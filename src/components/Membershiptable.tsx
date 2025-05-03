@@ -1,6 +1,20 @@
 import React from 'react'
-import  '../adminstyles/Membershiptable.css'
-import Pagination from './Pagination'
+import { Box, Button, Grid, InputAdornment, TextField,Typography,Stack} from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+import AddIcon from '@mui/icons-material/Add';
+import UploadIcon from '@mui/icons-material/Upload';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import {Custombutton,Filterbutton,CustomPagination} from '../adminstyles/MembershiptableStyles';
+
 const Membershiptable = () => {
 
 const tabledata=[
@@ -14,93 +28,131 @@ const tabledata=[
 
 
   return (
-    <div className='container-fluid'>
-      <div className='membership-heading'>
-      <h3 className='member-title'>Membership Management</h3>
-      <button className='subscription-button'>Subscription Plans</button>
-      </div>   
-      <div className='membership-search-group'>
-          <div className='inputsearch-box'>
-          <input type='search' className='form-control' placeholder='Search'/> 
-          <i className="bi bi-search"></i>
-          </div>
-          <div className='membership-btngroup'>
-          <button className='memberbtn'>
-          <i className="bi bi-plus-lg me-2"></i>
-            Add Item
-          </button >
-            <button className='memberbtn'>
-            <i className="bi bi-upload me-2"></i>
-            Bulk Upload</button>
-            <button className='memberbtn'>
-            <i className="bi bi-upload me-2"></i>
-            Export</button>
-            <button className='filter-button'>
-            <i className="bi bi-filter me-2"></i>
-            Filters</button>
-          </div>
+   <Box gap={2} >   
+    <Box display="flex" justifyContent="space-between" >
+    <Typography variant='h5' color='#3DB80C'>Membership Management</Typography>
+    <Custombutton >Subscrition Plans</Custombutton>
+    </Box>
 
+    <Grid container sx={{marginTop:'10px'}}>
+     <Grid size={{lg:6,md:6,sm:12}}>
+     <TextField 
+      type='search'
+      placeholder='Search'
+      size="small"
+      
+      slotProps={{
+        input: {
+          startAdornment: <InputAdornment position="start">
+            <SearchIcon sx={{color:"#3DB80C"}}/>
+          </InputAdornment>,
+        }
+       }}  
+       sx={{
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: '#3DB80C', 
+          },
+          '&:hover fieldset': {
+            borderColor: '#3DB80C', 
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: '#3DB80C', 
+          },
+        },
+        '& input::placeholder': {
+          color: '#3DB80C',
+          opacity: 1,
+        },
+        width:{lg:'500px',md:'500px'}
+      }}
+     />
+ </Grid>
+<Grid size={{lg:6,md:6,sm:12}}>
+<Box display="flex" justifyContent="flex-end" gap="10px" sx={{marginTop:{xs:2}}}>  
+<Custombutton startIcon={<AddIcon />}>
+  Add Member
+</Custombutton>
+
+<Custombutton variant="contained" startIcon={<UploadIcon />} >
+  Bulk Upload
+</Custombutton>
+
+<Custombutton startIcon={<UploadIcon />}>
+  Export
+</Custombutton>
+
+ <Filterbutton variant="outlined" startIcon={<FilterListIcon />}>
+  Filter
+ </Filterbutton>
+</Box>
+</Grid>
+</Grid>
+
+<TableContainer component={Paper} sx={{marginTop:"10px",background:"white"}}>
+<Table sx={{ minWidth: 650 }} >
+<TableHead   sx={{
+        border: '2px solid #3DB80C',         
+                 
+      }}>
+          <TableRow 
+           sx={{
+            fontWeight: 'bold',                
+            '& .MuiTableCell-head': {
+              fontWeight: 'bold',              
+              color: '#3DB80C',                
+              borderBottom: 'none',            
+            },
+          }}>
+            <TableCell>S.No</TableCell>
+            <TableCell align="left">Name</TableCell>
+            <TableCell align="left">Email</TableCell>
+            <TableCell align="left">Phone Number</TableCell>
+            <TableCell align="left">Membership Type</TableCell>
+            <TableCell align="left">Date</TableCell>
+            <TableCell align="left">Status</TableCell>
+            <TableCell align="left">Action</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody >
+          {
+            tabledata.map(data=>(
+             <TableRow key={data.sno}
+             
+             >
+              <TableCell>{data.sno}</TableCell>
+              <TableCell>{data.name}</TableCell>
+              <TableCell>{data.email}</TableCell>
+              <TableCell>{data.phone}</TableCell>
+              <TableCell>{data.membertype}</TableCell>
+              <TableCell>{data.date}</TableCell>
+              <TableCell>{data.status}</TableCell>
+              <TableCell><Button
+        variant="text"
+        startIcon={<EditIcon />}
+        endIcon={<ArrowDropDownIcon />}
+        sx={{ textTransform: 'none', color: '#555555'}} 
+      >
+        Edit
+      </Button></TableCell>
               
-      </div>
-    
-      <div className='table-container'>
-      <table className="table">
-      <thead>
-      <tr>
-      <th scope="col">SNo</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Membership Type</th>
-      <th scope="col">Date</th>
-      <th scope="col">Status</th>
-      <th scope="col">Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-       {
-         tabledata.map((data)=>(
-          <tr key={data.sno}>
-           <td>{data.sno}</td>
-           <td>{data.name}</td>
-           <td>{data.email}</td>
-           <td>{data.phone}</td>
-           <td>{data.membertype}</td>
-           <td>{data.date}</td>
-           <td>{data.status}</td>
-           <td>
-  <div className="dropdown">
-    <button
-      className="btn dropdown-toggle d-flex align-items-center"
-      type="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
-      <i className="bi bi-pencil me-1"></i>
-      Edit
-    </button>
-    <ul className="dropdown-menu">
-      <li><a className="dropdown-item" href="#">Edit Details</a></li>
-      <li><a className="dropdown-item" href="#">Deactivate</a></li>
-      <li><a className="dropdown-item" href="#">Delete</a></li>
-    </ul>
-  </div>
-</td>
-</tr>
-          
+             </TableRow>
 
-         ))
 
-       }
-    
-    </tbody> 
+            ))
+          }
+        </TableBody>
+</Table>
+</TableContainer>
 
-      </table>  
-</div>  
+{/* pagination */}
 
-<Pagination />    
-    
-    </div>
+<Stack spacing={2} alignItems="center" sx={{  padding: '20px' }}>
+      <CustomPagination count={10}   shape="rounded" />
+    </Stack>
+
+ </Box>
+   
   )
 }
 
