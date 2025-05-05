@@ -25,13 +25,13 @@ export const CustomPagination = styled(Pagination)(({ theme }) => ({
   }));
   
 
-
 export const Custombutton=styled(Button)({
     backgroundColor:'#3DB80C',
     fontSize:'14px',
   textTransform:'capitalize',
   color:'#ffffff'
 });
+
 export const Filterbutton=styled(Button)({
   borderColor:'#3DB80C',
   color:"#3DB80C",

@@ -14,8 +14,12 @@ import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {Custombutton,Filterbutton,CustomPagination} from '../adminstyles/MembershiptableStyles';
+import { useNavigate } from 'react-router-dom';
 
 const Membershiptable = () => {
+
+const navigate=useNavigate()
+
 
 const tabledata=[
   {sno:1,name:'Tanuja Abhilash',email:'hwestiii@outlook.com',phone:'+18143008184',membertype:'One Year',date:'From Mar 15 to Apr 15 2025',status:'active'},
@@ -31,7 +35,7 @@ const tabledata=[
    <Box gap={2} >   
     <Box display="flex" justifyContent="space-between" >
     <Typography variant='h5' color='#3DB80C'>Membership Management</Typography>
-    <Custombutton >Subscrition Plans</Custombutton>
+    <Custombutton onClick={()=>navigate("/admin/membership/subscriptionplans")}>Subscrition Plans</Custombutton>
     </Box>
 
     <Grid container sx={{marginTop:'10px'}}>
