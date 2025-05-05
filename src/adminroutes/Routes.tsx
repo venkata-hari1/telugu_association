@@ -9,7 +9,7 @@ import Login from '../components/Login'
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/login' element={<Login/>}/>
+      <Route path='/' element={<Login/>}/>
       
        <Route element={<Privateroutes />}>
         <Route path='/admin/' element={<Sidebar />}/>
