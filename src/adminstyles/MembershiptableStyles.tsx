@@ -1,10 +1,9 @@
 import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import theme from '../theme';
 
-export const CustomPagination = styled(Pagination)(({ theme }) => ({
+
+export const CustomPagination = styled(Pagination)(() => ({
     '& .MuiPaginationItem-root': {
       borderRadius: '8px',
       border: '1px solid #c1c1c1',

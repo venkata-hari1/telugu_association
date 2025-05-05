@@ -1,4 +1,3 @@
-import React from 'react'
 import {Routes, Route } from 'react-router-dom'
 import Membershiptable from '../components/Membershiptable'
 import Subscriptionplans from '../components/Subscriptionplans'
