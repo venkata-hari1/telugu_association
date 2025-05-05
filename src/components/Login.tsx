@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -19,10 +19,11 @@ function handleInput(event){
     }
   }
 )
+console.log(login)
 }
 
 function onSubmitting(){
-
+  
   navigate("/admin")
 }
 
