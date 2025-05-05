@@ -1,3 +1,4 @@
+import React from 'react'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -9,7 +10,7 @@ const Login = () => {
   )
 const navigate=useNavigate()
 
-function handleInput(event){
+function handleInput(event:any){
 
   const{name,value}=event.target
 
