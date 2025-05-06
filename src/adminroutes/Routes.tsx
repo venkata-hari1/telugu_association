@@ -4,6 +4,9 @@ import Subscriptionplans from '../components/Subscriptionplans'
 import Sidebar from '../components/Sidebar'
 import Privateroutes from './Privateroutes'
 import Login from '../components/Login'
+import AddMember from '../components/Addmember'
+import Commonheader from '../components/Commonheader'
+
 
 
 const AppRoutes = () => {
@@ -15,6 +18,8 @@ const AppRoutes = () => {
         <Route path='/admin/' element={<Sidebar />}/>
         <Route path='/admin/membership' element={<Membershiptable />}/>
         <Route path='/admin/membership/subscriptionplans' element={<Subscriptionplans />}/>
+        <Route path='/admin/membership/addmember' element={<AddMember />}/>
+        <Route path='/admin/header' element={<Commonheader />}/>
       </Route>
       </Routes>  
 

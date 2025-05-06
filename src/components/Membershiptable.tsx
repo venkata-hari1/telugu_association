@@ -15,6 +15,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {Custombutton,Filterbutton,CustomPagination} from '../adminstyles/MembershiptableStyles';
 import { useNavigate } from 'react-router-dom';
+import Commonheader from './Commonheader';
 
 const Membershiptable = () => {
 
@@ -33,9 +34,10 @@ const tabledata=[
 
   return (
    <Box gap={2} >   
+   <Commonheader />
     <Box display="flex" justifyContent="space-between" >
     <Typography variant='h5' color='#3DB80C'>Membership Management</Typography>
-    <Custombutton onClick={()=>navigate("/admin/membership/subscriptionplans")}>Subscrition Plans</Custombutton>
+    <Custombutton onClick={()=>navigate('/admin/membership/subscriptionplans')}>Subscrition Plans</Custombutton>
     </Box>
 
     <Grid container sx={{marginTop:'10px'}}>
@@ -56,6 +58,7 @@ const tabledata=[
         '& .MuiOutlinedInput-root': {
           '& fieldset': {
             borderColor: '#3DB80C', 
+            borderRadius:'10px'
           },
           '&:hover fieldset': {
             borderColor: '#3DB80C', 
@@ -68,13 +71,16 @@ const tabledata=[
           color: '#3DB80C',
           opacity: 1,
         },
-        width:{lg:'500px',md:'500px'}
+        width:{lg:'500px',md:'500px'},
+        borderRadius:'10px',
+        background:"white"
+
       }}
      />
  </Grid>
 <Grid size={{lg:6,md:6,sm:12}}>
 <Box display="flex" justifyContent="flex-end" gap="10px" sx={{marginTop:{xs:2}}}>  
-<Custombutton startIcon={<AddIcon />}>
+<Custombutton startIcon={<AddIcon/>} onClick={()=>navigate('/admin/membership/addmember')}>
   Add Member
 </Custombutton>
 

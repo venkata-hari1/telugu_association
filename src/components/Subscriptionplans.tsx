@@ -10,7 +10,12 @@ import {
 } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
+import Commonheader from './Commonheader';
+
 const Subscriptionplans = () => {
+
+ const navigate=useNavigate() 
   const allplans = [
     {
       cardid: 1,
@@ -55,6 +60,7 @@ const Subscriptionplans = () => {
 
   return (
     <Box>
+      <Commonheader />
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
         <Typography variant="h5" color="#3DB80C">
           Membership Management /{' '}
@@ -137,10 +143,10 @@ const Subscriptionplans = () => {
                 </Typography> 
               </CardContent>
               <Box display="flex"  justifyContent="center" p={2}>
-               <Button startIcon={<EditIcon />} sx={{width:"100px",background:'#3DB80C',color:'#ffffff'}}>Edit</Button>
+               <Button startIcon={<EditIcon onClick={()=>navigate('/admin/membership/editsubscription')} />} sx={{width:"100px",background:'#3DB80C',color:'#ffffff'}}>Edit</Button>
                </Box>
             </Card>
-          </Grid>
+          </Grid> 
         ))}
         
       </Grid>
