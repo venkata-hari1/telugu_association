@@ -17,10 +17,10 @@ import {Custombutton,Filterbutton,CustomPagination} from '../adminstyles/Members
 import { useNavigate } from 'react-router-dom';
 import Commonheader from './Commonheader';
 
+
 const Membershiptable = () => {
 
 const navigate=useNavigate()
-
 
 const tabledata=[
   {sno:1,name:'Tanuja Abhilash',email:'hwestiii@outlook.com',phone:'+18143008184',membertype:'One Year',date:'From Mar 15 to Apr 15 2025',status:'active'},
@@ -31,16 +31,15 @@ const tabledata=[
   {sno:6,name:'Pratyush Solanki',email:'oevans@icloud.com',phone:'+18143008346',membertype:'One Year',date:'From Mar 15 to Apr 15 2025',status:'active'},
 ]
 
-
-  return (
-   <Box gap={2} >   
+return (
+   <Box gap={2}>   
    <Commonheader />
-    <Box display="flex" justifyContent="space-between" >
+    <Box display="flex" justifyContent="space-between" alignItems="center">
     <Typography variant='h5' color='#3DB80C'>Membership Management</Typography>
     <Custombutton onClick={()=>navigate('/admin/membership/subscriptionplans')}>Subscrition Plans</Custombutton>
     </Box>
 
-    <Grid container sx={{marginTop:'10px'}}>
+    <Grid container>
      <Grid size={{lg:6,md:6,sm:12}}>
      <TextField 
       type='search'
@@ -73,8 +72,8 @@ const tabledata=[
         },
         width:{lg:'500px',md:'500px'},
         borderRadius:'10px',
-        background:"white"
-
+        background:"white",
+        marginTop:"20px"
       }}
      />
  </Grid>

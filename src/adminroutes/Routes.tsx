@@ -6,6 +6,9 @@ import Privateroutes from './Privateroutes'
 import Login from '../components/Login'
 import AddMember from '../components/Addmember'
 import Commonheader from '../components/Commonheader'
+import Sponsershipmanagement from '../components/Sponsershipmanagement'
+import Addsponsor from '../components/Addsponsor'
+import Donations from '../components/Donations'
 
 
 
@@ -20,6 +23,9 @@ const AppRoutes = () => {
         <Route path='/admin/membership/subscriptionplans' element={<Subscriptionplans />}/>
         <Route path='/admin/membership/addmember' element={<AddMember />}/>
         <Route path='/admin/header' element={<Commonheader />}/>
+        <Route path='/admin/sponsorship' element={<Sponsershipmanagement />}/>
+        <Route path='/admin/addsponsor' element={<Addsponsor />}/>
+        <Route path='/admin/sponsorship/donations' element={<Donations />}/>
       </Route>
       </Routes>  
 

@@ -26,7 +26,7 @@ const Sidebar = () => {
   const sidemenu = [
     { id: 1, title: 'Dashboard', icon: <GridViewIcon />, link: 'admin/dashboard' },
     { id: 2, title: 'Membership Management', icon: <GroupIcon />, link: 'admin/membership' },
-    { id: 3, title: 'Sponsers & Donations', icon: <PaymentsIcon />, link: 'admin/sponsers' },
+    { id: 3, title: 'Sponsers & Donations', icon: <PaymentsIcon />, link: 'admin/sponsorship' },
     { id: 4, title: 'Gallery & Media', icon: <InsertPhotoIcon />, link: 'admin/gallery' },
     { id: 5, title: 'Events & Calender', icon: <CalendarMonthIcon />, link: 'admin/events' },
     { id: 6, title: 'Board & Leadership', icon: <SupervisedUserCircleIcon />, link: 'admin/board' },

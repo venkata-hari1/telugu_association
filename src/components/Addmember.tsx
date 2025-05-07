@@ -17,7 +17,7 @@ import {
   
   const AddMember = () => {
   return (
-    <Box>
+    <Box sx={{overflowX:{sm:'hidden'}}}>
       <Commonheader />
       <Box display="flex" justifyContent="space-between">
         <Typography variant="h5" color="#3DB80C">
