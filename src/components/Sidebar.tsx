@@ -36,12 +36,11 @@ const Sidebar = () => {
   return (
     <Box
       height="100vh"
-      width="100%"
       sx={{
         background: "linear-gradient(to bottom, #5BE823, #3DB80C)",
         display: 'flex',
         flexDirection: 'column',
-        
+        width:{lg:'21%',md:'21%',sm:'100%',xs:'100%'}  
       }}
     >
     

@@ -143,7 +143,9 @@ const Subscriptionplans = () => {
                 </Typography> 
               </CardContent>
               <Box display="flex"  justifyContent="center" p={2}>
-               <Button startIcon={<EditIcon onClick={()=>navigate('/admin/membership/editsubscription')} />} sx={{width:"100px",background:'#3DB80C',color:'#ffffff'}}>Edit</Button>
+               <Button startIcon={<EditIcon />} 
+               sx={{width:"100px",background:'#3DB80C',color:'#ffffff'}}
+               onClick={()=>navigate('/admin/sponsorship/subscriptionplans/editsubscription')}>Edit</Button>
                </Box>
             </Card>
           </Grid> 

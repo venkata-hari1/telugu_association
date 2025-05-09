@@ -10,8 +10,9 @@ import {
   import Select from '@mui/material/Select';
   import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
   import UploadFileIcon from '@mui/icons-material/UploadFile';
-  import { VisuallyHiddenInput } from "../adminstyles/MembershiptableStyles";
+  import { GreenTextField, VisuallyHiddenInput } from "../adminstyles/MembershiptableStyles";
   import Commonheader from "./Commonheader";
+  
   
 const Addsponsor = () => {
   return (
@@ -26,7 +27,7 @@ const Addsponsor = () => {
            </Typography>
          </Box>
    
-         <Grid container spacing={3}>
+         <Grid container spacing={2}>
            <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
              <Typography>Company Name</Typography>
            </Grid>
@@ -73,6 +74,7 @@ const Addsponsor = () => {
                    },
                    borderRadius: "8px",
                    width: { md: "600px", lg: "600px", xs: "100%", sm: "600px" },
+
                  },
                }}
              />
@@ -161,7 +163,7 @@ const Addsponsor = () => {
          border: '1px solid #3DB80C',
          borderRadius: '8px',
          width: '140px',
-         padding: '2px 2px',
+         padding: '1px 1px',
          '& .MuiSelect-outlined': {
            padding: '8px 10px',
            color:"#3DB80C",
@@ -214,7 +216,7 @@ const Addsponsor = () => {
          border: '1px solid #3DB80C',
          borderRadius: '8px',
          width: '140px',
-         padding: '2px 2px',
+         padding: '1px 1px',
          '& .MuiSelect-outlined': {
            padding: '8px 10px',
            color:"#3DB80C",
@@ -235,7 +237,25 @@ const Addsponsor = () => {
              <Typography>Date</Typography>
     </Grid>
     <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
-    {/* for date */}
+      <Box display="flex" alignItems="center" gap={3}>
+            <GreenTextField
+             
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              size="small"
+            />
+            <Typography>To</Typography>
+            <GreenTextField
+             
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              size="small"
+            />
+          </Box>
     </Grid>
     <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
              <Typography>Load Image</Typography>

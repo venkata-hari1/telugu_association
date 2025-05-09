@@ -1,6 +1,7 @@
 import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
+import { TextField } from '@mui/material';
 
 
 export const CustomPagination = styled(Pagination)(() => ({
@@ -78,4 +79,34 @@ export const VisuallyHiddenInput = styled('input')({
   left: 0,
   whiteSpace: 'nowrap',
   width: 1,
+});
+
+
+export const GreenTextField = styled(TextField)({
+  '& label': {
+    color: '#3DB80C',
+    },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#3DB80C',
+    },
+    '&:hover fieldset': {
+      borderColor: '#3DB80C',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#3DB80C',
+    },
+  },
+  '& input': {
+    color: '#3DB80C',
+    
+  },
+  '& .MuiSvgIcon-root': {
+    color: '#3DB80C',
+  },
+
+  '& input::-webkit-calendar-picker-indicator': {
+    filter: 'invert(36%) sepia(86%) saturate(499%) hue-rotate(75deg) brightness(91%) contrast(87%)',
+  },
+  
 });

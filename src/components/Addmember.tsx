@@ -7,19 +7,20 @@ import {
   TextField,
   Typography,
   FormControl,
-  Button
+  Button,
   } from "@mui/material";
   import MenuItem from '@mui/material/MenuItem';
   import Select from '@mui/material/Select';
   import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
  import Commonheader from "./Commonheader";
+import { GreenTextField } from "../adminstyles/MembershiptableStyles";
 
   
   const AddMember = () => {
   return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
       <Commonheader />
-      <Box display="flex" justifyContent="space-between">
+      <Box display="flex" justifyContent="space-between" sx={{margin:"5px 0 14px 0"}}>
         <Typography variant="h5" color="#3DB80C">
           Membership Management/
           <Typography component="span" fontSize={22} fontWeight="300">
@@ -28,9 +29,9 @@ import {
         </Typography>
       </Box>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
-          <Typography>First Name</Typography>
+          <Typography >First Name</Typography>
         </Grid>
         <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
           <TextField
@@ -148,12 +149,15 @@ import {
           >
             <FormControlLabel
               value="zelle"
-              control={<Radio  />}
+              control={<Radio size="small"/>}
               label="Zelle"
               sx={{
                 m: 0,
-                "& .MuiRadio-root": { padding: "4px" },
+                "& .MuiRadio-root": { padding: "7px" },
                 width: "100%",
+                "& .MuiRadio-root.Mui-checked": {
+                  color:'#3DB80C'
+                }
               }}
             />
           </Paper>
@@ -169,18 +173,19 @@ import {
     variant="outlined"
     displayEmpty
     IconComponent={() => (
-      <ArrowDropDownIcon sx={{ color: 'green', cursor: 'pointer' }} />
+      <ArrowDropDownIcon sx={{ color: '#3DB80C', cursor: 'pointer' }} />
     )}
     MenuProps={{
       PaperProps: {
         sx: {
+          borderColor:"#3DB80C",
           backgroundColor: '#FDF7E1',
           marginTop: '4px',
           '& .MuiMenuItem-root': {
             backgroundColor: '#FDF7E1',
-            color: 'green',
+            color: '#3DB80C',
             '&:hover': {
-              backgroundColor: 'green',
+              backgroundColor: '#3DB80C',
               color: 'white',
             },
           },
@@ -188,15 +193,15 @@ import {
       },
     }}
     sx={{
-      color: 'green',
+      color: '#3DB80C',
       backgroundColor: '#FDF7E1',
-      border: '1px solid green',
+      border: '1px solid #3DB80C',
       borderRadius: '8px',
       width: '140px',
       padding: '2px 2px',
       '& .MuiSelect-outlined': {
         padding: '8px 10px',
-        color:"green",
+        color:"#3DB80C",
         background:'transparent'
       },
       '& fieldset': {
@@ -214,7 +219,26 @@ import {
           <Typography>Membership Date</Typography>
  </Grid>
  <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
- {/* for date */}
+ <Box display="flex" alignItems="center" gap={3}>
+      <GreenTextField
+       
+        type="date"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        size="small"
+      />
+      <Typography>To</Typography>
+      <GreenTextField
+        
+        type="date"
+        InputLabelProps={{
+          shrink: true,
+        
+        }}
+        size="small"
+      />
+    </Box>
  </Grid>
 <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
 <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",mt:5}}>

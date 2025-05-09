@@ -15,6 +15,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CircleIcon from '@mui/icons-material/Circle';
 import { useNavigate } from "react-router-dom";
+import Paginationcomponent from "./Pagination";
+import Commonheader from "./Commonheader";
+
+
 const Sponsershipmanagement = () => {
 
   const navigate=useNavigate()
@@ -31,13 +35,14 @@ const Sponsershipmanagement = () => {
 
   return (
    <Box>
+    <Commonheader />
    <Grid container>
     <Grid size={{lg:6,md:6,sm:6,xs:6}}>
      <Typography variant="h5" color='#3DB80C'>Sponsership Management</Typography>   
    </Grid >
    <Grid size={{lg:6,md:6,sm:6,xs:6}}>
     <Box display="flex" justifyContent="flex-end" gap="10px">
-     <Subscriptionbutton>Subscription Plans</Subscriptionbutton>
+     <Subscriptionbutton onClick={()=>navigate('subscriptionplans')}>Subscription Plans</Subscriptionbutton>
      <Subscriptionbutton onClick={()=>navigate('donations')}>Donations</Subscriptionbutton>   
      </Box>
    </Grid>
@@ -86,7 +91,7 @@ const Sponsershipmanagement = () => {
          gap="20px" 
          sx={{marginTop:{xs:2}, justifyContent:{lg:'flex-end',md:'flex-end',sm:'flex-start'
     }}}>
-      <Custombutton startIcon={<AddIcon/>} onClick={()=>navigate('/admin/addsponsor')}>
+      <Custombutton startIcon={<AddIcon/>} onClick={()=>navigate('/admin/sponsorship/addsponsor')}>
         Add Sponsor
       </Custombutton>
       <Custombutton startIcon={<UploadIcon />}>
@@ -165,6 +170,8 @@ const Sponsershipmanagement = () => {
 
    </Grid>
   </Grid>
+
+  <Paginationcomponent />
    </Box>
 
   )

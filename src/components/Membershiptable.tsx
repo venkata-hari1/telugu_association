@@ -1,4 +1,3 @@
-
 import { Box, Button, Grid, InputAdornment, TextField,Typography,Stack} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import AddIcon from '@mui/icons-material/Add';
@@ -13,10 +12,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import {Custombutton,Filterbutton,CustomPagination} from '../adminstyles/MembershiptableStyles';
+import {Custombutton,Filterbutton} from '../adminstyles/MembershiptableStyles';
 import { useNavigate } from 'react-router-dom';
 import Commonheader from './Commonheader';
-
+import Paginationcomponent from './Pagination';
+import CircleIcon from '@mui/icons-material/Circle';
 
 const Membershiptable = () => {
 
@@ -34,12 +34,17 @@ const tabledata=[
 return (
    <Box gap={2}>   
    <Commonheader />
-    <Box display="flex" justifyContent="space-between" alignItems="center">
-    <Typography variant='h5' color='#3DB80C'>Membership Management</Typography>
-    <Custombutton onClick={()=>navigate('/admin/membership/subscriptionplans')}>Subscrition Plans</Custombutton>
-    </Box>
+   <Grid container>
+    <Grid size={{lg:6,md:6,sm:6,xs:6}}>
+      <Typography variant="h5" color='#3DB80C'>Membership Management</Typography>   
+      </Grid >
+      <Grid size={{lg:6,md:6,sm:6,xs:6}}>
+       <Box display="flex" justifyContent="flex-end" gap="10px" sx={{marginTop:"5px"}}>
+        <Custombutton onClick={()=>navigate('/admin/membership/volunteermgmt')} >Volunteer Management</Custombutton>
+        <Custombutton onClick={()=>navigate('')}>Subscription plans </Custombutton>   
+        </Box>
+      </Grid>
 
-    <Grid container>
      <Grid size={{lg:6,md:6,sm:12}}>
      <TextField 
       type='search'
@@ -76,7 +81,7 @@ return (
         marginTop:"20px"
       }}
      />
- </Grid>
+   </Grid>
 <Grid size={{lg:6,md:6,sm:12}}>
 <Box display="flex" justifyContent="flex-end" gap="10px" sx={{marginTop:{xs:2}}}>  
 <Custombutton startIcon={<AddIcon/>} onClick={()=>navigate('/admin/membership/addmember')}>
@@ -96,7 +101,7 @@ return (
  </Filterbutton>
 </Box>
 </Grid>
-</Grid>
+
 
 <TableContainer component={Paper} sx={{marginTop:"10px",background:"white"}}>
 <Table sx={{ minWidth: 650 }} >
@@ -135,7 +140,10 @@ return (
               <TableCell>{data.phone}</TableCell>
               <TableCell>{data.membertype}</TableCell>
               <TableCell>{data.date}</TableCell>
-              <TableCell>{data.status}</TableCell>
+             
+              <TableCell sx={{color:"#3DB80C"}}>
+                 {data.status&&(<CircleIcon  sx={{fontSize:"11px"}}/>)}
+                 {data.status}</TableCell>
               <TableCell><Button
         variant="text"
         startIcon={<EditIcon />}
@@ -155,11 +163,8 @@ return (
 </TableContainer>
 
 {/* pagination */}
-
-<Stack spacing={2} alignItems="center" sx={{  padding: '20px' }}>
-      <CustomPagination count={10}   shape="rounded" />
-    </Stack>
-
+</Grid>
+<Paginationcomponent />
  </Box>
    
   )
