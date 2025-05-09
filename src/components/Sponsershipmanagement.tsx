@@ -35,7 +35,7 @@ const Sponsershipmanagement = () => {
 
   return (
    <Box>
-    <Commonheader />
+   
    <Grid container>
     <Grid size={{lg:6,md:6,sm:6,xs:6}}>
      <Typography variant="h5" color='#3DB80C'>Sponsership Management</Typography>   
@@ -81,7 +81,7 @@ const Sponsershipmanagement = () => {
               width:{lg:'500px',md:'500px'},
               borderRadius:'10px',
               background:"white",
-              marginTop:"20px"
+              
             }}
            />
    </Grid>
@@ -106,7 +106,7 @@ const Sponsershipmanagement = () => {
    {/* table line */}
    <Grid size={{lg:12,md:12,sm:12,xs:12}}>
    <TableContainer component={Paper} sx={{marginTop:"10px",background:"white"}}>
-<Table sx={{ minWidth: 650 }} >
+<Table sx={{ minWidth: 650 }} size='small'>
 <TableHead   sx={{
         border: '2px solid #3DB80C',         
                  

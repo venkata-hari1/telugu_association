@@ -35,20 +35,32 @@ const Sidebar = () => {
 
   return (
     <Box
-      height="100vh"
+      
       sx={{
+        height:"100vh",
+        width: { lg: '250px', md: '220px', sm: '100%', xs: '100%' },
+        minWidth: '200px',
         background: "linear-gradient(to bottom, #5BE823, #3DB80C)",
         display: 'flex',
         flexDirection: 'column',
-        width:{lg:'21%',md:'21%',sm:'100%',xs:'100%'}  
+        position:'fixed',
+        top:0,
+        left:0,
+        overflowY:'auto',
+        zIndex:1000,
+        
+          
       }}
     >
     
-      <Box component="img" src={tlogo} alt="Telugu Association" sx={{ width:"180px" ,height: "150px" }} />
-
-  
-      <Box sx={{ flexGrow: 1 }}>
-        <List sx={{ color: 'white' }}>
+    <Box component="img" src={tlogo} alt="Telugu Association" 
+    sx={{ width:"150px",
+    height: "auto",
+    margin:'auto',
+    display:'block'}} />
+    
+    <Box sx={{ flexGrow: 1 }}>
+        <List sx={{ color: 'white',fontSize:'10px' }}>
           {sidemenu.map(item => (
             <ListItemButton
               key={item.id}
@@ -58,15 +70,13 @@ const Sidebar = () => {
                   setSelectedId(item.id)
                   navigate(`/${item.link}`)
                 } 
-                  
-
-              }
+            }
               sx={{
                 '&.Mui-selected': {
                   backgroundColor: '#E4E139',
                   color: 'white',
                   fontWeight: 'bold',
-                },
+               },
                 '&:hover': {
                   backgroundColor: '#d4d115',
                 },
@@ -75,7 +85,7 @@ const Sidebar = () => {
               <ListItemIcon sx={{ color: selectedId === item.id ? 'green' : 'white' }}>
                 {item.icon}
               </ListItemIcon>
-              <ListItemText primary={item.title} />
+              <ListItemText primary={item.title}  sx={{ fontSize: '5px' }}/>
             </ListItemButton>
           ))}
         </List>

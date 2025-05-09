@@ -12,14 +12,13 @@ import {
   import MenuItem from '@mui/material/MenuItem';
   import Select from '@mui/material/Select';
   import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
- import Commonheader from "./Commonheader";
 import { GreenTextField } from "../adminstyles/MembershiptableStyles";
 
   
   const AddMember = () => {
   return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
-      <Commonheader />
+    
       <Box display="flex" justifyContent="space-between" sx={{margin:"5px 0 14px 0"}}>
         <Typography variant="h5" color="#3DB80C">
           Membership Management/
@@ -241,7 +240,7 @@ import { GreenTextField } from "../adminstyles/MembershiptableStyles";
     </Box>
  </Grid>
 <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
-<Box sx={{display:"flex",justifyContent:"center",alignItems:"center",mt:5}}>
+<Box sx={{display:"flex",justifyContent:"center",alignItems:"center",mt:3}}>
  <Button size="large" sx={{background:"green",padding:"10px 10px",color:"white"}}>Submit</Button>
 </Box>
 </Grid>

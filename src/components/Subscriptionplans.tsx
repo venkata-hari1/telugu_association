@@ -60,7 +60,7 @@ const Subscriptionplans = () => {
 
   return (
     <Box>
-      <Commonheader />
+     
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
         <Typography variant="h5" color="#3DB80C">
           Membership Management /{' '}

@@ -33,7 +33,7 @@ const tabledata=[
 
 return (
    <Box gap={2}>   
-   <Commonheader />
+ 
    <Grid container>
     <Grid size={{lg:6,md:6,sm:6,xs:6}}>
       <Typography variant="h5" color='#3DB80C'>Membership Management</Typography>   
@@ -104,7 +104,7 @@ return (
 
 
 <TableContainer component={Paper} sx={{marginTop:"10px",background:"white"}}>
-<Table sx={{ minWidth: 650 }} >
+<Table sx={{ minWidth: 650 }} size='small'>
 <TableHead   sx={{
         border: '2px solid #3DB80C',         
                  
