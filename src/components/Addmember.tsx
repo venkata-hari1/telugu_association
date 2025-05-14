@@ -8,18 +8,20 @@ import {
   Typography,
   FormControl,
   Button,
-  } from "@mui/material";
-  import MenuItem from '@mui/material/MenuItem';
-  import Select from '@mui/material/Select';
-  import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { GreenTextField } from "../adminstyles/MembershiptableStyles";
+} from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { GreenTextField, Submit } from "../adminstyles/MembershiptableStyles";
 
-  
-  const AddMember = () => {
+const AddMember = () => {
   return (
-    <Box sx={{overflowX:{sm:'hidden'}}}>
-    
-      <Box display="flex" justifyContent="space-between" sx={{margin:"5px 0 14px 0"}}>
+    <Box sx={{ overflowX: { sm: "hidden" } }}>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        sx={{ margin: "5px 0 14px 0" }}
+      >
         <Typography variant="h5" color="#3DB80C">
           Membership Management/
           <Typography component="span" fontSize={22} fontWeight="300">
@@ -30,7 +32,7 @@ import { GreenTextField } from "../adminstyles/MembershiptableStyles";
 
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
-          <Typography >First Name</Typography>
+          <Typography>First Name</Typography>
         </Grid>
         <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
           <TextField
@@ -148,106 +150,111 @@ import { GreenTextField } from "../adminstyles/MembershiptableStyles";
           >
             <FormControlLabel
               value="zelle"
-              control={<Radio size="small"/>}
+              control={<Radio size="small" />}
               label="Zelle"
               sx={{
                 m: 0,
                 "& .MuiRadio-root": { padding: "7px" },
                 width: "100%",
                 "& .MuiRadio-root.Mui-checked": {
-                  color:'#3DB80C'
-                }
+                  color: "#3DB80C",
+                },
               }}
             />
           </Paper>
         </Grid>
-       
+
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
           <Typography>Subscription Plan</Typography>
         </Grid>
         <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
-        <FormControl size="small">
-  <Select
-    value="One Year"
-    variant="outlined"
-    displayEmpty
-    IconComponent={() => (
-      <ArrowDropDownIcon sx={{ color: '#3DB80C', cursor: 'pointer' }} />
-    )}
-    MenuProps={{
-      PaperProps: {
-        sx: {
-          borderColor:"#3DB80C",
-          backgroundColor: '#FDF7E1',
-          marginTop: '4px',
-          '& .MuiMenuItem-root': {
-            backgroundColor: '#FDF7E1',
-            color: '#3DB80C',
-            '&:hover': {
-              backgroundColor: '#3DB80C',
-              color: 'white',
-            },
-          },
-        },
-      },
-    }}
-    sx={{
-      color: '#3DB80C',
-      backgroundColor: '#FDF7E1',
-      border: '1px solid #3DB80C',
-      borderRadius: '8px',
-      width: '140px',
-      padding: '2px 2px',
-      '& .MuiSelect-outlined': {
-        padding: '8px 10px',
-        color:"#3DB80C",
-        background:'transparent'
-      },
-      '& fieldset': {
-        border: 'none',
-      },
-    }}
-  >
-    <MenuItem value="One Month">One Month</MenuItem>
-    <MenuItem value="Six Months">Six Months</MenuItem>
-    <MenuItem value="One Year">One Year</MenuItem>
-  </Select>
-</FormControl>
-</Grid>
-<Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
+          <FormControl size="small">
+            <Select
+              value="One Year"
+              variant="outlined"
+              displayEmpty
+              IconComponent={() => (
+                <ArrowDropDownIcon
+                  sx={{ color: "#3DB80C", cursor: "pointer" }}
+                />
+              )}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    borderColor: "#3DB80C",
+                    backgroundColor: "#FDF7E1",
+                    marginTop: "4px",
+                    "& .MuiMenuItem-root": {
+                      backgroundColor: "#FDF7E1",
+                      color: "#3DB80C",
+                      "&:hover": {
+                        backgroundColor: "#3DB80C",
+                        color: "white",
+                      },
+                    },
+                  },
+                },
+              }}
+              sx={{
+                color: "#3DB80C",
+                backgroundColor: "#FDF7E1",
+                border: "1px solid #3DB80C",
+                borderRadius: "8px",
+                width: "140px",
+                padding: "2px 2px",
+                "& .MuiSelect-outlined": {
+                  padding: "8px 10px",
+                  color: "#3DB80C",
+                  background: "transparent",
+                },
+                "& fieldset": {
+                  border: "none",
+                },
+              }}
+            >
+              <MenuItem value="One Month">One Month</MenuItem>
+              <MenuItem value="Six Months">Six Months</MenuItem>
+              <MenuItem value="One Year">One Year</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
           <Typography>Membership Date</Typography>
- </Grid>
- <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
- <Box display="flex" alignItems="center" gap={3}>
-      <GreenTextField
-       
-        type="date"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        size="small"
-      />
-      <Typography>To</Typography>
-      <GreenTextField
-        
-        type="date"
-        InputLabelProps={{
-          shrink: true,
-        
-        }}
-        size="small"
-      />
-    </Box>
- </Grid>
-<Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
-<Box sx={{display:"flex",justifyContent:"center",alignItems:"center",mt:3}}>
- <Button size="large" sx={{background:"green",padding:"10px 10px",color:"white"}}>Submit</Button>
-</Box>
-</Grid>
-
-
-
-</Grid>
+        </Grid>
+        <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
+          <Box display="flex" alignItems="center" gap={3}>
+            <GreenTextField
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              size="small"
+            />
+            <Typography>To</Typography>
+            <GreenTextField
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              size="small"
+            />
+          </Box>
+        </Grid>
+        <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mt: 3,
+            }}
+          >
+            <Submit variant="contained" size="large">
+              Submit
+            </Submit>
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

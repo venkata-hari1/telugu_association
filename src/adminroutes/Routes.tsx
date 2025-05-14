@@ -14,6 +14,9 @@ import Addvolunteer from '../components/Addvolunteer'
 import Editsubscription from '../components/Editsubscription'
 import Mainlayout from '../components/Mainlayout'
 import Dashboard from '../components/Dashboard'
+import Gallery from '../components/Gallery'
+import Addgallery from '../components/Addgallery'
+
 
 
 
@@ -24,7 +27,7 @@ const AppRoutes = () => {
 
       <Route element={<Privateroutes />}>
         <Route path="/admin" element={<Mainlayout />}>
-          {/* These will be rendered inside <Outlet /> */}
+        
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="membership" element={<Membershiptable />} />
           <Route path="membership/addmember" element={<AddMember />} />
@@ -35,7 +38,11 @@ const AppRoutes = () => {
           <Route path="sponsorship/donations" element={<Donations />} />
           <Route path="sponsorship/subscriptionplans" element={<Subscriptionplans />} />
           <Route path="sponsorship/subscriptionplans/editsubscription" element={<Editsubscription />} />
-        </Route>
+          <Route path="gallery" element={<Gallery />}/>
+          <Route path="gallery/addgallery" element={<Addgallery />}/>
+         </Route>
+          
+         
       </Route>
     </Routes>
 

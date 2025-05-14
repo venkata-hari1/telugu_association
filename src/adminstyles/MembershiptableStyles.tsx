@@ -30,12 +30,13 @@ export const Custombutton = styled(Button)(({ theme }) => ({
   fontSize: '14px',
   textTransform: 'capitalize',
   color: '#ffffff',
- 
-
+  borderColor:'#3DB80C',
+  
   [theme.breakpoints.down('sm')]: {
     fontSize: '12px',
-    height: '36px',
+    height: 'auto',
     padding: '3px 4px',
+    width: '100%',
     
   },
 }));
@@ -48,9 +49,9 @@ export const Filterbutton=styled(Button)(({ theme }) => ({
 
   [theme.breakpoints.down('sm')]: {
     fontSize: '12px',
-    height: '36px',
+    height: 'auto',
     padding: '3px 4px',
-    
+    width: '100%',
   },
 }));
 
@@ -81,6 +82,12 @@ export const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
+
+export const Submit=styled(Button)({
+  background:'#3DB80C',
+  padding:'10px 10px',
+  color:"white"
+})
 
 export const GreenTextField = styled(TextField)({
   '& label': {

@@ -1,10 +1,12 @@
+// Sidebar.tsx
 import { useState } from 'react';
 import {
   Box,
   List,
   ListItemButton,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Drawer
 } from '@mui/material';
 import tlogo from '../assets/taLogo.png';
 import GridViewIcon from '@mui/icons-material/GridView';
@@ -17,66 +19,50 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
-const Sidebar = () => {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  
-  const navigate=useNavigate();
-
+const Sidebar = ({ mobileOpen, onCloseSidebar }) => {
+  const [selectedId, setSelectedId] = useState(null);
+  const navigate = useNavigate();
 
   const sidemenu = [
     { id: 1, title: 'Dashboard', icon: <GridViewIcon />, link: 'admin/dashboard' },
     { id: 2, title: 'Membership Management', icon: <GroupIcon />, link: 'admin/membership' },
-    { id: 3, title: 'Sponsers & Donations', icon: <PaymentsIcon />, link: 'admin/sponsorship' },
+    { id: 3, title: 'Sponsors & Donations', icon: <PaymentsIcon />, link: 'admin/sponsorship' },
     { id: 4, title: 'Gallery & Media', icon: <InsertPhotoIcon />, link: 'admin/gallery' },
-    { id: 5, title: 'Events & Calender', icon: <CalendarMonthIcon />, link: 'admin/events' },
+    { id: 5, title: 'Events & Calendar', icon: <CalendarMonthIcon />, link: 'admin/events' },
     { id: 6, title: 'Board & Leadership', icon: <SupervisedUserCircleIcon />, link: 'admin/board' },
     { id: 7, title: 'Profile', icon: <AccountCircleIcon />, link: 'admin/profile' },
   ];
 
-  return (
+  const drawerContent = (
     <Box
-      
       sx={{
-        height:"100vh",
-        width: { lg: '250px', md: '220px', sm: '100%', xs: '100%' },
-        minWidth: '200px',
+        width: '100%',
         background: "linear-gradient(to bottom, #5BE823, #3DB80C)",
+        height: "100%",
         display: 'flex',
         flexDirection: 'column',
-        position:'fixed',
-        top:0,
-        left:0,
-        overflowY:'auto',
-        zIndex:1000,
-        
-          
       }}
     >
-    
-    <Box component="img" src={tlogo} alt="Telugu Association" 
-    sx={{ width:"150px",
-    height: "auto",
-    margin:'auto',
-    display:'block'}} />
-    
-    <Box sx={{ flexGrow: 1 }}>
-        <List sx={{ color: 'white',fontSize:'10px' }}>
+      <Box component="img" src={tlogo} alt="Telugu Association"
+        sx={{ width: "150px", height: "auto", margin: 'auto', display: 'block' }} />
+
+      <Box sx={{ flexGrow: 1 }}>
+        <List sx={{ color: 'white' }}>
           {sidemenu.map(item => (
             <ListItemButton
               key={item.id}
               selected={selectedId === item.id}
-              onClick={() =>
-                {
-                  setSelectedId(item.id)
-                  navigate(`/${item.link}`)
-                } 
-            }
+              onClick={() => {
+                setSelectedId(item.id);
+                navigate(`/${item.link}`);
+                onCloseSidebar(); // close drawer on mobile
+              }}
               sx={{
                 '&.Mui-selected': {
                   backgroundColor: '#E4E139',
                   color: 'white',
                   fontWeight: 'bold',
-               },
+                },
                 '&:hover': {
                   backgroundColor: '#d4d115',
                 },
@@ -85,13 +71,12 @@ const Sidebar = () => {
               <ListItemIcon sx={{ color: selectedId === item.id ? 'green' : 'white' }}>
                 {item.icon}
               </ListItemIcon>
-              <ListItemText primary={item.title}  sx={{ fontSize: '5px' }}/>
+              <ListItemText primary={item.title} />
             </ListItemButton>
           ))}
         </List>
       </Box>
 
-    
       <Box>
         <ListItemButton
           onClick={() => console.log('Logout')}
@@ -110,6 +95,37 @@ const Sidebar = () => {
         </ListItemButton>
       </Box>
     </Box>
+  );
+
+  return (
+    <>
+      {/* Permanent Sidebar for lg/md */}
+      <Box
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          height: "100vh",
+          width: { lg: '250px', md: '220px' },
+          minWidth: '200px',
+          background: "linear-gradient(to bottom, #5BE823, #3DB80C)",
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          overflowY: 'auto',
+          zIndex: 1000,
+        }}
+      >
+        {drawerContent}
+      </Box>
+
+      {/* Drawer for mobile */}
+      <Drawer
+        open={mobileOpen}
+        onClose={onCloseSidebar}
+        sx={{ display: { xs: 'block', md: 'none' } }}
+      >
+        {drawerContent}
+      </Drawer>
+    </>
   );
 };
 

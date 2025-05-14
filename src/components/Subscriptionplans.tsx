@@ -11,7 +11,7 @@ import {
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
-import Commonheader from './Commonheader';
+
 
 const Subscriptionplans = () => {
 
@@ -60,18 +60,18 @@ const Subscriptionplans = () => {
 
   return (
     <Box>
-     
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
-        <Typography variant="h5" color="#3DB80C">
-          Membership Management /{' '}
-          <Typography component="span" fontSize={20}>
-            Subscription plans
-          </Typography>
-        </Typography>
-        <Custombutton>Subscription Plans</Custombutton>
-      </Box>
+    <Grid container>
+    <Grid size={{lg:6,md:6,sm:12,xs:12}} >
+      <Typography variant="h5" color="#3DB80C">
+          Membership Management / Subscription Plans</Typography>
+    </Grid>
+      <Grid size={{lg:6,md:6,sm:12,xs:12}} display="flex" justifyContent="flex-end">
+        <Custombutton variant='contained'>Subscription Plans</Custombutton>
+       </Grid>
+    </Grid> 
 
-      <Grid container spacing={1}>
+    
+      <Grid container spacing={5} mt={2}>
         {allplans.map((plans) => (
           <Grid size={{xs:12 ,sm:6,md:4}} key={plans.cardid}>
             <Card
@@ -80,7 +80,7 @@ const Subscriptionplans = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                width:"350px",
+                width:"320px",
                }}
             >
               <CardContent

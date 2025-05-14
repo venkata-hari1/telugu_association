@@ -41,14 +41,14 @@ const Sponsershipmanagement = () => {
      <Typography variant="h5" color='#3DB80C'>Sponsership Management</Typography>   
    </Grid >
    <Grid size={{lg:6,md:6,sm:6,xs:6}}>
-    <Box display="flex" justifyContent="flex-end" gap="10px">
-     <Subscriptionbutton onClick={()=>navigate('subscriptionplans')}>Subscription Plans</Subscriptionbutton>
-     <Subscriptionbutton onClick={()=>navigate('donations')}>Donations</Subscriptionbutton>   
+    <Box display="flex" justifyContent="flex-end" gap={3}>
+     <Subscriptionbutton variant="contained" onClick={()=>navigate('subscriptionplans')}>Subscription Plans</Subscriptionbutton>
+     <Subscriptionbutton variant="contained" onClick={()=>navigate('donations')}>Donations</Subscriptionbutton>   
      </Box>
    </Grid>
 
     {/* search line */}
-    <Grid size={{lg:6,md:6,sm:6,xs:6}}>
+    <Grid size={{lg:6,md:6,sm:12,xs:12}}>
       <TextField 
             type='search'
             placeholder='Search'
@@ -78,23 +78,23 @@ const Sponsershipmanagement = () => {
                 color: '#3DB80C',
                 opacity: 1,
               },
-              width:{lg:'500px',md:'500px'},
+              width:{lg:'500px',md:'500px',xs:'100%',sm:'100%'},
               borderRadius:'10px',
               background:"white",
-              
+              marginTop:2
             }}
            />
    </Grid>
    <Grid size={{lg:6,md:6,sm:12,xs:12}}>
     <Box display="flex" 
          
-         gap="20px" 
+         gap={4}
          sx={{marginTop:{xs:2}, justifyContent:{lg:'flex-end',md:'flex-end',sm:'flex-start'
     }}}>
-      <Custombutton startIcon={<AddIcon/>} onClick={()=>navigate('/admin/sponsorship/addsponsor')}>
+      <Custombutton variant="contained" startIcon={<AddIcon/>} onClick={()=>navigate('/admin/sponsorship/addsponsor')}>
         Add Sponsor
       </Custombutton>
-      <Custombutton startIcon={<UploadIcon />}>
+      <Custombutton variant="contained" startIcon={<UploadIcon />}>
         Export
       </Custombutton>
       <Filterbutton variant="outlined" startIcon={<FilterListIcon />}>
@@ -117,7 +117,8 @@ const Sponsershipmanagement = () => {
             '& .MuiTableCell-head': {
               fontWeight: 'bold',              
               color: '#3DB80C',                
-              borderBottom: 'none',            
+              borderBottom: 'none', 
+                         
             },
           }}>
             <TableCell>S.No</TableCell>

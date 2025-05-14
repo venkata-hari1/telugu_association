@@ -10,11 +10,10 @@ import {
   import Select from '@mui/material/Select';
   import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
   import UploadFileIcon from '@mui/icons-material/UploadFile';
-  import { GreenTextField, VisuallyHiddenInput } from "../adminstyles/MembershiptableStyles";
+  import { GreenTextField, Submit, VisuallyHiddenInput } from "../adminstyles/MembershiptableStyles";
   import Commonheader from "./Commonheader";
   
-  
-const Addsponsor = () => {
+  const Addsponsor = () => {
   return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
        
@@ -275,12 +274,12 @@ const Addsponsor = () => {
     multiple
   />
 </Button>
-
-    </Grid>
+ </Grid>
 
    <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
    <Box sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-    <Button size="large" sx={{background:"green",padding:"10px 10px",color:"white"}}>Submit</Button>
+   <Submit variant="contained" size="large">Submit</Submit>
+
    </Box>
    </Grid>
    
