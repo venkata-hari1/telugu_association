@@ -2,21 +2,16 @@ import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from "@mui
 import { Custombutton } from "../adminstyles/MembershiptableStyles"
 import AddIcon from '@mui/icons-material/Add';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import galimage1 from '../assets/gal-1.JPG'
-import galimage2 from '../assets/gal-2.JPG'
+import galimage1 from '../assets/gal-1.jpg'
 import { useNavigate } from "react-router-dom";
 
 const Gallery = () => {
  
-    const imageMap:{ [key: string]: string }= {
-        galimage1: galimage1,
-        galimage2: galimage2
-    };
       
    
    const gallerydata=[
-    {id:1,img:'galimage1',text:' Had a great time at recent event with #Associations'},
-    {id:2,img:'galimage2',text:' Had a great time at recent event with #Associations'},
+    {id:1,text:' Had a great time at recent event with #Associations'},
+    {id:2,text:' Had a great time at recent event with #Associations'},
     
    ] 
  const navigate=useNavigate()      
@@ -60,7 +55,7 @@ const Gallery = () => {
          <Card sx={{ maxWidth: '100%' }} component={Paper}>
          <CardMedia
           component="img"
-          image={imageMap[data.img]}
+          image={galimage1}
           alt={data.text}
           sx={{ height: 200, objectFit: 'cover' }}
         />
