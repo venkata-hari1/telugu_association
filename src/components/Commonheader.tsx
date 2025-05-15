@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 
-const Commonheader = ({ onToggleSidebar }) => {
+const Commonheader = ({ onToggleSidebar}:{onToggleSidebar: () => void }) => {
   return (
     <Box
       sx={{

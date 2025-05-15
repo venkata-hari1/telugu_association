@@ -19,8 +19,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
-const Sidebar = ({ mobileOpen, onCloseSidebar }) => {
-  const [selectedId, setSelectedId] = useState(null);
+const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSidebar:() => void}) => {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const navigate = useNavigate();
 
   const sidemenu = [
