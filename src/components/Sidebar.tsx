@@ -43,7 +43,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
       }}
     >
       <Box component="img" src={tlogo} alt="Telugu Association"
-        sx={{ width: "150px", height: "auto", margin: 'auto', display: 'block' }} />
+        sx={{ width: "150px", height: "auto", margin: 'auto', display: 'block',whiteSpace:'nowrap' }} />
 
       <Box sx={{ flexGrow: 1 }}>
         <List sx={{ color: 'white' }}>

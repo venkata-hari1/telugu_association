@@ -14,8 +14,8 @@ import Mainlayout from '../components/Mainlayout'
 import Dashboard from '../components/Dashboard'
 import Gallery from '../components/Gallery'
 import Addgallery from '../components/Addgallery'
-
-
+import EventsandCalender from '../components/EventsandCalender'
+import Addevent from '../components/Addevents'
 
 
 const AppRoutes = () => {
@@ -38,6 +38,8 @@ const AppRoutes = () => {
           <Route path="sponsorship/subscriptionplans/editsubscription" element={<Editsubscription />} />
           <Route path="gallery" element={<Gallery />}/>
           <Route path="gallery/addgallery" element={<Addgallery />}/>
+          <Route path="events" element={<EventsandCalender />}/>
+           <Route path="events/addevent" element={<Addevent />}/>  
          </Route>
           
          
