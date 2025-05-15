@@ -2,7 +2,7 @@ import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from "@mui
 import { Custombutton } from "../adminstyles/MembershiptableStyles"
 import AddIcon from '@mui/icons-material/Add';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import galimage1 from '../assets/gal-1.jpg'
+import galimage1 from '../assets/gal-1.JPG'
 import { useNavigate } from "react-router-dom";
 
 const Gallery = () => {
