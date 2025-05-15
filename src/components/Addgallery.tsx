@@ -3,7 +3,7 @@ import { Box, Button, Card, CardMedia, FormControl, FormControlLabel, FormLabel,
  import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Submit, VisuallyHiddenInput } from '../adminstyles/MembershiptableStyles';
 import UploadFileIcon from '@mui/icons-material/UploadFile'; 
-import ClearIcon from '@mui/icons-material/Clear';
+import CloseIcon from '@mui/icons-material/Close';
 import galimage2 from '../assets/gal-2.jpg'
 
 const Addgallery = () => {
@@ -185,7 +185,7 @@ const Addgallery = () => {
                                 height="194"
                                 image={galimage2}
                                 alt="Paella dish"/>
-                               <ClearIcon
+                               <CloseIcon
                                sx={{
                               position: 'absolute',
                               top: 8,
@@ -197,7 +197,7 @@ const Addgallery = () => {
                                 cursor:'pointer'
                               },
                             }}
-                            size="small"/> 
+                           /> 
                           </Card>
                             <Card sx={{ maxWidth: 345,position:"relative" }}>
                               <CardMedia
@@ -205,7 +205,7 @@ const Addgallery = () => {
                                 height="194"
                                 image={galimage2}
                                 alt="Paella dish"/>
-                               <ClearIcon
+                               <CloseIcon
                                sx={{
                               position: 'absolute',
                               top: 8,
@@ -217,7 +217,7 @@ const Addgallery = () => {
                                 cursor:'pointer'
                               },
                             }}
-                            size="small"/> 
+                         /> 
                           </Card>
                         </Grid>
                      
