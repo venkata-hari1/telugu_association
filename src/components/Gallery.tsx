@@ -2,7 +2,7 @@ import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from "@mui
 import { Custombutton } from "../adminstyles/MembershiptableStyles"
 import AddIcon from '@mui/icons-material/Add';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import galimage1 from '../assets/gal-1.JPG'
+import galimage2 from '../assets/gal-2.jpg'
 import { useNavigate } from "react-router-dom";
 
 const Gallery = () => {
@@ -55,7 +55,7 @@ const Gallery = () => {
          <Card sx={{ maxWidth: '100%' }} component={Paper}>
          <CardMedia
           component="img"
-          image={galimage1}
+          image={galimage2}
           alt={data.text}
           sx={{ height: 200, objectFit: 'cover' }}
         />
