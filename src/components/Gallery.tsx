@@ -8,18 +8,17 @@ import { useNavigate } from "react-router-dom";
 
 const Gallery = () => {
  
-    const imageMap = {
+    const imageMap:{ [key: string]: string }= {
         galimage1: galimage1,
         galimage2: galimage2
-      };
+    };
       
-    
-
+   
    const gallerydata=[
     {id:1,img:'galimage1',text:' Had a great time at recent event with #Associations'},
     {id:2,img:'galimage2',text:' Had a great time at recent event with #Associations'},
     
- ] 
+   ] 
  const navigate=useNavigate()      
 
  return (

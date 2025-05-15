@@ -4,10 +4,11 @@ import { Box, Button, Card, CardMedia, FormControl, FormControlLabel, FormLabel,
 import { Submit, VisuallyHiddenInput } from '../adminstyles/MembershiptableStyles';
 import UploadFileIcon from '@mui/icons-material/UploadFile'; 
 import CloseIcon from '@mui/icons-material/Close';
-import galimage2 from '../assets/gal-2.jpg'
+import galimage1 from '../assets/gal-1.jpg'
 
 const Addgallery = () => {
-  return (
+
+return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
        
              <Box display="flex" justifyContent="space-between" >
@@ -183,7 +184,7 @@ const Addgallery = () => {
                               <CardMedia
                                 component="img"
                                 height="194"
-                                image={galimage2}
+                                image={galimage1}
                                 alt="Paella dish"/>
                                <CloseIcon
                                sx={{
@@ -203,7 +204,7 @@ const Addgallery = () => {
                               <CardMedia
                                 component="img"
                                 height="194"
-                                image={galimage2}
+                                image={galimage1}
                                 alt="Paella dish"/>
                                <CloseIcon
                                sx={{
