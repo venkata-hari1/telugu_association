@@ -1,6 +1,6 @@
-import { Box, Button,Grid, InputAdornment, TextField, Typography } from "@mui/material"
+import { Box, Grid, Typography } from "@mui/material"
 import {Custombutton, Filterbutton, Subscriptionbutton} from '../adminstyles/MembershiptableStyles'
-import SearchIcon from '@mui/icons-material/Search'
+
 import AddIcon from '@mui/icons-material/Add';
 import UploadIcon from '@mui/icons-material/Upload';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -12,11 +12,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CircleIcon from '@mui/icons-material/Circle';
 import { useNavigate } from "react-router-dom";
 import Paginationcomponent from "./Pagination";
-
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { useState } from "react";
+import Filtersponser from "./Filtersponser";
 
 
 const Sponsershipmanagement = () => {
@@ -32,7 +35,10 @@ const Sponsershipmanagement = () => {
       {sno:6,companyname:'Pizza Hut',sponsorcontact:'Srikanth',logo:'img',contactemail:'mastinfo@gmail.com',website:"One Year",sponserplan:'Gold',date:'From Mar15th to April15th 2025',status:'Active',action:''},  
     
     ]
-
+    const[state,setState]=useState(false)
+    function openActivemembers(){
+       setState(prev=>!prev)
+    }
   return (
    <Box>
    
@@ -49,41 +55,7 @@ const Sponsershipmanagement = () => {
 
     {/* search line */}
     <Grid size={{lg:6,md:6,sm:12,xs:12}}>
-      <TextField 
-            type='search'
-            placeholder='Search'
-            size="small"
-            
-            slotProps={{
-              input: {
-                startAdornment: <InputAdornment position="start">
-                  <SearchIcon sx={{color:"#3DB80C"}}/>
-                </InputAdornment>,
-              }
-             }}  
-             sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: '#3DB80C', 
-                  borderRadius:'10px'
-                },
-                '&:hover fieldset': {
-                  borderColor: '#3DB80C', 
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: '#3DB80C', 
-                },
-              },
-              '& input::placeholder': {
-                color: '#3DB80C',
-                opacity: 1,
-              },
-              width:{lg:'500px',md:'500px',xs:'100%',sm:'100%'},
-              borderRadius:'10px',
-              background:"white",
-              marginTop:2
-            }}
-           />
+     
    </Grid>
    <Grid size={{lg:6,md:6,sm:12,xs:12}}>
     <Box display="flex" 
@@ -97,9 +69,11 @@ const Sponsershipmanagement = () => {
       <Custombutton variant="contained" startIcon={<UploadIcon />}>
         Export
       </Custombutton>
-      <Filterbutton variant="outlined" startIcon={<FilterListIcon />}>
+      <Filterbutton variant="outlined" startIcon={<FilterListIcon />} 
+      onClick={openActivemembers}>
         Filters
         </Filterbutton>
+        {state&&<Filtersponser opensponsor={openActivemembers}/>}
        </Box>
    </Grid>
 
@@ -129,7 +103,7 @@ const Sponsershipmanagement = () => {
             <TableCell align="left">Website</TableCell>
             <TableCell align="left">Sponsership Plan</TableCell>
             <TableCell align="left">Date</TableCell>
-            <TableCell align="left">Status</TableCell>
+            <TableCell align="left" >Status</TableCell>
             <TableCell align="left">Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -148,18 +122,24 @@ const Sponsershipmanagement = () => {
               <TableCell>{data.sponserplan}</TableCell>
               <TableCell>{data.date}</TableCell>
               
-              <TableCell sx={{color:"#3DB80C"}}>
+              <TableCell sx={{color:"#3DB80C",padding: "6px 10px"}}>
               {data.status&& ( <CircleIcon  sx={{fontSize:"11px"}}/>)}
                 {data.status}</TableCell>
-              <TableCell><Button
-        variant="text"
-        startIcon={<EditIcon />}
-        endIcon={<ArrowDropDownIcon />}
-        sx={{ textTransform: 'none', color: '#555555'}} 
-      >
-        Edit
-      </Button></TableCell>
-              
+              <TableCell>
+                 <Select
+                                       value="Edit"
+                                      size="small" 
+                                       renderValue={() => (
+                              <Box display="flex" alignItems="center">
+                              <EditIcon fontSize="small" style={{ marginRight: 4 }} />
+                              Edit
+                             </Box>
+                             )}>
+                              <MenuItem value="Edit">Edit</MenuItem>
+                              <MenuItem value="Delete"><DeleteOutlineIcon fontSize="small" style={{ marginRight: 8,color:"red" }} />Delete</MenuItem>
+                  
+                              </Select>
+              </TableCell>
              </TableRow>
 
 

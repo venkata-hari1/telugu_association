@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSidebar:() => void}) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const navigate = useNavigate();
-
+  
   const sidemenu = [
     { id: 1, title: 'Dashboard', icon: <GridViewIcon />, link: 'admin/dashboard' },
     { id: 2, title: 'Membership Management', icon: <GroupIcon />, link: 'admin/membership' },
@@ -40,6 +40,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
         height: "100%",
         display: 'flex',
         flexDirection: 'column',
+        
       }}
     >
       <Box component="img" src={tlogo} alt="Telugu Association"
@@ -70,7 +71,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
               <ListItemIcon sx={{ color: selectedId === item.id ? 'green' : 'white' }}>
                 {item.icon}
               </ListItemIcon>
-              <ListItemText primary={item.title} />
+              <ListItemText primary={item.title}  />
             </ListItemButton>
           ))}
         </List>
@@ -94,7 +95,10 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
         </ListItemButton>
       </Box>
     </Box>
-  );
+
+
+
+);
 
   return (
     <>

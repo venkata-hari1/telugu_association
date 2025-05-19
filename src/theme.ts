@@ -6,7 +6,16 @@ const theme = createTheme({
         },
     },
     typography: {
-      fontFamily: 'Roboto'
+      fontFamily: 'Roboto',
+        fontSize: 12,
+      h5: {
+      fontSize: '1.5rem',
+    },  
+
+     button: {
+      fontSize: '0.875rem',
+      textTransform: 'none', // Optional: removes UPPERCASE from buttons
+    },
     },
     
   });
