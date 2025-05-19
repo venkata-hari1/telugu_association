@@ -61,9 +61,9 @@ const Commonheader = ({ onToggleSidebar}:{onToggleSidebar: () => void }) => {
         }}
       />
 
-      <Avatar sx={{ backgroundColor: '#3DB80C', width: 30, height: 30 }}>
+   {/*    <Avatar sx={{ backgroundColor: '#3DB80C', width: 30, height: 30 }}>
         <NotificationsIcon sx={{ fontSize: '20px', color: 'white' }} />
-      </Avatar>
+      </Avatar> */}
     </Box>
   );
 };

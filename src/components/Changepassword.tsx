@@ -49,7 +49,7 @@ function hideconfirmPassword(){
   setConfirmType("password")
 }
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+    <Box display="flex" justifyContent="center" alignItems="center" minHeight="90vh">
             
     <Grid container 
     sx={{display:'flex',flexDirection:'column',

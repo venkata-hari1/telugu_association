@@ -2,12 +2,13 @@ import { Paper,Box, MenuItem } from '@mui/material'
 
 const Filtersponser = ({opensponsor}:{opensponsor:()=>void}) => {
   return (
+       
        <Paper
       elevation={3}
       sx={{
         position: "absolute",
-        top: "170px",
-        right: "30px",
+        top: {lg:"38px",md:"38px",sm:"100px",sx:"100px"},
+        right: "3px",
         zIndex: 10,
         width: 150,
       }}
@@ -18,6 +19,7 @@ const Filtersponser = ({opensponsor}:{opensponsor:()=>void}) => {
        
       </Box>
     </Paper>
+   
   )
 }
 

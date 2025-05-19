@@ -1,6 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material"
 import {Custombutton, Filterbutton, Subscriptionbutton} from '../adminstyles/MembershiptableStyles'
-
 import AddIcon from '@mui/icons-material/Add';
 import UploadIcon from '@mui/icons-material/Upload';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -56,12 +55,12 @@ const Sponsershipmanagement = () => {
     {/* search line */}
     <Grid size={{lg:6,md:6,sm:12,xs:12}}>
      
-   </Grid>
-   <Grid size={{lg:6,md:6,sm:12,xs:12}}>
+    </Grid>
+    <Grid size={{lg:6,md:6,sm:12,xs:12}}>
     <Box display="flex" 
          
          gap={4}
-         sx={{marginTop:{xs:2}, justifyContent:{lg:'flex-end',md:'flex-end',sm:'flex-start'
+         sx={{marginTop:{xs:2}, justifyContent:{lg:'flex-end',md:'flex-end',sm:'flex-start',
     }}}>
       <Custombutton variant="contained" startIcon={<AddIcon/>} onClick={()=>navigate('/admin/sponsorship/addsponsor')}>
         Add Sponsor
@@ -69,11 +68,19 @@ const Sponsershipmanagement = () => {
       <Custombutton variant="contained" startIcon={<UploadIcon />}>
         Export
       </Custombutton>
-      <Filterbutton variant="outlined" startIcon={<FilterListIcon />} 
-      onClick={openActivemembers}>
+      <Box sx={{ position:'relative'}}>
+      <Filterbutton 
+        variant="outlined" 
+        fullWidth
+        startIcon={<FilterListIcon />} 
+        onClick={openActivemembers}>
         Filters
         </Filterbutton>
-        {state&&<Filtersponser opensponsor={openActivemembers}/>}
+        {state&&
+  
+        <Filtersponser opensponsor={openActivemembers}/>
+        }
+        </Box>
        </Box>
    </Grid>
 
@@ -135,7 +142,7 @@ const Sponsershipmanagement = () => {
                               Edit
                              </Box>
                              )}>
-                              <MenuItem value="Edit">Edit</MenuItem>
+                              
                               <MenuItem value="Delete"><DeleteOutlineIcon fontSize="small" style={{ marginRight: 8,color:"red" }} />Delete</MenuItem>
                   
                               </Select>

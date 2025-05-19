@@ -7,8 +7,8 @@ const Filterdropdown = ({openfilter}:{openfilter:()=>void}) => {
       elevation={3}
       sx={{
         position: "absolute",
-        top: "160px",
-        right: "15px",
+        top: {lg:"38px",md:"38px",sm:"100px",sx:"100px"},
+        right: "1px",
         zIndex: 10,
         width: 100,
       }}

@@ -1,10 +1,4 @@
-import {
-  Box,
-  Grid,
-  Typography,
- 
-} from "@mui/material";
-
+import { Box, Grid, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import UploadIcon from "@mui/icons-material/Upload";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -23,16 +17,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import Paginationcomponent from "./Pagination";
 import CircleIcon from "@mui/icons-material/Circle";
-
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useState } from "react";
 import Filterdropdown from "./Filterdropdown";
 const Membershiptable = () => {
   const navigate = useNavigate();
-  
-  
+
   const tabledata = [
     {
       sno: 1,
@@ -89,11 +81,11 @@ const Membershiptable = () => {
       status: "active",
     },
   ];
- const[state,setState]=useState(false)
-  function openFilter(){     
-      setState(prev=>!prev)
+  const [state, setState] = useState(false);
+  function openFilter() {
+    setState((prev) => !prev);
   }
-  
+
   return (
     <Box gap={2}>
       <Grid container>
@@ -110,7 +102,10 @@ const Membershiptable = () => {
             >
               Volunteer Management
             </Custombutton>
-            <Custombutton variant="outlined" onClick={() => navigate("/admin/sponsorship/subscriptionplans")}>
+            <Custombutton
+              variant="outlined"
+              onClick={() => navigate("/admin/sponsorship/subscriptionplans")}
+            >
               Subscription plans{" "}
             </Custombutton>
           </Box>
@@ -120,9 +115,12 @@ const Membershiptable = () => {
           {/* <Search /> */}
         </Grid>
         <Grid size={{ lg: 6, md: 6, sm: 12 }} mt={2}>
-          <Box display="flex" justifyContent="flex-end" gap={2}>
+          <Box display="flex" 
+          sx={{justifyContent:{lg:'flex-end',md:'flex-end',sm:'flex-start',sx:'flex-start'}}} 
+          gap={3}>
             <Custombutton
               variant="contained"
+              
               startIcon={<AddIcon />}
               onClick={() => navigate("/admin/membership/addmember")}
             >
@@ -136,11 +134,17 @@ const Membershiptable = () => {
             <Custombutton variant="contained" startIcon={<UploadIcon />}>
               Export
             </Custombutton>
-
-            <Filterbutton variant="outlined" startIcon={<FilterListIcon />} onClick={openFilter}>
+            <Box sx={{ position:'relative'}}>
+            <Filterbutton
+              variant="outlined"
+              startIcon={<FilterListIcon />}
+              onClick={openFilter}
+              
+            >
               Filters
             </Filterbutton>
-            {state&&<Filterdropdown openfilter={openFilter}/>}
+            {state && <Filterdropdown openfilter={openFilter} />}
+            </Box>
           </Box>
         </Grid>
 
@@ -189,19 +193,27 @@ const Membershiptable = () => {
                     {data.status}
                   </TableCell>
                   <TableCell>
-                     <Select
-                       value="Edit"
-                      size="small" 
-                       renderValue={() => (
-              <Box display="flex" alignItems="center">
-              <EditIcon fontSize="small" style={{ marginRight: 4 }} />
-              Edit
-             </Box>
-             )}>
-              <MenuItem value="Edit">Edit</MenuItem>
-              <MenuItem value="Delete"><DeleteOutlineIcon fontSize="small" style={{ marginRight: 8,color:"red" }} />Delete</MenuItem>
-  
-              </Select>    
+                    <Select
+                      value="Edit"
+                      size="small"
+                      renderValue={() => (
+                        <Box display="flex" alignItems="center">
+                          <EditIcon
+                            fontSize="small"
+                            style={{ marginRight: 4 }}
+                          />
+                          Edit
+                        </Box>
+                      )}
+                    >
+                      <MenuItem value="Delete">
+                        <DeleteOutlineIcon
+                          fontSize="small"
+                          style={{ marginRight: 8, color: "red" }}
+                        />
+                        Delete
+                      </MenuItem>
+                    </Select>
                   </TableCell>
                 </TableRow>
               ))}

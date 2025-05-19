@@ -66,9 +66,15 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
                 '&:hover': {
                   backgroundColor: '#d4d115',
                 },
+                
               }}
             >
-              <ListItemIcon sx={{ color: selectedId === item.id ? 'green' : 'white' }}>
+              <ListItemIcon sx={{ color: selectedId === item.id ? 'green' : 'white',
+                minWidth: 'unset',
+                marginRight: '15px',
+                display: 'flex',
+                alignItems: 'center'
+              }}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText primary={item.title}  />

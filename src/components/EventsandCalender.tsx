@@ -24,9 +24,9 @@ const handleClose = () => {
 };
 
 const carddata=[
-  {id:1,title:'TOM Womens Day',day:'Saturday',eveimg:'eventImg1',date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'},
-  {id:2,title:'TOM Womens Day',day:'Saturday',eveimg:'eventImg1',date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'},
-  {id:3,title:'TOM Womens Day',day:'Saturday',eveimg:'eventImg1',date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'}
+  {id:1,title:"TOM Womens'Day",day:'Saturday',eveimg:'eventImg1',date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'},
+  {id:2,title:'TOM Dusssehra',day:'Saturday',eveimg:'eventImg1',date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'},
+  {id:3,title:'TOM Bhatukamma',day:'Saturday',eveimg:'eventImg1',date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'}
 ]
  return (
     <Box>
@@ -57,14 +57,15 @@ const carddata=[
 
         <Grid container mt={2}>
         <Grid size={{lg:12,md:12,sm:12,xs:12}} >
-          <Box gap={4} sx={{
+          <Box gap={6} sx={{
             display:'flex',
             flexDirection:{xs:'column',sm:"column",lg:"row",md:'row'},
             justifyContent:'center',alignItems:'center'}}>  
             {
               carddata.map((card)=>(
-               <Card sx={{width:"100%",p:1,background:'transparent'}}>
-            <CardHeader title={card.title} sx={{color:'#3DB80C'}} />
+               <Card  variant="outlined" sx={{width:"100%",p:1,background:'transparent'}}>
+            <CardHeader title={card.title} sx={{color:'#3DB80C'}}
+            titleTypographyProps={{ fontSize: '20px', color: '#3DB80C' }} />
               <CardMedia
                        component="img"
                        image={eventimg1}
