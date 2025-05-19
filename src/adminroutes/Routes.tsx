@@ -16,6 +16,11 @@ import Gallery from '../components/Gallery'
 import Addgallery from '../components/Addgallery'
 import EventsandCalender from '../components/EventsandCalender'
 import Addevent from '../components/Addevents'
+import BoardandLeadership from '../components/BoardandLeadership'
+import Addboard from '../components/Addboard'
+import Profile from '../components/Profile'
+import Changepassword from '../components/Changepassword'
+import Changeemail from '../components/Changeemail'
 
 
 const AppRoutes = () => {
@@ -40,9 +45,13 @@ const AppRoutes = () => {
           <Route path="gallery/addgallery" element={<Addgallery />}/>
           <Route path="events" element={<EventsandCalender />}/>
            <Route path="events/addevent" element={<Addevent />}/>  
-         </Route>
-          
-         
+           <Route path="board" element={<BoardandLeadership />}/>  
+           <Route path="board/addboard" element={<Addboard />}/>  
+            <Route path="profile" element={<Profile />}/>  
+            <Route path="profile/change-email" element={<Changeemail />}/> 
+            <Route path="profile/change-password" element={<Changepassword />}/>
+        </Route>
+     
       </Route>
     </Routes>
 

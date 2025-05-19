@@ -47,11 +47,11 @@ const carddata=[
 
       <Grid size={{lg:12,md:12,sm:6}}>
        <Box display="flex" gap={4} mt={2}>
-         <Button  variant="contained" startIcon={<AddIcon/>} 
+         <Button  variant="contained" 
          sx={{background:'#3DB80C'}}>Upcomming Events</Button>
           
-         <Button  variant="contained" startIcon={<AddIcon/>} 
-         sx={{background:'#3DB80C'}}>Past Events</Button>
+         <Button  variant="outlined" 
+         sx={{background:'#ffff',color:'#3DB80C',borderColor:'#3DB80C'}}>Past Events</Button>
         </Box>
         </Grid>
 

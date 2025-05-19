@@ -50,8 +50,8 @@ return (
                             color: '#3DB80C',
                             backgroundColor: 'white',
                             border: '1px solid #3DB80C',
-                            borderRadius: '8px',
-                            width: '140px',
+                            borderRadius: '2px',
+                            width: '120px',
                             padding: '1px 1px',
                             '& .MuiSelect-outlined': {
                               padding: '8px 10px',
@@ -64,7 +64,7 @@ return (
                             marginTop:'5px'
                           }}
                         >
-                          <MenuItem value="Year">Year</MenuItem>
+                          <MenuItem value="Year">2025</MenuItem>
                           
                           </Select>
                       </FormControl>

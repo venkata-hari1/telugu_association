@@ -1,7 +1,7 @@
 import {
   Box,
   Grid,
- TextField,
+  TextField,
   Typography,
   FormControl,
   Button
@@ -187,7 +187,7 @@ import {
            <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
            <FormControl size="small">
      <Select
-       value="One Year"
+       
        variant="outlined"
        displayEmpty
        IconComponent={() => (

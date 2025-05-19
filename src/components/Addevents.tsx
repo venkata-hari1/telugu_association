@@ -56,6 +56,39 @@ const Addevent = () => {
                             />
                      </Box>
                     </Grid>
+
+                 <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
+                      <Typography>Event Time</Typography>
+                 </Grid>   
+
+                   <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
+                   <TextField
+  
+  type="time"
+  InputLabelProps={{
+    shrink: true,
+  }}
+  inputProps={{
+    step: 300, // 5 min steps
+  }}
+  size="small"
+   sx={{
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#3DB80C', 
+      },
+      '&:hover fieldset': {
+        borderColor: '#2A8A08', 
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#1D6E06', 
+      },
+    },
+    color:'#3DB80C'
+  }}
+/>
+                 </Grid>
+
                 <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
                    <Typography>Event Venue</Typography>
                  </Grid>

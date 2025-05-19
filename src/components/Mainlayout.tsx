@@ -15,10 +15,7 @@ const Mainlayout = () => {
 
 
 
-
-  
-
-  return (
+return (
     <>
       <Sidebar
         mobileOpen={mobileOpen}
