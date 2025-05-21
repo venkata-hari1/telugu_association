@@ -78,7 +78,7 @@ const Sponsershipmanagement = () => {
         </Filterbutton>
         {state&&
   
-        <Filtersponser opensponsor={openActivemembers}/>
+        <Filtersponser/>
         }
         </Box>
        </Box>

@@ -31,7 +31,7 @@ export const Custombutton = styled(Button)(({ theme }) => ({
   textTransform: 'capitalize',
   color: '#ffffff',
   borderColor:'#3DB80C',
-  
+  width:'auto',
   [theme.breakpoints.down('sm')]: {
     fontSize: '12px',
     height: 'auto',
@@ -46,7 +46,8 @@ export const Filterbutton=styled(Button)(({ theme }) => ({
   color:"#3DB80C",
   fontSize:'14px',
   textTransform:'capitalize',
-
+  width:'auto',
+    height: '38px', 
   [theme.breakpoints.down('sm')]: {
     fontSize: '12px',
     height: 'auto',
@@ -62,10 +63,12 @@ export const Subscriptionbutton=styled(Button)(({theme})=>({
   fontSize: '14px',
   marginTop:'10px',
   fontWeight:400,
+  width:'auto',
   [theme.breakpoints.down('sm')]: {
       fontSize: '11px',
       padding: '6px 12px',
-      height:'40px'
+      height:'40px',
+      width:"100%"
     },
 
 }))

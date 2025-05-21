@@ -1,5 +1,5 @@
 // Commonheader.tsx
-import { TextField, Box, InputAdornment, Avatar, Typography } from '@mui/material';
+import { TextField, Box, InputAdornment,Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import { useLocation } from 'react-router-dom';

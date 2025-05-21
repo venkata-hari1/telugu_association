@@ -1,6 +1,6 @@
 import { Paper,Box, MenuItem } from '@mui/material'
 
-const Filtersponser = ({opensponsor}:{opensponsor:()=>void}) => {
+const Filtersponser = () => {
   return (
        
        <Paper

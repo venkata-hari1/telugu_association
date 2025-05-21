@@ -17,6 +17,9 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import Logout from './Logout';
+
+
 
 const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSidebar:() => void}) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -31,7 +34,11 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
     { id: 6, title: 'Board & Leadership', icon: <SupervisedUserCircleIcon />, link: 'admin/board' },
     { id: 7, title: 'Profile', icon: <AccountCircleIcon />, link: 'admin/profile' },
   ];
+  const[state,setState]=useState(false)
+  function handleLogout(){
+     setState(prev=>!prev)
 
+  }
   const drawerContent = (
     <Box
       sx={{
@@ -85,7 +92,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
 
       <Box>
         <ListItemButton
-          onClick={() => console.log('Logout')}
+          onClick={handleLogout}
           sx={{
             color: 'white',
             '&:hover': {
@@ -97,9 +104,10 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
           <ListItemIcon sx={{ color: 'white' }}>
             <LogoutIcon />
           </ListItemIcon>
-          <ListItemText primary="Logout" />
+          <ListItemText primary="Logout"  />
         </ListItemButton>
-      </Box>
+     </Box>
+      
     </Box>
 
 
@@ -123,9 +131,10 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
           zIndex: 1000,
         }}
       >
+        
         {drawerContent}
       </Box>
-
+        
       {/* Drawer for mobile */}
       <Drawer
         open={mobileOpen}
@@ -134,6 +143,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
       >
         {drawerContent}
       </Drawer>
+       <Logout open={state} handleClose={() => setState(false)} />        
     </>
   );
 };

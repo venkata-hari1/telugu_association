@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import UploadIcon from "@mui/icons-material/Upload";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -88,64 +88,66 @@ const Membershiptable = () => {
 
   return (
     <Box gap={2}>
-      <Grid container>
-        <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
-          <Typography variant="h5" color="#3DB80C">
+      <Grid container spacing={2} alignItems="center">
+        <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
+          <Typography variant="h5" sx={{ fontWeight: 500, color: "#3DB80C" }}>
             Membership Management
           </Typography>
         </Grid>
-        <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
-          <Box display="flex" justifyContent="flex-end" gap="10px">
-            <Custombutton
-              variant="outlined"
+        <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
+          <Box display="flex" justifyContent={{xs:'center',md:'flex-end'}}
+          gap={2} flexWrap="wrap">
+            <Button
+              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C'}}
+             variant="outlined"
               onClick={() => navigate("volunteermgmt")}
             >
               Volunteer Management
-            </Custombutton>
-            <Custombutton
+            </Button>
+            <Button
+              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C'}} 
               variant="outlined"
               onClick={() => navigate("/admin/sponsorship/subscriptionplans")}
             >
-              Subscription plans{" "}
-            </Custombutton>
+              Subscription plans
+            </Button>
           </Box>
         </Grid>
 
-        <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }} mt={2}>
-          {/* <Search /> */}
-        </Grid>
-        <Grid size={{ lg: 6, md: 6, sm: 12 }} mt={2}>
-          <Box display="flex" 
-          sx={{justifyContent:{lg:'flex-end',md:'flex-end',sm:'flex-start',sx:'flex-start'}}} 
-          gap={3}>
-            <Custombutton
-              variant="contained"
-              
-              startIcon={<AddIcon />}
-              onClick={() => navigate("/admin/membership/addmember")}
-            >
-              Add Member
-            </Custombutton>
+       {/*  <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }} >
+        <Search />
+        </Grid> */}
+        <Grid size={{ lg: 12, md: 12, sm: 12,xs:12 }} >
+          <Box sx={{display:'flex',justifyContent:{lg:'flex-end'},flexDirection:'row',flexWrap:'wrap',gap:2}}>
+          
+          <Button variant="contained" 
+           startIcon={<AddIcon />} 
+           onClick={() => navigate("/admin/membership/addmember")}
+           sx={{background:'#3DB80C'}}>
+          Add Member
+         </Button>
 
-            <Custombutton variant="contained" startIcon={<UploadIcon />}>
-              Bulk Upload
-            </Custombutton>
+        <Button variant="contained" startIcon={<UploadIcon />} sx={{background:'#3DB80C'}}>
+          Bulk Upload
+        </Button>
 
-            <Custombutton variant="contained" startIcon={<UploadIcon />}>
-              Export
-            </Custombutton>
-            <Box sx={{ position:'relative'}}>
-            <Filterbutton
-              variant="outlined"
-              startIcon={<FilterListIcon />}
-              onClick={openFilter}
-              
-            >
-              Filters
-            </Filterbutton>
-            {state && <Filterdropdown openfilter={openFilter} />}
-            </Box>
-          </Box>
+        <Button variant="contained" startIcon={<UploadIcon />} sx={{background:'#3DB80C'}}>
+          Export
+        </Button>
+
+        <Box sx={{position:'relative'}} >
+        <Button 
+          variant="outlined"
+          startIcon={<FilterListIcon />}
+          onClick={openFilter}
+          sx={{borderColor:'#3DB80C',color:'#3DB80C'}}
+        >
+          Filters
+        </Button>
+        {state && <Filterdropdown openfilter={openFilter} />}
+        </Box>
+       </Box>
+
         </Grid>
 
         <TableContainer

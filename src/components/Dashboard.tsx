@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, CardMedia, colors, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Paper, Stack, Typography } from "@mui/material"
+import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, Paper, Typography } from "@mui/material"
 import GroupIcon from '@mui/icons-material/Group';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -7,11 +7,13 @@ import event111 from '../assets/event11.jpg'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
+import { useNavigate } from "react-router-dom";
 
 
 
 const Dashboard = () => {
-  
+
+ const navigate= useNavigate()
   const boarddata=[
     {id:1,icon:<GroupIcon />,title:'Active Members',number:50},
     {id:2,icon:<CalendarTodayIcon />, title:'Total Upcomming Events',number:5},
@@ -92,7 +94,8 @@ return (
               size="small"
               variant="contained"
               startIcon={<AddIcon />}
-              sx={{marginRight:'10px',backgroundColor:'#3DB80C'}}>
+              sx={{marginRight:'10px',backgroundColor:'#3DB80C'}}
+              onClick={()=>navigate('/admin/board')}>
               Edit News
             </Button>
          </Box>
@@ -121,7 +124,8 @@ return (
               size="small"
               variant="contained"
               startIcon={<AddIcon />}
-              sx={{marginRight:'10px',backgroundColor:'#3DB80C'}}>
+              sx={{marginRight:'10px',backgroundColor:'#3DB80C'}}
+              onClick={()=>navigate('/admin/events/addevent')}>
               Add Events
             </Button>
          </Box>
