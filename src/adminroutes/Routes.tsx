@@ -30,8 +30,9 @@ const AppRoutes = () => {
 
       <Route element={<Privateroutes />}>
         <Route path="/admin" element={<Mainlayout />}>
-        
-          <Route path="dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} /> 
+           <Route path="dashboard" element={<Dashboard />} /> 
           <Route path="membership" element={<Membershiptable />} />
           <Route path="membership/addmember" element={<AddMember />} />
           <Route path="membership/volunteermgmt" element={<Volunteermanagement />} />
@@ -51,7 +52,7 @@ const AppRoutes = () => {
             <Route path="profile/change-email" element={<Changeemail />}/> 
             <Route path="profile/change-password" element={<Changepassword />}/>
         </Route>
-     
+         
       </Route>
     </Routes>
 

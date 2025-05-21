@@ -18,11 +18,11 @@ const Profile = () => {
 
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between" sx={{ mb: 2 }}>
+      {/* <Box display="flex" justifyContent="space-between" sx={{ mb: 2 }}>
         <Typography variant="h5" color="#3DB80C">
           Profile
         </Typography>
-      </Box>
+      </Box> */}
 
       <Paper
         sx={{

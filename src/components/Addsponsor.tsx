@@ -17,14 +17,14 @@ import {
   return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
        
-        <Box display="flex" justifyContent="space-between">
+       {/*  <Box display="flex" justifyContent="space-between">
            <Typography variant="h5" color="#3DB80C">
              Sponser Management/
              <Typography component="span" fontSize={22} fontWeight="300">
                Add Sponsor
              </Typography>
            </Typography>
-         </Box>
+         </Box> */}
    
          <Grid container spacing={2}>
            <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>

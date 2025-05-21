@@ -7,14 +7,14 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 const Addevent = () => {
   return (
    <Box sx={{overflowX:{sm:'hidden'}}}>
-      <Box display="flex" justifyContent="space-between">
+     {/*  <Box display="flex" justifyContent="space-between">
                 <Typography variant="h5" color="#3DB80C">
                   Events and Calendar/
                   <Typography component="span" fontSize={22} fontWeight="300">
                     Add Event
                   </Typography>
                 </Typography>
-      </Box>
+      </Box> */}
 
       <Grid container spacing={4} mt={4}>
                  <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>

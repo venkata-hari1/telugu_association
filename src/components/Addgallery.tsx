@@ -11,7 +11,7 @@ const Addgallery = () => {
 return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
        
-             <Box display="flex" justifyContent="space-between" >
+         {/*     <Box display="flex" justifyContent="space-between" >
                 <Typography variant="h5" color="#3DB80C">
                   Gallery and Media/
                   <Typography component="span" fontSize={22} fontWeight="300">
@@ -19,7 +19,7 @@ return (
                   </Typography>
                 </Typography>
               </Box>
-             
+              */}
              
                 <Box>
                    <FormControl size="small">

@@ -17,7 +17,7 @@ import { GreenTextField, Submit } from "../adminstyles/MembershiptableStyles";
 const AddMember = () => {
   return (
     <Box sx={{ overflowX: { sm: "hidden" } }}>
-      <Box
+     {/*  <Box
         display="flex"
         justifyContent="space-between"
         sx={{ margin: "5px 0 14px 0" }}
@@ -28,7 +28,7 @@ const AddMember = () => {
             Add Member
           </Typography>
         </Typography>
-      </Box>
+      </Box> */}
 
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>

@@ -7,14 +7,14 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 const Addboard = () => {
   return (
     <Box sx={{ overflowX: { sm: "hidden" } }}>
-      <Box display="flex">
+      {/* <Box display="flex">
         <Typography variant="h5" color="#3DB80C">
           Board and Leadership/
         </Typography>
         <Typography variant="h5" component="span" color="#3DB80C">
           Add Board
         </Typography>
-      </Box>
+      </Box> */}
       <Box>
         <FormControl size="small">
           <Select
