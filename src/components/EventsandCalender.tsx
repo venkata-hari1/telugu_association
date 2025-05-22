@@ -2,7 +2,6 @@ import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography
 import { Custombutton } from "../adminstyles/MembershiptableStyles"
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
-import eventimg1 from '../assets/event1.jpg'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useState } from "react";
@@ -68,7 +67,7 @@ const carddata=[
             titleTypographyProps={{ fontSize: '20px', color: '#3DB80C' }} />
               <CardMedia
                        component="img"
-                       image={eventimg1}
+                      //  image={eventimg1}
                        sx={{ height: 270, maxWidth:'300px',objectFit: 'cover',margin:'auto' }}
                      />
               <CardContent>
