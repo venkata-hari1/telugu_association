@@ -4,8 +4,6 @@ import { Box, Button, Card, CardMedia, FormControl, FormControlLabel, Grid,  Rad
 import { Submit, VisuallyHiddenInput } from '../adminstyles/MembershiptableStyles';
 import UploadFileIcon from '@mui/icons-material/UploadFile'; 
 import CloseIcon from '@mui/icons-material/Close';
-import galimage1 from '../assets/gal-1.jpg'
-
 const Addgallery = () => {
 
 return (
