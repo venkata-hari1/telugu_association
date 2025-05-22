@@ -21,7 +21,6 @@ import Addboard from '../components/Addboard'
 import Profile from '../components/Profile'
 import Changepassword from '../components/Changepassword'
 import Changeemail from '../components/Changeemail'
-import Logout from '../components/Logout'
 import Addnews from '../components/Addnews'
 
 
