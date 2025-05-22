@@ -1,13 +1,17 @@
 import { Box, Button, Grid, InputAdornment, TextField, Typography } from "@mui/material"
 import { Subscriptionbutton } from "../adminstyles/MembershiptableStyles"
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from "react-router-dom";
 
 const Editsubscription = () => {
+  
+  const navigate=useNavigate()
   return (
   <Box>
-   <Grid container spacing={4}>
-   <Grid size={{lg:6,md:6,sm:6,xs:6}}>
+   <Grid container spacing={2}>
+   <Grid size={{lg:6,md:6,sm:12,xs:12}}>
    <Typography variant="h5" color="#3DB80C">
-          Membership Management/
+          <ArrowBackIcon onClick={()=>navigate('/admin/sponsorship/subscriptionplans')} sx={{cursor:'pointer'}}/>&nbsp;Membership Management/
           <Typography component="span" fontSize={22} fontWeight="300">
             Subscription plans
           </Typography>

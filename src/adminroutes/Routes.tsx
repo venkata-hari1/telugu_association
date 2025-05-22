@@ -22,6 +22,7 @@ import Profile from '../components/Profile'
 import Changepassword from '../components/Changepassword'
 import Changeemail from '../components/Changeemail'
 import Logout from '../components/Logout'
+import Addnews from '../components/Addnews'
 
 
 const AppRoutes = () => {
@@ -34,6 +35,7 @@ const AppRoutes = () => {
             <Route path="/admin" element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} /> 
            <Route path="dashboard" element={<Dashboard />} /> 
+           <Route path='dashboard/addnews' element={<Addnews />}/>
           <Route path="membership" element={<Membershiptable />} />
           <Route path="membership/addmember" element={<AddMember />} />
           <Route path="membership/volunteermgmt" element={<Volunteermanagement />} />
@@ -53,8 +55,8 @@ const AppRoutes = () => {
             <Route path="profile/change-email" element={<Changeemail />}/> 
             <Route path="profile/change-password" element={<Changepassword />}/>
         </Route>
-
-      </Route>
+       
+     </Route>
     </Routes>
 
   )

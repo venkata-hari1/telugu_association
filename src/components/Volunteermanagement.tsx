@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import {
   Custombutton,
   Filterbutton,
@@ -88,15 +88,31 @@ const Volunteermanagement = () => {
   return (
     <Box>
       <Grid container>
-        <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
+        <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
           <Typography variant="h5" color="#3DB80C">
             Volunteer Management
           </Typography>
         </Grid>
         <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
-          <Box display="flex" justifyContent="flex-end" gap="10px">
-            <Subscriptionbutton>Membership Management</Subscriptionbutton>
-            <Subscriptionbutton onClick={()=>navigate('/admin/sponsorship/subscriptionplans')}>Subscription Plans</Subscriptionbutton>
+          <Box display="flex" justifyContent={{xs:'flex-end',md:'flex-end',sm:'space-between'}}
+          gap={1} >
+             <Button
+              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C'}}
+             variant="outlined"
+              onClick={() => navigate("/admin/membership")}
+            >
+              Membership Management
+            </Button>
+             <Button
+              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C'}} 
+              variant="outlined"
+              onClick={() => navigate("/admin/sponsorship/subscriptionplans")}
+            >
+              Subscription plans
+            </Button>
+
+            {/* <Subscriptionbutton onClick={()=>navigate('/admin/membership')}>Membership Management</Subscriptionbutton>
+            <Subscriptionbutton onClick={()=>navigate('/admin/sponsorship/subscriptionplans')}>Subscription Plans</Subscriptionbutton> */}
           </Box>
         </Grid>
         {/* search line */}

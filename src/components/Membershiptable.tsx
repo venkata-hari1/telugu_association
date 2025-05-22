@@ -95,7 +95,7 @@ const Membershiptable = () => {
           </Typography>
         </Grid>
         <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
-          <Box display="flex" justifyContent={{xs:'center',md:'flex-end'}}
+          <Box display="flex" justifyContent={{xs:'flex-start',md:'flex-end'}}
           gap={2} flexWrap="wrap">
             <Button
               sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C'}}

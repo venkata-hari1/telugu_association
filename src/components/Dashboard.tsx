@@ -95,7 +95,7 @@ return (
               variant="contained"
               startIcon={<AddIcon />}
               sx={{marginRight:'10px',backgroundColor:'#3DB80C'}}
-              onClick={()=>navigate('/admin/board')}>
+              onClick={()=>navigate('addnews')}>
               Edit News
             </Button>
          </Box>
