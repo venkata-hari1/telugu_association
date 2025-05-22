@@ -9,11 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import EditIcon from "@mui/icons-material/Edit";
-import {
-  Custombutton,
-  Filterbutton,
-} from "../adminstyles/MembershiptableStyles";
+import EditIcon from "@mui/icons-material/Edit";;
 import { useNavigate } from "react-router-dom";
 import Paginationcomponent from "./Pagination";
 import CircleIcon from "@mui/icons-material/Circle";
@@ -144,7 +140,7 @@ const Membershiptable = () => {
         >
           Filters
         </Button>
-        {state && <Filterdropdown openfilter={openFilter} />}
+        {state && <Filterdropdown  />}
         </Box>
        </Box>
 

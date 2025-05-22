@@ -1,6 +1,6 @@
 import { Paper,Box, MenuItem } from '@mui/material'
 
-const Filterdropdown = ({openfilter}:{openfilter:()=>void}) => {
+const Filterdropdown = () => {
   return (
    
       <Paper
