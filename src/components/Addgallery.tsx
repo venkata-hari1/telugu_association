@@ -184,7 +184,7 @@ return (
                               <CardMedia
                                 component="img"
                                 height="194"
-                                image={galimage1}
+                                // image={galimage1}
                                 alt="Paella dish"/>
                                <CloseIcon
                                sx={{
@@ -204,7 +204,7 @@ return (
                               <CardMedia
                                 component="img"
                                 height="194"
-                                image={galimage1}
+                                // image={galimage1}
                                 alt="Paella dish"/>
                                <CloseIcon
                                sx={{
