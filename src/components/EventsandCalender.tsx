@@ -2,7 +2,7 @@ import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography
 import { Custombutton } from "../adminstyles/MembershiptableStyles"
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
-import eventimg1 from '../assets/event1.jpg'
+
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useState } from "react";
@@ -33,20 +33,20 @@ const carddata=[
      {open && <Deletepopup open={open} handleClose={handleClose} />}
 
      <Grid container>
-      <Grid size={{lg:6,md:6,sm:6,xs:6}}>
+      <Grid size={{md:6,sm:7,xs:7}}>
         <Typography color="#3DB80C" variant="h5">
             Events & Calender
         </Typography>
       </Grid>  
-        <Grid size={{lg:6,md:6,sm:6,xs:6}}>
+        <Grid size={{lg:6,md:6,sm:5,xs:5}}>
          <Box display="flex" justifyContent="flex-end">
-         <Button  variant="contained" startIcon={<AddIcon/>} 
-         sx={{background:'#3DB80C'}} onClick={()=>navigate('addevent')}>Add Event</Button>
+         <Button  variant="outlined" startIcon={<AddIcon/>} 
+         sx={{background:'#3DB80C',color:'white'}} onClick={()=>navigate('addevent')}>Add Event</Button>
         </Box>
       </Grid>
 
       <Grid size={{lg:12,md:12,sm:6}}>
-       <Box display="flex" gap={4} mt={2}>
+       <Box display="flex" gap={2} mt={2}>
          <Button  variant="contained" 
          sx={{background:'#3DB80C'}}>Upcomming Events</Button>
           
@@ -57,18 +57,18 @@ const carddata=[
 
         <Grid container mt={2}>
         <Grid size={{lg:12,md:12,sm:12,xs:12}} >
-          <Box gap={6} sx={{
+          <Box gap={10} sx={{
             display:'flex',
-            flexDirection:{xs:'column',sm:"column",lg:"row",md:'row'},
+            flexDirection:{xs:'column',sm:"column",md:'row'},
             justifyContent:'center',alignItems:'center'}}>  
             {
               carddata.map((card)=>(
-               <Card  variant="outlined" sx={{width:"100%",p:1,background:'transparent'}}>
+               <Card  variant="outlined" sx={{width:"100%",margin:'auto',p:1,background:'transparent'}}>
             <CardHeader title={card.title} sx={{color:'#3DB80C'}}
             titleTypographyProps={{ fontSize: '20px', color: '#3DB80C' }} />
               <CardMedia
                        component="img"
-                       image={eventimg1}
+                       
                        sx={{ height: 270, maxWidth:'300px',objectFit: 'cover',margin:'auto' }}
                      />
               <CardContent>

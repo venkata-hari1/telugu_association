@@ -1,14 +1,11 @@
-import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from "@mui/material"
+import { Box, Button, Card, CardContent, CardMedia, Grid, Paper, Typography } from "@mui/material"
 import { Custombutton } from "../adminstyles/MembershiptableStyles"
 import AddIcon from '@mui/icons-material/Add';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import galimage2 from '../assets/gal-2.jpg'
 import { useNavigate } from "react-router-dom";
 
 const Gallery = () => {
  
-      
-   
    const gallerydata=[
     {id:1,text:' Had a great time at recent event with #Associations'},
     {id:2,text:' Had a great time at recent event with #Associations'},
@@ -34,20 +31,27 @@ const Gallery = () => {
 
     <Grid>
     <Box display="flex" sx={{gap:"30px",justifyContent:"flex-start",mt:'5px'}}>
-       <Custombutton >
+       <Custombutton onClick={()=>navigate('photogallery')}>
          Photo Gallery
        </Custombutton>
-       <Custombutton >
+       <Custombutton onClick={()=>navigate('video')}>
          Video Gallery
        </Custombutton>
       </Box>
     
-     <Box component={Paper} sx={{width:{lg:'100%'},p:3,mt:2}}>
-
-       <Box display="flex" justifyContent="space-between" alignItems="center">
+     <Box component={Paper} sx={{width:{lg:'100%'},p:3,mt:2}} >
+       <Grid container >
+        <Grid size={{md:6, xs:12}}>
         <Typography variant="h6" color="#3DB80C">Homepage Highlights</Typography>
-        <Custombutton startIcon={<BorderColorIcon />}>Edit</Custombutton>
-       </Box>
+       </Grid>
+       <Grid size={{md:6,xs:12}}>
+        <Box sx={{display:'flex',justifyContent:{md:'flex-end',sm:'flex-start',gap:10}}} >
+        <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}>Add Highlights</Button>
+        <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}>Edit</Button>
+        </Box>
+        </Grid>
+        </Grid>
+
       
        <Grid container spacing={4} sx={{ mt: 2 }}>
        {gallerydata.map((data) => (
@@ -55,7 +59,7 @@ const Gallery = () => {
          <Card sx={{ maxWidth: '100%' }} component={Paper}>
          <CardMedia
           component="img"
-          image={galimage2}
+          
           alt={data.text}
           sx={{ height: 200, objectFit: 'cover' }}
         />

@@ -21,8 +21,9 @@ import Addboard from '../components/Addboard'
 import Profile from '../components/Profile'
 import Changepassword from '../components/Changepassword'
 import Changeemail from '../components/Changeemail'
-import Logout from '../components/Logout'
 import Addnews from '../components/Addnews'
+import Media from '../components/Media'
+import Videogallery from '../components/Videogallery'
 
 
 const AppRoutes = () => {
@@ -46,6 +47,9 @@ const AppRoutes = () => {
           <Route path="sponsorship/subscriptionplans" element={<Subscriptionplans />} />
           <Route path="sponsorship/subscriptionplans/editsubscription" element={<Editsubscription />} />
           <Route path="gallery" element={<Gallery />}/>
+           <Route path="gallery/photogallery" element={<Media />}/>
+           <Route path="gallery/video" element={<Videogallery />}/>
+          <Route path="media/addgallery" element={<Addgallery />}/>
           <Route path="gallery/addgallery" element={<Addgallery />}/>
           <Route path="events" element={<EventsandCalender />}/>
            <Route path="events/addevent" element={<Addevent />}/>  
@@ -55,7 +59,8 @@ const AppRoutes = () => {
             <Route path="profile/change-email" element={<Changeemail />}/> 
             <Route path="profile/change-password" element={<Changepassword />}/>
         </Route>
-       
+          
+            
      </Route>
     </Routes>
 

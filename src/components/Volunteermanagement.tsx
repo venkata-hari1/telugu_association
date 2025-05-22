@@ -1,8 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import {
-  Custombutton,
-  Filterbutton,
-  Subscriptionbutton,
+ 
 } from "../adminstyles/MembershiptableStyles";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -88,61 +86,93 @@ const Volunteermanagement = () => {
   return (
     <Box>
       <Grid container>
-        <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
+        <Grid size={{md:6,xs:12}}>
           <Typography variant="h5" color="#3DB80C">
             Volunteer Management
           </Typography>
         </Grid>
-        <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
-          <Box display="flex" justifyContent={{xs:'flex-end',md:'flex-end',sm:'space-between'}}
-          gap={1} >
-             <Button
-              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C'}}
-             variant="outlined"
+        <Grid size={{md:6,xs:12}}>
+          <Box 
+          sx={{display:"flex",gap:1,
+          justifyContent:{md:'flex-end',sm:'flex-start'},
+          flexWrap:'wrap'}}>
+            <Button
+              sx={{
+                background: "#3DB80C",
+                color: "white",
+                borderColor: "#3DB80C",
+                fontSize:13,
+                fontWeight:400
+              }}
+              variant="outlined"
               onClick={() => navigate("/admin/membership")}
             >
               Membership Management
             </Button>
-             <Button
-              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C'}} 
+            <Button
+              sx={{
+                background: "#3DB80C",
+                color: "white",
+                borderColor: "#3DB80C",
+                fontSize:13,
+                fontWeight:400
+              }}
               variant="outlined"
               onClick={() => navigate("/admin/sponsorship/subscriptionplans")}
             >
               Subscription plans
             </Button>
-
-            {/* <Subscriptionbutton onClick={()=>navigate('/admin/membership')}>Membership Management</Subscriptionbutton>
-            <Subscriptionbutton onClick={()=>navigate('/admin/sponsorship/subscriptionplans')}>Subscription Plans</Subscriptionbutton> */}
           </Box>
         </Grid>
+
         {/* search line */}
         <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}></Grid>
         <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
           <Box
-            display="flex"
-            gap="20px"
             sx={{
-              marginTop: { xs: 2 },
-              justifyContent: {
-                lg: "flex-end",
-                md: "flex-end",
-                sm: "flex-start",
-              },
+              display: "flex",
+              justifyContent: { lg: "flex-end" },
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: 2,
+              mt:1,
+              
             }}
           >
-            <Custombutton
+            <Button
+              variant="contained"
               startIcon={<AddIcon />}
               onClick={() => navigate("addvolunteer")}
+              sx={{ background: "#3DB80C",fontWeight:400 }}
             >
               Add Volunteer
-            </Custombutton>
-            <Custombutton variant="contained" startIcon={<UploadIcon />}>
+            </Button>
+
+            <Button
+              variant="contained"
+              startIcon={<UploadIcon />}
+              sx={{ background: "#3DB80C",fontWeight:400}}
+            >
               Bulk Upload
-            </Custombutton>
-            <Custombutton startIcon={<UploadIcon />}>Export</Custombutton>
-            <Filterbutton variant="outlined" startIcon={<FilterListIcon />}>
-              Filters
-            </Filterbutton>
+            </Button>
+
+            <Button
+              variant="contained"
+              startIcon={<UploadIcon />}
+              sx={{ background: "#3DB80C",fontWeight:400 }}
+            >
+              Export
+            </Button>
+
+            <Box sx={{ position: "relative",fontWeight:400 }}>
+              <Button
+                variant="outlined"
+                startIcon={<FilterListIcon />}
+                sx={{ borderColor: "#3DB80C", color: "#3DB80C" }}
+              >
+                Filters
+              </Button>
+            </Box>
           </Box>
         </Grid>
         {/* table data */}
@@ -202,7 +232,6 @@ const Volunteermanagement = () => {
                           </Box>
                         )}
                       >
-                        
                         <MenuItem value="Delete">
                           <DeleteOutlineIcon
                             fontSize="small"

@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material"
+import { Box, Button, Grid, Typography } from "@mui/material"
 import {Custombutton, Filterbutton, Subscriptionbutton} from '../adminstyles/MembershiptableStyles'
 import AddIcon from '@mui/icons-material/Add';
 import UploadIcon from '@mui/icons-material/Upload';
@@ -42,43 +42,64 @@ const Sponsershipmanagement = () => {
    <Box>
    
    <Grid container>
-    <Grid size={{lg:6,md:6,sm:6,xs:6}}>
+    <Grid size={{lg:6,md:6,sm:12,xs:12}} >
      <Typography variant="h5" color='#3DB80C'>Sponsership Management</Typography>   
    </Grid >
-   <Grid size={{lg:6,md:6,sm:6,xs:6}}>
-    <Box display="flex" justifyContent="flex-end" gap={3}>
-     <Subscriptionbutton variant="contained" onClick={()=>navigate('subscriptionplans')}>Subscription Plans</Subscriptionbutton>
-     <Subscriptionbutton variant="contained" onClick={()=>navigate('donations')}>Donations</Subscriptionbutton>   
-     </Box>
-   </Grid>
+   <Grid size={{lg:6,md:6,sm:12,xs:12}}>
+    
+      <Box display="flex" justifyContent={{xs:'flex-start',md:'flex-end'}}
+          gap={1} flexWrap="nowrap" sx={{marginTop:{xs:1}}}>
+            <Button
+              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C',fontWeight:400}}
+             variant="outlined"
+              onClick={()=>navigate('subscriptionplans')}
+            >
+              Subscription Plan
+            </Button>
+            <Button
+              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C',fontWeight:400}} 
+              variant="outlined"
+              onClick={()=>navigate('donations')}
+            >
+              Dontations
+            </Button>
+          </Box>
+    </Grid>
 
     {/* search line */}
     <Grid size={{lg:6,md:6,sm:12,xs:12}}>
      
     </Grid>
     <Grid size={{lg:6,md:6,sm:12,xs:12}}>
-    <Box display="flex" 
-         
-         gap={4}
-         sx={{marginTop:{xs:2}, justifyContent:{lg:'flex-end',md:'flex-end',sm:'flex-start',
-    }}}>
-      <Custombutton variant="contained" startIcon={<AddIcon/>} onClick={()=>navigate('/admin/sponsorship/addsponsor')}>
+    <Box sx={{
+              display: "flex",
+              justifyContent: { lg: "flex-end" },
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: 1,
+              mt:1,
+              
+            }}>
+      <Button variant="outlined" startIcon={<AddIcon/>}
+      sx={{ background: "#3DB80C",color:'white',border:'none',fontWeight:400 }}
+      onClick={()=>navigate('/admin/sponsorship/addsponsor')}>
         Add Sponsor
-      </Custombutton>
-      <Custombutton variant="contained" startIcon={<UploadIcon />}>
+      </Button>
+      <Button variant="outlined" startIcon={<UploadIcon />}
+      sx={{ background: "#3DB80C",color:'white',border:'none',fontWeight:400 }}>
         Export
-      </Custombutton>
+      </Button>
       <Box sx={{ position:'relative'}}>
-      <Filterbutton 
-        variant="outlined" 
+      <Button 
+        variant="contained" 
         fullWidth
         startIcon={<FilterListIcon />} 
-        onClick={openActivemembers}>
+        onClick={openActivemembers}
+        sx={{background: "#3DB80C",fontWeight:400,color: "white",border:"none"}}>
         Filters
-        </Filterbutton>
+        </Button>
         {state&&
-  
-        <Filtersponser/>
+         <Filtersponser/>
         }
         </Box>
        </Box>

@@ -11,10 +11,10 @@ const theme = createTheme({
       h5: {
       fontSize: '1.5rem',
     },  
-
-     button: {
+    button: {
       fontSize: '0.875rem',
-      textTransform: 'none', // Optional: removes UPPERCASE from buttons
+      textTransform: 'none',
+       // Optional: removes UPPERCASE from buttons
     },
     },
     

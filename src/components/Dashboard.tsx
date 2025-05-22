@@ -56,10 +56,11 @@ return (
      </Box>
       <Grid container spacing={2}>
         <Grid size={{ lg: 8, md: 8, sm: 12, xs: 12 }}>
-          <Box sx={{display:'flex', flexDirection:'row',gap:2}}>
-          { boarddata.map((board)=>{
-          return <Card sx={{ width:209,height:140,border:'1px solid #3DB80C' }}>
-          <CardContent 
+          <Grid container spacing={2}>
+            {boarddata.map((board)=>(
+              <Grid size={{xs:12,sm:6,md:4}} key={board.id}>
+                 <Card sx={{ height: 140, border: '1px solid #3DB80C' }}>
+                    <CardContent 
           sx={{display:'flex',
           gap:'5px'}}>
           <Box sx={{color:"#3DB80C"}} >{board.icon}</Box>
@@ -73,19 +74,20 @@ return (
             <Typography variant="h6">
              {board.number}
         </Typography>
-          </CardContent>
-          </Card>
-          })
-          
-          }
-         
-          </Box>
-          
-          <Grid>
+          </CardContent>        
+                  </Card>              
+              </Grid>
+
+            ))}
+          </Grid>
+        <Grid>
          <Box sx={{border:'1px solid #3DB80C',
-          width:{lg:"93%",md:"92%",sm:"100%",xs:'100%'},pt:1,pb:2,mt:2,
+          marginTop:2,
+          paddingBottom:2,
+          width:{lg:"100%",md:"100%",sm:"100%",xs:'100%'},
           borderRadius:'5px',
-          background:'white'}}>
+          background:'white'}}
+          >
          <Box sx={{display:'flex',justifyContent:'space-between',p:1}}>
          <Typography variant="h6" color='#3DB80C'>
           News
@@ -113,8 +115,10 @@ return (
 
            <Grid>
          <Box sx={{border:'1px solid #3DB80C',
-          width:{lg:"93%",md:"93%",sm:"100%",xs:'100%'},pt:1,pb:2,mt:2,
+          width:{lg:"100%",md:"100%",sm:"100%",xs:'100%'},
           borderRadius:'5px',
+          marginTop:2,
+          paddingBottom:2,
           background:'white'}}>
          <Box sx={{display:'flex',justifyContent:'space-between',p:1}}>
          <Typography variant="h6" color='#3DB80C'>
@@ -130,7 +134,7 @@ return (
             </Button>
          </Box>
          
-          <Box sx={{ pl: 4, m: 0,lineHeight:3,display:'flex',gap:3 }}>
+          <Box sx={{lineHeight:3,display:'flex',gap:3,justifyContent:'center' }}>
            {newsimages.map(image=>(
                         <Card variant="outlined" sx={{maxWidth:100}}>
             <CardMedia
