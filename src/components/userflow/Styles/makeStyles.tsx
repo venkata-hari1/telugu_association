@@ -10,7 +10,7 @@ const flex={
     flexDirection:'column' as 'column',
     alignContent:'center',
 }
-export const useStyles = makeStyles()((theme) => ({
+export const useStyles = makeStyles()(() => ({
     root:{
         display: 'flex',
         alignItems:'center',
