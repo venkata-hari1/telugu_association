@@ -33,8 +33,8 @@ const AppRoutes = () => {
 
       <Route element={<Privateroutes />}>
         <Route path="/admin" element={<Mainlayout />}>
-            <Route path="/admin" element={<Dashboard />} />
-            <Route path="dashboard" element={<Dashboard />} /> 
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} /> 
            <Route path="dashboard" element={<Dashboard />} /> 
            <Route path='dashboard/addnews' element={<Addnews />}/>
           <Route path="membership" element={<Membershiptable />} />

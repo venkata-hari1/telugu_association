@@ -2,11 +2,11 @@ import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography
 import { Custombutton } from "../adminstyles/MembershiptableStyles"
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
-
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useState } from "react";
 import Deletepopup from "./Deletepopup";
+import Paginationcomponent from "./Pagination";
 
 const EventsandCalender = () => {
   
@@ -55,21 +55,22 @@ const carddata=[
         </Box>
         </Grid>
 
-        <Grid container mt={2}>
+        <Grid container mt={2} width="100%">
         <Grid size={{lg:12,md:12,sm:12,xs:12}} >
-          <Box gap={10} sx={{
+          <Box gap={4} sx={{
             display:'flex',
+            width:'100%',
             flexDirection:{xs:'column',sm:"column",md:'row'},
-            justifyContent:'center',alignItems:'center'}}>  
+            justifyContent:'start'}}>  
             {
               carddata.map((card)=>(
-               <Card  variant="outlined" sx={{width:"100%",margin:'auto',p:1,background:'transparent'}}>
+               <Card  variant="outlined" sx={{p:1,background:'transparent'}}>
             <CardHeader title={card.title} sx={{color:'#3DB80C'}}
             titleTypographyProps={{ fontSize: '20px', color: '#3DB80C' }} />
               <CardMedia
                        component="img"
                        
-                       sx={{ height: 270, maxWidth:'300px',objectFit: 'cover',margin:'auto' }}
+                       sx={{ height:250, maxWidth:'300px',objectFit: 'cover',margin:'auto' }}
                      />
               <CardContent>
                <Typography gutterBottom variant="h6" component="div">
@@ -100,6 +101,10 @@ const carddata=[
         </Grid>
         </Grid>    
     </Grid>   
+
+    <Box mt={5}>
+      <Paginationcomponent />
+    </Box>
     </Box>
 
   )

@@ -44,7 +44,7 @@ const current = breeadcrumbmap[location.pathname];
   {current.sub && (
     <>
       /{' '}
-      <Typography component="span" fontSize={22} fontWeight="300">
+      <Typography component="span" fontSize={22} fontWeight="300" gap={1}>
         {current.sub}
       </Typography>
     </>
