@@ -13,6 +13,9 @@ import Telugu from './Telugu';
 import Gallery from './Gallery';
 import ContactUs from './ContactUs';
 import Mebershipbenfits from './Mebershipbenfits';
+import Registration from './Auth/Registration';
+import Login from '../AdminFlow/Login';
+import Donate from './Donate';
 type Classes = {
     root: string;
 };
@@ -29,6 +32,9 @@ export default function Welcomepage() {
         <Grid size={{lg:9.3}}>
           <Routes>
             <Route path="" element={<Home/>}/>
+            <Route path="registration" element={<Registration/>}/>
+            <Route path="donate" element={<Donate/>}/>
+            <Route path="login" element={<Login/>}/>
             <Route path="about_us" element={<AboutUs/>}/>
             <Route path="governing_body" element={<GoverningBody/>}/>
             <Route path="events" element={<Events/>}/>

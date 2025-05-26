@@ -7,6 +7,7 @@ import Sponsor1 from '../../assets/sponsor1.png'
 import Sponsor2 from '../../assets/sponsor2.png'
 import Sponsor3 from '../../assets/sponsor3.png'
 import Sponsor4 from '../../assets/sponsor4.png'
+import { useNavigate } from 'react-router-dom';
 type IProps={
   classes:{
     [type:string]:string
@@ -14,12 +15,13 @@ type IProps={
 }
 export default function Sidebar() {
  const {classes}:IProps=useStyles()
+ const navigate=useNavigate()
  const sponsor=[{id:1,img:Sponsor1},{id:2,img:Sponsor2},{id:3,img:Sponsor3},{id:4,img:Sponsor4}]
   return (
     <Box className={classes.sidebarstyle}>
       <Box className={classes.buttons}>
-      <Button startIcon={<PersonAddAltIcon />}>BECOME A MEMBER</Button>
-      <Button startIcon={<PaidIcon/>}>DONATE NOW</Button>
+      <Button startIcon={<PersonAddAltIcon />} onClick={()=>navigate('/registration')}>BECOME A MEMBER</Button>
+      <Button startIcon={<PaidIcon/>}  onClick={()=>navigate('/donate')}>DONATE NOW</Button>
       </Box>
       <Box>
         <Typography className={classes.commontext}>Panchangam</Typography>

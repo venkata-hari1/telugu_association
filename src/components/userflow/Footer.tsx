@@ -50,7 +50,7 @@ const handleClick=(tab:{id:number,link:string})=>{
                         <IconButton className={classes.socailmediaicon_container}><FacebookIcon className={classes.socailmediaicon}/></IconButton>
                         <IconButton className={classes.socailmediaicon_container}><XIcon  className={classes.socailmediaicon}/></IconButton>
                     </Box>
-                    <Button className={classes.volunteer_btn}>BECOME A VOLUNTEER</Button>
+                    <Button className={classes.volunteer_btn} onClick={()=>navigate('/registration')}>BECOME A VOLUNTEER</Button>
                     <Typography className={classes.copyright_text}>Tax Id : 90-0089250 @ 2025 Telugumn.Org. All Rights Reserved.</Typography>
                 </Box>
             </Grid>
