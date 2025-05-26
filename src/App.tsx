@@ -1,12 +1,12 @@
-import { BrowserRouter} from 'react-router-dom'
-import AppRoutes from './adminroutes/Routes'
-const App = () => {
 
- 
+import React from 'react'
+import { Suspense } from 'react'
+const App = () => { 
+const AppRoutes=React.lazy(()=>import('./routes/AppRoutes'))
   return (
-     <BrowserRouter>
+       <Suspense fallback={<div>Loading...</div>}>
        <AppRoutes />
-     </BrowserRouter>
+       </Suspense>
   )
 }
 

@@ -4,12 +4,14 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import './index.css'
+import { BrowserRouter } from 'react-router-dom';
 
 createRoot(document.getElementById('root')!).render(
-
-     <ThemeProvider theme={theme}>
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
       <CssBaseline /> 
       <App />
     </ThemeProvider>
+    </BrowserRouter>
 
 )
