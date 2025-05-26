@@ -12,6 +12,7 @@ import Sponsors from './Sponsors';
 import Telugu from './Telugu';
 import Gallery from './Gallery';
 import ContactUs from './ContactUs';
+import Mebershipbenfits from './Mebershipbenfits';
 type Classes = {
     root: string;
 };
@@ -35,6 +36,7 @@ export default function Welcomepage() {
             <Route path="telugu" element={<Telugu/>}/>
             <Route path="gallery" element={<Gallery/>}/>
             <Route path="contactUs" element={<ContactUs/>}/>
+            <Route path="mebershipbenfits" element={<Mebershipbenfits/>}/>
           </Routes>
         </Grid>
      </Grid>

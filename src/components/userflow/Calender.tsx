@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { makeStyles } from 'tss-react/mui';

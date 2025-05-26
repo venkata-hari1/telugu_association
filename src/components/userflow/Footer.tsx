@@ -6,6 +6,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
+import { useNavigate } from 'react-router-dom';
 type IProps={
     classes:{
         [type:string]:string
@@ -13,19 +14,26 @@ type IProps={
 }
 export default function Footer() {
     const {classes}:IProps=useStyles()
+    const navigate=useNavigate()
     const tabData: TabData[] = [
-        { id: 0, label: 'Home', content: 'This is the Home tab content' },
-        { id: 1, label: 'Sponsors', content: 'Sponsor logos and info' },
-        { id: 2, label: 'About Us', content: 'About Us content goes here' },
-        { id: 3, label: 'Telugu', content: 'Content in Telugu' },
-        { id: 4, label: 'Governing Body', content: 'Details about Governing Body' },
-        { id: 5, label: 'Gallery', content: 'Photos and videos' },
-        { id: 6, label: 'Events', content: 'Upcoming Events and activities' },
-        { id: 7, label: 'Membership Benefits', content: 'Upcoming Events and activities' },
-        { id: 8, label: '', content: '' },
-        { id: 9, label: 'Contact Us', content: 'Contact form and details' },
+        { id: 0, label: 'Home', link:'/' },
+        { id: 1, label: 'Sponsors', link: '/sponsors' },
+        { id: 2, label: 'About Us',link: '/about_us' },
+        { id: 3, label: 'Telugu',  link: '/telugu' },
+        { id: 4, label: 'Governing Body', link: '/governing_body'  },
+        { id: 5, label: 'Gallery', link: '/gallery'  },
+        { id: 6, label: 'Events',  link: '/events'  },
+        { id: 7, label: 'Membership Benefits', link: 'mebershipbenfits' },
+        { id: 8, label: '', link: '' },
+        { id: 9, label: 'Contact Us', link: '/contactus' },
 
     ];
+
+
+const handleClick=(tab:{id:number,link:string})=>{
+ navigate(`${tab.link}`)
+}
+
     return (
         <Box className={classes.footercontainer}>
         <Grid container>
@@ -51,6 +59,7 @@ export default function Footer() {
                 {tabData.map((tab) => (
                     <Box
                         key={tab.id}
+                        onClick={()=>handleClick(tab)}
                        className={classes.footertext}
                     >
                         {tab.label}
