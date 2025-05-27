@@ -1,9 +1,10 @@
 import { Box, Typography } from "@mui/material"
 import heritage from '../../assets/heritage.png'
 
-export default function AboutUs() {
+
+const Mission = () => {
   return (
-   <Box width="100%" height="100vh"p={2}>
+    <Box width="100%" height="100vh"p={2}>
     <Typography variant="h6" color="#3DB80C">Our Mission</Typography>
     <Typography component="div" color="#3DB80C">
       Preserve and perpetuate the cultural heritage of Telugu speaking people of Greater Minnesota. Assist and promote cultural, charitable, educational, social and community affairs of the Telugu speaking people in Greater Minnesota. Foster harmony within the Telugu community and to share our diverse culture with the Greater Minnesota community.
@@ -18,3 +19,5 @@ export default function AboutUs() {
    </Box>
   )
 }
+
+export default Mission

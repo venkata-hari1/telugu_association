@@ -3,6 +3,7 @@ import { AppBar, Box, Button, Toolbar } from '@mui/material';
 import logo from '../../assets/logo.png'
 import { useStyles } from './Styles/makeStyles';
 import { useNavigate } from 'react-router-dom';
+
 export interface TabData {
   id: number;
   label: string;
@@ -24,6 +25,8 @@ const tabData: TabData[] = [
   { id: 6, label: 'Gallery', link: '/gallery' },
   { id: 7, label: 'Contact Us', link: '/contactus' },
 ];
+
+
 
 export default function Header() {
   const [activeTab, setActiveTab] = React.useState<number>(0);
@@ -48,6 +51,7 @@ export default function Header() {
           <Box sx={{ display: 'flex', width: '80%', justifyContent: 'space-between' }}>
 
             {tabData.map((tab) => (
+              
               <Button
                 key={tab.id}
                 onClick={()=>handleClick(tab)}
@@ -79,6 +83,7 @@ export default function Header() {
                     borderRadius: '2px',
                     transition: 'left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   },
+                  
                 }}
               >
                 {tab.label}

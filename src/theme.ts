@@ -6,7 +6,7 @@ const theme = createTheme({
         },
     },
     typography: {
-      fontFamily: 'Roboto',
+      fontFamily: 'Lato',
         fontSize: 12,
       h5: {
       fontSize: '1.5rem',

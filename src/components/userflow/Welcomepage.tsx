@@ -16,6 +16,10 @@ import Mebershipbenfits from './Mebershipbenfits';
 import Registration from './Auth/Registration';
 import Login from '../AdminFlow/Login';
 import Donate from './Donate';
+
+import Mission from './Mission';
+import Organization from './Organization';
+
 type Classes = {
     root: string;
 };
@@ -43,7 +47,11 @@ export default function Welcomepage() {
             <Route path="gallery" element={<Gallery/>}/>
             <Route path="contactUs" element={<ContactUs/>}/>
             <Route path="mebershipbenfits" element={<Mebershipbenfits/>}/>
+            <Route path="mission" element={<Mission/>}/>
+            <Route path="organization" element={<Organization/>}/>
+              
           </Routes>
+
         </Grid>
      </Grid>
      <Footer/>
