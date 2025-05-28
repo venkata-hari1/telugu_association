@@ -1,12 +1,13 @@
-import { Box, Card, CardContent, CardMedia, Divider, Grid, Paper, Typography } from "@mui/material"
+import { Box,Card,CardContent,CardMedia,Divider,Grid,Paper,Typography} from "@mui/material"
 import teluguassociation from '../../assets/teluguassociation.png'
 import teamBg from '../../assets/teambg.png'
 import bathukamma from '../../assets/bathukamma.jpg'
 import tennis from '../../assets/tennis.jpg'
 import sankranthi from '../../assets/sankranthi.jpg'
-import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import V6 from '../../assets/V6.jpg'
 import tv5 from '../../assets/TV5.jpg'
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
 function Home() {
 
 const eventdata=[
@@ -25,34 +26,20 @@ const sponserdata=[
 ]
 
   return (
-  <Box>
-    <Box sx={{ width:"100%",
-      backgroundImage:`url(${teluguassociation})`,
-      height: '150px',
-      backgroundSize:'cover',
-      backgroundPosition:'center',
-      backgroundRepeat:'no-repeat',
-      objectFit:'contain'
-    }} />
-
-    <Box sx={{ width:"100%",
-      backgroundImage:`url(${teamBg})`,
-      height: '300px',
-      backgroundSize:'cover',
-      backgroundPosition:'center',
-      backgroundRepeat:'no-repeat',
-      objectFit:'contain'
-    }} /> 
-    <Box sx={{
+  <Box width="100%">
+   <Box component="img" src={teluguassociation} 
+   sx={{ objectFit: 'contain',height:'100%',width:'100%',display: 'block' }}/> 
+   <Box component="img" src={teamBg} sx={{height:'100%',width:'100%',
+    objectFit:'contain',display: 'block'}}/> 
+   <Box sx={{
       display:'flex',
       alignItems:'center',
       width:'100%',
       border:'1px solid #3DB80C',
-      padding:'8px 8px',
-      background:'white'
+      background:'white',
+      height:'auto'
     }}>
-     
-    <Typography
+      <Typography
     variant="h6"
 
     sx={{
@@ -63,13 +50,10 @@ const sponserdata=[
     }}>
       NEWS &UPDATES
     </Typography>
-   
-   
-   <Divider orientation="vertical"
-   flexItem
-   sx={{borderColor:'#4caf50', marginRight: '8px' }}/>
-
-   <Box sx={{
+     <Divider orientation="vertical"
+       flexItem
+      sx={{borderColor:'#4caf50', marginRight: '8px' }}/>
+      <Box sx={{
     overflow:'hidden',
     whiteSpace:'nowrap',
     flex:1,
@@ -92,49 +76,47 @@ const sponserdata=[
         </Typography>
         
    </Box>
-   
-    </Box>
+  </Box>   
 
-    <Box>
+<Box>
       <Typography component="div" variant="h6" color="#3DB80C" padding={2}>
          UPCOMING EVENTS
       </Typography>
      <Box display="flex" justifyContent="center" alignItems="center"
-     flexDirection={{md:'row',xs:'column'}} gap={8} p={2}>
+     flexDirection={{md:'row',xs:'column'}} gap={10} p={2}>
      { 
       eventdata.map(event=>(
           <Card sx={{
+            width:"100%",
         display:'flex',
         alignItems:'center',
         justifyContent:'center',
         flexDirection:{sm:'column', xs:'column'}
+        
       }}>
-        <CardMedia image={event.img}  sx={{ height: 200,width:150}}/>
+        <CardMedia image={event.img}  sx={{ height: 200,width:'100%'}}/>
      </Card>
         
       ))
      }
      <NavigateNextIcon sx={{color:"green",background:'white',width:30,height:30,borderRadius:5,cursor:'pointer'}}/>
      </Box>
-       
-    </Box>
+   </Box>
 
-
-    <Box  sx={{width:{lg:'100%'},p:3,mt:2}}>
+  <Box  sx={{width:'100%',p:3,mt:2}}>
     
   <Box display="flex" justifyContent="space-between" alignItems="center">
   <Typography variant="h6" color="#3DB80C">EVENT GALLERY</Typography>
-
   </Box>
-      <Grid container spacing={4} sx={{ mt: 2 }}>
+      <Grid container spacing={2} sx={{ mt: 1 }}>
            {gallerydata.map((data) => (
             <Grid size={{xs:12 ,sm:6 ,md:6}} key={data.id}>
-             <Card sx={{ maxWidth: '100%' }} component={Paper}>
+             <Card sx={{ width: '100%',background:'transparent' }} component={Paper}>
              <CardMedia
               component="img"
               image={data.img}
               alt={data.text}
-              sx={{ height: 200, objectFit: 'cover' }}
+              sx={{ height: 150,width:'100%', objectFit: 'contain',display:'block' }}
             />
             <CardContent>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -144,25 +126,34 @@ const sponserdata=[
           </Card>
         </Grid>
       ))}
-      </Grid>
+       </Grid>
     </Box>
+   
+   <Box sx={{ mb: 1 }}>
+  <Typography variant="h6" color="#3DB80C" sx={{marginLeft:"30px"}}> OUR SPONSERS</Typography>
+  <Grid container>
+  <Box component={Paper} 
+  sx={{display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    marginLeft:"27px",
+  marginRight:'26px',
+  gap:"50px",
+  width:"100%",
+  flexDirection: { lg: 'row', md: 'row', sm: 'column', xs: 'column' }
+  }}>
+    {
+      sponserdata.map(sponser=>(
+        <Card sx={{display:'flex',justifyContent:'center',
+    }}>
+    <CardMedia component="img"src={sponser.img} sx={{height:"90px",width:'100%'}}/>
+   </Card>
 
-   <Box sx={{p:4,mt:2}}>
-    <Typography variant="h6" color="#3DB80C">
-      OUR SPONSORS
-    </Typography>
-    <Box component={Paper} p={3} display="flex" gap={5} alignItems="center" 
-    justifyContent="center" flexDirection={{lg:'row',xs:'column', sm:'column'}}>
-      {
-        sponserdata.map(sponser=>(
-           <Card sx={{height:"150px",display:'flex',justifyContent:'center',alignItems:'center'}}>
-      <CardMedia image={sponser.img}  sx={{ height: 100,width:160 }}/>
-     </Card>
-        ))
-      }
+      ))
+    }
     </Box>
-   </Box>
-  
+  </Grid>
+  </Box>
   
   </Box>
 
