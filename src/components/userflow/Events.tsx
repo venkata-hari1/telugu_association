@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Divider, Grid, Typography } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Divider,  Typography } from "@mui/material"
 import bathukamma from '../../assets/bathukamma.jpg'
 const Events = () => {
   
