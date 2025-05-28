@@ -17,7 +17,7 @@ const Events = () => {
     eventdata.map(event=>(
      <Box>
     <Box sx={{display:'flex',mt:2}}>
-   <Card variant="outlined" sx={{display:'flex',gap:5,background:'transparent'}}>
+   <Card variant="outlined" sx={{display:'flex',gap:3,background:'transparent'}}>
    <CardMedia component="image" image={event.img} sx={{width:'150px',height:'200px'}}/>
    <Box display="flex" flexDirection="column" sx={{position:'relative'}}>
    <CardContent>
@@ -26,7 +26,7 @@ const Events = () => {
     </CardContent>
     
     <CardActions sx={{ position:'absolute',bottom:0}}>
-      <Button  variant="outlined" sx={{background:'#3DB80C',color:'white',border:"none"}}>View Details</Button>
+      <Button  variant="contained" sx={{background:'#3DB80C',color:'white',border:"none", whiteSpace: 'normal'}}>View Details</Button>
     </CardActions>
   </Box>  
    </Card>
