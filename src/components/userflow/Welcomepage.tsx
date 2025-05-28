@@ -20,6 +20,13 @@ import Donate from './Donate';
 import Mission from './Mission';
 import Organization from './Organization';
 import Upcommingevents from './Upcommingevents';
+import Nakshatralu from './Nakshatralu';
+import Samvatsaralu from './Samvatsaralu';
+import Tithulu from './Tithulu';
+import Gunintamulu from './Gunintamulu';
+import Vemanapadyalu from './Vemanapadyalu';
+import Aksaramala from './Aksaramala';
+import BhashaandLipi from './BhashaandLipi';
 
 type Classes = {
     root: string;
@@ -51,6 +58,13 @@ export default function Welcomepage() {
             <Route path="mission" element={<Mission/>}/>
             <Route path="organization" element={<Organization/>}/>
              <Route path="upcoming" element={<Upcommingevents/>}/>  
+            <Route path="nakshatralu" element={<Nakshatralu/>}/> 
+            <Route path="samvatsaralu" element={<Samvatsaralu/>}/>  
+            <Route path="tithulu" element={<Tithulu/>}/>  
+             <Route path="gunintamulu" element={<Gunintamulu/>}/>  
+             <Route path="padyalu" element={<Vemanapadyalu/>}/>
+             <Route path="aksharamala" element={<Aksaramala/>}/>
+              <Route path="lipi" element={<BhashaandLipi/>}/>
           </Routes>
 
         </Grid>
