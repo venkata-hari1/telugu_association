@@ -19,6 +19,7 @@ import Donate from './Donate';
 
 import Mission from './Mission';
 import Organization from './Organization';
+import Upcommingevents from './Upcommingevents';
 
 type Classes = {
     root: string;
@@ -49,7 +50,7 @@ export default function Welcomepage() {
             <Route path="mebershipbenfits" element={<Mebershipbenfits/>}/>
             <Route path="mission" element={<Mission/>}/>
             <Route path="organization" element={<Organization/>}/>
-              
+             <Route path="upcoming" element={<Upcommingevents/>}/>  
           </Routes>
 
         </Grid>
