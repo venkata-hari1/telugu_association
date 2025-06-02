@@ -6,6 +6,7 @@ import Login from "./Login";
 
 const Registration = ({ type }: { type:any }) => {
   const [membershipValue, setMembershipValue] = useState('');
+  const [paymentValue, setPaymentValue] = useState('');
   const[value,setValue]=useState(false)
   const handleLogin=()=>{
    setValue(!value)
@@ -370,13 +371,15 @@ const Registration = ({ type }: { type:any }) => {
                 Membership Plan Details
               </Typography>
             </Grid>
+          
+            <Grid container sx={{width:'85%'}}>
             <RadioGroup
-            sx={{width:'85%'}}
+           
   row
   value={membershipValue}
   onChange={(e) => setMembershipValue(e.target.value)}
 >
-            <Grid container>
+             <Grid container spacing={2}>
               <Grid size={{ sm: 12, md: 4 }}>
                 <Paper
                   variant="outlined"
@@ -392,6 +395,7 @@ const Registration = ({ type }: { type:any }) => {
                     background: "transparent",
                   }}
                 >
+
                   <FormControlLabel
                     value="One Year $45"
                     control={<Radio size="small" />}
@@ -403,6 +407,7 @@ const Registration = ({ type }: { type:any }) => {
                       "& .MuiRadio-root.Mui-checked": { color: "#3DB80C" },
                     }}
                   />
+       
                 </Paper>
               </Grid>
               <Grid size={{ sm: 12, md: 4 }}>
@@ -457,6 +462,8 @@ const Registration = ({ type }: { type:any }) => {
                   />
                 </Paper>
               </Grid>
+              </Grid>
+              </RadioGroup>
 
               {(type === "/donate" || type === "/member") && (
                 <Grid size={{ xs: 12, md: 12 }}>
@@ -466,7 +473,12 @@ const Registration = ({ type }: { type:any }) => {
                   </Typography>
                 </Grid>
               )}
-
+            <RadioGroup
+           
+           row
+           value={paymentValue}
+           onChange={(e) => setPaymentValue(e.target.value)}
+         >
               <Grid container margin="auto" spacing={0} border="1px solid #3DB80C">
                 <Grid size={{ sm: 12, md: 4 }} width="100%" p={2}>
                   <Paper
@@ -562,8 +574,8 @@ const Registration = ({ type }: { type:any }) => {
                   </Paper>
                 </Grid>
               </Grid>
+              </RadioGroup>
             </Grid>
-            </RadioGroup>
           </>
         )}
 
@@ -574,7 +586,12 @@ const Registration = ({ type }: { type:any }) => {
                 Payment Information<Typography component="span" color="red">*</Typography>
               </Typography>
             </Grid>
-
+            <RadioGroup
+          
+          row
+          value={paymentValue}
+          onChange={(e) => setPaymentValue(e.target.value)}
+        >
             <Grid container margin="auto" alignItems="center" spacing={0} border="1px solid #3DB80C">
               <Grid size={{ sm: 12, md: 4 }} width="100%" p={2}>
                 <Paper
@@ -674,6 +691,7 @@ const Registration = ({ type }: { type:any }) => {
                 </Box>
               </Grid>
             </Grid>
+            </RadioGroup>
           </>
         )}
 
