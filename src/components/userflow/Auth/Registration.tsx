@@ -2,12 +2,21 @@ import { Box, Button, Divider, FormControlLabel, Grid, Paper, Radio, RadioGroup,
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { Fragment } from "react/jsx-runtime";
 import { useState } from "react";
+import Login from "./Login";
 
 const Registration = ({ type }: { type:any }) => {
   const [membershipValue, setMembershipValue] = useState('');
   const [paymentValue, setPaymentValue] = useState('');
+  const[value,setValue]=useState(false)
+  const handleLogin=()=>{
+   setValue(!value)
+  }
+  const handleGetValue=(x:boolean)=>{
+   setValue(x)
+  }
   return (
     <Box p={2}>
+      <Login value={value} handleGetValue={handleGetValue}/>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography color="#3DB80C" fontWeight="700">
           {type === '/donate' ? "Donate Now" : type === '/member' ? "Member Registration" : "Volunteer Registration"}
@@ -81,7 +90,7 @@ const Registration = ({ type }: { type:any }) => {
         >
           <Typography sx={{ fontSize: 14, fontWeight: 600 }}>
             Already have an account?{" "}
-            <Typography component="span" color="#3DB80C" sx={{ cursor: "pointer" }}>
+            <Typography component="span" color="#3DB80C" sx={{ cursor: "pointer" }} onClick={handleLogin}>
               Log In
             </Typography>
           </Typography>

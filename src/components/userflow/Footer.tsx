@@ -26,7 +26,7 @@ export default function Footer() {
         { id: 4, label: 'Governing Body', link: '/governing_body'  },
         { id: 5, label: 'Gallery', link: '/gallery'  },
         { id: 6, label: 'Events',  link: '/events'  },
-        { id: 7, label: 'Membership Benefits', link: 'mebershipbenfits' },
+        { id: 7, label: 'Membership Benefits', link: '/mebershipbenfits' },
         { id: 8, label: '', link: '' },
         { id: 9, label: 'Contact Us', link: '/contactus' },
 

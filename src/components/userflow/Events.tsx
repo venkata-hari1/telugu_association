@@ -10,12 +10,17 @@ import {
 } from "@mui/material";
 import bathukamma from "../../assets/bathukamma.jpg";
 import Ugadhi from '../../assets/ugadhi.png'
+import TeluguCalender from '../../assets/telugucalender.png'
+import WomensDay from '../../assets/womensday.png'
+import Dasara from '../../assets/dasara.png'
+import Batukamma from '../../assets/bathukamma.jpg'
 import { useLocation, useNavigate } from "react-router-dom";
 const Events = () => {
   const location=useLocation()
   const navigate=useNavigate()
   const pathname = location.pathname;
-  const eventdata = [
+
+  const upcomingevents = [
     {
       id: 1,
       img: bathukamma,
@@ -30,12 +35,35 @@ const Events = () => {
     },
     {
       id: 3,
-      img: bathukamma,
+      img: TeluguCalender,
       name: "TAM Telugu Calendar 2025",
       date: "Sunday , 09/28/2025",
     },
     
   ];
+
+  const pastevents = [
+    {
+      id: 1,
+      img: WomensDay,
+      name: "TAM'S Womens Day",
+      date: "Saturday , 04/19/2025",
+    },
+    {
+      id: 2,
+      img: Dasara,
+      name: "TAM Dussehra",
+      date: "Sunday , 09/28/2025",
+    },
+    {
+      id: 3,
+      img: Batukamma,
+      name: "TAM Bathukamma",
+      date: "Sunday , 09/28/2025",
+    },
+    
+  ];
+  const Event=pathname==="/events/upcoming"?upcomingevents:pastevents
   return (
     <Box width="100%">
       <Box sx={{ p: 2 }}>
@@ -45,12 +73,12 @@ const Events = () => {
           {pathname==="/events/upcoming"?"Upcoming Events":"Past Events"}
         </Typography>
 
-        {eventdata.map((event) => (
+        {Event.map((event) => (
           <Box>
             <Box sx={{ display: "flex", mt: 2 }}>
               <Card
                 variant="outlined"
-                sx={{ display: "flex", gap: 3, background: "transparent" }}
+                sx={{ display: "flex", gap: 3, background: "transparent",width:{lg:'60%',xs:'100%'} }}
               >
                 <CardMedia
                   component="image"
@@ -68,10 +96,10 @@ const Events = () => {
                       variant="h6"
                       sx={{ fontSize: 15, fontWeight: 600, mb: 1 }}
                     >
-                      TAM'S Womens Day
+                     {event.name}
                     </Typography>
                     <Typography sx={{ fontSize: 15, fontWeight: 600, mb: 1 }}>
-                      Saturday , 04/19/2025
+                    {event.date}
                     </Typography>
                   </CardContent>
 
@@ -84,7 +112,7 @@ const Events = () => {
                         border: "none",
                         whiteSpace: "normal",
                       }}
-                      onClick={()=>navigate('/eventdetails')}
+                      onClick={()=>navigate('/eventdetails',{state:{value:event}})}
                     >
                       View Details
                     </Button>

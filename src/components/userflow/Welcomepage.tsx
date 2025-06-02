@@ -13,7 +13,7 @@ import Gallery from './Gallery';
 import ContactUs from './ContactUs';
 import Mebershipbenfits from './Mebershipbenfits';
 import Registration from './Auth/Registration';
-import Login from '../AdminFlow/Login';
+import AdminLogin from '../AdminFlow/AdminLogin'
 
 import Mission from './Mission';
 import Organization from './Organization';
@@ -27,6 +27,8 @@ import Aksaramala from './Aksaramala';
 import BhashaandLipi from './BhashaandLipi';
 import TAMbylaws from './TAMbylaws';
 import GoverningBodyPresidents from './GoverningBody';
+import Login from './Auth/Login';
+
 type Classes = {
     root: string;
 };
@@ -43,9 +45,8 @@ export default function Welcomepage() {
         <Grid size={{lg:9.3}}>
           <Routes>
             <Route path="" element={<Home/>}/>
-           {/*  <Route path="registration" element={<Registration/>}/> */}
             
-            <Route path="login" element={<Login/>}/>
+            <Route path="login" element={<AdminLogin/>}/>
             <Route path="about_us" element={<AboutUs/>}/>
             <Route path="governing_body/presidents" element={<GoverningBodyPresidents/>}/>
             <Route path="governing_body/board_of_directors" element={<GoverningBodyPresidents/>}/>
@@ -75,6 +76,7 @@ export default function Welcomepage() {
                 <Route path="volunteer" element={<Registration type='/volunteer'/>}/>
                   <Route path="member" element={<Registration type="/member"/>}/>
                   <Route path="donate" element={<Registration type="/donate"/>}/>
+                  
           </Routes>
 
         </Grid>

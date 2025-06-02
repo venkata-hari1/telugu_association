@@ -11,20 +11,51 @@ import {
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import sankranthi from "../../assets/sankranthi.jpg";
 import { useLocation } from "react-router-dom";
-
+import Photo1 from '../../assets/photo1.png'
+import Photo2 from '../../assets/photo2.png'
+import Photo3 from '../../assets/photo3.png'
+import Photo4 from '../../assets/photo4.png'
 function Gallery() {
   const location=useLocation()
   const pathname=location.pathname
-  const gallerysumdata = [
-    { id: 1, text: "TAM Deepavali" },
-    { id: 2, text: "TAM Sankranti" },
-  ];
-  const galldata = [
-    { id: 1, img: sankranthi },
-    { id: 2, img: sankranthi },
-    { id: 3, img: sankranthi },
+  const Video1 = () => (
+    <iframe
+      width="600"
+      height="315"
+      src="https://www.youtube.com/embed/MSxd7wENUZ4?si=MD3hqBOhD0STIEYD"
+      title="YouTube video player"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerPolicy="strict-origin-when-cross-origin"
+      allowFullScreen
+    />
+  );
+  const photogalldata = [
+    {id:1,txt:'TAM Deepavali',imgs:[
+      { id: 1, img: Photo1 },
+      { id: 2, img: Photo2},
+      { id: 3, img: Photo2 },
+    ]},
+    {id:2,txt:'TAM Sankranti',imgs:[
+      { id: 1, img: Photo3 },
+      { id: 2, img:Photo4 },
+      { id: 3, img: Photo4 },
+    ]}
   ];
 
+  const videogalldata = [
+    {
+      id: 1,
+      txt: 'TAM Deepavali',
+      imgs: [{ id: 1, img: <Video1 /> }],
+    },
+    {
+      id: 2,
+      txt: 'TAM Sankranti',
+      imgs: [{ id: 1, img: <Video1 /> }],
+    }
+  ];
+ const Gallery=pathname==="/gallery/photos"?photogalldata:videogalldata
   return (
     <Box width="100%" p={2}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -78,7 +109,7 @@ function Gallery() {
         </FormControl>
       </Box>
 
-      {gallerysumdata.map((gdata) => (
+      {Gallery.map((gdata) => (
         <Box key={gdata.id}>
           <Paper
             sx={{
@@ -94,7 +125,7 @@ function Gallery() {
             <Typography
               sx={{ color: "#3DB80C", fontSize: 14, fontWeight: 600 }}
             >
-              {gdata.text}
+              {gdata.txt}
             </Typography>
           </Paper>
           <Box
@@ -105,20 +136,38 @@ function Gallery() {
             flexDirection={{ lg: "row", md: "row", sm: "column", xs: "column" }}
             gap={3}
           >
-            {galldata.map((gallery) => (
+            {gdata.imgs.map((gallery:any) => (
               <Card
                 key={gallery.id}
                 sx={{
                   background: "transparent",
-                  width: { sm: "100%", xs: "100%", lg: "250px" },
-                  height: "150px",
+                  width: { sm: "100%", xs: "100%", lg: "100%" },
+               
                 }}
               >
-                <CardMedia
-                  component="img"
-                  src={gallery.img}
-                  sx={{ width: "100%", height: "150px" }}
-                />
+               {pathname==="/gallery/photos" ? (
+  <CardMedia
+    component="img"
+    src={gallery.img}
+    sx={{ width: "100%", height: "150px" }}
+  />
+) : (
+  <Box
+  sx={{
+    position: "relative",
+    display:'flex',
+    padding:'10px',
+    justifyContent:'center',
+    alignItems:'center',
+    alignContent:'center',
+    width: "100%",
+  }}
+>
+  
+    {gallery.img}
+
+</Box>
+)}
               </Card>
             ))}
           </Box>
