@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material"
 import eventcalender from '../../assets/calender.png'
-const Upcommingevents = () => {
+const EventDetails = () => {
 
 return (
      <Box sx={{width:'100%',p:2}}>
@@ -30,4 +30,4 @@ return (
   )
 }
 
-export default Upcommingevents
+export default EventDetails

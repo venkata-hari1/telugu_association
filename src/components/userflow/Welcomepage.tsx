@@ -7,7 +7,6 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import AboutUs from './AboutUs';
 import Events from './Events';
-import GoverningBody from './GoverningBody';
 import Sponsors from './Sponsors';
 import Telugu from './Telugu';
 import Gallery from './Gallery';
@@ -18,7 +17,7 @@ import Login from '../AdminFlow/Login';
 
 import Mission from './Mission';
 import Organization from './Organization';
-import Upcommingevents from './Upcommingevents';
+import Upcommingevents from './EventDetails';
 import Nakshatralu from './Nakshatralu';
 import Samvatsaralu from './Samvatsaralu';
 import Tithulu from './Tithulu';
@@ -26,10 +25,8 @@ import Gunintamulu from './Gunintamulu';
 import Vemanapadyalu from './Vemanapadyalu';
 import Aksaramala from './Aksaramala';
 import BhashaandLipi from './BhashaandLipi';
-import Volunteer from './Volunteer';
-
-
-
+import TAMbylaws from './TAMbylaws';
+import GoverningBodyPresidents from './GoverningBody';
 type Classes = {
     root: string;
 };
@@ -50,16 +47,23 @@ export default function Welcomepage() {
             
             <Route path="login" element={<Login/>}/>
             <Route path="about_us" element={<AboutUs/>}/>
-            <Route path="governing_body" element={<GoverningBody/>}/>
-            <Route path="events" element={<Events/>}/>
+            <Route path="governing_body/presidents" element={<GoverningBodyPresidents/>}/>
+            <Route path="governing_body/board_of_directors" element={<GoverningBodyPresidents/>}/>
+            <Route path="governing_body/previous_board_members" element={<GoverningBodyPresidents/>}/>
+            <Route path="events/past" element={<Events/>}/>
+            <Route path="events/upcoming" element={<Events/>}/>
+
             <Route path="sponsors" element={<Sponsors/>}/>
             <Route path="telugu" element={<Telugu/>}/>
-            <Route path="gallery" element={<Gallery/>}/>
+            <Route path="gallery/photos" element={<Gallery/>}/>
+            <Route path="gallery/videos" element={<Gallery/>}/>
             <Route path="contactUs" element={<ContactUs/>}/>
             <Route path="mebershipbenfits" element={<Mebershipbenfits/>}/>
             <Route path="mission" element={<Mission/>}/>
-            <Route path="organization" element={<Organization/>}/>
-             <Route path="upcoming" element={<Upcommingevents/>}/>  
+            <Route path="about_us/organization" element={<Organization/>}/>
+            <Route path="about_us/mission" element={<Mission/>}/>
+            <Route path="about_us/tam_by_laws" element={<TAMbylaws/>}/>
+             <Route path="eventdetails" element={<Upcommingevents/>}/>  
             <Route path="nakshatralu" element={<Nakshatralu/>}/> 
             <Route path="samvatsaralu" element={<Samvatsaralu/>}/>  
             <Route path="tithulu" element={<Tithulu/>}/>  

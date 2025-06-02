@@ -10,8 +10,11 @@ import {
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import sankranthi from "../../assets/sankranthi.jpg";
+import { useLocation } from "react-router-dom";
 
 function Gallery() {
+  const location=useLocation()
+  const pathname=location.pathname
   const gallerysumdata = [
     { id: 1, text: "TAM Deepavali" },
     { id: 2, text: "TAM Sankranti" },
@@ -26,7 +29,7 @@ function Gallery() {
     <Box width="100%" p={2}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography color="#3DB80C" fontWeight="700">
-          Photo Gallery
+          {pathname==="/gallery/photos"?"Photo Gallery":"Video Gallery"}
         </Typography>
         <FormControl size="small">
           <Select

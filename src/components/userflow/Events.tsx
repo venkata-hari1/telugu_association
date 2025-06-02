@@ -9,7 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import bathukamma from "../../assets/bathukamma.jpg";
+import { useLocation, useNavigate } from "react-router-dom";
 const Events = () => {
+  const location=useLocation()
+  const navigate=useNavigate()
+  const pathname = location.pathname;
   const eventdata = [
     {
       id: 1,
@@ -42,7 +46,7 @@ const Events = () => {
         <Typography
           sx={{ fontSize: 15, fontWeight: 600, mb: 1, color: "#3DB80C" }}
         >
-          Past Events
+          {pathname==="/events/upcoming"?"Upcoming Events":"Past Events"}
         </Typography>
 
         {eventdata.map((event) => (
@@ -84,6 +88,7 @@ const Events = () => {
                         border: "none",
                         whiteSpace: "normal",
                       }}
+                      onClick={()=>navigate('/eventdetails')}
                     >
                       View Details
                     </Button>

@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -21,8 +22,13 @@ import Vasanth from "../../assets/vasanth.jpg";
 import Kiran from "../../assets/kiran.jpg";
 import Ramtallapaka from "../../assets/ramtallapaka.jpg";
 import Venkat from "../../assets/venkat.jpg";
+import { useLocation, useParams } from "react-router-dom";
+import { Fragment, useEffect, useState } from "react";
 
-function GoverningBody() {
+function GoverningBodyPresidents() {
+  const location = useLocation();
+  const pathname = location.pathname;
+ const[date,setData]=useState<number[]>([])
   const boardmembers = [
     { id: 1, name: "Ramachandra Peteti", image: Ramachandra, position: "2021 President" },
     { id: 2, name: "Ramu Thodupunoori", image: Ramuthodapunuri, position: "2020 President" },
@@ -40,13 +46,23 @@ function GoverningBody() {
     { id: 14, name: "Ram Tallapaka", image: Ramtallapaka, position: "2008 President" },
     { id: 15, name: "Venkata Akurati", image: Venkat, position: "2007 President" },
   ];
-
+  useEffect(() => {
+    const years = [];
+    for (let i = 2023; i >= 2013; i--) {
+      years.push(i);
+    }
+    setData(years);
+  }, []);
   return (
     <Box width="100%" p={2}>
-      <Typography variant="h6" color="#3DB80C" mb={3} fontWeight={700} textAlign="center">
-        TEAM Honors and Recognizes our Past Presidents!
+      <Typography variant="h6" color="#3DB80C" mb={3} fontWeight={700} >
+        {pathname==="/governing_body/previous_board_members"?"Previous Board members":pathname==="/governing_body/board_of_directors"?"Board of Directors":"TEAM Honors and Recognizes our Past Presidents!"}
       </Typography>
-
+{pathname==="/governing_body/previous_board_members"&&<Fragment>
+  {date.map((x:number)=>
+    <Button key={x} variant="contained" sx={{ background: '#3DB80C',marginLeft:'8px',marginBottom:'8px'}} >{x}</Button>
+  )}
+  </Fragment>}
       <Grid container spacing={3} justifyContent="center">
         {boardmembers.map((member) => (
           <Grid key={member.id} size={{xs:12,sm:6,md:4}}>
@@ -94,4 +110,4 @@ function GoverningBody() {
   );
 }
 
-export default GoverningBody;
+export default GoverningBodyPresidents;
