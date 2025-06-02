@@ -4,7 +4,7 @@ const Volunteer = () => {
   
 return (
     <Box>
-
+    
     </Box>
   )
 }
