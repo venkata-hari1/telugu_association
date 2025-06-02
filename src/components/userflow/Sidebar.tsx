@@ -24,7 +24,7 @@ export default function Sidebar() {
       <Button startIcon={<PaidIcon/>}  onClick={()=>navigate('/donate')}>DONATE NOW</Button>
       </Box>
       <Box>
-        <Typography className={classes.commontext}>Panchangam</Typography>
+        <Typography className={classes.commontext} sx={{mt:2,textTransform:'uppercase'}}>Panchangam</Typography>
         <Calender/>
       </Box>
 

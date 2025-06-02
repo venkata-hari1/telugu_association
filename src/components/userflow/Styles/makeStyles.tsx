@@ -11,19 +11,19 @@ const flex={
     alignContent:'center',
 }
 export const useStyles = makeStyles()(() => ({
-    root:{
+    root: {
         display: 'flex',
-        alignItems:'center',
-        flexDirection:'column' as 'column',
-        alignContent:'center',
+        flexDirection: 'column' as const,
+        alignItems: 'center',
+      
         backgroundImage: `url(${WelcomeImage})`,
-        backgroundSize: 'cover',                
-        backgroundRepeat: 'no-repeat',     
-        height:'fit-content',
-        width: '100%',                  
-        boxSizing:'border-box',
-        marginTop:'-10px'
-    },
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'contain',       
+        backgroundColor: '#fff',       
+        minHeight: '100vh',
+        width: '100%',
+        marginTop: '-10px',
+      },
     commontext:{
         ...Lato,
         marginBottom:'5px',

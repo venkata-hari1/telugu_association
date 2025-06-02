@@ -63,12 +63,12 @@ function GoverningBodyPresidents() {
     <Button key={x} variant="contained" sx={{ background: '#3DB80C',marginLeft:'8px',marginBottom:'8px'}} >{x}</Button>
   )}
   </Fragment>}
-      <Grid container spacing={3} justifyContent="center">
+      <Grid container  spacing={1}>
         {boardmembers.map((member) => (
-          <Grid key={member.id} size={{xs:12,sm:6,md:4}}>
+          <Grid key={member.id} size={{xs:12,md:4,lg:4}}>
             <Card
               sx={{
-                maxWidth: 250,
+        
                 margin: "0 auto",
                 background: "transparent",
                 boxShadow: "none",

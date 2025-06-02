@@ -97,8 +97,8 @@ export default function Header() {
         }}
       >
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Box className={classes.logo}>
-            <Box src={logo} component={'img'} alt="logo" className={classes.logo_image} />
+          <Box className={classes.logo} >
+            <Box src={logo} component={'img'} alt="logo" className={classes.logo_image} sx={{marginTop:'15px'}} />
           </Box>
           <Box sx={{ display: 'flex', width: '80%', justifyContent: 'space-between' }}>
             {tabData.map((tab) => (
