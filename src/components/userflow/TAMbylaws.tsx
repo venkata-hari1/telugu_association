@@ -1,21 +1,21 @@
-import { Box, Typography } from "@mui/material"
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import TAGC123 from '../../assets/TAGC123.pdf'
+import { Box, Typography } from "@mui/material";
+import TAGC123 from '../../assets/TAGC123.pdf';
 
 export default function TAMbylaws() {
-  
-  const navigate=useNavigate()
-
-  useEffect(()=>{
-   window.open(TAGC123,'_blank')
-   navigate('/') 
-  },[navigate])
-
   return (
-   <Box>
-    <Typography>Opening PDF..</Typography>
+    <Box p={2}>
+      <Typography variant="h6" mb={2}>
+       
+      </Typography>
 
-   </Box>
-  )
+      <Box
+        component="iframe"
+        src={TAGC123}
+        width="100%"
+        height="800px"
+        sx={{ border: '1px solid #ccc', borderRadius: 2 }}
+      />
+    </Box>
+  );
 }
+
