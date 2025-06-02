@@ -25,7 +25,7 @@ const tabData: TabData[] = [
     link: '/about_us',
     dropdown: [
       { id: 10, label: 'Organization', link: '/about_us/organization' },
-      { id: 11, label: 'Mission', link: '/about_us/mission' },
+      { id: 11, label: 'Our Mission', link: '/about_us/mission' },
       { id: 12, label: 'TAM By Laws', link: '/about_us/tam_by_laws' },
     ],
   },

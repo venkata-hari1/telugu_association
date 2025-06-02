@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import bathukamma from "../../assets/bathukamma.jpg";
+import Ugadhi from '../../assets/ugadhi.png'
 import { useLocation, useNavigate } from "react-router-dom";
 const Events = () => {
   const location=useLocation()
@@ -23,22 +24,17 @@ const Events = () => {
     },
     {
       id: 2,
-      img: bathukamma,
-      name: "TAM'S Womens Day",
-      date: "Saturday , 04/19/2025",
+      img: Ugadhi,
+      name: "TAM Ugadi & SriRama Navami Celebrations",
+      date: "Sunday , 09/28/2025",
     },
     {
       id: 3,
       img: bathukamma,
-      name: "TAM'S Womens Day",
-      date: "Saturday , 04/19/2025",
+      name: "TAM Telugu Calendar 2025",
+      date: "Sunday , 09/28/2025",
     },
-    {
-      id: 4,
-      img: bathukamma,
-      name: "TAM'S Womens Day",
-      date: "Saturday , 04/19/2025",
-    },
+    
   ];
   return (
     <Box width="100%">

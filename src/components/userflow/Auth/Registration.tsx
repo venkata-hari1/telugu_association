@@ -1,14 +1,16 @@
-import { Box, Button, Divider, FormControlLabel, Grid, Paper, Radio, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, FormControlLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { Fragment } from "react/jsx-runtime";
+import { useState } from "react";
 
 const Registration = ({ type }: { type:any }) => {
-  console.log(type);
+  const [membershipValue, setMembershipValue] = useState('');
+  const [paymentValue, setPaymentValue] = useState('');
   return (
     <Box p={2}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography color="#3DB80C" fontWeight="700">
-          {type === '/donate' ? "Donate" : type === '/member' ? "Member Registration" : "Volunteer Registration"}
+          {type === '/donate' ? "Donate Now" : type === '/member' ? "Member Registration" : "Volunteer Registration"}
         </Typography>
       </Box>
 
@@ -48,6 +50,7 @@ const Registration = ({ type }: { type:any }) => {
               fullWidth
               id="donation-amount"
               name="donation-amount"
+              type='number'
               sx={{
                 "& .MuiOutlinedInput-root": {
                   borderTopLeftRadius: 0,
@@ -159,6 +162,7 @@ const Registration = ({ type }: { type:any }) => {
             name="mobile-no"
             variant="outlined"
             size="small"
+            type='number'
             placeholder="Your Mobile Number"
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -358,8 +362,13 @@ const Registration = ({ type }: { type:any }) => {
                 Membership Plan Details
               </Typography>
             </Grid>
-
-            <Grid container margin="auto" spacing={2}>
+            <RadioGroup
+            sx={{width:'85%'}}
+  row
+  value={membershipValue}
+  onChange={(e) => setMembershipValue(e.target.value)}
+>
+            <Grid container>
               <Grid size={{ sm: 12, md: 4 }}>
                 <Paper
                   variant="outlined"
@@ -442,9 +451,9 @@ const Registration = ({ type }: { type:any }) => {
               </Grid>
 
               {(type === "/donate" || type === "/member") && (
-                <Grid size={{ xs: 12, md: 12 }} sx={{ marginLeft: { md: "68px" } }}>
-                  <Divider sx={{ border: "1px groove #3DB80C", width: "90%" }} />
-                  <Typography fontWeight="600">
+                <Grid size={{ xs: 12, md: 12 }}>
+                  <Divider sx={{ border: "1px groove #3DB80C", width: "100%" ,mt:2,mb:2}} />
+                  <Typography fontWeight="600" sx={{mb:1}}>
                     Payment Information<Typography component="span" color="red">*</Typography>
                   </Typography>
                 </Grid>
@@ -546,6 +555,7 @@ const Registration = ({ type }: { type:any }) => {
                 </Grid>
               </Grid>
             </Grid>
+            </RadioGroup>
           </>
         )}
 
@@ -636,6 +646,7 @@ const Registration = ({ type }: { type:any }) => {
                       size="small"
                       fullWidth
                       id="total-amount"
+                      type="number"
                       name="total-amount"
                       sx={{
                         "& .MuiOutlinedInput-root": {
