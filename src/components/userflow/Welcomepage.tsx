@@ -30,6 +30,8 @@ import GoverningBodyPresidents from './GoverningBody';
 import Login from './Auth/Login';
 import Forgotpassword from './Auth/Forgotpassword';
 import Resetpassword from './Auth/Resetpassword';
+import Otpinput from './Auth/otpinput';
+
 
 type Classes = {
     root: string;
@@ -50,7 +52,8 @@ export default function Welcomepage() {
            {/*  <Route path="registration" element={<Registration/>}/> */}
             
              <Route path='forgot' element={<Forgotpassword/>}/>    
-             <Route path='reset' element={<Resetpassword />} />         
+             <Route path='reset' element={<Resetpassword />} />      
+             <Route path='/otp' element={<Otpinput />}/>   
             <Route path='login1' element={<Login />}/>
             <Route path="login" element={<AdminLogin/>}/>
             <Route path="about_us" element={<AboutUs/>}/>

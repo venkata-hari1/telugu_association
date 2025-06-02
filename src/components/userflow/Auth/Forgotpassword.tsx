@@ -1,6 +1,4 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material"
-import { useState } from "react";
-
 
 const Forgotpassword = () => {
 
