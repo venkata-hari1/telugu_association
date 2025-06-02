@@ -6,7 +6,10 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+
+
 type IProps={
     classes:{
         [type:string]:string
@@ -34,8 +37,14 @@ const handleClick=(tab:{id:number,link:string})=>{
  navigate(`${tab.link}`)
 }
 
+const location=useLocation()
+console.log(location.pathname)
+
     return (
-        <Box className={classes.footercontainer}>
+        <Box className={classes.footercontainer} sx={{display:{xs:'none',md:'none',lg:'grid'}}}>
+        
+   
+
         <Grid container>
             <Grid size={{lg:1,xs:2,md:2}}>
             <Box src={Logo} component={'img'} alt='Logo' sx={{width:'70px',height:'70px'}}/>   
@@ -50,7 +59,7 @@ const handleClick=(tab:{id:number,link:string})=>{
                         <IconButton className={classes.socailmediaicon_container}><FacebookIcon className={classes.socailmediaicon}/></IconButton>
                         <IconButton className={classes.socailmediaicon_container}><XIcon  className={classes.socailmediaicon}/></IconButton>
                     </Box>
-                    <Button className={classes.volunteer_btn} onClick={()=>navigate('/registration')}>BECOME A VOLUNTEER</Button>
+                    <Button className={classes.volunteer_btn} onClick={()=>navigate('/volunteer')}>BECOME A VOLUNTEER</Button>
                     <Typography className={classes.copyright_text}>Tax Id : 90-0089250 @ 2025 Telugumn.Org. All Rights Reserved.</Typography>
                 </Box>
             </Grid>

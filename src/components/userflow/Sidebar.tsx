@@ -18,9 +18,9 @@ export default function Sidebar() {
  const navigate=useNavigate()
  const sponsor=[{id:1,img:Sponsor1},{id:2,img:Sponsor2},{id:3,img:Sponsor3},{id:4,img:Sponsor4}]
   return (
-    <Box className={classes.sidebarstyle}>
+    <Box className={classes.sidebarstyle} sx={{display:{xs:'none',md:'none',lg:'grid'}}}>
       <Box className={classes.buttons}>
-      <Button startIcon={<PersonAddAltIcon />} onClick={()=>navigate('/registration')}>BECOME A MEMBER</Button>
+      <Button startIcon={<PersonAddAltIcon />} onClick={()=>navigate('/member')}>BECOME A MEMBER</Button>
       <Button startIcon={<PaidIcon/>}  onClick={()=>navigate('/donate')}>DONATE NOW</Button>
       </Box>
       <Box>

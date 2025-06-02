@@ -37,7 +37,7 @@ export default function Header() {
    navigate(`${tab.link}`)
   }
   return (
-    <Box sx={{ width: '76%' }}>
+    <Box sx={{ width: '76%',display:{xs:'none',md:'none',lg:'grid'} }}>
       <AppBar
         position="static"
         sx={{

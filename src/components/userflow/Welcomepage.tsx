@@ -15,7 +15,6 @@ import ContactUs from './ContactUs';
 import Mebershipbenfits from './Mebershipbenfits';
 import Registration from './Auth/Registration';
 import Login from '../AdminFlow/Login';
-import Donate from './Donate';
 
 import Mission from './Mission';
 import Organization from './Organization';
@@ -27,6 +26,9 @@ import Gunintamulu from './Gunintamulu';
 import Vemanapadyalu from './Vemanapadyalu';
 import Aksaramala from './Aksaramala';
 import BhashaandLipi from './BhashaandLipi';
+import Volunteer from './Volunteer';
+
+
 
 type Classes = {
     root: string;
@@ -44,8 +46,8 @@ export default function Welcomepage() {
         <Grid size={{lg:9.3}}>
           <Routes>
             <Route path="" element={<Home/>}/>
-            <Route path="registration" element={<Registration/>}/>
-            <Route path="donate" element={<Donate/>}/>
+           {/*  <Route path="registration" element={<Registration/>}/> */}
+            
             <Route path="login" element={<Login/>}/>
             <Route path="about_us" element={<AboutUs/>}/>
             <Route path="governing_body" element={<GoverningBody/>}/>
@@ -65,6 +67,10 @@ export default function Welcomepage() {
              <Route path="padyalu" element={<Vemanapadyalu/>}/>
              <Route path="aksharamala" element={<Aksaramala/>}/>
               <Route path="lipi" element={<BhashaandLipi/>}/>
+
+                <Route path="volunteer" element={<Registration type='/volunteer'/>}/>
+                  <Route path="member" element={<Registration type="/member"/>}/>
+                  <Route path="donate" element={<Registration type="/donate"/>}/>
           </Routes>
 
         </Grid>
