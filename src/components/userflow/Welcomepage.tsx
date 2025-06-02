@@ -28,6 +28,8 @@ import BhashaandLipi from './BhashaandLipi';
 import TAMbylaws from './TAMbylaws';
 import GoverningBodyPresidents from './GoverningBody';
 import Login from './Auth/Login';
+import Forgotpassword from './Auth/Forgotpassword';
+import Resetpassword from './Auth/Resetpassword';
 
 type Classes = {
     root: string;
@@ -47,7 +49,8 @@ export default function Welcomepage() {
             <Route path="" element={<Home/>}/>
            {/*  <Route path="registration" element={<Registration/>}/> */}
             
-
+             <Route path='forgot' element={<Forgotpassword/>}/>    
+             <Route path='reset' element={<Resetpassword />} />         
             <Route path='login1' element={<Login />}/>
             <Route path="login" element={<AdminLogin/>}/>
             <Route path="about_us" element={<AboutUs/>}/>
@@ -79,6 +82,7 @@ export default function Welcomepage() {
                 <Route path="volunteer" element={<Registration type='/volunteer'/>}/>
                   <Route path="member" element={<Registration type="/member"/>}/>
                   <Route path="donate" element={<Registration type="/donate"/>}/>
+                
                   
           </Routes>
 

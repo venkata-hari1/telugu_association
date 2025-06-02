@@ -2,9 +2,8 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material"
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useState } from "react";
-import Fb from '../../../assets/fb.png'
+import Fb2 from '../../../assets/fb2.png'
 import Googleimg from '../../../assets/google.png'
 
 
@@ -25,12 +24,13 @@ function hidecurrentPassword(){
 
 
   return (
-     <Box display="flex" justifyContent="center" alignItems="center" minHeight="90vh">
+     <Box display="flex" justifyContent="center" alignItems="center" minHeight="90vh"
+     >
                 
         <Grid container 
         sx={{display:'flex',flexDirection:'column',
         justifyContent:'center',alignItems:'center',
-        background:'#E4EFC585',
+        background:'white',
         padding:"40px",
         width:"450px",
         borderRadius:'15px',
@@ -106,18 +106,15 @@ function hidecurrentPassword(){
              </Box> 
             </Grid>
             <Typography>Or</Typography>
-            <Box display="flex" just> 
-             <Box component="img" src={Fb} sx={{width:'50px', height:'50px'}}/>
+           
+            <Box display="flex" alignItems="center" justifyContent="center"> 
+             <Box component="img" src={Fb2} sx={{width:'40px', height:'40px',marginTop:"-10px"}}/>
              <Box component="img" src={Googleimg} sx={{width:'40px',height:'40px'}}/>
             </Box>
           
           <Box display="flex" flexDirection="column">
                 <Button variant="contained" sx={{background:'#3DB80C'}}>Submit</Button>
-               <Box sx={{display:'flex',justifyContent:'center',alignItems:'center',pt:2}}>
-               <ArrowBackIcon fontSize="small"/><Typography component="p" 
-                sx={{cursor:'pointer'}}>Back to Profile</Typography>
-               </Box>
-            </Box>
+              </Box>
     
           </Grid>
     
