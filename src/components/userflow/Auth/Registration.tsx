@@ -6,7 +6,6 @@ import Login from "./Login";
 
 const Registration = ({ type }: { type:any }) => {
   const [membershipValue, setMembershipValue] = useState('');
-  const [paymentValue, setPaymentValue] = useState('');
   const[value,setValue]=useState(false)
   const handleLogin=()=>{
    setValue(!value)

@@ -1,10 +1,8 @@
 import { Box, Paper, Typography } from "@mui/material"
-import eventcalender from '../../assets/calender.png'
 import { useLocation } from "react-router-dom"
 import { Fragment } from "react/jsx-runtime"
 const EventDetails = () => {
 const location=useLocation()
-console.log(location?.state?.value)
 return (
   <Fragment>
      {location?.state?.value&&<Box sx={{width:'100%',p:2}}>

@@ -27,8 +27,6 @@ import Aksaramala from './Aksaramala';
 import BhashaandLipi from './BhashaandLipi';
 import TAMbylaws from './TAMbylaws';
 import GoverningBodyPresidents from './GoverningBody';
-import Login from './Auth/Login';
-
 type Classes = {
     root: string;
 };

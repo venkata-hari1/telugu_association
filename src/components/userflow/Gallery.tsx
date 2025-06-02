@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import sankranthi from "../../assets/sankranthi.jpg";
 import { useLocation } from "react-router-dom";
 import Photo1 from '../../assets/photo1.png'
 import Photo2 from '../../assets/photo2.png'
