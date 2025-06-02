@@ -22,7 +22,7 @@ import Vasanth from "../../assets/vasanth.jpg";
 import Kiran from "../../assets/kiran.jpg";
 import Ramtallapaka from "../../assets/ramtallapaka.jpg";
 import Venkat from "../../assets/venkat.jpg";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Fragment, useEffect, useState } from "react";
 
 function GoverningBodyPresidents() {
