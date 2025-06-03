@@ -49,7 +49,9 @@ const sponserdata=[
       color:'#3DB80C',
       fontWeight:'600',
       whiteSpace:'nowrap',
-      marginRight:'8px'
+      marginRight:'8px',
+      fontSize:'16px',
+      padding:'3px'
     }}>
       NEWS &UPDATES
     </Typography>
@@ -68,6 +70,7 @@ const sponserdata=[
           sx={{
             display: 'inline-block',
             paddingLeft: '100%',
+            fontSize:'13px',
             animation: 'marquee 15s linear infinite',
             '@keyframes marquee': {
               '0%': { transform: 'translateX(0%)' },
@@ -86,12 +89,12 @@ const sponserdata=[
    {!display&&<Box  sx={{width:'100%',p:3,mt:2}}>
     
  <Box display="flex" justifyContent="space-between" alignItems="center">
-  <Typography variant="h6" color="#3DB80C">EVENT GALLERY</Typography>
+  <Typography variant="h6" color="#3DB80C" sx={{fontWeight:'bold',fontSize:'15px'}}>EVENT GALLERY</Typography>
   </Box>
       <Grid container spacing={2} sx={{ mt: 1 }}>
            {gallerydata.map((data) => (
             <Grid size={{xs:12 ,sm:6 ,md:6}} key={data.id}>
-             <Card sx={{ width: '100%',background:'transparent' }} component={Paper}>
+             <Card sx={{ width: '100%',background:'transparent' }} variant="outlined" component={Paper}>
              <CardMedia
               component="img"
               image={data.img}
@@ -99,7 +102,7 @@ const sponserdata=[
               sx={{ height: 150,width:'100%', objectFit: 'contain',display:'block' }}
             />
             <CardContent>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              <Typography variant="body2" sx={{ color: 'text.secondary',fontSize:'13px' }}>
                 {data.text}
               </Typography>
             </CardContent>
@@ -110,7 +113,7 @@ const sponserdata=[
     </Box>}
    
    {!display&&<Box sx={{ mb: 1 }}>
-  <Typography variant="h6" color="#3DB80C" sx={{marginLeft:"30px"}}> OUR SPONSERS</Typography>
+  <Typography variant="h6" color="#3DB80C" mb={1} sx={{marginLeft:"30px",fontWeight:'bold',fontSize:'15px'}}> OUR SPONSERS</Typography>
   <Grid container>
   <Box component={Paper} 
   sx={{display:'flex',
