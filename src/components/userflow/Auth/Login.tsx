@@ -89,9 +89,11 @@ export default function Login() {
     dispatch(setMessage("Login successful!"));
     localStorage.setItem("member", "member");
   };
-
+const handleClose=()=>{
+  dispatch(setLogin(false))
+}
   return (
-    <Dialog open={login}>
+    <Dialog open={login} onClose={handleClose}>
       <DialogContent>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Grid

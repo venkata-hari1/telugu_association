@@ -37,9 +37,11 @@ const Otpinput = () => {
       setOtpError('Please enter 4-digit OTP');
     }
   };
-
+const handleClose=()=>{
+  dispatch(setOtp(false))
+}
   return (
-    <Dialog open={value}>
+    <Dialog open={value} onClose={handleClose}>
       <DialogContent>
         <Box display="flex" justifyContent="center" alignItems="center" >
           <Grid

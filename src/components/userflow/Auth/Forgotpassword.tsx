@@ -45,9 +45,11 @@ const Forgotpassword = () => {
     setEmailTouched(false);
     setEmailError("");
   };
-
+const handleClose=()=>{
+  dispatch(setForgetPassword(false))
+}
   return (
-    <Dialog open={value}>
+    <Dialog open={value} onClose={handleClose}>
       <DialogContent>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Grid

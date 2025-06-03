@@ -83,9 +83,11 @@ const Resetpassword = () => {
       setConfirmPassword("");
     }
   };
-
+const handleClose=()=>{
+  dispatch(setNewPassword(false))
+}
   return (
-    <Dialog open={value}>
+    <Dialog open={value} onClose={handleClose}>
       <DialogContent>
         <Box display="flex" justifyContent="center" alignItems="center">
 
