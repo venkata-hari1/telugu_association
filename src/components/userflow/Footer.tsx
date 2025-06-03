@@ -9,7 +9,6 @@ import XIcon from '@mui/icons-material/X';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
-
 type IProps={
     classes:{
         [type:string]:string

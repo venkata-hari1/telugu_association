@@ -30,7 +30,8 @@ import GoverningBodyPresidents from './GoverningBody';
 import Login from './Auth/Login';
 import Forgotpassword from './Auth/Forgotpassword';
 import Resetpassword from './Auth/Resetpassword';
-import Otpinput from './Auth/otpinput';
+import Otpinput from './Auth/Otpinput';
+import Usermemebership from './Usermemebership';
 
 
 type Classes = {
@@ -56,6 +57,8 @@ export default function Welcomepage() {
              <Route path='/otp' element={<Otpinput />}/>   
             <Route path='login1' element={<Login />}/>
             <Route path="login" element={<AdminLogin/>}/>
+
+
             <Route path="about_us" element={<AboutUs/>}/>
             <Route path="governing_body/presidents" element={<GoverningBodyPresidents/>}/>
             <Route path="governing_body/board_of_directors" element={<GoverningBodyPresidents/>}/>
@@ -81,6 +84,7 @@ export default function Welcomepage() {
              <Route path="padyalu" element={<Vemanapadyalu/>}/>
              <Route path="aksharamala" element={<Aksaramala/>}/>
               <Route path="lipi" element={<BhashaandLipi/>}/>
+              <Route path='usermembership' element={<Usermemebership/>} />
 
                 <Route path="volunteer" element={<Registration type='/volunteer'/>}/>
                   <Route path="member" element={<Registration type="/member"/>}/>

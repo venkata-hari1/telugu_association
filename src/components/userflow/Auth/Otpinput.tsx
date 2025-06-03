@@ -1,4 +1,4 @@
-import { Box, Grid, Typography,Button } from '@mui/material'
+import { Box, Grid, Typography,Button, TextField } from '@mui/material'
 import OTPInput from 'react-otp-input';
 
 
@@ -16,13 +16,13 @@ const Otpinput = () => {
         borderRadius:'15px',
         gap:2}}>
        <Typography  variant="h6" fontWeight="600">OTP Verification</Typography>
-       <Typography  variant="h6">We have sent 4-digit code to</Typography> 
+       <Typography   component="span" fontWeight="600" >We have sent 4-digit code to</Typography> 
        <Typography  component="span" variant="body1" fontWeight="600">your @gmail.com</Typography> 
         
-         <OTPInput
-                
-        numInputs={4}
-        inputStyle={{
+        <OTPInput
+          value={1}            
+          numInputs={4}
+          inputStyle={{
           width: '3rem',
           height: '3rem',
           margin: '0 0.5rem',
@@ -30,7 +30,15 @@ const Otpinput = () => {
           borderRadius: '4px',
           border: '1px solid #3DB80C',
         }}
-        renderInput={(props) => <input {...props} />}
+        renderInput={(props) => 
+           <TextField
+            {...props}
+            variant="outlined"
+            inputProps={{ style: { textAlign: 'center', fontSize: '1.5rem' } }}
+            sx={{ width: '3rem', mx: 0.5 }}
+          />
+      
+      }
       />
 
       <Box mt={3}>
