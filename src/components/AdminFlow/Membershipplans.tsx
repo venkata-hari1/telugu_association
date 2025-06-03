@@ -63,10 +63,7 @@ const Membershipplans = () => {
    const locoation=useLocation() 
    const pathname=locoation.pathname
    const[state,setState]=useState(false)
-  
-  function subscriptionHandler(){
-    setState((prev)=>!prev)
-  }
+
  
   function handleEdit(){
     if(pathname==='sponsorship/subscriptionplans'){

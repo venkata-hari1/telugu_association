@@ -34,8 +34,7 @@ const userFlowSlice = createSlice({
             state.popup = action.payload;
         },
     },
-    extraReducers: (builder) => {
-    },
+
 });
 
 export const { setLogin,setForgetPassword,setNewPassword,setOtp,setPopUp} = userFlowSlice.actions;

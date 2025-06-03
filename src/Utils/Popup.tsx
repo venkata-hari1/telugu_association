@@ -8,7 +8,8 @@ const PopUp = () => {
 const open=useSelector((state:RootState)=>state.userFlow.popup)
 const dispatch=useDispatch<AppDispatch>()
 
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (e: React.SyntheticEvent | Event, reason?: string) => {
+    e.preventDefault()
     if (reason === 'clickaway') {
       return;
     }
