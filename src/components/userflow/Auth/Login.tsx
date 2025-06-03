@@ -9,6 +9,7 @@ import {
   TextField,
   InputAdornment,
   Button,
+  useMediaQuery,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -25,7 +26,7 @@ import Googleimg from "../../../assets/google.png";
 export default function Login() {
   const login = useSelector((state: RootState) => state.userFlow.login);
   const dispatch = useDispatch<AppDispatch>();
-
+  const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))
   const [currentshow, setCurrentShow] = useState(false);
   const [currenttype, setCurrentType] = useState("password");
 
@@ -100,8 +101,8 @@ export default function Login() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              padding: "40px",
-              width: "450px",
+              padding: display?"":"40px",
+              width:"450px",
               borderRadius: "15px",
               gap: 2,
             }}
@@ -125,6 +126,7 @@ export default function Login() {
             </Grid>
             <Grid size={{xs:12}}>
               <TextField
+        
                 type="email"
                 size="small"
                 placeholder="Your Email id"
@@ -193,7 +195,7 @@ export default function Login() {
             </Grid>
 
             <Typography>Or</Typography>
-            <Box display="flex" justifyContent="space-between" sx={{ width: "30%" }}>
+            <Box  sx={{ display:'flex',justifyContent:display?'center':'space-between',width: display?"100%":"30%" }}>
               <Box
                 component="img"
                 src={Fb}
@@ -206,7 +208,7 @@ export default function Login() {
               />
             </Box>
 
-            <Box display="flex" flexDirection="column">
+            <Box display="flex" flexDirection="column" sx={{width:display?'100%':''}} >
               <Button
                 variant="contained"
                 sx={{ background: "#3DB80C" }}

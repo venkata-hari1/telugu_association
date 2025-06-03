@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogContent, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogContent, Grid, TextField, Theme, Typography, useMediaQuery } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/Store";
 import { setForgetPassword, setMessage, setOtp, setPopUp } from "../../../Redux/UserFlow";
@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const Forgotpassword = () => {
   const value = useSelector((state: RootState) => state.userFlow.forgetPassword);
   const dispatch = useDispatch<AppDispatch>();
-
+  const display=useMediaQuery((theme:Theme)=>theme.breakpoints.down('lg'))
   const [email, setEmail] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
   const [emailError, setEmailError] = useState("");
@@ -58,7 +58,7 @@ const Forgotpassword = () => {
               justifyContent: "center",
               alignItems: "center",
               background: "white",
-              padding: "40px",
+              padding: display?"2px":"40px",
               width: "450px",
               borderRadius: "15px",
               gap: 2,
@@ -102,7 +102,7 @@ const Forgotpassword = () => {
             <Box display="flex" flexDirection="column" width="100%">
   <Button
     variant="contained"
-    sx={{ background: "#3DB80C", width: '30%', mx: 'auto' }}
+    sx={{ background: "#3DB80C", width: display?'100%':'30%', mx: 'auto' }}
     onClick={handleSendOTP}
     disabled={!isFormValid}
   >

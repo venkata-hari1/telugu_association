@@ -1,5 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 import WelcomeImage from '../../../assets/welcomepage.png';
+import { Theme } from '@mui/material';
 export const Lato={
     fontFamily:'"Lato", sans-serif',
 }
@@ -10,7 +11,7 @@ const flex={
     flexDirection:'column' as 'column',
     alignContent:'center',
 }
-export const useStyles = makeStyles()(() => ({
+export const useStyles = makeStyles()((theme:Theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column' as const,
@@ -21,7 +22,9 @@ export const useStyles = makeStyles()(() => ({
         backgroundColor: '#fff',       
         height:'fit-content',
         width: '100%',
-        marginTop: '-10px',
+        [theme.breakpoints.down('lg')]:{
+            backgroundImage:'none'
+        }
       },
     commontext:{
         ...Lato,
@@ -46,6 +49,24 @@ export const useStyles = makeStyles()(() => ({
     objectFit:'cover',
      width:'150px',
      height:'150px'
+    },
+    mobilebuttons:{
+        display:'grid',
+        gridTemplateColumns:'50% 50%',
+        gridGap:'1%',
+        padding:'10px',
+        placeItems:'center',
+        '&>button':{
+            ...Lato,
+            width:'100%',
+            padding:'10px',
+            fontSize:'12px',
+             fontWeight:'bold',
+             background: '#3DB80C',
+             color:'white',
+             borderRadius:'14px'
+        
+         }
     },
     buttons:{
         padding:'10px',
@@ -134,5 +155,58 @@ export const useStyles = makeStyles()(() => ({
     logo:{
         ...flex,
         width:'20%',
-    }
+    },
+    sponsaresSection:{
+        display:'flex',
+        flexDirection:'column'
+    },
+    mobileressection:{
+        display:'inline-flex',
+        overflowX:'scroll' as 'scroll'
+    },
+    res_sponsorimages: {
+        width: '80%',          
+        height: '80%',      
+        objectFit: 'cover' as 'cover',
+        borderRadius: '8px',
+    },
+    res_sponsorsection:{
+
+        display:'grid',
+        background:'white',
+        padding:'10px',
+        gridGap:'1%',
+        gridTemplateColumns:'20% 80%',
+          placeItems: 'center'
+    },
+    imgbox:{
+        ...flex,
+    },
+    upcomingevents_title:{
+        width:'100%',
+        display:'grid',
+        gridTemplateColumns:'50% 50%'
+    },
+    upcomingevents: {
+        display: 'grid',
+        gridTemplateColumns: '33% 33% 33%',
+        gap: '1%',
+        width: '100%',
+        placeItems: 'center',
+      },
+      menuicon:{
+        position:'absolute' as 'absolute',
+        top:'0',
+        left:'0',
+        marginTop:'5%',
+        marginLeft:'4%',
+        background:'white',
+
+      },
+      mobilefixedheader:{
+        position:'fixed' as 'fixed',
+        width:'100%',
+       top:0,
+       zIndex:900
+      }
 }))

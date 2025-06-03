@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogContent, Grid, TextField, Typography, InputAdornment } from "@mui/material";
+import { Box, Button, Dialog, DialogContent, Grid, TextField, Typography, InputAdornment, useMediaQuery, Theme } from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -12,7 +12,7 @@ const Resetpassword = () => {
   const [confirmshow, setConfirmShow] = useState(false);
   const [newtype, setNewType] = useState("password");
   const [confirmtype, setConfirmType] = useState("password");
-
+ const display=useMediaQuery((theme:Theme)=>theme.breakpoints.down('lg'))
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -97,13 +97,13 @@ const Resetpassword = () => {
               justifyContent: 'center',
               alignItems: 'center',
               background: '#ffffff',
-              padding: "40px",
+              padding:display?'0px': "40px",
               width: "450px",
               borderRadius: '15px',
               gap: 2
             }}
           >
-            <Typography color="#3DB80C" variant="h5">Reset Your Password</Typography>
+            <Typography color="#3DB80C" variant="h5" sx={{fontSize:'15px'}}>Reset Your Password</Typography>
 
             <Grid size={{ lg: 12, md: 12, xs: 12, sm: 12 }}>
               <Typography fontWeight="500">Password</Typography>
@@ -186,7 +186,7 @@ const Resetpassword = () => {
             <Box display="flex" flexDirection="column" width="100%" mt={2}>
               <Button
                 variant="contained"
-                sx={{ background: '#3DB80C', width: '30%', mx: 'auto' }}
+                sx={{ background: '#3DB80C', width: display?'100%':'30%', mx: 'auto' }}
                 onClick={handleResetPassword}
                 disabled={!!passwordError || !!confirmPasswordError || !password || !confirmPassword}
               >

@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, useMediaQuery } from '@mui/material'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import { useStyles } from './Styles/makeStyles'
@@ -30,23 +30,24 @@ import Forgotpassword from './Auth/Forgotpassword';
 import Resetpassword from './Auth/Resetpassword';
 import Otpinput from './Auth/Otpinput';
 import Usermemebership from './Usermemebership';
+import MobileHeader from './Reusable/MobileHeader';
 type Classes = {
     root: string;
 };
 
 export default function Welcomepage() {
  const { classes }: { classes: Classes } = useStyles();
+ const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))
   return (
     <Box className={classes.root}>
     <Header/>
-     <Grid container sx={{width:'76%',background:'#FDF7E1'}}>
-        <Grid size={{lg:2.7}} sx={{borderRight:'1px solid #3DB80C',overflow:'hidden'}}>
-            <Sidebar/>
+     <Grid container sx={{width:{lg:'76%',xs:'100%',md:'100%'},background:'#FDF7E1'}}>
+        <Grid size={{lg:2.7,xs:12,md:12}} sx={{borderRight:'1px solid #3DB80C',overflow:'hidden'}}>
+            {!display?<Sidebar/>:<MobileHeader/>}
         </Grid>
-        <Grid size={{lg:9.3}}>
+        <Grid size={{lg:9.3,xs:12,md:12}}>
           <Routes>
             <Route path="" element={<Home/>}/>
-            
              <Route path='forgot' element={<Forgotpassword/>}/>    
              <Route path='reset' element={<Resetpassword />} />      
              <Route path='/otp' element={<Otpinput />}/>   

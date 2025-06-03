@@ -55,17 +55,32 @@ function GoverningBodyPresidents() {
   }, []);
   return (
     <Box width="100%" p={2}>
-      <Typography variant="h6" color="#3DB80C" mb={3} fontWeight={700} >
+      <Typography variant="h6" color="#3DB80C" mb={1} fontWeight={700} >
         {pathname==="/governing_body/previous_board_members"?"Previous Board members":pathname==="/governing_body/board_of_directors"?"Board of Directors":"TEAM Honors and Recognizes our Past Presidents!"}
       </Typography>
 {pathname==="/governing_body/previous_board_members"&&<Fragment>
+  <Box
+  gap={1}
+  sx={{
+    display: 'flex',
+    justifyContent:'space-between',
+    overflowX: 'auto',
+    whiteSpace: 'nowrap',
+    paddingBottom: '8px',
+    '&::-webkit-scrollbar': {
+      display: 'none', 
+    },
+  }}
+>
   {date.map((x:number)=>
-    <Button key={x} variant="contained" sx={{ background: '#3DB80C',marginLeft:'8px',marginBottom:'8px'}} >{x}</Button>
+    <Button key={x} variant="contained" sx={{ background: '#3DB80C',fontSize:{lg:'14px',xs:'11px',md:'11px'}}} >{x}</Button>
   )}
+  
+</Box>
   </Fragment>}
       <Grid container  spacing={1}>
         {boardmembers.map((member) => (
-          <Grid key={member.id} size={{xs:12,md:4,lg:4}}>
+          <Grid key={member.id} size={{xs:6,md:6,lg:4}}>
             <Card
               sx={{
         
@@ -82,10 +97,11 @@ function GoverningBodyPresidents() {
                 image={member.image}
                 alt={member.name}
                 sx={{
-                  width: 200,
-                  height: 200,
+                  width: {lg:'100%',xs:'85%',md:'85%'},
+                 height:{lg:200,xs:130,md:130},
                   objectFit: "cover",
                   borderRadius: 2,
+                
                 }}
               />
               <CardContent>

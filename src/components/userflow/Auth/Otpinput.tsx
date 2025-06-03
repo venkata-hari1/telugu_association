@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Button, TextField, Dialog, DialogContent } from '@mui/material';
+import { Box, Grid, Typography, Button, TextField, Dialog, DialogContent, useMediaQuery, Theme } from '@mui/material';
 import OTPInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../Redux/Store';
@@ -9,7 +9,7 @@ const Otpinput = () => {
   const value = useSelector((state: RootState) => state.userFlow.otp);
   const email=localStorage.getItem('email')
   const dispatch = useDispatch<AppDispatch>();
-
+ const display=useMediaQuery((theme:Theme)=>theme.breakpoints.down('lg'))
   const [otp, setOtpValue] = useState('');
   const [otpTouched, setOtpTouched] = useState(false);
   const [otpError, setOtpError] = useState('');
@@ -50,7 +50,7 @@ const Otpinput = () => {
               justifyContent: 'center',
               alignItems: 'center',
               background: 'white',
-              padding: '40px',
+              padding: display?'0':'40px',
               width: '450px',
               borderRadius: '15px',
               gap: 2,
@@ -109,7 +109,7 @@ const Otpinput = () => {
         <Box display="flex" flexDirection="column" width="100%">
               <Button
                 variant="contained"
-                sx={{ background: '#3DB80C', fontSize: '18px',width:'30%', mx: 'auto' ,mt:3 }}
+                sx={{ background: '#3DB80C', fontSize: '18px',width:display?'100%':'30%', mx: 'auto' ,mt:3 }}
                 onClick={handleOtpSubmit}
                 disabled={otp.length !== 4}
               >

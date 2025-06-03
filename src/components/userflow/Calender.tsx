@@ -1,24 +1,39 @@
-import { Box } from '@mui/material';
+
+import { Box, Theme, useMediaQuery } from '@mui/material';
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles()(() => ({
+const useStyles = makeStyles()((theme:Theme) => ({
   centergrid:{
     display:'flex',
     justifyContent:'center',
     alignItems:'center',
     alignContent:'center'
   },
+  mobilecalnderRoot:{
+    boxShadow: '19.37px 19.37px 15.5px 0px #0000001A',
+    border:'none',
+    borderRadius:'14px',
+    width:'90%',
+    '& .react-calendar__navigation__prev2-button, & .react-calendar__navigation__next2-button': {
+      display: 'none',
+    },
+          '& .react-calendar__navigation button': {
+            fontSize: '15px',
+           
+          },
+      
+        
+  },
     calendarRoot: {
       fontFamily: '"Lato", sans-serif !important', 
       overflow: 'hidden',
       borderRadius: '10px',
-      width:'200px',
       border: 'none',
       boxShadow: '19.37px 19.37px 15.5px 0px #0000001A',
-      
+      width:'200px',
       fontSize: '10px',
       '& .react-calendar__navigation__prev2-button, & .react-calendar__navigation__next2-button': {
   display: 'none',
@@ -32,9 +47,7 @@ const useStyles = makeStyles()(() => ({
         },
       },
   
-      '& .react-calendar__tile--now': {
-        backgroundColor: '#e0f7fa',
-      },
+     
     },
     highlight: {
         backgroundColor: '#FFE400 !important',
@@ -45,15 +58,19 @@ const useStyles = makeStyles()(() => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 'auto',      
+        margin: 'auto',    
+        [theme.breakpoints.down('lg')]:{
+         width:'fit-content',
+         height:'fit-content'
+        }  
       },
   }));
   
 
 const MyCalendar = () => {
-  const { classes } = useStyles();
+  const { classes }:any = useStyles();
   const [value, setValue] = useState<any>(new Date());
-
+ const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))
   const highlightedDates = [
     new Date(2025, 4, 10),
     new Date(2025, 4, 11),
@@ -70,7 +87,8 @@ const MyCalendar = () => {
   return (
     <Box className={classes.centergrid}>
     <Calendar
-      className={classes.calendarRoot}
+      className={display?classes.mobilecalnderRoot:classes.calendarRoot}
+     
       onChange={setValue}
       value={value}
       tileClassName={({ date, view }) => {

@@ -1,20 +1,18 @@
-import { Box,Card,CardContent,CardMedia,Divider,Grid,Paper,Typography} from "@mui/material"
+import { Box,Card,CardContent,CardMedia,Divider,Grid,Paper,Typography, useMediaQuery} from "@mui/material"
 import teluguassociation from '../../assets/teluguassociation.png'
 import teamBg from '../../assets/teambg.png'
-import bathukamma from '../../assets/bathukamma.jpg'
+
 import tennis from '../../assets/tennis.jpg'
 import sankranthi from '../../assets/sankranthi.jpg'
 import V6 from '../../assets/V6.jpg'
 import tv5 from '../../assets/TV5.jpg'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import MyCalendar from "./Calender"
+import UpcomingEvents from "./UpcomingEvents"
 
 function Home() {
+const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))
 
-const eventdata=[
-  {id:1,name:'bathukamma',img:bathukamma},
-  {id:2,name:'bathukamma',img:bathukamma},
-  {id:3,name:'bathukamma',img:bathukamma}
-]
 const gallerydata=[
     {id:1,img:tennis,text:' Had a great time at recent event with #Associations'},
     {id:2,img:sankranthi,text:' Had a great time at recent event with #Associations'},
@@ -27,11 +25,17 @@ const sponserdata=[
 
   return (
   <Box width="100%">
-   <Box component="img" src={teluguassociation} 
-   sx={{ objectFit: 'contain',height:'100%',width:'100%',display: 'block' }}/> 
-   <Box component="img" src={teamBg} sx={{height:'100%',width:'100%',
-    objectFit:'contain',display: 'block'}}/> 
-   <Box sx={{
+    {display&&
+    <Box sx={{padding:'10px'}}>
+      <Typography sx={{fontWeight:'bold',fontSize:'15px',color:'#3DB80C',mb:1}}>Panchangam</Typography>
+    <MyCalendar/>
+    </Box>
+  }
+   {!display&&<Box component="img" src={teluguassociation} 
+   sx={{ objectFit: 'contain',height:'100%',width:'100%',display: 'block' }}/> }
+   {!display&&<Box component="img" src={teamBg} sx={{height:'100%',width:'100%',
+    objectFit:'contain',display: 'block'}}/> }
+   {!display&&<Box sx={{
       display:'flex',
       alignItems:'center',
       width:'100%',
@@ -76,36 +80,13 @@ const sponserdata=[
         </Typography>
         
    </Box>
-  </Box>   
+  </Box>}
 
-<Box>
-      <Typography component="div" variant="h6" color="#3DB80C" padding={2}>
-         UPCOMING EVENTS
-      </Typography>
-     <Box display="flex" justifyContent="center" alignItems="center"
-     flexDirection={{md:'row',xs:'column'}} gap={10} p={2}>
-     { 
-      eventdata.map(event=>(
-          <Card sx={{
-            width:"100%",
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'center',
-        flexDirection:{sm:'column', xs:'column'}
-        
-      }}>
-        <CardMedia image={event.img}  sx={{ height: 200,width:'100%'}}/>
-     </Card>
-        
-      ))
-     }
-     <NavigateNextIcon sx={{color:"green",background:'white',width:30,height:30,borderRadius:5,cursor:'pointer'}}/>
-     </Box>
-   </Box>
+<UpcomingEvents/>
 
-  <Box  sx={{width:'100%',p:3,mt:2}}>
+   {!display&&<Box  sx={{width:'100%',p:3,mt:2}}>
     
-  <Box display="flex" justifyContent="space-between" alignItems="center">
+ <Box display="flex" justifyContent="space-between" alignItems="center">
   <Typography variant="h6" color="#3DB80C">EVENT GALLERY</Typography>
   </Box>
       <Grid container spacing={2} sx={{ mt: 1 }}>
@@ -127,9 +108,9 @@ const sponserdata=[
         </Grid>
       ))}
        </Grid>
-    </Box>
+    </Box>}
    
-   <Box sx={{ mb: 1 }}>
+   {!display&&<Box sx={{ mb: 1 }}>
   <Typography variant="h6" color="#3DB80C" sx={{marginLeft:"30px"}}> OUR SPONSERS</Typography>
   <Grid container>
   <Box component={Paper} 
@@ -153,7 +134,7 @@ const sponserdata=[
     }
     </Box>
   </Grid>
-  </Box>
+  </Box>}
   
   </Box>
 
