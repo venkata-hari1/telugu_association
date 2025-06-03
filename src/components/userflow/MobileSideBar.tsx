@@ -6,6 +6,8 @@ import {
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login';
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../../Redux/UserFlow';
 interface DropdownItem {
   id: number;
   label: string;
@@ -73,7 +75,7 @@ const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ open, onClose }) => {
   const [openDropdown, setOpenDropdown] = useState<Record<number, boolean>>({});
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const navigate = useNavigate();
-
+  const dispatch=useDispatch()
   const handleItemClick = (item: TabItem) => {
     setSelectedId(item.id);
     if (item.dropdown) {
@@ -92,7 +94,10 @@ const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ open, onClose }) => {
     navigate(subItem.link);
     onClose();
   };
-
+const handleLogin=()=>{
+  dispatch(setLogin(true))
+  onClose();
+}
   return (
     <Drawer anchor="left" open={open} onClose={onClose} PaperProps={{
         sx: { backgroundColor: '#FDF7E1', width: 280,padding:'20px' },
@@ -149,6 +154,7 @@ const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ open, onClose }) => {
           ))}
         </List>
         <Button
+        onClick={handleLogin}
   sx={{
     marginLeft:'10px',
     background: '#3DB80C',
