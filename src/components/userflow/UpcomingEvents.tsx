@@ -1,11 +1,9 @@
-import { Box, Typography,useMediaQuery } from '@mui/material'
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Box, Typography } from '@mui/material'
 import bathukamma from '../../assets/bathukamma.jpg'
 import { useStyles } from './Styles/makeStyles';
 type IProps=any
 
 export default function UpcomingEvents() {
-    const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))
  const { classes }:IProps = useStyles();
     const eventdata=[
         {id:1,name:'bathukamma',img:bathukamma},

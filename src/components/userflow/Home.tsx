@@ -6,7 +6,6 @@ import tennis from '../../assets/tennis.jpg'
 import sankranthi from '../../assets/sankranthi.jpg'
 import V6 from '../../assets/V6.jpg'
 import tv5 from '../../assets/TV5.jpg'
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import MyCalendar from "./Calender"
 import UpcomingEvents from "./UpcomingEvents"
 
