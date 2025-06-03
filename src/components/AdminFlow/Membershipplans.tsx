@@ -85,7 +85,7 @@ const Membershipplans = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                
+                width:"200px"
                }}
             >
               <CardContent

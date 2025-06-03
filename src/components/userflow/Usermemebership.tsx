@@ -25,7 +25,7 @@ const Usermemebership = () => {
                   Membership Registration
                   </Typography>
       </Paper>
-     <Box width="90%"> 
+     <Box width="100%"> 
      {pathname==='/usermembership'&&<Membershipplans 
     />} 
      </Box>
