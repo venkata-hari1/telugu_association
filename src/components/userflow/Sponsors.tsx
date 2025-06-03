@@ -4,7 +4,7 @@ import sponser3 from '../../assets/sponsor3.png'
 import sponser4 from '../../assets/sponsor4.png'
 import sponser5 from '../../assets/sponser5.jpg'
 import sponser6 from '../../assets/sponser6.jpg'
-import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Grid, Theme, Typography, useMediaQuery } from '@mui/material'
 
 const sponsers = [
   { id: 1, img: sponser1, name:'Gurram Tax 2019'},
@@ -16,7 +16,9 @@ const sponsers = [
    
  ];
 
+
 function Sponsors() {
+  const display=useMediaQuery((theme:Theme)=>theme.breakpoints.down('lg'))
   return (
     <Box width="100%" p={2}>
      <Typography color="#3DB80C" fontWeight={600}>Our Sponsers</Typography>
@@ -24,9 +26,9 @@ function Sponsors() {
       <Grid container spacing={4}>
       {
         sponsers.map(sponser=>(
-         <Grid size={{xs:12,md:6}} sx={{ display:'flex',justifyContent:'center',alignItems:'center'}}key={sponser.id}>
-        <Card sx={{width:"250px",
-          height:'230px',
+         <Grid size={{xs:6,md:6,lg:6}} sx={{ display:'flex',justifyContent:'center',alignItems:'center'}} key={sponser.id}>
+        <Card sx={{width:display?"100%":"250px",
+          height:display?'130px':'230px',
           background:'transparent',
           p:2,
           boxShadow: 'none',
