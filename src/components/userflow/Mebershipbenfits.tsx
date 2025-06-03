@@ -1,7 +1,8 @@
 import { Box, Button, Typography } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 function Mebershipbenfits() {
-
+const navigate=useNavigate()
 const memberbenefits=[
 {id:1,heading:'Sankranti event',descriptin:'Sankranti is one of the prominent festivals of Telugu speaking people.'},
 {id:2,heading:'',descriptin:'This event will promote Telugu speaking people living in Greater Minnesota to celebrate this festival as a part of Telugu culture.'},
@@ -21,7 +22,7 @@ const memberbenefits=[
     <Box width="100%" p={2}>
      <Box display="flex" justifyContent="space-between" color="#3DB80C">
       <Typography fontWeight="700">Membership Benefits</Typography>
-      <Button variant="contained" sx={{color:'white',background:'#3DB80C'}}>Membership Plans</Button>
+      <Button variant="contained" sx={{color:'white',background:'#3DB80C'}} onClick={()=>navigate('/usermembership')}>Membership Plans</Button>
      </Box>
      <Box color="#3DB80C">
       <Typography variant="body1" mt={2} >
