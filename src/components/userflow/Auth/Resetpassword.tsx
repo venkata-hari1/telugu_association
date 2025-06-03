@@ -6,7 +6,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/Store";
-import { setLogin, setNewPassword } from "../../../Redux/UserFlow";
+import { setLogin, setMessage, setNewPassword, setPopUp } from "../../../Redux/UserFlow";
 
 
 const Resetpassword = () => {
@@ -39,6 +39,8 @@ function hideconfirmPassword(){
 const handleResetPassword=()=>{
  dispatch(setNewPassword(false))
  dispatch(setLogin(true))
+   dispatch(setMessage('Password Changed Successfully'))
+       dispatch(setPopUp(true))
 }
   return (
     <Dialog open={value}>

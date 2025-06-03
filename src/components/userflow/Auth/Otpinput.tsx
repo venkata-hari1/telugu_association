@@ -2,7 +2,7 @@ import { Box, Grid, Typography, Button, TextField, Dialog, DialogContent } from 
 import OTPInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../Redux/Store';
-import { setNewPassword, setOtp } from '../../../Redux/UserFlow';
+import { setMessage, setNewPassword, setOtp, setPopUp } from '../../../Redux/UserFlow';
 
 const Otpinput = () => {
   const value=useSelector((state:RootState)=>state.userFlow.otp)
@@ -10,6 +10,8 @@ const Otpinput = () => {
   const handleOtp=()=>{
    dispatch(setOtp(false))
    dispatch(setNewPassword(true))
+      dispatch(setMessage('Otp Verified'))
+      dispatch(setPopUp(true))
   }
   return (
     <Dialog open={value}>

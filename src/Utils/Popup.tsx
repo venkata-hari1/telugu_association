@@ -6,15 +6,19 @@ import { setPopUp } from '../Redux/UserFlow';
 
 const PopUp = () => {
 const open=useSelector((state:RootState)=>state.userFlow.popup)
+const message=useSelector((state:RootState)=>state.userFlow.message)
 const dispatch=useDispatch<AppDispatch>()
 
-  const handleClose = (e: React.SyntheticEvent | Event, reason?: string) => {
-    e.preventDefault()
+const handleClose = (e: React.SyntheticEvent | Event, reason?: string) => {
+    if (e && 'preventDefault' in e) {
+      e.preventDefault();
+    }
+  
     if (reason === 'clickaway') {
       return;
     }
-    dispatch(setPopUp(false))
   
+    dispatch(setPopUp(false));
   };
 
   return (
@@ -23,12 +27,12 @@ const dispatch=useDispatch<AppDispatch>()
 
       <Snackbar
         open={open}
-        autoHideDuration={3000}
+        autoHideDuration={1000}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          Login successful!
+          {message}
         </Alert>
       </Snackbar>
     </>
