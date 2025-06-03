@@ -9,7 +9,7 @@ const Usermemebership = () => {
   console.log(pathname)
   return (
    <Box width="100%">
-    <Typography>Membership Plans</Typography>
+    <Typography color="#3DB80C" fontWeight="600">Membership Plans</Typography>
       <Paper
                 sx={{
                   display: "flex",
@@ -25,7 +25,7 @@ const Usermemebership = () => {
                   Membership Registration
                   </Typography>
       </Paper>
-     <Box width="90%"> 
+     <Box width="100%" gap={2} overflow="hidden"> 
      {pathname==='/usermembership'&&<Membershipplans 
     />} 
      </Box>
