@@ -3,15 +3,16 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
-import Fb from '../../../assets/fb.png'
+import Fb from '../../../assets/fb2.png'
 import Googleimg from '../../../assets/google.png'
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../Redux/Store";
+import { setForgetPassword, setLogin } from "../../../Redux/UserFlow";
 
-type IProps={
-  value:boolean
-  handleGetValue:(t:boolean)=>void
-}
-export default function Login({value,handleGetValue}:IProps) {
 
+export default function Login() {
+const login=useSelector((state:RootState)=>state.userFlow.login)
+const dispatch=useDispatch<AppDispatch>()
  const[currentshow,setCurrentShow]=useState(false)
  
  const [currenttype,setCurrentType]=useState("password")
@@ -26,10 +27,14 @@ function hidecurrentPassword(){
 }
 
 const handleRegister=()=>{
-  handleGetValue(false)
+dispatch(setLogin(false))
+}
+const handleForgetPassword=()=>{
+  dispatch(setForgetPassword(true))
+  dispatch(setLogin(false))
 }
   return (
-    <Dialog open={value}>
+    <Dialog open={login}>
       <DialogContent>
      <Box display="flex" justifyContent="center" alignItems="center">          
         <Grid container 
@@ -107,13 +112,13 @@ const handleRegister=()=>{
             }}
               />   
              <Box display="flex" justifyContent="flex-end"> 
-             <Typography >Forgot password?</Typography>  
+             <Typography sx={{cursor:'pointer'}} onClick={handleForgetPassword}>Forgot password?</Typography>  
              </Box> 
             </Grid>
             <Typography>Or</Typography>
             <Box display="flex" justifyContent="space-between" sx={{width:'30%'}}> 
-             <Box component="img" src={Fb} sx={{width:'50px', height:'50px',objectFit:'cover'}}/>
-             <Box component="img" src={Googleimg} sx={{width:'40px',marginTop:'6px',height:'40px',objectFit:'cover'}}/>
+             <Box component="img" src={Fb} sx={{width:'40px', height:'40px',objectFit:'cover'}}/>
+             <Box component="img" src={Googleimg} sx={{width:'40px',height:'40px',objectFit:'cover'}}/>
             </Box>
           
           <Box display="flex" flexDirection="column">

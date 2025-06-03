@@ -26,6 +26,9 @@ import Aksaramala from './Aksaramala';
 import BhashaandLipi from './BhashaandLipi';
 import TAMbylaws from './TAMbylaws';
 import GoverningBodyPresidents from './GoverningBody';
+import Forgotpassword from './Auth/Forgotpassword';
+import Resetpassword from './Auth/Resetpassword';
+
 type Classes = {
     root: string;
 };
@@ -43,6 +46,8 @@ export default function Welcomepage() {
           <Routes>
             <Route path="" element={<Home/>}/>
             
+             <Route path='forgotpassword' element={<Forgotpassword/>}/>    
+             <Route path='resetpassword' element={<Resetpassword />} />         
             <Route path="login" element={<AdminLogin/>}/>
             <Route path="about_us" element={<AboutUs/>}/>
             <Route path="governing_body/presidents" element={<GoverningBodyPresidents/>}/>
@@ -73,6 +78,7 @@ export default function Welcomepage() {
                 <Route path="volunteer" element={<Registration type='/volunteer'/>}/>
                   <Route path="member" element={<Registration type="/member"/>}/>
                   <Route path="donate" element={<Registration type="/donate"/>}/>
+                
                   
           </Routes>
 

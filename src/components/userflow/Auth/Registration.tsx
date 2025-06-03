@@ -3,20 +3,25 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import Login from "./Login";
+import Forgotpassword from "./Forgotpassword";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../Redux/Store";
+import { setLogin } from "../../../Redux/UserFlow";
+import Resetpassword from "./Resetpassword";
 
 const Registration = ({ type }: { type:any }) => {
   const [membershipValue, setMembershipValue] = useState('');
   const [paymentValue, setPaymentValue] = useState('');
-  const[value,setValue]=useState(false)
+  const dispatch=useDispatch<AppDispatch>()
   const handleLogin=()=>{
-   setValue(!value)
+    dispatch(setLogin(true))
   }
-  const handleGetValue=(x:boolean)=>{
-   setValue(x)
-  }
+
   return (
     <Box p={2}>
-      <Login value={value} handleGetValue={handleGetValue}/>
+      <Login/>
+      <Forgotpassword/>
+      <Resetpassword/>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography color="#3DB80C" fontWeight="700">
           {type === '/donate' ? "Donate Now" : type === '/member' ? "Member Registration" : "Volunteer Registration"}
