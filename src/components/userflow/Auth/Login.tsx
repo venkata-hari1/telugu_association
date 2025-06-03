@@ -208,7 +208,7 @@ export default function Login() {
               />
             </Box>
 
-            <Box display="flex" flexDirection="column" sx={{width:display?'100%':''}} >
+            <Box display="flex" flexDirection="column" sx={{width:display?'100%':'30%'}} >
               <Button
                 variant="contained"
                 sx={{ background: "#3DB80C" }}
