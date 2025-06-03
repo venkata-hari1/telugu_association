@@ -45,7 +45,7 @@ const Registration = ({ type }: { type: any }) => {
             width: "100%",
           }}
         >
-          <Typography variant="h6">Enter Your Donation Amount</Typography>
+          <Typography variant="h6" sx={{fontSize:'16px',fontWeight:'bold'}}>Enter Your Donation Amount</Typography>
           <Box sx={{ display: "flex", width: "20%", height: "40px" }}>
             <Box
               sx={{
