@@ -62,7 +62,7 @@ const Membershipplans = () => {
 
    const locoation=useLocation() 
    const pathname=locoation.pathname
-   const[state,setState]=useState(false)
+   const[state]=useState(false)
 
  
   function handleEdit(){
