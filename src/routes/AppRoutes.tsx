@@ -24,6 +24,9 @@ import Changeemail from '../components/AdminFlow/Changeemail'
 import Addnews from '../components/AdminFlow/Addnews'
 import Welcomepage from '../components/userflow/Welcomepage'
 import Home from '../components/userflow/Home'
+import Adminforgotpassword from '../components/AdminFlow/Adminforgotpassword'
+import AdminResetpassword from '../components/AdminFlow/AdminResetpassword'
+import AdminOtp from '../components/AdminFlow/AdminOtp'
 
 
 
@@ -34,6 +37,9 @@ const AdminRoutes = () => {
       <Route path='/home' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/*' element={<Welcomepage />}/> 
+      <Route path="/adminforgot" element={<Adminforgotpassword/>} />
+      <Route path="/adminreset" element={<AdminResetpassword/>} />
+      <Route path="/adminotp" element={<AdminOtp/>} />
       <Route element={<Privateroutes />}>
         <Route path="/admin" element={<Mainlayout />}>
             {/* <Route path="/admin" element={<Dashboard />} /> */}
