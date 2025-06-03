@@ -28,7 +28,8 @@ import TAMbylaws from './TAMbylaws';
 import GoverningBodyPresidents from './GoverningBody';
 import Forgotpassword from './Auth/Forgotpassword';
 import Resetpassword from './Auth/Resetpassword';
-
+import Otpinput from './Auth/Otpinput';
+import Usermemebership from './Usermemebership';
 type Classes = {
     root: string;
 };
@@ -46,9 +47,12 @@ export default function Welcomepage() {
           <Routes>
             <Route path="" element={<Home/>}/>
             
-             <Route path='forgotpassword' element={<Forgotpassword/>}/>    
-             <Route path='resetpassword' element={<Resetpassword />} />         
+             <Route path='forgot' element={<Forgotpassword/>}/>    
+             <Route path='reset' element={<Resetpassword />} />      
+             <Route path='/otp' element={<Otpinput />}/>   
             <Route path="login" element={<AdminLogin/>}/>
+
+
             <Route path="about_us" element={<AboutUs/>}/>
             <Route path="governing_body/presidents" element={<GoverningBodyPresidents/>}/>
             <Route path="governing_body/board_of_directors" element={<GoverningBodyPresidents/>}/>
@@ -74,6 +78,7 @@ export default function Welcomepage() {
              <Route path="padyalu" element={<Vemanapadyalu/>}/>
              <Route path="aksharamala" element={<Aksaramala/>}/>
               <Route path="lipi" element={<BhashaandLipi/>}/>
+              <Route path='usermembership' element={<Usermemebership/>} />
 
                 <Route path="volunteer" element={<Registration type='/volunteer'/>}/>
                   <Route path="member" element={<Registration type="/member"/>}/>

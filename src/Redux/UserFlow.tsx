@@ -4,12 +4,14 @@ type IProps = {
     forgetPassword: boolean,
     otp: boolean,
     newPassword: boolean
+    popup:boolean
 }
 const initialState: IProps = {
     login: false,
     forgetPassword: false,
     otp: false,
-    newPassword: false
+    newPassword: false,
+    popup:false
 };
 
 const userFlowSlice = createSlice({
@@ -28,10 +30,13 @@ const userFlowSlice = createSlice({
         setNewPassword: (state, action) => {
             state.newPassword = action.payload;
         },
+        setPopUp: (state, action) => {
+            state.popup = action.payload;
+        },
     },
     extraReducers: (builder) => {
     },
 });
 
-export const { setLogin,setForgetPassword,setNewPassword,setOtp} = userFlowSlice.actions;
+export const { setLogin,setForgetPassword,setNewPassword,setOtp,setPopUp} = userFlowSlice.actions;
 export default userFlowSlice.reducer;

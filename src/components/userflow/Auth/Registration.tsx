@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../Redux/Store";
 import { setLogin } from "../../../Redux/UserFlow";
 import Resetpassword from "./Resetpassword";
+import Otpinput from "./Otpinput";
+import PopUp from "../../../Utils/Popup";
 
 const Registration = ({ type }: { type:any }) => {
   const [membershipValue, setMembershipValue] = useState('');
@@ -22,6 +24,8 @@ const Registration = ({ type }: { type:any }) => {
       <Login/>
       <Forgotpassword/>
       <Resetpassword/>
+      <Otpinput/>
+      <PopUp/>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography color="#3DB80C" fontWeight="700">
           {type === '/donate' ? "Donate Now" : type === '/member' ? "Member Registration" : "Volunteer Registration"}

@@ -7,7 +7,7 @@ import Fb from '../../../assets/fb2.png'
 import Googleimg from '../../../assets/google.png'
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/Store";
-import { setForgetPassword, setLogin } from "../../../Redux/UserFlow";
+import { setForgetPassword, setLogin, setPopUp } from "../../../Redux/UserFlow";
 
 
 export default function Login() {
@@ -32,6 +32,13 @@ dispatch(setLogin(false))
 const handleForgetPassword=()=>{
   dispatch(setForgetPassword(true))
   dispatch(setLogin(false))
+}
+const handleLogin=()=>{
+  dispatch(setPopUp(true))
+  setTimeout(()=>{
+    dispatch(setLogin(false))
+  },1000)
+  localStorage.setItem('member','member')
 }
   return (
     <Dialog open={login}>
@@ -122,7 +129,7 @@ const handleForgetPassword=()=>{
             </Box>
           
           <Box display="flex" flexDirection="column">
-                <Button variant="contained" sx={{background:'#3DB80C'}}>Submit</Button>
+                <Button variant="contained" sx={{background:'#3DB80C'}} onClick={handleLogin}>Submit</Button>
               
             </Box>
     

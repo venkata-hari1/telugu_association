@@ -4,8 +4,9 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../Redux/Store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../Redux/Store";
+import { setLogin, setNewPassword } from "../../../Redux/UserFlow";
 
 
 const Resetpassword = () => {
@@ -14,6 +15,7 @@ const Resetpassword = () => {
  const [newtype,setNewType]=useState("password")
  const [confirmtype,setConfirmType]=useState("password")
  const value=useSelector((state:RootState)=>state.userFlow.newPassword)
+ const dispatch=useDispatch<AppDispatch>()
 function shownewPassword(){
   setNewShow(true)
   setNewType("text")
@@ -33,6 +35,10 @@ function showconfirmPassword(){
 function hideconfirmPassword(){
   setConfirmShow(false)
   setConfirmType("password")
+}
+const handleResetPassword=()=>{
+ dispatch(setNewPassword(false))
+ dispatch(setLogin(true))
 }
   return (
     <Dialog open={value}>
@@ -128,7 +134,7 @@ function hideconfirmPassword(){
                 }}/>     
                 </Grid>
                 <Box display="flex" flexDirection="column">
-                    <Button variant="contained" sx={{background:'#3DB80C'}}>Continue</Button>
+                    <Button variant="contained" sx={{background:'#3DB80C'}} onClick={handleResetPassword}>Continue</Button>
                   
                 </Box>
         

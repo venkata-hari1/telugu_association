@@ -1,11 +1,15 @@
 import { Box, Button, Dialog, DialogContent, Grid, TextField, Typography } from "@mui/material"
-import { useSelector } from "react-redux"
-import { RootState } from "../../../Redux/Store"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../../Redux/Store"
+import { setForgetPassword, setOtp } from "../../../Redux/UserFlow"
 
 const Forgotpassword = () => {
-
 const value=useSelector((state:RootState)=>state.userFlow.forgetPassword)
-
+const dispatch=useDispatch<AppDispatch>()
+const handleSendOTP=()=>{
+ dispatch(setOtp(true))
+ dispatch(setForgetPassword(false))
+}
 return (
    <Dialog open={value}>
        <DialogContent>
@@ -56,7 +60,7 @@ return (
           
           
           <Box display="flex" flexDirection="column">
-                <Button variant="contained" sx={{background:'#3DB80C'}}>Send OTP</Button>
+                <Button variant="contained" sx={{background:'#3DB80C'}} onClick={handleSendOTP}>Send OTP</Button>
               </Box>
     
           </Grid>
