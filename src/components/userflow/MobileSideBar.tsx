@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   Drawer, List, ListItemButton, ListItemText, Collapse, Box,
   Button
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login';
 import { useDispatch } from 'react-redux';
 import { setLogin } from '../../Redux/UserFlow';
+import Login from './Auth/Login';
 interface DropdownItem {
   id: number;
   label: string;
@@ -99,6 +100,8 @@ const handleLogin=()=>{
   onClose();
 }
   return (
+    <Fragment>
+      <Login/>
     <Drawer anchor="left" open={open} onClose={onClose} PaperProps={{
         sx: { backgroundColor: '#FDF7E1', width: 280,padding:'20px' },
       }}>
@@ -171,6 +174,7 @@ const handleLogin=()=>{
 </Button>
       </Box>
     </Drawer>
+    </Fragment>
   );
 };
 
