@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   FormControl,
-  TextField,
   Typography,
 } from '@mui/material';
 import Logo from '../../assets/logo.png';
@@ -12,10 +11,12 @@ import backgroundImg from '../../assets/BackgroundImage.png';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import OTPInput from 'react-otp-input';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AdminOtp = () => {
   const [otp, setOtp] = useState('');
-
+ 
+ const navigate=useNavigate()
   return (
     <Box
       sx={{
@@ -87,12 +88,12 @@ const AdminOtp = () => {
           </Button>
           </Box>    
          <Typography display="flex" justifyContent="center" mt={2}>
-           Dont Receive the Email?
-          <Typography component="span">Resend</Typography> 
+           Dont Receive the Email? &nbsp;
+          <Typography component="span" sx={{textDecoration:'underline',cursor:'pointer'}}>Resend</Typography> 
          </Typography>
 
          <Typography sx={{display:'flex',justifyContent:'center', mt:2
-         }}>
+         }} onClick={()=>navigate('/login')}>
             <ArrowBackIcon/>Back to Login
             </Typography>
         </CardContent>

@@ -4,8 +4,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {  useEffect, useState } from 'react';
 import Logo from '../../assets/logo.png'
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
+
+  const navigate=useNavigate()
 
  const[currentshow,setCurrentShow]=useState(false)
  
@@ -58,7 +61,8 @@ function handlerPassword(event:any){
   
   setPwd(event.target.value)
   console.log(pwd)
- if(pwd.length>0 && pwd.length<8){
+ 
+if(pwd.length>0 && pwd.length<=6){
    
   setPwdError("Password should be 8 charecters")
  }else{
@@ -82,8 +86,7 @@ return (
     justifyContent:'center',
     alignItems:'center',
     flexDirection:'column',
-    margin:0,
-    padding:0
+    overflowX:'hidden'
    }}>
 
   <Box  component="img"
@@ -157,7 +160,9 @@ return (
     {pwdError && <Typography color='red'>{pwdError}</Typography>}
 
     <Box display='flex' justifyContent="flex-end">
-      <Typography sx={{cursor:'pointer'}}>Forgot Password?</Typography>
+      <Typography sx={{cursor:'pointer',textDecoration:'underline'}} 
+      onClick={() => {navigate('/adminforgot')
+      }}>Forgot Password?</Typography>
     </Box>
      <Box display="flex" justifyContent="center">
       

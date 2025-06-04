@@ -2,8 +2,12 @@ import { Box, Button, Card, CardContent, FormControl, OutlinedInput, Typography 
 import backgroundImg from '../../assets/BackgroundImage.png'
 import Logo from '../../assets/logo.png'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
+
 
 const Adminforgotpassword = () => {
+  
+     const navigate=useNavigate()
   return (
      <Box sx={{
         backgroundImage:`url(${backgroundImg})`,
@@ -59,13 +63,13 @@ const Adminforgotpassword = () => {
                 variant="contained"
                 
                 sx={{ mt: 3, backgroundColor: '#3DB80C',width:"150px" }}
-              >
+         onClick={()=>navigate('/adminreset')}     >
              Reset Password
           </Button>
           </Box> 
         </CardContent> 
         <CardContent>
-    <Typography sx={{display:'flex',justifyContent:'center'}}>
+    <Typography sx={{display:'flex',justifyContent:'center',cursor:'pointer'}} onClick={()=>navigate('/login')}>
      <ArrowBackIcon/>Back to Login
     </Typography>
    </CardContent> 

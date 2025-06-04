@@ -15,6 +15,9 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
 import Logo from "../../assets/logo.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
+
+
 
 const AdminResetpassword = () => {
   const [currentshow, setCurrentShow] = useState(false);
@@ -42,6 +45,28 @@ const AdminResetpassword = () => {
     setConfirmtype("password");
   }
 
+const[password,setPassword]=useState()
+const[confirmpassword,setConfirmpassword]=useState()
+
+function passwordHandler(event:any){
+ setPassword(event.target.value)
+}
+
+function confirmpwdHandler(event:any){
+  setConfirmpassword(event.target.value)
+}
+
+const[errorValue,setErrorvalue]=useState('')
+
+function submitResetHanlder(){
+  if(password!==confirmpassword){
+   setErrorvalue('Password & Confirm password should be match')
+  }else{
+    setErrorvalue('')
+  }
+}
+
+ const navigate=useNavigate()
   return (
     <Box
       sx={{
@@ -49,7 +74,7 @@ const AdminResetpassword = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        height: "100vh", // or any specific height
+        height: "100vh",  
         width: "100%",
         display: "flex",
         justifyContent: "center",
@@ -99,6 +124,7 @@ const AdminResetpassword = () => {
               id="password"
               type={currenttype}
               placeholder="Your Password"
+              onChange={passwordHandler}
               sx={{
                 backgroundColor: "white",
                 "& .MuiOutlinedInput-notchedOutline": {
@@ -145,6 +171,7 @@ const AdminResetpassword = () => {
               id="password"
               type={confirmtype}
               placeholder="Your Password"
+              onClick={confirmpwdHandler}
               sx={{
                 backgroundColor: "white",
                 "& .MuiOutlinedInput-notchedOutline": {
@@ -177,18 +204,20 @@ const AdminResetpassword = () => {
               }
             />
           </FormControl>
-
+            {errorValue&& <Typography color="red">{errorValue}</Typography>}  
           <Box display="flex" justifyContent="center">
             <Button
               variant="contained"
-              sx={{ mt: 3, backgroundColor: "#3DB80C", width: "150px" }}
+              sx={{ mt: 2, backgroundColor: "#3DB80C", width: "180px" }}
+            onClick={submitResetHanlder}
             >
               Reset Password
             </Button>
           </Box>
+           
         </CardContent>
         <CardContent>
-          <Typography sx={{ display: "flex", justifyContent: "center" }}>
+          <Typography sx={{ display: "flex", justifyContent: "center",cursor:'pointer' }} onClick={()=>navigate('/login')}>
             <ArrowBackIcon />
             Back to Login
           </Typography>
