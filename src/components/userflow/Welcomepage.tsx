@@ -32,6 +32,7 @@ import Forgotpassword from './Auth/Forgotpassword';
 import Resetpassword from './Auth/Resetpassword';
 import Otpinput from './Auth/Otpinput';
 import Usermemebership from './Usermemebership';
+import MembershipregPopup from './MembershipregPopup';
 
 
 type Classes = {
@@ -86,14 +87,14 @@ export default function Welcomepage() {
               <Route path="lipi" element={<BhashaandLipi/>}/>
               <Route path='usermembership' element={<Usermemebership/>} />
 
+
                 <Route path="volunteer" element={<Registration type='/volunteer'/>}/>
                   <Route path="member" element={<Registration type="/member"/>}/>
                   <Route path="donate" element={<Registration type="/donate"/>}/>
-                
+                <Route path="memberpopup" element={<MembershipregPopup />}/>
                   
           </Routes>
-
-        </Grid>
+          </Grid>
      </Grid>
      <Footer/>
     </Box>

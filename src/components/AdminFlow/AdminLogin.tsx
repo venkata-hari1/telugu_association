@@ -59,10 +59,11 @@ const [pwdError, setPwdError] = useState('');
 
 function handlerPassword(event:any){
   
-  setPwd(event.target.value)
+  const value=event.target.value
+  setPwd(value)
   console.log(pwd)
  
-if(pwd.length>0 && pwd.length<=6){
+if(value.length>0 && value.length<8){
    
   setPwdError("Password should be 8 charecters")
  }else{
@@ -70,9 +71,6 @@ if(pwd.length>0 && pwd.length<=6){
  }
 
 }
-
-
-
 
 return (
    <Box sx={{

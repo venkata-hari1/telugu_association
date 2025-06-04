@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 function Mebershipbenfits() {
 
@@ -16,12 +17,14 @@ const memberbenefits=[
 {id:11,heading:'Volunteer appreciation:',descriptin:'TEAM celebrates this event to recognize the services extended by the volunteers.'},
 
 ]
+const navigate=useNavigate()
 
-  return (
+return (
     <Box width="100%" p={2}>
      <Box display="flex" justifyContent="space-between" color="#3DB80C">
       <Typography fontWeight="700">Membership Benefits</Typography>
-      <Button variant="contained" sx={{color:'white',background:'#3DB80C'}}>Membership Plans</Button>
+      <Button variant="contained" sx={{color:'white',background:'#3DB80C'}}
+      onClick={()=>navigate('/usermembership')}>Membership Plans</Button>
      </Box>
      <Box color="#3DB80C">
       <Typography variant="body1" mt={2} >
