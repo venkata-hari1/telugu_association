@@ -2,11 +2,18 @@ import { Box, Button, Card, CardContent, FormControl, IconButton, InputAdornment
 import backgroundImg from '../../assets/BackgroundImage.png'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import {  useEffect, useState } from 'react';
+import {  Fragment, useEffect, useState } from 'react';
 import Logo from '../../assets/logo.png'
+import { useNavigate } from 'react-router-dom';
+import { setMessage, setPopUp } from '../../Redux/UserFlow';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../Redux/Store';
+import PopUp from '../../Utils/Popup';
 
 const AdminLogin = () => {
 
+  const navigate=useNavigate()
+ const dispatch=useDispatch<AppDispatch>()
  const[currentshow,setCurrentShow]=useState(false)
  
  const [currenttype,setCurrentType]=useState("password")
@@ -32,8 +39,6 @@ function isEmailVaild(email:any){
 }
 
 const isEmail=isEmailVaild(email)
-console.log(isEmail)
-
 const[emailError,setEmailerror]=useState('')
 
 useEffect(()=>{
@@ -54,37 +59,51 @@ const[pwd,setPwd]=useState('')
 
 const [pwdError, setPwdError] = useState('');
 
-function handlerPassword(event:any){
-  
-  setPwd(event.target.value)
-  console.log(pwd)
- if(pwd.length>0 && pwd.length<8){
-   
-  setPwdError("Password should be 8 charecters")
- }else{
-  setPwdError("")
- }
-
+function handlerPassword(event: any) {
+  const newPassword = event.target.value;
+  setPwd(newPassword);
+  if (newPassword.length === 0) {
+    setPwdError("Password is required");
+  } else if (newPassword.length < 8) {
+    setPwdError("Password should be at least 8 characters");
+  }  else {
+    setPwdError("");
+  }
 }
 
-
+const handleLogin = () => {
+  dispatch(setPopUp(true));
+  dispatch(setMessage("Login successful!"));
+  setTimeout(()=>{
+    navigate('/admin/dashboard')
+  },900)
+  localStorage.setItem("admin", "admin");
+  setEmail("");
+  setPwd("");
+  setEmailerror("");
+  setPwdError("");
+};
 
 
 return (
-   <Box sx={{
-    backgroundImage:`url(${backgroundImg})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    height: '100vh', 
+  <Fragment>
+        <PopUp />
+   <Box 
+   sx={{
+    backgroundImage: `url(${backgroundImg})`,
+    backgroundSize: 'cover',           
+    backgroundRepeat: 'no-repeat',      
+    backgroundPosition: 'contain',
+    backgroundAttachment: 'fixed',     
+    minHeight: '100vh',                
     width: '100%',
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    flexDirection:'column',
-    margin:0,
-    padding:0
-   }}>
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    overflowY: 'hidden',
+  }}
+   >
 
   <Box  component="img"
   src={Logo} sx={{
@@ -104,6 +123,7 @@ return (
               Email ID
             </Typography>
         <OutlinedInput id="email" type='email'
+         value={email}
         onChange={handleEmail} 
         placeholder='Your Email ID'
           sx={{
@@ -128,6 +148,7 @@ return (
              Password
       </Typography>
             <OutlinedInput id="password" type={currenttype}  
+            value={pwd} 
              onChange={handlerPassword}
              placeholder='Your Password' 
               sx={{
@@ -157,13 +178,16 @@ return (
     {pwdError && <Typography color='red'>{pwdError}</Typography>}
 
     <Box display='flex' justifyContent="flex-end">
-      <Typography sx={{cursor:'pointer'}}>Forgot Password?</Typography>
+      <Typography sx={{cursor:'pointer',textDecoration:'underline'}} 
+      onClick={() => {navigate('/adminforgot')
+      }}>Forgot Password?</Typography>
     </Box>
      <Box display="flex" justifyContent="center">
       
       <Button
             variant="contained"
             disabled={!isEmail || pwd.length<8}
+            onClick={handleLogin}
             sx={{ mt: 3, backgroundColor: '#3DB80C',width:"100px" }}
           >
             Login
@@ -173,6 +197,7 @@ return (
     </CardContent>  
   </Card>
 </Box>
+</Fragment>
   )
 }
 

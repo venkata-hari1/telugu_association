@@ -12,14 +12,28 @@ import {
 import backgroundImg from "../../assets/BackgroundImage.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Logo from "../../assets/logo.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
+import PopUp from "../../Utils/Popup";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../Redux/Store";
+import { setMessage, setPopUp } from "../../Redux/UserFlow";
 
 const AdminResetpassword = () => {
+  const navigate = useNavigate();
+
   const [currentshow, setCurrentShow] = useState(false);
   const [currenttype, setCurrentType] = useState("password");
+  const [confirmshow, setConfirmshow] = useState(false);
+  const [confirmtype, setConfirmtype] = useState("password");
 
+  const [password, setPassword] = useState("");
+  const [confirmpassword, setConfirmpassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmError, setConfirmError] = useState("");
+ const dispatch=useDispatch<AppDispatch>()
   function showcurrentPassword() {
     setCurrentShow(true);
     setCurrentType("text");
@@ -28,9 +42,6 @@ const AdminResetpassword = () => {
     setCurrentShow(false);
     setCurrentType("password");
   }
-
-  const [confirmshow, setConfirmshow] = useState(false);
-  const [confirmtype, setConfirmtype] = useState("password");
 
   function confirmshowPassword() {
     setConfirmshow(true);
@@ -42,29 +53,55 @@ const AdminResetpassword = () => {
     setConfirmtype("password");
   }
 
+  function passwordHandler(event: any) {
+    setPassword(event.target.value);
+    if (event.target.value.length < 8) {
+      setPasswordError("Password must be at least 8 characters long");
+    } else {
+      setPasswordError("");
+    }
+  }
+
+  function confirmpwdHandler(event: any) {
+    setConfirmpassword(event.target.value);
+    if (event.target.value !== password) {
+      setConfirmError("Passwords do not match");
+    } else {
+      setConfirmError("");
+    }
+  }
+
+  function submitResetHanlder() {
+   dispatch(setPopUp(true))
+   dispatch(setMessage('Password Changed Successfully'))
+   setTimeout(()=>{
+    navigate('/login')
+   },900)
+
+   
+  }
+  const isDisabled =
+  password.length < 8 || confirmpassword !== password || !!passwordError || !!confirmError;
   return (
+    <Fragment>
+      <PopUp/>
     <Box
-      sx={{
-        backgroundImage: `url(${backgroundImg})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        height: "100vh", // or any specific height
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
+    sx={{
+      backgroundImage: `url(${backgroundImg})`,
+      backgroundSize: 'cover',           
+      backgroundRepeat: 'no-repeat',      
+      backgroundPosition: 'contain',
+      backgroundAttachment: 'fixed',     
+      minHeight: '100vh',                
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      overflowY: 'hidden',
+    }}
     >
-      <Box
-        component="img"
-        src={Logo}
-        sx={{
-          width: 150,
-          height: "auto",
-        }}
-      />
+      <Box component="img" src={Logo} sx={{ width: 150, height: "auto" }} />
 
       <Card
         sx={{
@@ -83,22 +120,21 @@ const AdminResetpassword = () => {
           </Typography>
           <Typography display="flex" justifyContent="center">
             <Typography component="span" fontWeight="700">
-              Must be Atleast 8 Charecters
+              Must be Atleast 8 Characters
             </Typography>
           </Typography>
-          <FormControl
-            fullWidth
-            margin="normal"
-            size="small"
-            variant="outlined"
-          >
+
+          {/* Password Field */}
+          <FormControl fullWidth margin="normal" size="small" variant="outlined">
             <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 700 }}>
               Password
             </Typography>
             <OutlinedInput
               id="password"
               type={currenttype}
+              value={password}
               placeholder="Your Password"
+              onChange={passwordHandler}
               sx={{
                 backgroundColor: "white",
                 "& .MuiOutlinedInput-notchedOutline": {
@@ -114,37 +150,33 @@ const AdminResetpassword = () => {
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton edge="end">
-                    {!currentshow && (
-                      <VisibilityOffIcon
-                        onClick={showcurrentPassword}
-                        sx={{ cursor: "pointer" }}
-                      />
-                    )}
-                    {currentshow && (
-                      <VisibilityIcon
-                        onClick={hidecurrentPassword}
-                        sx={{ cursor: "pointer" }}
-                      />
+                    {!currentshow ? (
+                      <VisibilityOffIcon onClick={showcurrentPassword} sx={{ cursor: "pointer" }} />
+                    ) : (
+                      <VisibilityIcon onClick={hidecurrentPassword} sx={{ cursor: "pointer" }} />
                     )}
                   </IconButton>
                 </InputAdornment>
               }
             />
+            {passwordError && (
+              <Typography color="error" sx={{ fontSize: "13px", mt: 0.5 }}>
+                {passwordError}
+              </Typography>
+            )}
           </FormControl>
 
-          <FormControl
-            fullWidth
-            margin="normal"
-            size="small"
-            variant="outlined"
-          >
+          {/* Confirm Password Field */}
+          <FormControl fullWidth margin="normal" size="small" variant="outlined">
             <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 700 }}>
               Confirm Password
             </Typography>
             <OutlinedInput
-              id="password"
+              id="confirmpassword"
               type={confirmtype}
+              value={confirmpassword}
               placeholder="Your Password"
+              onChange={confirmpwdHandler}
               sx={{
                 backgroundColor: "white",
                 "& .MuiOutlinedInput-notchedOutline": {
@@ -160,41 +192,46 @@ const AdminResetpassword = () => {
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton edge="end">
-                    {!confirmshow && (
-                      <VisibilityOffIcon
-                        onClick={confirmshowPassword}
-                        sx={{ cursor: "pointer" }}
-                      />
-                    )}
-                    {confirmshow && (
-                      <VisibilityIcon
-                        onClick={hideconfirmPassword}
-                        sx={{ cursor: "pointer" }}
-                      />
+                    {!confirmshow ? (
+                      <VisibilityOffIcon onClick={confirmshowPassword} sx={{ cursor: "pointer" }} />
+                    ) : (
+                      <VisibilityIcon onClick={hideconfirmPassword} sx={{ cursor: "pointer" }} />
                     )}
                   </IconButton>
                 </InputAdornment>
               }
             />
+            {confirmError && (
+              <Typography color="error" sx={{ fontSize: "13px", mt: 0.5 }}>
+                {confirmError}
+              </Typography>
+            )}
           </FormControl>
 
           <Box display="flex" justifyContent="center">
             <Button
               variant="contained"
-              sx={{ mt: 3, backgroundColor: "#3DB80C", width: "150px" }}
+              sx={{ mt: 2, backgroundColor: "#3DB80C", width: "180px" }}
+              onClick={submitResetHanlder}
+              disabled={isDisabled}
             >
               Reset Password
             </Button>
           </Box>
         </CardContent>
+
         <CardContent>
-          <Typography sx={{ display: "flex", justifyContent: "center" }}>
+          <Typography
+            sx={{ display: "flex", justifyContent: "center", cursor: "pointer" }}
+            onClick={() => navigate("/login")}
+          >
             <ArrowBackIcon />
             Back to Login
           </Typography>
         </CardContent>
       </Card>
     </Box>
+    </Fragment>
   );
 };
 

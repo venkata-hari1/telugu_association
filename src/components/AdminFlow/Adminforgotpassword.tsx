@@ -1,77 +1,128 @@
-import { Box, Button, Card, CardContent, FormControl, OutlinedInput, Typography } from '@mui/material'
-import backgroundImg from '../../assets/BackgroundImage.png'
-import Logo from '../../assets/logo.png'
+import {
+  Box, Button, Card, CardContent, FormControl,
+  OutlinedInput, Typography
+} from '@mui/material';
+import backgroundImg from '../../assets/BackgroundImage.png';
+import Logo from '../../assets/logo.png';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
+import { Fragment, useState } from 'react';
+import PopUp from '../../Utils/Popup';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../Redux/Store';
+import { setMessage, setPopUp } from '../../Redux/UserFlow';
 
 const Adminforgotpassword = () => {
+  const navigate = useNavigate();
+  const dispatch=useDispatch<AppDispatch>()
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  function handleEmailChange(event: any) {
+    const value = event.target.value;
+    setEmail(value);
+    validateEmail(value);
+  }
+
+  function validateEmail(value: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (value.length === 0) {
+      setEmailError('Email is required');
+    } else if (!emailRegex.test(value)) {
+      setEmailError('Invalid email format');
+    } else {
+      setEmailError('');
+    }
+  }
+ const handleResetPassword=()=>{
+  dispatch(setPopUp(true))
+  setEmail('')
+  dispatch(setMessage('Otp Sent'))
+  setTimeout(()=>{
+    navigate('/adminotp')
+  },900)
+  
+ }
+  const isFormValid = email.length > 0 && emailError === '';
+
   return (
-     <Box sx={{
-        backgroundImage:`url(${backgroundImg})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        height: '100vh', 
-        width: '100%',
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        flexDirection:'column',
-        
-       }}>
-    
-      <Box  component="img"
-      src={Logo} sx={{
-        width: 150,
-        height: 'auto'}}/>
-    
-      <Card sx={{ width: 400, p: 3, boxShadow: 3,background:'#f0f3d3',
-        display:'flex',justifyContent:'center',flexDirection:'column' }}>
-      
-      <CardContent>
-        <Typography variant="h5" align="center" gutterBottom
-        color='#3DB80C' >
-                Login
-        </Typography>
-        <FormControl fullWidth size='small' variant="outlined">
-          <Typography variant="subtitle2" sx={{ mb: 0.5,fontWeight:700 }}>
-                  Email ID
-                </Typography>
-            <OutlinedInput id="email" type='email' 
-            placeholder='Your Email ID'
-              sx={{
-        backgroundColor: 'white',
-        '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#3DB80C',
-        },
-        '&:hover .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#3DB80C',
-        },
-        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#3DB80C',
-        }
-      }}
-              />
-        </FormControl>
-     
-       
-         <Box display="flex" justifyContent="center">
-          <Button
-                variant="contained"
-                
-                sx={{ mt: 3, backgroundColor: '#3DB80C',width:"150px" }}
-              >
-             Reset Password
-          </Button>
-          </Box> 
-        </CardContent> 
+    <Fragment>
+      <PopUp/>
+    <Box
+     sx={{
+      backgroundImage: `url(${backgroundImg})`,
+      backgroundSize: 'cover',           
+      backgroundRepeat: 'no-repeat',      
+      backgroundPosition: 'contain',
+      backgroundAttachment: 'fixed',     
+      minHeight: '100vh',                
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      overflowY: 'hidden',
+    }}
+    >
+      <Box component="img" src={Logo} sx={{ width: 150, height: 'auto' }} />
+      <Card sx={{
+        width: 400, p: 3, boxShadow: 3, background: '#f0f3d3',
+        display: 'flex', justifyContent: 'center', flexDirection: 'column'
+      }}>
         <CardContent>
-    <Typography sx={{display:'flex',justifyContent:'center'}}>
-     <ArrowBackIcon/>Back to Login
-    </Typography>
-   </CardContent> 
+          <Typography variant="h5" align="center" gutterBottom
+            color='#3DB80C' sx={{ fontSize: '18px', fontWeight: 'bold' }}>
+            Forget Password
+          </Typography>
+          <FormControl fullWidth size='small' variant="outlined">
+            <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 700 }}>
+              Email ID
+            </Typography>
+            <OutlinedInput
+              id="email"
+              type='email'
+              value={email}
+              onChange={handleEmailChange}
+              placeholder='Your Email ID'
+              sx={{
+                backgroundColor: 'white',
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#3DB80C',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#3DB80C',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#3DB80C',
+                }
+              }}
+            />
+          </FormControl>
+          {emailError && <Typography color="red" sx={{ mt: 1 }}>{emailError}</Typography>}
+
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="contained"
+              disabled={!isFormValid}
+              sx={{ mt: 3, backgroundColor: '#3DB80C', width: "150px" }}
+              onClick={handleResetPassword}
+            >
+              Reset Password
+            </Button>
+          </Box>
+        </CardContent>
+
+        <CardContent>
+          <Typography
+            sx={{ display: 'flex', justifyContent: 'center', cursor: 'pointer' }}
+            onClick={() => navigate('/login')}>
+            <ArrowBackIcon /> Back to Login
+          </Typography>
+        </CardContent>
       </Card>
     </Box>
-  )
-}
+    </Fragment>
+  );
+};
 
-export default Adminforgotpassword
+export default Adminforgotpassword;
