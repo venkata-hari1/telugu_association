@@ -8,10 +8,28 @@ import {
   Paper
 } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import PopUp1 from '../../Utils/PopUp1';
+import {  useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../Redux/Store';
+import { setMessage, setPopUp } from '../../Redux/UserFlow';
+import PopUp from '../../Utils/Popup';
 
 const Usermembership = () => {
+ const value=localStorage.getItem('member')
+ const[open,setOpen]=useState(false)
+const[badge,setBadge]=useState('')
+const[plan,setPlan]=useState('')
+const dispatch=useDispatch<AppDispatch>()
+const Plandetails=(t:string)=>{
 
-
+   setBadge(t)
+   setOpen(true)
+}
+useEffect(()=>{
+  const plan=localStorage.getItem('plan') || ''
+  setPlan(plan)
+},[plan])
   const allplans = [
       {
         cardid: 1,
@@ -40,10 +58,22 @@ const Usermembership = () => {
       },
     ];
 
+const handleClose=(t:boolean)=>{
+  setOpen(t)
+}
+  const handlePlan=(t:string)=>{
+    if(value==="member"){
+    localStorage.setItem('plan',t)
+    setPlan(t);
+    dispatch(setMessage('Plan Changed Successfully'))
+    dispatch(setPopUp(true))
+    }
 
-  
+  }
   return (
  <Box sx={{ width: '100%', mx: 'auto', py: 2 }}>
+  <PopUp1 badge={badge} open={open} handleClose={handleClose}/>
+  <PopUp/>
    <Typography color="#3DB80C" fontWeight="600" pl={3}>Membership Plans</Typography>
    <Paper
                 sx={{
@@ -81,7 +111,7 @@ const Usermembership = () => {
           >
             <CardContent
               sx={{
-                background: '#3DB80C',
+                background: value==="member" && plan===plans.badge?'#808080bd':'#3DB80C',
                 color: '#ffffff',
                 height: { xs: '140px', md: '150px' },
                 display: 'flex',
@@ -154,6 +184,7 @@ const Usermembership = () => {
             </CardContent>
             <CardContent>
               <Typography variant="body1"
+               onClick={()=>Plandetails(plans.badge)}
                 sx={{
                   textAlign: 'center',
                   mt: 3,
@@ -161,6 +192,7 @@ const Usermembership = () => {
                   fontSize: { xs: '14px', sm: '16px', md: '13px' },
                   wordWrap: 'break-word',
                   fontFamily:'Lato,',
+                  cursor:'pointer',
                   color:'#3DB80C',
                   fontWeight:600,
                   textDecoration:'underline'
@@ -172,16 +204,19 @@ const Usermembership = () => {
             <Box display="flex" justifyContent="center" p={2}>
               <Button
                 variant='contained'
-                
+                disabled={value==="member" && plan===plans.badge}
                 sx={{
+                   whiteSpace:'nowrap',
                   width: '100px',
-                  background: '#3DB80C',
+                  
+                  background:'#3DB80C',
                   color: '#fff',
                   '&:hover': { background: '#339c0a' },
                   
                 }}
+                onClick={()=>handlePlan(plans.badge)}
               >
-                SignUp
+                {value==="member"?"Change Plan":"SignUp"}
               </Button>
             </Box>
           </Card>

@@ -42,7 +42,7 @@ export default function Welcomepage() {
  const { classes }: { classes: Classes } = useStyles();
  const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root} id='top'>
     <Header/>
      <Grid container sx={{width:{lg:'76%',xs:'100%',md:'100%'},background:'#FDF7E1'}}>
         <Grid size={{lg:2.7,xs:12,md:12}} sx={{borderRight:'1px solid #3DB80C',overflow:'hidden'}}>

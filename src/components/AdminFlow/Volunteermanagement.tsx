@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
 import {
   Custombutton,
   Filterbutton,
@@ -216,31 +216,22 @@ const Volunteermanagement = () => {
                     <TableCell>{data.phone}</TableCell>
                     <TableCell>{data.joineddate}</TableCell>
                     <TableCell sx={{ color: "#3DB80C" }}>
-                      {data.status && <CircleIcon sx={{ fontSize: "11px" }} />}
-                      {data.status}
+                    <Stack direction='row'>
+                    {data.status && <CircleIcon sx={{ marginTop:'5px',marginRight:'2px',fontSize: "11px" }} />}
+                    {data.status}
+                    </Stack>
                     </TableCell>
                     <TableCell>
-                      <Select
-                        value="Edit"
-                        size="small"
-                        renderValue={() => (
-                          <Box display="flex" alignItems="center">
-                            <EditIcon
-                              fontSize="small"
-                              style={{ marginRight: 4 }}
-                            />
-                            Edit
-                          </Box>
-                        )}
-                      >
-                        <MenuItem value="Delete">
-                          <DeleteOutlineIcon
-                            fontSize="small"
-                            style={{ marginRight: 8, color: "red" }}
-                          />
-                          Delete
-                        </MenuItem>
-                      </Select>
+                    <Stack direction='row' gap={2}>
+                    <IconButton sx={{flexDirection:'column'}}>
+                     <EditIcon sx={{fontSize:'20px',color: '#3DB80C'}}/> 
+                    <Typography sx={{fontSize:'11px' ,color: '#3DB80C',fontWeight:'550'}}>EDIT</Typography>
+                    </IconButton>  
+                    <IconButton sx={{flexDirection:'column'}}>
+                    <DeleteOutlineIcon sx={{color: '#FF3326'}}/>
+                    <Typography sx={{color: '#FF3326',fontSize:'11px'}}>Delete</Typography>
+                    </IconButton>
+                    </Stack>
                     </TableCell>
                   </TableRow>
                 ))}

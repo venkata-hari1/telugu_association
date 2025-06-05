@@ -47,7 +47,7 @@ const AdminRoutes = () => {
            {/* <Route path="dashboard" element={<Dashboard />} />  */}
            <Route path='dashboard/addnews' element={<Addnews />}/>
           <Route path="membership" element={<Membershiptable />} />
-          <Route path="membership/addmember" element={<AddMember />} />
+          <Route path="membership/member" element={<AddMember />} />
           <Route path="membership/volunteermgmt" element={<Volunteermanagement />} />
           <Route path="membership/volunteermgmt/addvolunteer" element={<Addvolunteer />} />
           <Route path="sponsorship" element={<Sponsershipmanagement />} />

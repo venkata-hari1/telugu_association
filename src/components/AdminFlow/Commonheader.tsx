@@ -10,7 +10,7 @@ const Commonheader = ({ onToggleSidebar}:{onToggleSidebar: () => void }) => {
   
   const breeadcrumbmap:Record<string,{main:string,sub:string}>={
     '/admin/gallery/addgallery':{main: 'Gallery and Media', sub: 'Add Gallery' },
-    '/admin/membership/addmember':{main:'Membership Management',sub:'Add Member'},
+    '/admin/membership/member':{main:'Membership Management',sub:'Add Member'},
 
     '/admin/sponsorship/addsponsor':{main: 'Sponsorship Management', sub: 'Add Sponsor'},
     '/admin/events/addevent': { main: 'Event Management', sub: 'Add Event' },

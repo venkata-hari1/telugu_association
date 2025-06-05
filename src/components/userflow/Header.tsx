@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AppBar, Box, Button, Toolbar, Menu, MenuItem } from '@mui/material';
 import logo from '../../assets/logo.png';
 import { useStyles } from './Styles/makeStyles';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export interface TabData {
   id: number;
@@ -67,7 +67,7 @@ export default function Header() {
   const [selectedTab, setSelectedTab] = React.useState<number | null>(null);
   const { classes }: IProps = useStyles();
   const navigate = useNavigate();
-
+ const location=useLocation()
   const handleClick = (tab: TabData, dropdownItemId?: number) => {
     // If dropdownItemId is provided, set activeTab to the parent tab's id
     const newActiveTab = dropdownItemId !== undefined ? tab.id : tab.id;
@@ -87,7 +87,13 @@ export default function Header() {
     setAnchorEl(null);
     setSelectedTab(null);
   };
-
+  const isActiveTab = (tab: TabData): boolean => {
+    if (location.pathname === tab.link) return true;
+    if (tab.dropdown) {
+      return tab.dropdown.some((item) => location.pathname.startsWith(item.link));
+    }
+    return false;
+  };
   return (
     <Box sx={{ width: '76%', display: { xs: 'none', md: 'none', lg: 'grid' } }}>
       <AppBar
@@ -129,7 +135,7 @@ export default function Header() {
                       left: 0,
                       right: 0,
                       height: '3px',
-                      backgroundColor: activeTab === tab.id ? 'white' : 'transparent',
+                      backgroundColor:isActiveTab(tab) ? 'white' : 'transparent',
                       borderRadius: '2px',
                       transition: 'left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     },

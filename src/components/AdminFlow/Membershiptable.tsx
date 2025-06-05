@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import UploadIcon from "@mui/icons-material/Upload";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -13,9 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";;
 import { useNavigate } from "react-router-dom";
 import Paginationcomponent from "./Pagination";
 import CircleIcon from "@mui/icons-material/Circle";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useState } from "react";
 import Filterdropdown from "./Filterdropdown";
 const Membershiptable = () => {
@@ -29,7 +27,7 @@ const Membershiptable = () => {
       phone: "+18143008184",
       membertype: "One Year",
       date: "From Mar 15 to Apr 15 2025",
-      status: "active",
+      status: "Active",
     },
     {
       sno: 2,
@@ -38,7 +36,7 @@ const Membershiptable = () => {
       phone: "+14842634655",
       membertype: "One Year",
       date: "From Mar 15 to Apr 15 2025",
-      status: "active",
+      status: "Active",
     },
     {
       sno: 3,
@@ -47,7 +45,7 @@ const Membershiptable = () => {
       phone: "+15852826353",
       membertype: "One Year",
       date: "From Mar 15 to Apr 15 2025",
-      status: "active",
+      status: "Active",
     },
     {
       sno: 4,
@@ -56,7 +54,7 @@ const Membershiptable = () => {
       phone: "+16102448965",
       membertype: "One Year",
       date: "From Mar 15 to Apr 15 2025",
-      status: "active",
+      status: "Active",
     },
     {
       sno: 5,
@@ -65,7 +63,7 @@ const Membershiptable = () => {
       phone: "+18143008346",
       membertype: "One Year",
       date: "From Mar 15 to Apr 15 2025",
-      status: "active",
+      status: "Active",
     },
     {
       sno: 6,
@@ -74,7 +72,7 @@ const Membershiptable = () => {
       phone: "+18143008346",
       membertype: "One Year",
       date: "From Mar 15 to Apr 15 2025",
-      status: "active",
+      status: "Active",
     },
   ];
   const [state, setState] = useState(false);
@@ -118,7 +116,7 @@ const Membershiptable = () => {
           
           <Button variant="contained" 
            startIcon={<AddIcon />} 
-           onClick={() => navigate("/admin/membership/addmember")}
+           onClick={() => navigate("/admin/membership/member" ,{state:{value:'add'}})}
            sx={{background:'#3DB80C',fontWeight:400}}>
           Add Member
          </Button>
@@ -186,32 +184,24 @@ const Membershiptable = () => {
                   <TableCell>{data.membertype}</TableCell>
                   <TableCell>{data.date}</TableCell>
 
-                  <TableCell sx={{ color: "#3DB80C" }}>
-                    {data.status && <CircleIcon sx={{ fontSize: "11px" }} />}
+                  <TableCell sx={{ color: "#3DB80C"}}>
+                    <Stack direction='row'>
+                    {data.status && <CircleIcon sx={{ marginTop:'5px',marginRight:'2px',fontSize: "11px" }} />}
                     {data.status}
+                    </Stack>
+                   
                   </TableCell>
                   <TableCell>
-                    <Select
-                      value="Edit"
-                      size="small"
-                      renderValue={() => (
-                        <Box display="flex" alignItems="center">
-                          <EditIcon
-                            fontSize="small"
-                            style={{ marginRight: 4 }}
-                          />
-                          Edit
-                        </Box>
-                      )}
-                    >
-                      <MenuItem value="Delete">
-                        <DeleteOutlineIcon
-                          fontSize="small"
-                          style={{ marginRight: 8, color: "red" }}
-                        />
-                        Delete
-                      </MenuItem>
-                    </Select>
+                    <Stack direction='row' gap={2}>
+                    <IconButton sx={{flexDirection:'column'}} onClick={()=>navigate('/admin/membership/member',{state:{value:'edit'}})}>
+                     <EditIcon sx={{fontSize:'20px',color: '#3DB80C'}}/> 
+                    <Typography sx={{fontSize:'11px' ,color: '#3DB80C',fontWeight:'550'}}>EDIT</Typography>
+                    </IconButton>  
+                    <IconButton sx={{flexDirection:'column'}}>
+                    <DeleteOutlineIcon sx={{color: '#FF3326'}}/>
+                    <Typography sx={{color: '#FF3326',fontSize:'11px'}}>Delete</Typography>
+                    </IconButton>
+                    </Stack>
                   </TableCell>
                 </TableRow>
               ))}

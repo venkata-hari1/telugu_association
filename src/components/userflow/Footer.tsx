@@ -20,11 +20,11 @@ export default function Footer() {
     const tabData: TabData[] = [
         { id: 0, label: 'Home', link:'/' },
         { id: 1, label: 'Sponsors', link: '/sponsors' },
-        { id: 2, label: 'About Us',link: '/about_us' },
+        { id: 2, label: 'About Us',link: '/about_us/organization' },
         { id: 3, label: 'Telugu',  link: '/telugu' },
-        { id: 4, label: 'Governing Body', link: '/governing_body'  },
-        { id: 5, label: 'Gallery', link: '/gallery'  },
-        { id: 6, label: 'Events',  link: '/events'  },
+        { id: 4, label: 'Governing Body', link: '/governing_body/board_of_directors'  },
+        { id: 5, label: 'Gallery', link: '/gallery/photos'  },
+        { id: 6, label: 'Events',  link: '/events/upcoming'  },
         { id: 7, label: 'Membership Benefits', link: '/mebershipbenfits' },
         { id: 8, label: '', link: '' },
         { id: 9, label: 'Contact Us', link: '/contactus' },
@@ -32,12 +32,19 @@ export default function Footer() {
     ];
 
 
-const handleClick=(tab:{id:number,link:string})=>{
- navigate(`${tab.link}`)
-}
+    const handleClick = (tab: { id: number; link: string }) => {
+        navigate(`${tab.link}`);
 
-const location=useLocation()
-console.log(location.pathname)
+        setTimeout(() => {
+          const topElement = document.getElementById('top');
+          if (topElement) {
+            topElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }, 100); 
+      };
+
 
     return (
         <Box className={classes.footercontainer} sx={{display:{xs:'none',md:'none',lg:'grid'}}}>

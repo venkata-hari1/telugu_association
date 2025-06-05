@@ -27,9 +27,9 @@ const theme = createTheme({
           fontWeight: 'bold',
         },
         body: {
-          padding:'12px',
+         
           fontSize: '13.5px',
-          whiteSpace:'nowrap' // Body font size
+        
         },
       },
     },
