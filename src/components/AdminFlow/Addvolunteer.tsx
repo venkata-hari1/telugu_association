@@ -1,5 +1,6 @@
 import { Box, Button, FormControl, Grid, MenuItem, Select, TextField, Typography } from "@mui/material"
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 const Addvolunteer = () => {
@@ -7,8 +8,8 @@ const Addvolunteer = () => {
     return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
  
-        <Box display="flex" justifyContent="space-between" sx={{marginTop:"10px",marginBottom:"20px"}}>
-           <Typography variant="h5" color="#3DB80C">
+        <Box display="flex" justifyContent="flex-start" sx={{marginBottom:"20px"}}>
+         <ArrowBackIcon /> &nbsp; <Typography variant="h5" color="#3DB80C">
              Volunteer Management/
              <Typography component="span" fontSize={22} fontWeight="300">
                Add Volunteer

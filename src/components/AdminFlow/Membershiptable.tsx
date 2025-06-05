@@ -86,7 +86,7 @@ const Membershiptable = () => {
     <Box gap={2}>
       <Grid container spacing={2} alignItems="center">
         <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
-          <Typography variant="h5" sx={{ fontWeight: 500, color: "#3DB80C" ,fontSize:'25px'}}>
+          <Typography variant="h5" color="#3DB80C">
             Membership Management
           </Typography>
         </Grid>
@@ -94,14 +94,14 @@ const Membershiptable = () => {
           <Box display="flex" justifyContent={{xs:'flex-start',md:'flex-end'}}
           gap={2} flexWrap="wrap">
             <Button
-              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C'}}
+              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C',fontWeight:400}}
              variant="outlined"
               onClick={() => navigate("volunteermgmt")}
             >
               Volunteer Management
             </Button>
             <Button
-              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C'}} 
+              sx={{background:'#3DB80C',color:'white',borderColor:'#3DB80C',fontWeight:400}} 
               variant="outlined"
               onClick={() => navigate("/admin/sponsorship/subscriptionplans")}
             >
@@ -119,15 +119,15 @@ const Membershiptable = () => {
           <Button variant="contained" 
            startIcon={<AddIcon />} 
            onClick={() => navigate("/admin/membership/addmember")}
-           sx={{background:'#3DB80C'}}>
+           sx={{background:'#3DB80C',fontWeight:400}}>
           Add Member
          </Button>
 
-        <Button variant="contained" startIcon={<UploadIcon />} sx={{background:'#3DB80C'}}>
+        <Button variant="contained" startIcon={<UploadIcon />} sx={{background:'#3DB80C',fontWeight:400}}>
           Bulk Upload
         </Button>
 
-        <Button variant="contained" startIcon={<UploadIcon />} sx={{background:'#3DB80C'}}>
+        <Button variant="contained" startIcon={<UploadIcon />} sx={{background:'#3DB80C',fontWeight:400}}>
           Export
         </Button>
 
@@ -136,7 +136,7 @@ const Membershiptable = () => {
           variant="outlined"
           startIcon={<FilterListIcon />}
           onClick={openFilter}
-          sx={{borderColor:'#3DB80C',color:'#3DB80C'}}
+          sx={{borderColor:'#3DB80C',color:'#3DB80C',fontWeight:400}}
         >
           Filters
         </Button>
@@ -148,7 +148,7 @@ const Membershiptable = () => {
 
         <TableContainer
           component={Paper}
-          sx={{ marginTop: "10px", background: "white" }}
+          sx={{ marginTop: "10px", background: "white",fontWeight:400 }}
         >
           <Table sx={{ minWidth: 650 }} size="small">
             <TableHead

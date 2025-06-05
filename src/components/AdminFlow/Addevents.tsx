@@ -220,16 +220,18 @@ const Addevent = () => {
         </Grid>
         <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
           <TextField
+            
             type="time"
             name="eventTime"
             value={formData.eventTime}
             onChange={handleChange}
             InputLabelProps={{ shrink: true }}
-            inputProps={{ step: 300 }}
+            inputProps={{ step: 600 }}
             size="small"
             error={!!errors.eventTime}
             helperText={errors.eventTime}
             sx={{
+               width:'15%',
               "& .MuiOutlinedInput-root": {
                 "& fieldset": { borderColor: errors.eventTime ? "red" : "#3DB80C" },
                 "&:hover fieldset": { borderColor: errors.eventTime ? "red" : "#2A8A08" },
@@ -249,6 +251,7 @@ const Addevent = () => {
           <TextField
             fullWidth
             size="small"
+
             name="eventVenue"
             value={formData.eventVenue}
             onChange={handleChange}
