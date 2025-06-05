@@ -20,7 +20,6 @@ import BoardandLeadership from '../components/AdminFlow/BoardandLeadership'
 import Addboard from '../components/AdminFlow/Addboard'
 import Profile from '../components/AdminFlow/Profile'
 import Changepassword from '../components/AdminFlow/Changepassword'
-import Changeemail from '../components/AdminFlow/Changeemail'
 import Addnews from '../components/AdminFlow/Addnews'
 import Welcomepage from '../components/userflow/Welcomepage'
 import Home from '../components/userflow/Home'
@@ -29,6 +28,8 @@ import AdminResetpassword from '../components/AdminFlow/AdminResetpassword'
 import AdminOtp from '../components/AdminFlow/AdminOtp'
 import Media from '../components/AdminFlow/Media'
 import Videogallery from '../components/AdminFlow/Videogallery'
+import Profileotp from '../components/AdminFlow/Profileotp'
+
 
 
 
@@ -66,8 +67,9 @@ const AdminRoutes = () => {
            <Route path="board" element={<BoardandLeadership />}/>  
            <Route path="board/addboard" element={<Addboard />}/>  
             <Route path="profile" element={<Profile />}/>  
-            <Route path="profile/change-email" element={<Changeemail />}/> 
+         
             <Route path="profile/change-password" element={<Changepassword />}/>
+             <Route path="profile/profile-otp" element={<Profileotp />}/>
         </Route>
        
      </Route>

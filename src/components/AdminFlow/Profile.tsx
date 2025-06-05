@@ -47,7 +47,8 @@ const Profile = () => {
                    InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <Button variant="contained" size="small" sx={{ bgcolor: '#3DB80C' }}>
+                        <Button variant="contained" size="small" sx={{ bgcolor: '#3DB80C' }}
+                        onClick={()=>navigate('profile-otp')}>
                           Update
                         </Button>
                       </InputAdornment>
