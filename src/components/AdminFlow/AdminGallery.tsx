@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useNavigate } from "react-router-dom";
 
-const Gallery = () => {
+const AdminGallery = () => {
  
    const gallerydata=[
     {id:1,text:' Had a great time at recent event with #Associations'},
@@ -31,10 +31,10 @@ const Gallery = () => {
 
     <Grid>
     <Box display="flex" sx={{gap:"30px",justifyContent:"flex-start",mt:'5px'}}>
-       <Custombutton onClick={()=>navigate('/photogallery')}>
+       <Custombutton onClick={()=>navigate('photogallery')}>
          Photo Gallery
        </Custombutton>
-       <Custombutton onClick={()=>navigate('/video')}>
+       <Custombutton onClick={()=>navigate('video')}>
          Video Gallery
        </Custombutton>
       </Box>
@@ -46,8 +46,10 @@ const Gallery = () => {
        </Grid>
        <Grid size={{md:6,xs:12}}>
         <Box sx={{display:'flex',justifyContent:{md:'flex-end',sm:'flex-start',gap:10}}} >
-        <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}>Add Highlights</Button>
-        <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}>Edit</Button>
+        <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
+        onClick={()=>navigate('addgallery')}>Add Highlights</Button>
+        <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
+        onClick={()=>navigate('addgallery')} >Edit</Button>
         </Box>
         </Grid>
         </Grid>
@@ -81,4 +83,4 @@ const Gallery = () => {
   )
 }
 
-export default Gallery
+export default AdminGallery
