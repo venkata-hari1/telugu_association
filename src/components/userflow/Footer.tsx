@@ -6,7 +6,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 
 type IProps={
@@ -44,7 +44,17 @@ export default function Footer() {
           }
         }, 100); 
       };
-
+   const handleVolunteer=()=>{
+  navigate('/volunteer')
+  setTimeout(() => {
+    const topElement = document.getElementById('top');
+    if (topElement) {
+      topElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, 100); 
+   }
 
     return (
         <Box className={classes.footercontainer} sx={{display:{xs:'none',md:'none',lg:'grid'}}}>
@@ -65,7 +75,7 @@ export default function Footer() {
                         <IconButton className={classes.socailmediaicon_container}><FacebookIcon className={classes.socailmediaicon}/></IconButton>
                         <IconButton className={classes.socailmediaicon_container}><XIcon  className={classes.socailmediaicon}/></IconButton>
                     </Box>
-                    <Button className={classes.volunteer_btn} onClick={()=>navigate('/volunteer')}>BECOME A VOLUNTEER</Button>
+                    <Button className={classes.volunteer_btn} onClick={handleVolunteer}>BECOME A VOLUNTEER</Button>
                     <Typography className={classes.copyright_text}>Tax Id : 90-0089250 @ 2025 Telugumn.Org. All Rights Reserved.</Typography>
                 </Box>
             </Grid>

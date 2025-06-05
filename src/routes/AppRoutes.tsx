@@ -12,7 +12,7 @@ import Addvolunteer from '../components/AdminFlow/Addvolunteer'
 import Editsubscription from '../components/AdminFlow/Editsubscription'
 import Mainlayout from '../components/AdminFlow/Mainlayout'
 import Dashboard from '../components/AdminFlow/Dashboard'
-import Gallery from '../components/AdminFlow/Gallery'
+import Gallery from '../components/AdminFlow/AdminGallery'
 import Addgallery from '../components/AdminFlow/Addgallery'
 import EventsandCalender from '../components/AdminFlow/EventsandCalender'
 import Addevent from '../components/AdminFlow/Addevents'
@@ -27,6 +27,8 @@ import Home from '../components/userflow/Home'
 import Adminforgotpassword from '../components/AdminFlow/Adminforgotpassword'
 import AdminResetpassword from '../components/AdminFlow/AdminResetpassword'
 import AdminOtp from '../components/AdminFlow/AdminOtp'
+import Media from '../components/AdminFlow/Media'
+import Videogallery from '../components/AdminFlow/Videogallery'
 
 
 
@@ -55,8 +57,10 @@ const AdminRoutes = () => {
           <Route path="sponsorship/donations" element={<Donations />} />
           <Route path="sponsorship/subscriptionplans" element={<Subscriptionplans />} />
           <Route path="sponsorship/subscriptionplans/editsubscription" element={<Editsubscription />} />
-          <Route path="gallery" element={<Gallery />}/>
-          <Route path="gallery/addgallery" element={<Addgallery />}/>
+          <Route path="admingallery" element={<Gallery />}/>
+          <Route path="admingallery/addgallery" element={<Addgallery />}/>
+          <Route path="admingallery/photogallery" element={<Media />}/>
+           <Route path="admingallery/video" element={<Videogallery />}/>
           <Route path="events" element={<EventsandCalender />}/>
            <Route path="events/addevent" element={<Addevent />}/>  
            <Route path="board" element={<BoardandLeadership />}/>  

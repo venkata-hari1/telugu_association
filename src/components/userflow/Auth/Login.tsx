@@ -22,8 +22,10 @@ import {
 } from "../../../Redux/UserFlow";
 import Fb from "../../../assets/fb2.png";
 import Googleimg from "../../../assets/google.png";
-
-export default function Login() {
+type IProps={
+  value:string
+}
+export default function Login({value}:IProps) {
   const login = useSelector((state: RootState) => state.userFlow.login);
   const dispatch = useDispatch<AppDispatch>();
   const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))
@@ -87,7 +89,9 @@ export default function Login() {
       dispatch(setLogin(false));
     }, 1000);
     dispatch(setMessage("Login successful!"));
+    if(value==="member"){
     localStorage.setItem("member", "member");
+    }
   };
 const handleClose=()=>{
   dispatch(setLogin(false))

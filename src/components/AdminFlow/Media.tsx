@@ -7,11 +7,11 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { Custombutton } from "../adminstyles/MembershiptableStyles";
+import { Custombutton } from "../../adminstyles/MembershiptableStyles";
 import AddIcon from "@mui/icons-material/Add";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { useNavigate } from "react-router-dom";
-import tgallery1 from "../assets/tgallery1.jpg";
+import tgallery1 from "../../assets/tgallery1.jpg";
 
 const Media = () => {
   const gallerydata = [
@@ -55,7 +55,7 @@ const Media = () => {
             <Custombutton
               variant="outlined"
               startIcon={<AddIcon />}
-              onClick={() => navigate("addgallery")}
+              onClick={() => navigate("/admin/admingallery/addgallery")}
             >
               Add Gallery
             </Custombutton>
@@ -70,10 +70,11 @@ const Media = () => {
             <Custombutton
               variant="outlined"
               sx={{ background: "white", color: "#3DB80C" }}
+              
             >
               Photo Gallery
             </Custombutton>
-            <Custombutton variant="outlined" onClick={()=>navigate('admin/gallery/video')}>Video Gallery</Custombutton>
+            <Custombutton variant="outlined" onClick={()=>navigate('/admin/admingallery/video')}>Video Gallery</Custombutton>
           </Box>
 
           <Box display="flex" gap={1} flexWrap="wrap" mt={2}>

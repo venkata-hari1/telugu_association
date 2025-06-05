@@ -29,7 +29,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
     { id: 1, title: 'Dashboard', icon: <GridViewIcon />, link: 'admin/dashboard' },
     { id: 2, title: 'Membership Management', icon: <GroupIcon />, link: 'admin/membership' },
     { id: 3, title: 'Sponsors & Donations', icon: <PaymentsIcon />, link: 'admin/sponsorship' },
-    { id: 4, title: 'Gallery & Media', icon: <InsertPhotoIcon />, link: 'admin/gallery' },
+    { id: 4, title: 'Gallery & Media', icon: <InsertPhotoIcon />, link: 'admin/admingallery' },
     { id: 5, title: 'Events & Calendar', icon: <CalendarMonthIcon />, link: 'admin/events' },
     { id: 6, title: 'Board & Leadership', icon: <SupervisedUserCircleIcon />, link: 'admin/board' },
     { id: 7, title: 'Profile', icon: <AccountCircleIcon />, link: 'admin/profile' },
