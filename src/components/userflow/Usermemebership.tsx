@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../Redux/Store';
 import { setMessage, setPopUp } from '../../Redux/UserFlow';
 import PopUp from '../../Utils/Popup';
+import { useNavigate } from 'react-router-dom';
 
 const Usermembership = () => {
  const value=localStorage.getItem('member')
@@ -21,6 +22,7 @@ const Usermembership = () => {
 const[badge,setBadge]=useState('')
 const[plan,setPlan]=useState('')
 const dispatch=useDispatch<AppDispatch>()
+const navigate=useNavigate()
 const Plandetails=(t:string)=>{
 
    setBadge(t)
@@ -68,7 +70,7 @@ const handleClose=(t:boolean)=>{
     dispatch(setMessage('Plan Changed Successfully'))
     dispatch(setPopUp(true))
     }
-
+   navigate('/member')
   }
   return (
  <Box sx={{ width: '100%', mx: 'auto', py: 2 }}>
