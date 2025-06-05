@@ -32,6 +32,8 @@ import Otpinput from './Auth/Otpinput';
 import Usermemebership from './Usermemebership';
 import MobileHeader from './Reusable/MobileHeader';
 import MembershipregPopup from './MembershipregPopup';
+import Donate from './Donate';
+import Volunteer from './Volunteer';
 
 
 type Classes = {
@@ -85,9 +87,9 @@ export default function Welcomepage() {
               <Route path='usermembership' element={<Usermemebership/>} />
 
 
-                <Route path="volunteer" element={<Registration type='/volunteer'/>}/>
+                <Route path="volunteer" element={<Volunteer/>}/>
                   <Route path="member" element={<Registration type="/member"/>}/>
-                  <Route path="donate" element={<Registration type="/donate"/>}/>
+                  <Route path="donate" element={<Donate/>}/>
                 <Route path="memberpopup" element={<MembershipregPopup />}/>
                   
           </Routes>
