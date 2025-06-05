@@ -5,7 +5,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Drawer
+  Drawer,
+  Typography
 } from '@mui/material';
 import tlogo from '../../assets/taLogo.png';
 import GridViewIcon from '@mui/icons-material/GridView';
@@ -16,15 +17,14 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useNavigate } from 'react-router-dom';
-import Logout from '../AdminFlow/Logout';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Logout from './Logout';
 
 
 
 const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSidebar:() => void}) => {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
   const navigate = useNavigate();
-  
+  const location = useLocation();
   const sidemenu = [
     { id: 1, title: 'Dashboard', icon: <GridViewIcon />, link: 'admin/dashboard' },
     { id: 2, title: 'Membership Management', icon: <GroupIcon />, link: 'admin/membership' },
@@ -57,35 +57,37 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
         <List sx={{ color: 'white' }}>
           {sidemenu.map(item => (
             <ListItemButton
-              key={item.id}
-              selected={selectedId === item.id}
-              onClick={() => {
-                setSelectedId(item.id);
-                navigate(`/${item.link}`);
-                onCloseSidebar(); // close drawer on mobile
-              }}
+            key={item.id}
+            selected={location.pathname === `/${item.link}`}
+            onClick={() => {
+              navigate(`/${item.link}`);
+              onCloseSidebar();
+            }}
+            sx={{
+              '&.Mui-selected': {
+                backgroundColor: '#E4E139',
+                color: 'white',
+                fontWeight: 'bold',
+              },
+              '&:hover': {
+                backgroundColor: '#EE4E130',
+              },
+            }}
+          >
+            <ListItemIcon
               sx={{
-                '&.Mui-selected': {
-                  backgroundColor: '#E4E139',
-                  color: 'white',
-                  fontWeight: 'bold',
-                },
-                '&:hover': {
-                  backgroundColor: '#d4d115',
-                },
-                
-              }}
-            >
-              <ListItemIcon sx={{ color: selectedId === item.id ? 'green' : 'white',
+                color: location.pathname === `/${item.link}` ? 'green' : 'white',
                 minWidth: 'unset',
                 marginRight: '15px',
                 display: 'flex',
-                alignItems: 'center'
-              }}>
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.title}  />
-            </ListItemButton>
+                alignItems: 'center',
+              }}
+            >
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={<Typography sx={{fontSize:'14.5px',fontWeight:'550',lineHeight:'30px'}}>{item.title}</Typography>}/>
+          </ListItemButton>
+          
           ))}
         </List>
       </Box>
@@ -95,6 +97,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
           onClick={handleLogout}
           sx={{
             color: 'white',
+            
             '&:hover': {
               backgroundColor: '#d4d115',
               color: 'white',
@@ -104,7 +107,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
           <ListItemIcon sx={{ color: 'white' }}>
             <LogoutIcon />
           </ListItemIcon>
-          <ListItemText primary="Logout"  />
+          <ListItemText primary={<Typography sx={{fontSize:'15px',fontWeight:'550'}}>Logout</Typography>}  />
         </ListItemButton>
      </Box>
       

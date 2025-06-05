@@ -17,7 +17,6 @@ export default function Sidebar() {
         <Typography className={classes.commontext} sx={{mt:2,textTransform:'uppercase'}}>Panchangam</Typography>
         <Calender/>
       </Box>
-
       <ProudSponers/>
     </Box>
   )

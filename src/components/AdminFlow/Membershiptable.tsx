@@ -86,7 +86,7 @@ const Membershiptable = () => {
     <Box gap={2}>
       <Grid container spacing={2} alignItems="center">
         <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
-          <Typography variant="h5" sx={{ fontWeight: 500, color: "#3DB80C" }}>
+          <Typography variant="h5" sx={{ fontWeight: 500, color: "#3DB80C" ,fontSize:'25px'}}>
             Membership Management
           </Typography>
         </Grid>

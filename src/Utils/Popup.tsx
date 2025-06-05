@@ -31,7 +31,12 @@ const handleClose = (e: React.SyntheticEvent | Event, reason?: string) => {
         onClose={handleClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity="success" sx={{ 
+          width: '100%' ,
+          border: '1px solid darkgreen', // Dark green border
+          boxShadow: '0 2px 10px rgba(0, 128, 0, 0.2)', // Optional shadow for effect
+          
+          }}>
           {message}
         </Alert>
       </Snackbar>

@@ -1,8 +1,8 @@
 // Mainlayout.tsx
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Commonheader from "./Commonheader";
-import Sidebar from "./Sidebar";
+import Sidebar from "./AdminSidebar";
 import { useState } from "react";
 
 const Mainlayout = () => {
@@ -16,28 +16,33 @@ const Mainlayout = () => {
 
 
 return (
-    <>
+    <Grid container spacing={1}>
+      <Grid size={{lg:2}}>
       <Sidebar
         mobileOpen={mobileOpen}
         onCloseSidebar={() => setMobileOpen(false)}
       />
-
+      </Grid>
+    <Grid size={{lg:10,xs:12,md:12}} >
+      <Box sx={{display:'flex',justifyContent:'center',alignItems:'center',alignContent:'center',flexDirection:'column',width:'100%'}}>
       <Box
-        sx={{
-          marginLeft: { lg: '250px', md: '220px', sm: 0, xs: 0 },
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100vh',
-          overflow: 'hidden'
-        }}
+       sx={{width:'100%'}}
       >
         <Commonheader onToggleSidebar={handleToggleSidebar} />
-
+        </Box>
+        <Box
+        sx={{
+          width:'96%',
+         
+        }}
+      >
         <Box sx={{ flexGrow: 1, overflowY: 'auto', p: 2 }}>
           <Outlet />
         </Box>
       </Box>
-    </>
+      </Box>
+      </Grid>
+    </Grid>
   );
 };
 

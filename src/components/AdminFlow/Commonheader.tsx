@@ -23,10 +23,9 @@ const current = breeadcrumbmap[location.pathname];
  return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
+        display:'flex',justifyContent:'center',alignItems:'center',alignContent:'center',flexDirection:'column',
         gap: 2,
+        width:'100%',
         boxShadow: 1,
         pt: 1,
         pb: 1,
@@ -34,11 +33,12 @@ const current = breeadcrumbmap[location.pathname];
         pl: 2
       }}
     >
+      <Box sx={{width:'96%'}}>
       {/* Mobile toggle icon */}
       <Box sx={{ display: { xs: "block", md: "none" }, cursor: 'pointer' }} onClick={onToggleSidebar}>
         <FormatAlignJustifyIcon />
       </Box>
-  {current?(<Box display="flex" justifyContent="flex-start"  alignItems="center">
+  {current?(<Box display="flex"  justifyContent="flex-start"  alignItems="center">
         <Typography variant="h5" color="#3DB80C">
   {current.main}
   {current.sub && (
@@ -90,10 +90,7 @@ const current = breeadcrumbmap[location.pathname];
 
     )}
       
-
-   {/*    <Avatar sx={{ backgroundColor: '#3DB80C', width: 30, height: 30 }}>
-        <NotificationsIcon sx={{ fontSize: '20px', color: 'white' }} />
-      </Avatar> */}
+</Box>
     </Box>
   );
 };

@@ -3,7 +3,10 @@ import GroupIcon from '@mui/icons-material/Group';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AddIcon from "@mui/icons-material/Add";
-import event111 from '../../assets/event11.jpg'
+import bathukamma from "../../assets/bathukamma.jpg";
+import Ugadhi from '../../assets/ugadhi.png'
+import TeluguCalender from '../../assets/telugucalender.png'
+import WomensDay from '../../assets/womensday.png'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
@@ -27,11 +30,11 @@ const Dashboard = () => {
   {id:4,news:'TEAM Sports Day 2025-Registrations Open'},
  ]  
  const newsimages=[
-  {id:1,img:event111},
-  {id:2,img:event111},
-  {id:3,img:event111},
-  {id:4,img:event111},
-  {id:5,img:event111}
+  {id:1,img:bathukamma},
+  {id:2,img:Ugadhi},
+  {id:3,img:TeluguCalender},
+  {id:4,img:WomensDay},
+  {id:5,img:bathukamma}
 ]
 
 const data = [
@@ -50,27 +53,27 @@ const data = [
 return (
     <Box>
       <Box>
-          <Typography variant="h5" color="#3DB80C">
-            Dashboard Data
+          <Typography variant="h5" color="#3DB80C" mb={1} sx={{fontSize:'28px'}}>
+            Dashboard
           </Typography>
      </Box>
-      <Grid container spacing={2}>
-        <Grid size={{ lg: 8, md: 8, sm: 12, xs: 12 }}>
-          <Box sx={{display:'flex', flexDirection:'row',gap:2}}>
+      <Grid container>
+        <Grid size={{ lg: 8, md: 8,  xs: 12 }}>
+          <Box sx={{display:'flex',width:'95%' ,flexDirection:'row',gap:2}}>
           { boarddata.map((board)=>{
-          return <Card sx={{ width:209,height:140,border:'1px solid #3DB80C' }}>
+          return <Card sx={{width:'100%', border:'1px solid #3DB80C' }}>
           <CardContent 
           sx={{display:'flex',
           gap:'5px'}}>
           <Box sx={{color:"#3DB80C"}} >{board.icon}</Box>
-          <Typography  sx={{fontWeight:500,color:'#3DB80C',fontSize:13}}>
+          <Typography  sx={{fontWeight:500,color:'#3DB80C',fontSize:15,whiteSpace:'nowrap'}}>
           {board.title}
           </Typography>
           </CardContent>
           <Divider sx={{ borderColor: '#3DB80C'}}/>
             <CardContent sx={{display:'flex',gap:'12px',justifyContent:'center'}}>
             
-            <Typography variant="h6">
+            <Typography variant="h6" sx={{fontSize:'18px',fontWeight:'bold'}}>
              {board.number}
         </Typography>
           </CardContent>
@@ -83,7 +86,7 @@ return (
           
           <Grid>
          <Box sx={{border:'1px solid #3DB80C',
-          width:{lg:"93%",md:"92%",sm:"100%",xs:'100%'},pt:1,pb:2,mt:2,
+          width:{lg:"95%",xs:'100%'},pt:1,pb:2,mt:2,
           borderRadius:'5px',
           background:'white'}}>
          <Box sx={{display:'flex',justifyContent:'space-between',p:1}}>
@@ -94,7 +97,7 @@ return (
               size="small"
               variant="contained"
               startIcon={<AddIcon />}
-              sx={{marginRight:'10px',backgroundColor:'#3DB80C'}}
+              sx={{marginRight:'10px',fontSize:'14px',backgroundColor:'#3DB80C'}}
               onClick={()=>navigate('addnews')}>
               Edit News
             </Button>
@@ -102,7 +105,7 @@ return (
          {newsdata.map(news=>(
           <Box component="ul" sx={{ pl: 4, m: 0,lineHeight:3 }}>
           <li>
-          <Typography variant="body1" fontSize={13}>{news.news}</Typography>
+          <Typography variant="body1" fontSize={14}>{news.news}</Typography>
           </li>
           </Box>
          ))}
@@ -113,7 +116,7 @@ return (
 
            <Grid>
          <Box sx={{border:'1px solid #3DB80C',
-          width:{lg:"93%",md:"93%",sm:"100%",xs:'100%'},pt:1,pb:2,mt:2,
+          width:{lg:"95%"},pt:1,pb:2,mt:2,
           borderRadius:'5px',
           background:'white'}}>
          <Box sx={{display:'flex',justifyContent:'space-between',p:1}}>
@@ -124,7 +127,7 @@ return (
               size="small"
               variant="contained"
               startIcon={<AddIcon />}
-              sx={{marginRight:'10px',backgroundColor:'#3DB80C'}}
+              sx={{marginRight:'10px',fontSize:'14px',backgroundColor:'#3DB80C'}}
               onClick={()=>navigate('/admin/events/addevent')}>
               Add Events
             </Button>
@@ -151,10 +154,12 @@ return (
           </Grid>
         </Grid>
         
-       <Grid size={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
+       <Grid size={{ lg: 4, md: 4, xs: 12 }} >
         <Paper
       elevation={3}
       sx={{
+        width:'100%',
+   
         borderRadius: '12px',
         border: '1px solid #3DB80C',
         p: 2,
@@ -163,7 +168,7 @@ return (
       }}
     >
       {/* Header */}
-      <Box display="flex" alignItems="center" mb={2}>
+      <Box display="flex" alignItems="center"  mb={2}>
         <GroupIcon sx={{ color: '#3DB80C', mr: 1 }} />
         <Typography variant="h6" sx={{ color: '#3DB80C', fontWeight: 500 }}>
           Active Membership Trend
