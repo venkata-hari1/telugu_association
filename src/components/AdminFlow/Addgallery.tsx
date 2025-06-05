@@ -4,11 +4,17 @@ import { Box, Button, Card, CardMedia, FormControl, FormControlLabel, Grid,  Rad
 import { Submit, VisuallyHiddenInput } from '../../adminstyles/MembershiptableStyles';
 import UploadFileIcon from '@mui/icons-material/UploadFile'; 
 import CloseIcon from '@mui/icons-material/Close';
-
+import bathukamma from '../../assets/bathukamma.jpg'
+import Ugaadi from '../../assets/Ugadii.png'
 
 const Addgallery = () => {
 
-return (
+const galdata=[
+  {id:1,eveimg:bathukamma,},
+  {id:2,eveimg:bathukamma,},
+  ]
+
+  return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
        
          {/*     <Box display="flex" justifyContent="space-between" >
@@ -171,40 +177,22 @@ return (
                             }}
                           />
                         </Grid>
-                   
-                       <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
+                       
+                        
+                         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
                           <Typography>Preview</Typography>
                         </Grid>
+                       
                         <Grid size={{xs:12,sm:12,md:6,lg:6}} gap={3}
                         sx={{
                           display:'flex',
                           flexDirection:{md:'row',sm:'column',xs:'column'}}}>
-                          
+                      { galdata.map(galimg=>(
                           <Card sx={{ maxWidth: 345,position:"relative" }}>
                               <CardMedia
                                 component="img"
                                 height="194"
-                               
-                                alt="Paella dish"/>
-                               <CloseIcon
-                               sx={{
-                              position: 'absolute',
-                              top: 8,
-                              right: 8,
-                              backgroundColor: '#3DB80C',
-                              color:'white',
-                              '&:hover': {
-                                backgroundColor: '#3DB80C',
-                                cursor:'pointer'
-                              },
-                            }}
-                           /> 
-                          </Card>
-                            <Card sx={{ maxWidth: 345,position:"relative" }}>
-                              <CardMedia
-                                component="img"
-                                height="194"
-                               
+                                image={galimg.eveimg}          
                                 alt="Paella dish"/>
                                <CloseIcon
                                sx={{
@@ -220,8 +208,13 @@ return (
                             }}
                          /> 
                           </Card>
-                        </Grid>
-                     
+                        ))
+                      }                       
+                     </Grid>
+                        
+
+                          
+                       
 
                       <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
                         <Box sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
