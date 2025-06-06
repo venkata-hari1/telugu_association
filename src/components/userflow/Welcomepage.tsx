@@ -34,6 +34,7 @@ import MobileHeader from './Reusable/MobileHeader';
 import MembershipregPopup from './MembershipregPopup';
 import Donate from './Donate';
 import Volunteer from './Volunteer';
+import Userprofile from './Userprofile';
 
 
 type Classes = {
@@ -91,7 +92,8 @@ export default function Welcomepage() {
             <Route path="member" element={<Registration />} />
             <Route path="donate" element={<Donate />} />
             <Route path="memberpopup" element={<MembershipregPopup />} />
-
+            <Route path="user-profile" element={<Userprofile />}/>
+            
           </Routes>
         </Grid>
       </Grid>

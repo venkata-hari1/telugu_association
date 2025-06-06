@@ -25,7 +25,7 @@ import Addnews from '../components/AdminFlow/Addnews'
 import Media from '../components/AdminFlow/Media'
 import Videogallery from '../components/AdminFlow/Videogallery'
 import AdminGallery from '../components/AdminFlow/AdminGallery'
-
+import Profileotp from '../components/AdminFlow/Profileotp'
 
 const AppRoutes = () => {
   return (
@@ -39,7 +39,7 @@ const AppRoutes = () => {
            <Route path="dashboard" element={<Dashboard />} /> 
            <Route path='dashboard/addnews' element={<Addnews />}/>
           <Route path="membership" element={<Membershiptable />} />
-          <Route path="membership/member" element={<AddMember />} />
+          <Route path="membership/addmember" element={<AddMember />} />
           <Route path="membership/volunteermgmt" element={<Volunteermanagement />} />
           <Route path="membership/volunteermgmt/addvolunteer" element={<Addvolunteer />} />
           <Route path="sponsorship" element={<Sponsershipmanagement />} />
