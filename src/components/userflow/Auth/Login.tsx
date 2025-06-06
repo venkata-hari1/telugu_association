@@ -24,7 +24,7 @@ import Googleimg from "../../../assets/google.png";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../Utils/ShowToast";
 type IProps={
-  value:string
+  value:string 
 }
 export default function Login({value}:IProps) {
   const login = useSelector((state: RootState) => state.userFlow.login);

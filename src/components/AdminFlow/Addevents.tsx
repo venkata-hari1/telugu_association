@@ -3,8 +3,7 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { GreenTextField, Submit, VisuallyHiddenInput } from "../../adminstyles/MembershiptableStyles";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../Redux/Store";
+
 import {showToast} from "../../Utils/ShowToast";
 
 const Addevent = () => {
@@ -44,7 +43,7 @@ const Addevent = () => {
   // State for image preview URL
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
- const dispatch=useDispatch<AppDispatch>()
+
   const validateField = (name: string, value: string | File | null): string => {
     switch (name) {
       case 'eventTitle':

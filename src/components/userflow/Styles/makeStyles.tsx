@@ -13,7 +13,7 @@ const flex={
 }
 export const useStyles = makeStyles()((theme:Theme) => ({
     root: {
-        backgroundImage: `url(${backgroundImg})`,
+    backgroundImage: `url(${backgroundImg})`,
         backgroundSize: 'cover',         
         backgroundRepeat: 'no-repeat',     
         backgroundPosition: 'contain',   

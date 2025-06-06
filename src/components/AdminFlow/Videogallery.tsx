@@ -66,7 +66,7 @@ const navigate=useNavigate()
         </Grid>
       </Grid>
       <Box sx={{ display: "flex", gap: 2, flexDirection: "column", mt: 2 }}>
-       {festdata.map((fest)=>(
+       {festdata.map(()=>(
            <Card
           variant="outlined"
           sx={{ maxWidth: 345, background: "transparent" }}

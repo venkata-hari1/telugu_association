@@ -13,8 +13,6 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { GreenTextField, Submit, VisuallyHiddenInput } from "../../adminstyles/MembershiptableStyles";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../Redux/Store";
 import {showToast} from "../../Utils/ShowToast";
 
 const Addsponsor = () => {
@@ -63,7 +61,7 @@ const Addsponsor = () => {
   });
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const dispatch=useDispatch<AppDispatch>()
+
   // Validate individual field
   const validateField = (name: string, value: string | File | null): string => {
     switch (name) {

@@ -101,7 +101,7 @@ const handleLogin=()=>{
 }
   return (
     <Fragment>
-      <Login/>
+      <Login value="member"/>
     <Drawer anchor="left" open={open} onClose={onClose} PaperProps={{
         sx: { backgroundColor: '#FDF7E1', width: 280,padding:'20px' },
       }}>

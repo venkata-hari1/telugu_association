@@ -3,13 +3,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {showToast} from "../../Utils/ShowToast";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../Redux/Store";
+
 
 
 const Addnews = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
   const masterText = `To celebrate Telugu festivals and perpetuate our culture from one generation to another, the Telugu Association of Minnesota (TEAM) offers a one-year family membership. This enables families to participate in events such as Sankranti, Ugadi, Deepawali, summer picnic, and more.
 Members also get access to:
 Telugu language competitions for children

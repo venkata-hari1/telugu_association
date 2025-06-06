@@ -1,7 +1,7 @@
 import { Box, Button, Dialog, DialogContent, Grid, TextField, Theme, Typography, useMediaQuery } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/Store";
-import { setForgetPassword, setOtp, setPopUp } from "../../../Redux/UserFlow";
+import { setForgetPassword, setOtp} from "../../../Redux/UserFlow";
 import { useState, useEffect } from "react";
 import { showToast } from "../../../Utils/ShowToast";
 

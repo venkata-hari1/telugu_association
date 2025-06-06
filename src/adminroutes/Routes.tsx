@@ -2,7 +2,7 @@ import {Routes, Route} from 'react-router-dom'
 import Membershiptable from '../components/AdminFlow/Membershiptable'
 import Subscriptionplans from '../components/AdminFlow/Subscriptionplans'
 import Privateroutes from '../routes/Privateroutes'
-import Login from '../components/Login'
+
 import AddMember from '../components/AdminFlow/Addmember'
 import Sponsershipmanagement from '../components/AdminFlow/Sponsershipmanagement'
 import Addsponsor from '../components/AdminFlow/Addsponsor'
@@ -12,7 +12,6 @@ import Addvolunteer from '../components/AdminFlow/Addvolunteer'
 import Editsubscription from '../components/AdminFlow/Editsubscription'
 import Mainlayout from '../components/AdminFlow/Mainlayout'
 import Dashboard from '../components/AdminFlow/Dashboard'
-import Gallery from '../components/AdminFlow/AdminGallery'
 import Addgallery from '../components/AdminFlow/Addgallery'
 import EventsandCalender from '../components/AdminFlow/EventsandCalender'
 import Addevent from '../components/AdminFlow/Addevents'
@@ -30,7 +29,7 @@ import AdminGallery from '../components/AdminFlow/AdminGallery'
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<Login />} />
+
 
       <Route element={<Privateroutes />}>
         <Route path="/admin" element={<Mainlayout />}>

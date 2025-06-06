@@ -9,8 +9,7 @@ import {
   Divider,
   Box,
 } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../Redux/Store';
+
 import { showToast } from './ShowToast';
 
 type IProps={
@@ -19,7 +18,6 @@ type IProps={
 }
 const MembershipConfirmationDialog = ({display,handleDisplay}:IProps) => {
  
-const dispatch=useDispatch<AppDispatch>()
   const handleClose1 = () => {
     const data={
         message:'close',

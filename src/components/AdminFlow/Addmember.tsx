@@ -13,8 +13,6 @@ import {
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { GreenTextField, Submit } from "../../adminstyles/MembershiptableStyles";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../Redux/Store";
 import { showToast } from "../../Utils/ShowToast";
 
 const AddMember = () => {
@@ -57,7 +55,7 @@ const AddMember = () => {
     startDate: '',
     endDate: ''
   });
-const dispatch=useDispatch<AppDispatch>()
+
   // Validate individual field
   const validateField = (name: string, value: string): string => {
     switch (name) {
