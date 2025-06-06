@@ -28,8 +28,8 @@ const Donate = () => {
         lastName: '',
         email: '',
         mobileNumber: '',
-        donationAmount: '5',
-        totalAmount: '5.15',
+        donationAmount: '',
+        totalAmount: '',
         paymentMethod: ''
     });
 
