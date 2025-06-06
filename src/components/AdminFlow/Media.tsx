@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import tgallery1 from "../../assets/tgallery1.jpg";
 
 const Media = () => {
+ 
   const gallerydata = [
     { id: 1, img: tgallery1 },
     { id: 2, img: tgallery1 },
@@ -104,7 +105,7 @@ const Media = () => {
                 <Typography variant="h6" color="#3DB80C">
                   {fest.festtitle}
                 </Typography>
-                 <Button variant="outlined" 
+                 <Button variant="outlined"  onClick={()=>navigate('/admin/admingallery/addgallery')}
                  sx={{background:'#3DB80C',color:'white'}}startIcon={fest.icon}>{fest.edit}</Button>
               </Box>
                <Grid container spacing={5} sx={{ mt: 2 }}>

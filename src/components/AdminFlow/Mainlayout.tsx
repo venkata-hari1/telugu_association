@@ -18,6 +18,7 @@ const Mainlayout = () => {
 return (
     <Grid container spacing={1}>
       <Grid size={{lg:2}}>
+    
       <Sidebar
         mobileOpen={mobileOpen}
         onCloseSidebar={() => setMobileOpen(false)}

@@ -4,8 +4,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useNavigate } from 'react-router-dom';
 
 const Logout = ({open,handleClose}:{ open: boolean; handleClose: () => void }) => {
+  const navigate=useNavigate()
   return (
     <Box>
        <Dialog
@@ -22,7 +24,7 @@ const Logout = ({open,handleClose}:{ open: boolean; handleClose: () => void }) =
           
            <DialogActions sx={{display:"flex", justifyContent:"space-between",paddingTop:'40px'}}>
           <Button variant="outlined" size="large" sx={{borderColor:"#3DB80C",color:"#3DB80C"}} onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" size="large" sx={{background:"#3DB80C",color:"#fff"}} onClick={handleClose} autoFocus>
+          <Button variant="contained" size="large" sx={{background:"#3DB80C",color:"#fff"}} onClick={()=>navigate('/login')} autoFocus>
             Logout
           </Button>
         </DialogActions>

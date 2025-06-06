@@ -16,10 +16,8 @@ import { Fragment, useState } from "react";
 import Logo from "../../assets/logo.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
-import PopUp from "../../Utils/Popup";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../Redux/Store";
-import { setMessage, setPopUp } from "../../Redux/UserFlow";
+import {showToast} from "../../Utils/ShowToast";
+
 
 const AdminResetpassword = () => {
   const navigate = useNavigate();
@@ -33,7 +31,6 @@ const AdminResetpassword = () => {
   const [confirmpassword, setConfirmpassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmError, setConfirmError] = useState("");
- const dispatch=useDispatch<AppDispatch>()
   function showcurrentPassword() {
     setCurrentShow(true);
     setCurrentType("text");
@@ -72,8 +69,8 @@ const AdminResetpassword = () => {
   }
 
   function submitResetHanlder() {
-   dispatch(setPopUp(true))
-   dispatch(setMessage('Password Changed Successfully'))
+
+   showToast(true,'Password Changed Successfully')
    setTimeout(()=>{
     navigate('/login')
    },900)
@@ -84,7 +81,6 @@ const AdminResetpassword = () => {
   password.length < 8 || confirmpassword !== password || !!passwordError || !!confirmError;
   return (
     <Fragment>
-      <PopUp/>
     <Box
     sx={{
       backgroundImage: `url(${backgroundImg})`,

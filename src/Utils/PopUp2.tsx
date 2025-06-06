@@ -11,7 +11,8 @@ import {
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../Redux/Store';
-import { setMessage, setPopUp } from '../Redux/UserFlow';
+import { showToast } from './ShowToast';
+
 type IProps={
     display:boolean
     handleDisplay:(data:{value:boolean,message:string})=>void
@@ -27,16 +28,16 @@ const dispatch=useDispatch<AppDispatch>()
     handleDisplay(data)
   };
  const handleConfirm=()=>{
-    dispatch(setPopUp(true));
+
     const data={
         message:'confirm',
         value:false
     }
     handleDisplay(data)
-    dispatch(setMessage('Member Registration Submitted Successfully'));
+    showToast(true,'Member Registration Submitted Successfully')
  }
   return (
-    <Dialog open={true} onClose={handleClose1} maxWidth="sm" fullWidth>
+    <Dialog open={display} onClose={handleClose1} maxWidth="sm" fullWidth>
       <DialogTitle>Membership Confirmation</DialogTitle>
       <DialogContent dividers>
         <Box>

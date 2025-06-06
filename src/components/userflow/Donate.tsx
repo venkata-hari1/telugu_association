@@ -11,13 +11,9 @@ import {
     Typography
 } from "@mui/material";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import PopUp from "../../Utils/Popup";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../Redux/Store";
-import { setMessage, setPopUp } from "../../Redux/UserFlow";
+import {showToast} from "../../Utils/ShowToast";
 
 const Donate = () => {
-    const [membershipValue] = useState('');
     const [paymentValue, setPaymentValue] = useState('');
     const [formData, setFormData] = useState<{
         firstName: string;
@@ -52,7 +48,6 @@ const Donate = () => {
         donationAmount: '',
         paymentMethod: ''
     });
-    const dispatch=useDispatch<AppDispatch>()
     // Validate individual field
     const validateField = (name: string, value: string): string => {
         switch (name) {
@@ -95,10 +90,7 @@ const Donate = () => {
     // Handle form submission
     const handleSubmit = () => {
         if (isFormValid()) {
-       
-           
-            dispatch(setPopUp(true))
-            dispatch(setMessage(`Thank you! Your donation of $${formData.donationAmount} has been submitted successfully.`));
+            showToast(true,`Thank you! Your donation of $${formData.donationAmount} has been submitted successfully.`)
             setTimeout(()=>{
                 setFormData({
                     firstName: '',
@@ -137,7 +129,6 @@ const Donate = () => {
 
     return (
         <Box p={2}>
-            <PopUp/>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Typography color="#3DB80C" fontWeight="700">
                     Donate Now

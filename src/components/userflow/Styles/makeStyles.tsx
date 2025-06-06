@@ -1,5 +1,5 @@
 import { makeStyles } from 'tss-react/mui';
-import WelcomeImage from '../../../assets/welcomepage.png';
+import backgroundImg from '../../../assets/BackgroundImage.png'
 import { Theme } from '@mui/material';
 export const Lato={
     fontFamily:'"Lato", sans-serif',
@@ -13,15 +13,19 @@ const flex={
 }
 export const useStyles = makeStyles()((theme:Theme) => ({
     root: {
+        backgroundImage: `url(${backgroundImg})`,
+        backgroundSize: 'cover',         
+        backgroundRepeat: 'no-repeat',     
+        backgroundPosition: 'contain',   
+ 
+        minHeight: '100vh',
+        width: '100%',    
+        height:'fit-content',              
         display: 'flex',
-        flexDirection: 'column' as const,
+        
+        justifyContent: 'center',
         alignItems: 'center',
-        backgroundImage: `url(${WelcomeImage})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',       
-        backgroundColor: '#fff',       
-        height:'fit-content',
-        width: '100%',
+        flexDirection: 'column',
         [theme.breakpoints.down('lg')]:{
             backgroundImage:'none'
         }
@@ -149,8 +153,7 @@ export const useStyles = makeStyles()((theme:Theme) => ({
     footercontainer:{
         marginTop:'1px',
         background: '#3DB80C',width:'76%',padding:'15px',
-        borderTopLeftRadius:'20px',
-        borderTopRightRadius:'20px'
+      
     },
     logo:{
         ...flex,

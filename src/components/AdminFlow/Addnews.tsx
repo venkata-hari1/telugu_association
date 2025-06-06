@@ -2,10 +2,10 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import PopUp from "../../Utils/Popup";
+import {showToast} from "../../Utils/ShowToast";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Redux/Store";
-import { setMessage, setPopUp } from "../../Redux/UserFlow";
+
 
 const Addnews = () => {
   const navigate = useNavigate();
@@ -39,10 +39,8 @@ Note: After June, prorated membership fees apply.`;
   // Handle save
   const handleSave = () => {
     if (!error) {
-      dispatch(setPopUp(true));
-      dispatch(setMessage('News Added'));
-
-      setError('');
+     showToast(true,'News Added')
+      setError('')
     }
   };
 
@@ -53,7 +51,6 @@ Note: After June, prorated membership fees apply.`;
 
   return (
     <Box>
-      <PopUp />
       <Grid container spacing={4} sx={{ width: { lg: '60%', xs: '100%' } }}>
         <Grid size={{ xs: 12 }}>
           <Typography variant="h5" color="#3DB80C">

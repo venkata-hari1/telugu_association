@@ -3,10 +3,9 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { GreenTextField, Submit, VisuallyHiddenInput } from "../../adminstyles/MembershiptableStyles";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { setMessage, setPopUp } from "../../Redux/UserFlow";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Redux/Store";
-import PopUp from "../../Utils/Popup";
+import {showToast} from "../../Utils/ShowToast";
 
 const Addevent = () => {
   // State for form values and errors
@@ -128,8 +127,7 @@ const Addevent = () => {
         eventDescription: '',
         image: ''
       });
-      dispatch(setPopUp(true))
-      dispatch(setMessage('Event Added Successfully'))
+      showToast(true,'Event Added Successfully')
       setImagePreview(null);
       const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
@@ -160,7 +158,7 @@ const Addevent = () => {
 
   return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
-      <PopUp/>
+
       <Grid container spacing={4} mt={4}>
         {/* Event Title */}
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>

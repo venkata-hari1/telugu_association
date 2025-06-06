@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import tgallery1 from "../../assets/tgallery1.jpg";
 
 const Videogallery = () => {
+  
   const festdata = [
     {
       id: 1,
@@ -85,6 +86,7 @@ const navigate=useNavigate()
               variant="outlined"
               sx={{ background: "#3DB80C", color: "white",mt:1,mb:1 }}
               startIcon={<BorderColorIcon />}
+              onClick={()=>navigate('/admin/admingallery/addgallery')}
             >
               Edit
             </Button>

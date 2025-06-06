@@ -7,13 +7,14 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './Redux/Store.tsx'
-
+import { ToastContainer } from 'react-toastify';
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <App />
+        <ToastContainer />
       </ThemeProvider>
     </BrowserRouter>
   </Provider>

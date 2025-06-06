@@ -7,14 +7,12 @@ import Logo from '../../assets/logo.png';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import { Fragment, useState } from 'react';
-import PopUp from '../../Utils/Popup';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../Redux/Store';
-import { setMessage, setPopUp } from '../../Redux/UserFlow';
+import {showToast} from '../../Utils/ShowToast';
+
+
 
 const Adminforgotpassword = () => {
   const navigate = useNavigate();
-  const dispatch=useDispatch<AppDispatch>()
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
 
@@ -35,9 +33,9 @@ const Adminforgotpassword = () => {
     }
   }
  const handleResetPassword=()=>{
-  dispatch(setPopUp(true))
+
   setEmail('')
-  dispatch(setMessage('Otp Sent'))
+  showToast(true,'Otp Sent')
   setTimeout(()=>{
     navigate('/adminotp')
   },900)
@@ -47,7 +45,6 @@ const Adminforgotpassword = () => {
 
   return (
     <Fragment>
-      <PopUp/>
     <Box
      sx={{
       backgroundImage: `url(${backgroundImg})`,

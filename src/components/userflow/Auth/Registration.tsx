@@ -16,11 +16,12 @@ import {
 import { Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../Redux/Store";
-import { setLogin, setPopUp, setMessage } from "../../../Redux/UserFlow";
+import { setLogin, } from "../../../Redux/UserFlow";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import PopUp1 from "../../../Utils/PopUp1";
 import PopUp2 from "../../../Utils/PopUp2";
-import PopUp from "../../../Utils/Popup";
+import Login from "./Login";
+import Resetpassword from "./Resetpassword";
 
 const Registration = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -165,7 +166,6 @@ const[display,setDisplay]=useState(false)
       setShowConfirmPassword(false);
     }
     setDisplay(true)
-    console.log(formData)
   };
 
   // Check if form is valid
@@ -219,6 +219,7 @@ const handleClose=(t:boolean)=>{
 const handleDisplay=(data:{value:boolean,message:string})=>{
 setDisplay(data.value)
 if(data?.message==='confirm'){
+  dispatch(setLogin(true));
 setMemberShipAmount('')
 setFormData({
   firstName: '',
@@ -241,9 +242,11 @@ setFormData({
 
   return (
     <Box p={2}>
-      <PopUp/>
+
       <PopUp1 badge={badge} open={open} handleClose={handleClose}/>
       <PopUp2 display={display} handleDisplay={handleDisplay}/>
+      <Login value='member'/>
+      <Resetpassword/>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography color="#3DB80C" fontWeight="700">
           Member Registration

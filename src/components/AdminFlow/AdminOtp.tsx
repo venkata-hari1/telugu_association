@@ -12,19 +12,16 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import OTPInput from 'react-otp-input';
 import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PopUp from '../../Utils/Popup';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../Redux/Store';
-import { setMessage, setPopUp } from '../../Redux/UserFlow';
+import {showToast} from '../../Utils/ShowToast';
+;
+
 
 const AdminOtp = () => {
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
   const navigate = useNavigate()
-  const dispatch=useDispatch<AppDispatch>()
   const handleOtp=()=>{
-   dispatch(setPopUp(true))
-   dispatch(setMessage('OTP Verified Successfully'))
+   showToast(true,'OTP Verified Successfully')
    setOtp('')
    setTimeout(()=>{
     navigate('/adminreset')
@@ -33,7 +30,6 @@ const AdminOtp = () => {
   }
   return (
     <Fragment>
-      <PopUp/>
     <Box
        sx={{
         backgroundImage: `url(${backgroundImg})`,

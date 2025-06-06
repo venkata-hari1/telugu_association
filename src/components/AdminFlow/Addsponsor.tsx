@@ -15,8 +15,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { GreenTextField, Submit, VisuallyHiddenInput } from "../../adminstyles/MembershiptableStyles";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Redux/Store";
-import { setMessage, setPopUp } from "../../Redux/UserFlow";
-import PopUp from "../../Utils/Popup";
+import {showToast} from "../../Utils/ShowToast";
 
 const Addsponsor = () => {
   const [formData, setFormData] = useState<{
@@ -167,8 +166,7 @@ const Addsponsor = () => {
         endDate: '',
         image: ''
       });
-      dispatch(setPopUp(true))
-      dispatch(setMessage('Sponor Added Successfully'))
+      showToast(true,'Sponor Added Successfully')
       setImagePreview(null);
       const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
@@ -203,7 +201,6 @@ const Addsponsor = () => {
 
   return (
     <Box sx={{ overflowX: { sm: 'hidden' } }}>
-      <PopUp/>
       <Grid container spacing={2}>
         {/* Company Name */}
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>

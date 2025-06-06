@@ -1,10 +1,12 @@
 import { Box, Button, Dialog, DialogContent, Grid, TextField, Theme, Typography, useMediaQuery } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/Store";
-import { setForgetPassword, setMessage, setOtp, setPopUp } from "../../../Redux/UserFlow";
+import { setForgetPassword, setOtp, setPopUp } from "../../../Redux/UserFlow";
 import { useState, useEffect } from "react";
+import { showToast } from "../../../Utils/ShowToast";
 
 const Forgotpassword = () => {
+
   const value = useSelector((state: RootState) => state.userFlow.forgetPassword);
   const dispatch = useDispatch<AppDispatch>();
   const display=useMediaQuery((theme:Theme)=>theme.breakpoints.down('lg'))
@@ -32,13 +34,10 @@ const Forgotpassword = () => {
 
   const handleSendOTP = () => {
     localStorage.setItem('email',email)
-    setTimeout(()=>{
-      dispatch(setOtp(true));
-      dispatch(setPopUp(true));
-      dispatch(setForgetPassword(false));
-    },1000)
-    dispatch(setMessage("Otp sent"));
 
+    dispatch(setOtp(true));
+    dispatch(setForgetPassword(false));
+    showToast(true,'OTP Sent')
 
     // Optionally reset form after sending OTP
     setEmail("");
@@ -48,8 +47,9 @@ const Forgotpassword = () => {
 const handleClose=()=>{
   dispatch(setForgetPassword(false))
 }
+console.log(value)
   return (
-    <Dialog open={value} onClose={handleClose}>
+    <Dialog open={value} onClose={handleClose} disableEnforceFocus>
       <DialogContent>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Grid

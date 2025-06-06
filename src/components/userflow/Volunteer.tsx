@@ -12,9 +12,9 @@ import {
 import { Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Redux/Store";
-import { setLogin, setPopUp, setMessage } from "../../Redux/UserFlow";
+import { setLogin, } from "../../Redux/UserFlow";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import PopUp from "../../Utils/Popup";
+import {showToast} from "../../Utils/ShowToast";
 import Login from "./Auth/Login";
 import Otpinput from "./Auth/Otpinput";
 import Forgotpassword from "./Auth/Forgotpassword";
@@ -135,8 +135,7 @@ const Volunteer = () => {
   // Handle form submission
   const handleSubmit = () => {
     if (isFormValid()) {
-      dispatch(setPopUp(true));
-      dispatch(setMessage('Thank you for signing up! We’ve received your Volunteer Registration.'));
+      showToast(true,'Thank you for signing up! We’ve received your Volunteer Registration.')
       setFormData({
         firstName: '',
         lastName: '',
@@ -200,7 +199,7 @@ const Volunteer = () => {
       <Forgotpassword />
       <Resetpassword />
       <Otpinput />
-      <PopUp />
+
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography color="#3DB80C" fontWeight="700">
           Volunteer Registration

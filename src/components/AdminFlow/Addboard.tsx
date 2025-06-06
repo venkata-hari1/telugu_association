@@ -1,206 +1,245 @@
-import { Box, Button, FormControl, Grid, Select, TextField, Typography } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
+import {
+  Box,
+  Button,
+  FormControl,
+  Select,
+  TextField,
+  Typography,
+  MenuItem,
+} from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { useState } from "react";
 import { Submit, VisuallyHiddenInput } from "../../adminstyles/MembershiptableStyles";
-import UploadFileIcon from '@mui/icons-material/UploadFile';
+import { showToast } from "../../Utils/ShowToast";
+
+
+const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB
+const ALLOWED_TYPES = ["image/jpeg", "image/png"];
 
 const Addboard = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    role: "",
+    image: null as File | null,
+  });
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [errors, setErrors] = useState({ image: "" });
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleRoleChange = (e: any) => {
+    setFormData((prev) => ({ ...prev, role: e.target.value }));
+  };
+
+  const handleImageChange = (e: any) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      setErrors({ image: "Only JPG and PNG files are allowed" });
+      setFormData((prev) => ({ ...prev, image: null }));
+      setImagePreview(null);
+      return;
+    }
+
+    if (file.size > MAX_IMAGE_SIZE) {
+      setErrors({ image: "Image must be less than or equal to 1MB" });
+      setFormData((prev) => ({ ...prev, image: null }));
+      setImagePreview(null);
+      return;
+    }
+
+    setErrors({ image: "" });
+    setFormData((prev) => ({ ...prev, image: file }));
+    setImagePreview(URL.createObjectURL(file));
+  };
+
+  const isFormValid =
+    formData.firstName.trim() &&
+    formData.lastName.trim() &&
+    formData.role &&
+    formData.image &&
+    !errors.image;
+
+  const handleSubmit = () => {
+    if (!isFormValid) return;
+
+    showToast(true, "Board members added successfully");
+
+    setFormData({ firstName: "", lastName: "", role: "", image: null });
+    setImagePreview(null);
+    setErrors({ image: "" });
+  };
+
   return (
-    <Box sx={{ overflowX: { sm: "hidden" } }}>
-      {/* <Box display="flex">
-        <Typography variant="h5" color="#3DB80C">
-          Board and Leadership/
-        </Typography>
-        <Typography variant="h5" component="span" color="#3DB80C">
-          Add Board
-        </Typography>
-      </Box> */}
-      <Box>
+    <Box sx={{ overflowX: { sm: "hidden" }, width: {lg:"60%",md:'100%',xs:'100%'}, }}>
+      {/* Year Select */}
+      <Box mb={2}>
         <FormControl size="small">
           <Select
-            value="Year"
+            value="2025"
             variant="outlined"
             displayEmpty
             IconComponent={() => (
               <ArrowDropDownIcon sx={{ color: "#3DB80C", cursor: "pointer" }} />
             )}
-            MenuProps={{
-              PaperProps: {
-                sx: {
-                  backgroundColor: "#FDF7E1",
-                  marginTop: "4px",
-                  "& .MuiMenuItem-root": {
-                    backgroundColor: "#FDF7E1",
-                    color: "#3DB80C",
-                    "&:hover": {
-                      backgroundColor: "#3DB80C",
-                      color: "white",
-                    },
-                  },
-                },
-              },
-            }}
             sx={{
               color: "#3DB80C",
               backgroundColor: "white",
               border: "1px solid #3DB80C",
               borderRadius: "2px",
               width: "120px",
-              padding: "1px 1px",
-              "& .MuiSelect-outlined": {
-                padding: "8px 10px",
-                color: "#3DB80C",
-                background: "transparent",
-              },
-              "& fieldset": {
-                border: "none",
-              },
-              marginTop: "5px",
+              "& fieldset": { border: "none" },
             }}
           >
-            <MenuItem value="Year">2025</MenuItem>
+            <MenuItem value="2025">2025</MenuItem>
           </Select>
         </FormControl>
       </Box>
-      <Grid container spacing={5} mt={1}>
-        <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
-          <Typography>FirstName</Typography>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
-          <TextField
-            fullWidth
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "#3DB80C",
-                },
-                "&:hover fieldset": {
-                  borderColor: "#3DB80C",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#3DB80C",
-                },
-                borderRadius: "8px",
-                width: { md: "600px", lg: "600px", xs: "100%", sm: "600px" },
-              },
-            }}
-          />
-        </Grid>
 
-          <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
-          <Typography>LastName</Typography>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
-          <TextField
-            fullWidth
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "#3DB80C",
-                },
-                "&:hover fieldset": {
-                  borderColor: "#3DB80C",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#3DB80C",
-                },
-                borderRadius: "8px",
-                width: { md: "600px", lg: "600px", xs: "100%", sm: "600px" },
-              },
-            }}
-          />
-        </Grid>
+      {/* First Name */}
+      <Box mb={2}>
+        <Typography mb={0.5}>First Name</Typography>
+        <TextField
+          fullWidth
+          size="small"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleInputChange}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": { borderColor: "#3DB80C" },
+              "&:hover fieldset": { borderColor: "#3DB80C" },
+              "&.Mui-focused fieldset": { borderColor: "#3DB80C" },
+              borderRadius: "8px",
+            },
+          }}
+        />
+      </Box>
 
-         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
-             <Typography>Role</Typography>
-           </Grid>
-           <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
-           <FormControl size="small">
-     <Select
-       
-       variant="outlined"
-       displayEmpty
-       IconComponent={() => (
-         <ArrowDropDownIcon sx={{ color: '#3DB80C', cursor: 'pointer' }} />
-       )}
-       MenuProps={{
-         PaperProps: {
-           sx: {
-             backgroundColor: '#FDF7E1',
-             marginTop: '4px',
-             '& .MuiMenuItem-root': {
-               backgroundColor: '#FDF7E1',
-               color: '#3DB80C',
-               '&:hover': {
-                 backgroundColor: '#3DB80C',
-                 color: 'white',
-               },
-             },
-           },
-         },
-       }}
-       sx={{
-         color: '#3DB80C',
-         backgroundColor: '#FDF7E1',
-         border: '1px solid #3DB80C',
-         borderRadius: '6px',
-         width: '200px',
-         padding: '1px 1px',
-         '& .MuiSelect-outlined': {
-           padding: '8px 10px',
-           color:"#3DB80C",
-           background:'transparent'
-         },
-         '& fieldset': {
-           border: 'none',
-         },
-       }}
-     >  
-        <MenuItem value="Role">Select Role</MenuItem> 
-       <MenuItem value="presedent">Presedent</MenuItem>
-       <MenuItem value="vice-presedent">Vicepresedent</MenuItem>
-       <MenuItem value="marketing secretary">Vicepresedent</MenuItem>
-       <MenuItem value="vice-presedent">Food Secretary</MenuItem>
-       <MenuItem value="marketing secretary">Culture Secretary</MenuItem>
-       <MenuItem value="marketing secretary">Volunteer Secretary</MenuItem>
-        <MenuItem value="marketing secretary">Event Secretery</MenuItem>
-        <MenuItem value="marketing secretary">Language/Media Secretery</MenuItem>
-              <MenuItem value="marketing secretary">Others</MenuItem>
-     </Select>
-   </FormControl>
-   </Grid>
-    <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
-                <Typography>Load Image</Typography>
-       </Grid>
-       <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
-       <Button
-     component="label"
-     variant="outlined"
-     tabIndex={-1}
-     endIcon={<UploadFileIcon />}
-     sx={{borderColor:'#3DB80C',color:'#3DB80C',paddingTop:"7px",paddingBottom:'7px'}}
-   >
-     Upload
-     <VisuallyHiddenInput
-       type="file"
-       
-       multiple
-     />
-   </Button>
-   <Box mt={2}>
-    <Typography component="p" color="#F34646">*Please upload the sponsor logo in landscape format (Preferred size: 300px width × 100px height)</Typography>
-   </Box>
-    </Grid>
-    
-     <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
-       <Box sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-       <Submit variant="contained" size="large">Submit</Submit>
-    
-       </Box>
-       </Grid>
-</Grid>
+      {/* Last Name */}
+      <Box mb={2}>
+        <Typography mb={0.5}>Last Name</Typography>
+        <TextField
+          fullWidth
+          size="small"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleInputChange}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": { borderColor: "#3DB80C" },
+              "&:hover fieldset": { borderColor: "#3DB80C" },
+              "&.Mui-focused fieldset": { borderColor: "#3DB80C" },
+              borderRadius: "8px",
+            },
+          }}
+        />
+      </Box>
+
+      {/* Role */}
+      <Box mb={2}>
+        <Typography mb={0.5}>Role</Typography>
+        <FormControl size="small" fullWidth>
+          <Select
+            value={formData.role}
+            onChange={handleRoleChange}
+            displayEmpty
+            IconComponent={() => (
+              <ArrowDropDownIcon sx={{ color: "#3DB80C", cursor: "pointer" }} />
+            )}
+            sx={{
+              color: "#3DB80C",
+              backgroundColor: "#FDF7E1",
+              border: "1px solid #3DB80C",
+              borderRadius: "6px",
+              "& fieldset": { border: "none" },
+            }}
+          >
+            <MenuItem value="">Select Role</MenuItem>
+            <MenuItem value="president">President</MenuItem>
+            <MenuItem value="vice-president">Vice President</MenuItem>
+            <MenuItem value="marketing secretary">Marketing Secretary</MenuItem>
+            <MenuItem value="food secretary">Food Secretary</MenuItem>
+            <MenuItem value="culture secretary">Culture Secretary</MenuItem>
+            <MenuItem value="volunteer secretary">Volunteer Secretary</MenuItem>
+            <MenuItem value="event secretary">Event Secretary</MenuItem>
+            <MenuItem value="media secretary">Language/Media Secretary</MenuItem>
+            <MenuItem value="others">Others</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+
+      {/* Image Upload */}
+      <Box mb={2}>
+        <Typography mb={0.5}>Load Image</Typography>
+        <Button
+          component="label"
+          variant="outlined"
+          tabIndex={-1}
+          endIcon={<UploadFileIcon />}
+          sx={{ borderColor: "#3DB80C", color: "#3DB80C", py: "7px" }}
+        >
+          Upload
+          <VisuallyHiddenInput type="file" onChange={handleImageChange} />
+        </Button><br/>
+
+        {errors.image && (
+          <Typography color="#F34646" fontSize={14} mt={1}>
+            {errors.image}
+          </Typography>
+        )}
+
+        {imagePreview && (
+          <Box mt={1} position="relative" display="inline-block">
+            <img
+              src={imagePreview}
+              alt="preview"
+              style={{
+                maxWidth: "200px",
+                maxHeight: "100px",
+                objectFit: "contain",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+              }}
+            />
+            <CancelIcon
+              onClick={() => {
+                setFormData((prev) => ({ ...prev, image: null }));
+                setImagePreview(null);
+                setErrors({ image: "" });
+              }}
+              sx={{
+                position: "absolute",
+                top: -10,
+                right: -10,
+                backgroundColor: "white",
+                borderRadius: "50%",
+                color: "red",
+                cursor: "pointer",
+                boxShadow: 1,
+              }}
+            />
+          </Box>
+        )}
+
+        <Typography color="#F34646" mt={1}>
+          *Please upload the sponsor logo in landscape format (Preferred size: 300px × 100px)
+        </Typography>
+      </Box>
+
+      {/* Submit */}
+      <Box display="flex" justifyContent="center" mt={4}>
+        <Submit variant="contained" size="large" disabled={!isFormValid} onClick={handleSubmit}>
+          Submit
+        </Submit>
+      </Box>
     </Box>
   );
 };

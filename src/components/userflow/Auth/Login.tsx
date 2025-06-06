@@ -17,11 +17,12 @@ import { RootState, AppDispatch } from "../../../Redux/Store";
 import {
   setLogin,
   setForgetPassword,
-  setPopUp,
-  setMessage,
+
 } from "../../../Redux/UserFlow";
 import Fb from "../../../assets/fb2.png";
 import Googleimg from "../../../assets/google.png";
+import { useNavigate } from "react-router-dom";
+import { showToast } from "../../../Utils/ShowToast";
 type IProps={
   value:string
 }
@@ -40,7 +41,7 @@ export default function Login({value}:IProps) {
   const [passwordTouched, setPasswordTouched] = useState(false);
 
   const [isFormValid, setIsFormValid] = useState(false);
-
+ const navigate=useNavigate()
   function showcurrentPassword() {
     setCurrentShow(true);
     setCurrentType("text");
@@ -78,7 +79,7 @@ export default function Login({value}:IProps) {
   };
 
   const handleLogin = () => {
-    dispatch(setPopUp(true));
+
     setEmail("");
     setPassword("");
     setEmailError("");
@@ -88,7 +89,9 @@ export default function Login({value}:IProps) {
     setTimeout(() => {
       dispatch(setLogin(false));
     }, 1000);
-    dispatch(setMessage("Login successful!"));
+
+    showToast(true,'Login Successfully')
+    navigate('/')
     if(value==="member"){
     localStorage.setItem("member", "member");
     }

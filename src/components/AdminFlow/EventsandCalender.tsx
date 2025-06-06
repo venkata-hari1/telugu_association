@@ -7,7 +7,9 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useState } from "react";
 import Deletepopup from "./Deletepopup";
 import Paginationcomponent from "./Pagination";
-
+import bathukamma from '../../assets/bathukamma.jpg'
+import Ugaadi from '../../assets/Ugadii.png'
+import Bathukammaevent from '../../assets/bathukammaevent.png'
 const EventsandCalender = () => {
   
 const navigate=useNavigate();
@@ -24,9 +26,9 @@ const handleClose = () => {
 };
 
 const carddata=[
-  {id:1,title:"TOM Womens'Day",day:'Saturday',eveimg:'eventImg1',date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'},
-  {id:2,title:'TOM Dusssehra',day:'Saturday',eveimg:'eventImg1',date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'},
-  {id:3,title:'TOM Bhatukamma',day:'Saturday',eveimg:'eventImg1',date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'}
+  {id:1,title:"TOM Womens'Day",day:'Saturday',eveimg:bathukamma,date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'},
+  {id:2,title:'TOM Dusssehra',day:'Saturday',eveimg:Ugaadi,date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'},
+  {id:3,title:'TOM Bhatukamma',day:'Saturday',eveimg:Bathukammaevent,date:'04/19/2025',address1:'HTGC Temple,10915', address2:'Lemont Rd Lemont IL 60439'}
 ]
  return (
     <Box>
@@ -69,8 +71,8 @@ const carddata=[
             titleTypographyProps={{ fontSize: '20px', color: '#3DB80C' }} />
               <CardMedia
                        component="img"
-                       
-                       sx={{ height:250, maxWidth:'300px',objectFit: 'cover',margin:'auto' }}
+                       image={card.eveimg}
+                       sx={{ height:250, maxWidth:'300px',objectFit: 'contain',margin:'auto' }}
                      />
               <CardContent>
                <Typography gutterBottom variant="h6" component="div">
@@ -85,7 +87,7 @@ const carddata=[
                  </Typography>
               </CardContent>
                <Box display="flex" sx={{gap:"30px",justifyContent:"center",mt:'5px'}}>
-       <Custombutton variant="contained" startIcon={<EditIcon />}>
+       <Custombutton onClick={()=>navigate('/admin/events/addevent')} variant="contained" startIcon={<EditIcon />}>
          Edit
        </Custombutton>
        <Custombutton variant="outlined" startIcon={<DeleteOutlineIcon />} sx={{background:'white',borderColor:'red',color:'red'}}

@@ -13,10 +13,9 @@ import {
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { GreenTextField, Submit } from "../../adminstyles/MembershiptableStyles";
-import PopUp from "../../Utils/Popup";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Redux/Store";
-import { setMessage, setPopUp } from "../../Redux/UserFlow";
+import { showToast } from "../../Utils/ShowToast";
 
 const AddMember = () => {
   const [formData, setFormData] = useState<{
@@ -124,8 +123,7 @@ const dispatch=useDispatch<AppDispatch>()
         endDate: ''
       });
     }
-    dispatch(setPopUp(true))
-    dispatch(setMessage('Member Added Successfully'))
+    showToast(true,'Member Added Successfully')
   };
 
   // Check if form is valid
@@ -146,7 +144,6 @@ const dispatch=useDispatch<AppDispatch>()
 
   return (
     <Box sx={{ overflowX: { sm: "hidden" } }}>
-      <PopUp/>
       <Grid container spacing={2}>
         {/* First Name */}
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>

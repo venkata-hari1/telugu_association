@@ -10,10 +10,8 @@ import {
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PopUp1 from '../../Utils/PopUp1';
 import {  useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../Redux/Store';
-import { setMessage, setPopUp } from '../../Redux/UserFlow';
-import PopUp from '../../Utils/Popup';
+
+import {showToast} from '../../Utils/ShowToast';
 import { useNavigate } from 'react-router-dom';
 
 const Usermembership = () => {
@@ -21,7 +19,6 @@ const Usermembership = () => {
  const[open,setOpen]=useState(false)
 const[badge,setBadge]=useState('')
 const[plan,setPlan]=useState('')
-const dispatch=useDispatch<AppDispatch>()
 const navigate=useNavigate()
 const Plandetails=(t:string)=>{
 
@@ -67,15 +64,16 @@ const handleClose=(t:boolean)=>{
     if(value==="member"){
     localStorage.setItem('plan',t)
     setPlan(t);
-    dispatch(setMessage('Plan Changed Successfully'))
-    dispatch(setPopUp(true))
+
+    showToast(true,'Plan Changed Successfully')
     }
+    else{
    navigate('/member')
+    }
   }
   return (
  <Box sx={{ width: '100%', mx: 'auto', py: 2 }}>
   <PopUp1 badge={badge} open={open} handleClose={handleClose}/>
-  <PopUp/>
    <Typography color="#3DB80C" fontWeight="600" pl={3}>Membership Plans</Typography>
    <Paper
                 sx={{

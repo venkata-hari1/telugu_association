@@ -5,15 +5,12 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {  Fragment, useEffect, useState } from 'react';
 import Logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom';
-import { setMessage, setPopUp } from '../../Redux/UserFlow';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../Redux/Store';
-import PopUp from '../../Utils/Popup';
+import { showToast } from '../../Utils/ShowToast';
+
 
 const AdminLogin = () => {
 
   const navigate=useNavigate()
- const dispatch=useDispatch<AppDispatch>()
  const[currentshow,setCurrentShow]=useState(false)
  
  const [currenttype,setCurrentType]=useState("password")
@@ -72,8 +69,8 @@ function handlerPassword(event: any) {
 }
 
 const handleLogin = () => {
-  dispatch(setPopUp(true));
-  dispatch(setMessage("Login successful!"));
+ showToast(true,'Login successfully')
+  
   setTimeout(()=>{
     navigate('/admin/dashboard')
   },900)
@@ -87,7 +84,7 @@ const handleLogin = () => {
 
 return (
   <Fragment>
-        <PopUp />
+
    <Box 
    sx={{
     backgroundImage: `url(${backgroundImg})`,

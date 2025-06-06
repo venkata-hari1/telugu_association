@@ -2,8 +2,9 @@ import { Box, Grid, Typography, Button, TextField, Dialog, DialogContent, useMed
 import OTPInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../Redux/Store';
-import { setMessage, setNewPassword, setOtp, setPopUp } from '../../../Redux/UserFlow';
+import {  setNewPassword, setOtp} from '../../../Redux/UserFlow';
 import { useState, useEffect } from 'react';
+import { showToast } from '../../../Utils/ShowToast';
 
 const Otpinput = () => {
   const value = useSelector((state: RootState) => state.userFlow.otp);
@@ -27,8 +28,7 @@ const Otpinput = () => {
     if (otp.length === 4) {
       dispatch(setOtp(false));
       dispatch(setNewPassword(true));
-      dispatch(setMessage('Otp Verified'));
-      dispatch(setPopUp(true));
+     showToast(true,'OTP Verified')
       setOtpValue('');
       setOtpTouched(false);
       setOtpError('');

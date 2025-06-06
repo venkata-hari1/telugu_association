@@ -5,7 +5,8 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Redux/Store";
-import { setLogin, setMessage, setNewPassword, setPopUp } from "../../../Redux/UserFlow";
+import { setLogin,  setNewPassword } from "../../../Redux/UserFlow";
+import { showToast } from "../../../Utils/ShowToast";
 
 const Resetpassword = () => {
   const [newshow, setNewShow] = useState(false);
@@ -76,8 +77,8 @@ const Resetpassword = () => {
     if (!passwordError && !confirmPasswordError && password.length >= 6 && password === confirmPassword) {
       dispatch(setNewPassword(false));
       dispatch(setLogin(true));
-      dispatch(setMessage('Password Changed Successfully'));
-      dispatch(setPopUp(true));
+      showToast(true,'Password Changed Successfully')
+
       // Clear inputs on success
       setPassword("");
       setConfirmPassword("");
