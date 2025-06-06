@@ -22,6 +22,8 @@ import PopUp1 from "../../../Utils/PopUp1";
 import PopUp2 from "../../../Utils/PopUp2";
 import Login from "./Login";
 import Resetpassword from "./Resetpassword";
+import Forgotpassword from "./Forgotpassword";
+import Otpinput from "./Otpinput";
 
 const Registration = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -246,7 +248,9 @@ setFormData({
       <PopUp1 badge={badge} open={open} handleClose={handleClose}/>
       <PopUp2 display={display} handleDisplay={handleDisplay}/>
       <Login value='member'/>
-      <Resetpassword/>
+      <Forgotpassword />
+      <Resetpassword />
+      <Otpinput />
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography color="#3DB80C" fontWeight="700">
           Member Registration
