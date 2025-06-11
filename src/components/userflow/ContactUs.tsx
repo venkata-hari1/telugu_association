@@ -37,7 +37,7 @@ function ContactUs() {
           <Typography component="span"> 23-7411880</Typography>
         </Typography>
         <Typography>
-          We’ll get back to you as soon as possible. Thank you for connecting
+          We’ll get back to you as soon as possible. Thank you for colloborating
           with TEAM!
         </Typography>
       </Box>
