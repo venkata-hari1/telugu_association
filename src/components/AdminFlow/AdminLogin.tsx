@@ -6,11 +6,16 @@ import {  Fragment, useEffect, useState } from 'react';
 import Logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom';
 import { showToast } from '../../Utils/ShowToast';
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../Redux/Store";
+import { adminLogin } from "../../Redux/AdminLoginThunk"; // adjust path if needed
 
 
 const AdminLogin = () => {
 
   const navigate=useNavigate()
+
+   const dispatch = useDispatch<AppDispatch>();
  const[currentshow,setCurrentShow]=useState(false)
  
  const [currenttype,setCurrentType]=useState("password")
@@ -68,17 +73,43 @@ function handlerPassword(event: any) {
   }
 }
 
-const handleLogin = () => {
- showToast(true,'Login successfully')
+// const handleLogin = () => {
+//  showToast(true,'Login successfully')
   
-  setTimeout(()=>{
-    navigate('/admin/dashboard')
-  },900)
-  localStorage.setItem("admin", "admin");
-  setEmail("");
-  setPwd("");
-  setEmailerror("");
-  setPwdError("");
+//   setTimeout(()=>{
+//     navigate('/admin/dashboard')
+//   },900)
+//   localStorage.setItem("admin", "admin");
+//   setEmail("");
+//   setPwd("");
+//   setEmailerror("");
+//   setPwdError("");
+// };
+
+const handleLogin = async () => {
+  try {
+    const credentials = {
+      email: email,
+      password: pwd,
+    };
+
+    const result = await dispatch(adminLogin(credentials)).unwrap();
+
+    showToast(true, result.message || "Login successful!");
+
+    localStorage.setItem("admin", "admin");
+
+    setEmail("");
+    setPwd("");
+    setEmailerror("");
+    setPwdError("");
+
+    setTimeout(() => {
+      navigate("/admin/dashboard");
+    }, 900);
+  } catch (error: any) {
+    showToast(false, error.message || "Login failed!");
+  }
 };
 
 
