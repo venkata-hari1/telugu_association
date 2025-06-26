@@ -17,19 +17,27 @@ import { RootState, AppDispatch } from "../../../Redux/Store";
 import {
   setLogin,
   setForgetPassword,
-
 } from "../../../Redux/UserFlow";
 import Fb from "../../../assets/fb2.png";
 import Googleimg from "../../../assets/google.png";
 import { useNavigate } from "react-router-dom";
-import { showToast } from "../../../Utils/ShowToast";
-type IProps={
-  value:string 
+import { showToast } from "../../../Utils/ShowToast"; 
+
+type IProps = {
+  value: string;
+};
+
+
+declare global {
+  interface Window {
+    FB: any; 
+  }
 }
-export default function Login({value}:IProps) {
+
+export default function Login({ value }: IProps) {
   const login = useSelector((state: RootState) => state.userFlow.login);
   const dispatch = useDispatch<AppDispatch>();
-  const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))
+  const display = useMediaQuery((theme) => theme.breakpoints.down('lg'));
   const [currentshow, setCurrentShow] = useState(false);
   const [currenttype, setCurrentType] = useState("password");
 
@@ -41,7 +49,8 @@ export default function Login({value}:IProps) {
   const [passwordTouched, setPasswordTouched] = useState(false);
 
   const [isFormValid, setIsFormValid] = useState(false);
- const navigate=useNavigate()
+  const navigate = useNavigate();
+
   function showcurrentPassword() {
     setCurrentShow(true);
     setCurrentType("text");
@@ -67,6 +76,19 @@ export default function Login({value}:IProps) {
     }
 
     setIsFormValid(validateEmail(email) && password.length >= 6);
+
+   
+    if (window.FB && !window.FB._initialized) { 
+        window.FB.init({
+            appId: '633072536472101', 
+            cookie: true,
+            xfbml: true,
+            version: 'v12.0' 
+        });
+        window.FB._initialized = true; 
+    }
+   
+
   }, [email, password, emailTouched, passwordTouched]);
 
   const handleRegister = () => {
@@ -79,7 +101,7 @@ export default function Login({value}:IProps) {
   };
 
   const handleLogin = () => {
-
+   
     setEmail("");
     setPassword("");
     setEmailError("");
@@ -90,15 +112,47 @@ export default function Login({value}:IProps) {
       dispatch(setLogin(false));
     }, 1000);
 
-    showToast(true,'Login Successfully')
-    navigate('/')
-    if(value==="member"){
-    localStorage.setItem("member", "member");
+    showToast(true, 'Login Successfully');
+    navigate('/');
+    if (value === "member") {
+      localStorage.setItem("member", "member");
     }
   };
-const handleClose=()=>{
-  dispatch(setLogin(false))
-}
+
+ 
+  const handleFacebookLogin = () => {
+    if (window.FB) {
+      window.FB.login(function (response: any) {
+        if (response.authResponse) {
+          console.log('Welcome! Fetching your information.... ');
+          window.FB.api('/me', { fields: 'name,email' }, function (response: any) {
+            console.log('Good to see you, ' + response.name + '.');
+            console.log('User email: ' + response.email);
+            
+
+            showToast(true, `Logged in with Facebook as ${response.name}`);
+            dispatch(setLogin(false)); 
+            navigate('/');
+            if (value === "member") {
+              localStorage.setItem("member", "member");
+            }
+          });
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+          showToast(false, 'Facebook login cancelled or not authorized');
+        }
+      }, { scope: 'public_profile,email' }); 
+    } else {
+      console.error('Facebook SDK not loaded.');
+      showToast(false, 'Facebook SDK not loaded. Please try again.');
+    }
+  };
+  
+
+  const handleClose = () => {
+    dispatch(setLogin(false));
+  };
+
   return (
     <Dialog open={login} onClose={handleClose}>
       <DialogContent>
@@ -110,8 +164,8 @@ const handleClose=()=>{
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              padding: display?"":"40px",
-              width:"450px",
+              padding: display ? "" : "40px",
+              width: "450px",
               borderRadius: "15px",
               gap: 2,
             }}
@@ -130,12 +184,11 @@ const handleClose=()=>{
               </Typography>
             </Typography>
 
-            <Grid size={{xs:12}}>
+            <Grid size={{ xs: 12 }}>
               <Typography fontWeight="500">Email ID</Typography>
             </Grid>
-            <Grid size={{xs:12}}>
+            <Grid size={{ xs: 12 }}>
               <TextField
-        
                 type="email"
                 size="small"
                 placeholder="Your Email id"
@@ -156,10 +209,10 @@ const handleClose=()=>{
               />
             </Grid>
 
-            <Grid size={{xs:12}}>
+            <Grid size={{ xs: 12 }}>
               <Typography fontWeight="500">Password</Typography>
             </Grid>
-            <Grid size={{xs:12}}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 type={currenttype}
                 size="small"
@@ -204,20 +257,21 @@ const handleClose=()=>{
             </Grid>
 
             <Typography>Or</Typography>
-            <Box  sx={{ display:'flex',justifyContent:display?'center':'space-between',width: display?"100%":"30%" }}>
+            <Box sx={{ display: 'flex', justifyContent: display ? 'center' : 'space-between', width: display ? "100%" : "30%", gap: '20px' }}> {/* Added gap for spacing */}
               <Box
                 component="img"
                 src={Fb}
-                sx={{ width: "40px", height: "40px", objectFit: "cover" }}
+                sx={{ width: "40px", height: "40px", objectFit: "cover", cursor: "pointer" }} 
+                onClick={handleFacebookLogin} 
               />
               <Box
                 component="img"
                 src={Googleimg}
-                sx={{ width: "40px", height: "40px", objectFit: "cover" }}
+                sx={{ width: "40px", height: "40px", objectFit: "cover", cursor: "pointer" }} 
               />
             </Box>
 
-            <Box display="flex" flexDirection="column" sx={{width:display?'100%':'30%'}} >
+            <Box display="flex" flexDirection="column" sx={{ width: display ? '100%' : '30%' }} >
               <Button
                 variant="contained"
                 sx={{ background: "#3DB80C" }}
