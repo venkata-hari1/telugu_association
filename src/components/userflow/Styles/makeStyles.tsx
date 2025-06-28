@@ -14,13 +14,13 @@ const flex={
 export const useStyles = makeStyles()((theme:Theme) => ({
     root: {
     backgroundImage: `url(${backgroundImg})`,
-        backgroundSize: 'cover',         
+        backgroundSize: '100% 100%',     
         backgroundRepeat: 'no-repeat',     
-        backgroundPosition: 'contain',   
+        backgroundPosition: 'centre',   
  
         minHeight: '100vh',
         width: '100%',    
-        height:'fit-content',              
+        height:'100%',              
         display: 'flex',
         
         justifyContent: 'center',

@@ -54,8 +54,8 @@ function GoverningBodyPresidents() {
     setData(years);
   }, []);
   return (
-    <Box width="100%" p={2}>
-      <Typography variant="h6" color="#3DB80C" mb={1} fontWeight={700} >
+    <Box width="100%" p={1}>
+      <Typography variant="h6" color="#3DB80C" mb={0.5} fontWeight={700} >
         {pathname==="/governing_body/previous_board_members"?"Previous Board members":pathname==="/governing_body/board_of_directors"?"Board of Directors":"TEAM Honors and Recognizes our Past Presidents!"}
       </Typography>
 {pathname==="/governing_body/previous_board_members"&&<Fragment>
@@ -97,12 +97,12 @@ function GoverningBodyPresidents() {
                 image={member.image}
                 alt={member.name}
                 sx={{
-                  width: {lg:'100%',xs:'85%',md:'85%'},
-                 height:{lg:200,xs:130,md:130},
-                  objectFit: "cover",
-                  borderRadius: 2,
-                
-                }}
+                width: { lg: 120, md: 110, xs: 100 },
+                height: { lg: 120, md: 110, xs: 100 },
+                objectFit: "cover",
+                borderRadius: 2, // Circle crop
+                mb: 1, // margin bottom for spacing from name
+              }}
               />
               <CardContent>
                 <Typography
