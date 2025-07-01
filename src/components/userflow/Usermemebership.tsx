@@ -29,6 +29,7 @@ useEffect(()=>{
   const plan=localStorage.getItem('plan') || ''
   setPlan(plan)
 },[plan])
+
   const allplans = [
       {
         cardid: 1,
