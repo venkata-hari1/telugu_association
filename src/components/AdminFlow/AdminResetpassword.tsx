@@ -162,7 +162,7 @@ const AdminResetpassword = () => {
             )}
           </FormControl>
 
-          {/* Confirm Password Field */}
+          
           <FormControl fullWidth margin="normal" size="small" variant="outlined">
             <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 700 }}>
               Confirm Password
