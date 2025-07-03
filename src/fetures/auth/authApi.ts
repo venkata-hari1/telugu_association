@@ -5,12 +5,12 @@ export const signInAdmin = async (data:any) => {
 
     const reqData = JSON.stringify(data)
     const response = await axios({
-        url: `${origin}/auth/members_signin`,
+        url: `${origin}/auth/signin`,
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
-        data: reqData
+        data:reqData
     })
 
     return response?.data

@@ -32,14 +32,41 @@ const initialState: IAuth = {
 };
 
 
-export const loginUser = createAsyncThunk<any, { email: string; password: string }>(
-  'auth/loginuser',
-  async (data, { rejectWithValue }) => {
+// export const loginUser = createAsyncThunk(
+//   'auth/loginUser',
+//   async (payload:{data:{email:string,password:string}}, thunkAPI) => {
+//     try {
+//       const {data}=payload
+//       const res = await axios.post(`http://localhost:6000/api/auth/signin`, {data});
+//       return res.data;
+//     } catch (err: any) {
+//       return thunkAPI.rejectWithValue(err.response?.data?.message || 'Login failed');
+//     }
+//   }
+// );
+export const loginUser= createAsyncThunk(
+  "auth/signin",
+  async (payload: { data:{email:string,password:string} }, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const response = await api.signInAdmin(data);
-      return response;
+      const {data}=payload
+      const response = await fetch(`http://localhost:8080/api/auth/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+     
+      if (response.ok) {
+        localStorage.setItem("token", result.token);
+        return fulfillWithValue(result);
+      } else {
+        return rejectWithValue(result);
+      }
     } catch (error: any) {
-      return rejectWithValue(error.message || 'Login failed');
+      return rejectWithValue(error.message || "Something went wrong");
     }
   }
 );

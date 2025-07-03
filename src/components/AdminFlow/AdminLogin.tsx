@@ -80,7 +80,11 @@ function handlerPassword(event: any) {
  const handleLogin = async () => {
    const reqData = { email, password: pwd };
   // await dispatch(loginUser(reqData) as any); // cast `as any` if using plain JS without custom Thunk types
-const result = await dispatch(loginUser(reqData) as any);
+  const data={
+    email:email,
+    password:pwd
+  }
+const result = await dispatch(loginUser({data:data}) as any);
   if (signInUser) {
     showToast(true, 'Login successful');
     localStorage.setItem("admin", JSON.stringify(result.payload));
