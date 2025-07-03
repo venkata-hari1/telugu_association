@@ -13,21 +13,47 @@ import OTPInput from 'react-otp-input';
 import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {showToast} from '../../Utils/ShowToast';
-;
+import { verifyOtp } from '../../fetures/auth/authSlice';
+import {  useLocation } from 'react-router-dom';
+import { useEffect } from 'react'; 
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../../Redux/Store'; 
+
 
 
 const AdminOtp = () => {
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
-  const navigate = useNavigate()
-  const handleOtp=()=>{
-   showToast(true,'OTP Verified Successfully')
-   setOtp('')
-   setTimeout(()=>{
-    navigate('/adminreset')
-   },900)
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
   
+const location = useLocation();
+const email = location.state?.email;
+  
+  
+  useSelector((state: RootState) => state.login);
+
+  const handleOtp = () => {
+  if (otp.length !== 4 || !email) {
+    setOtpError("Please enter a valid 5-digit OTP");
+    return;
   }
+
+  dispatch(verifyOtp({ email, otp }))
+    .then((result: any) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        showToast(true, "OTP Verified Successfully");
+        navigate('/adminreset', { state: { email } });
+      } else {
+        showToast(false, result.payload || "Invalid OTP");
+      }
+    });
+};
+
+
+  
+
   return (
     <Fragment>
     <Box
