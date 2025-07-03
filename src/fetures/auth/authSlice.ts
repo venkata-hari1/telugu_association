@@ -1,60 +1,3 @@
-//  import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
-// import * as api from './authApi' 
-
-// interface IAuth{
-//      signInUser:any,
-//     loading:boolean,
-//     error:any
-// }
-
-// const initialState:IAuth ={
-//      signInUser:null,
-//     loading:false,
-//     error:null,
-// }
-
-// export const loginUser = createAsyncThunk<any> ('auth/loginuser',
-//     async(data:any,{rejectWithValue})=>{
-//         try{
-//             const response =  await api.signInAdmin(data)
-//             return response;
-//         }   
-//         catch(error:any){
-//             return rejectWithValue(error.message)
-
-//         }
-
-//     }
-// )
-
-
-// const authSlice = createSlice({
-//     name:"auth",
-//     initialState,
-//     reducers:{   resetauthAdminState:(state)=>{
-//             state.signInUser = null
-           
-//         }},
-//     extraReducers:(builder)=>{
-//         builder.addCase(loginUser.pending, (state) =>{
-//             state.loading= true 
-//             state.error = null
-//         })
-        
-//        builder.addCase(loginUser.fulfilled,(state , action:any)=>{
-//             state.loading = false
-//             state.signInUser=action.payload
-                    
-//         })
-//        builder.addCase(loginUser.rejected, (state ,action:any )=>{
-//             state.loading = false
-//             state.error = action.payload
-//         })
-//     }
-// })
-// export const { resetauthAdminState
-//  } = authSlice.actions;
-// export default authSlice.reducer
 
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as api from './authApi';
@@ -120,7 +63,7 @@ export const forgetPassword = createAsyncThunk<
 
 export const verifyOtp = createAsyncThunk<
   ApiResponse,
-  { email: string; otp: string }, // ✅ Accept both email and otp
+  { email: string; otp: string }, 
   { rejectValue: string }
 >(
   'auth/verifyOtp',
