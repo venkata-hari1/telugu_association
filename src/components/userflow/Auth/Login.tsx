@@ -26,7 +26,7 @@ import { showToast } from "../../../Utils/ShowToast";
 type IProps={
   value:string 
 }
-export default function Login({value}:IProps) {
+export default function Login({value}:IProps,loginopen:boolean) {
   const login = useSelector((state: RootState) => state.userFlow.login);
   const dispatch = useDispatch<AppDispatch>();
   const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { makeStyles } from 'tss-react/mui';
+import Panchangampopup from '../../Utils/Panchangampopup';
 
 const useStyles = makeStyles()((theme:Theme) => ({
   centergrid:{
@@ -84,6 +85,26 @@ const MyCalendar = () => {
     date1.getMonth() === date2.getMonth() &&
     date1.getDate() === date2.getDate();
 
+
+const [open,setOpen] = useState(false);
+
+const[selectedDate,setSelectedDate]=useState("");
+const handleClickOpen = (currentdate:Date) => {
+  setOpen(true);
+  setValue(currentdate)
+  const day=currentdate.getDate().toString().padStart(2,'0');
+  const month=currentdate.toLocaleString('en-US',{month:'short'});
+  const year=currentdate.getFullYear()
+  const formattedDate=`${day} ${month} ${year}`
+  console.log(formattedDate)
+  setSelectedDate(formattedDate)
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   return (
     <Box className={classes.centergrid}>
     <Calendar
@@ -97,7 +118,9 @@ const MyCalendar = () => {
         }
         return undefined;
       }}
+      onClickDay={(currentdate)=>handleClickOpen(currentdate)}
     />
+    {open &&<Panchangampopup open={open} handleclose={handleClose} selecteddate={selectedDate}/>}
     </Box>
   );
 };
