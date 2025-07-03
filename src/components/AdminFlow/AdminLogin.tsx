@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { showToast } from '../../Utils/ShowToast';
 import { useDispatch, useSelector } from 'react-redux';
   import { loginUser } from '../../fetures/auth/authSlice';
+import { AppDispatch } from '../../Redux/Store';
 
 
 
@@ -17,8 +18,12 @@ import { useDispatch, useSelector } from 'react-redux';
 const AdminLogin = () => {
 
   const navigate=useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { signInUser, loading, error, } = useSelector((state: any) => state.login)
+  const [email,setEmail]=useState<string>('')
+  const[pwd,setPwd]=useState<string>('')
+
+const [pwdError, setPwdError] = useState('');
  const[currentshow,setCurrentShow]=useState(false)
  
  const [currenttype,setCurrentType]=useState("password")
@@ -32,7 +37,6 @@ function hidecurrentPassword(){
   setCurrentType("password")
 }
 
-const [email,setEmail]=useState('')
 
 function handleEmail(event:any){
   setEmail(event.target.value)
@@ -60,9 +64,7 @@ function emailHandlingError(isEmail:any){
   }
 }
 
-const[pwd,setPwd]=useState('')
 
-const [pwdError, setPwdError] = useState('');
 
 function handlerPassword(event: any) {
   const newPassword = event.target.value;
@@ -77,32 +79,31 @@ function handlerPassword(event: any) {
 }
 
 
- const handleLogin = async () => {
-   const reqData = { email, password: pwd };
-  // await dispatch(loginUser(reqData) as any); // cast `as any` if using plain JS without custom Thunk types
+ const handleLogin = async() => {
+  try{
   const data={
     email:email,
     password:pwd
   }
-const result = await dispatch(loginUser({data:data}) as any);
-  if (signInUser) {
-    showToast(true, 'Login successful');
-    localStorage.setItem("admin", JSON.stringify(result.payload));
-    navigate('/admin/dashboard');
-  
-
-  } else {
-    const errorMsg = result.payload || error|| 'Login failed';
-    showToast(false, errorMsg);
-  }
-
-  // Clear form fields
-  setEmail("");
+const response = await dispatch(loginUser({data:data}));
+const fullfilled=response.payload
+  if (fullfilled.status) {
+    showToast(true, fullfilled.message);
+    setEmail("");
   setPwd("");
   setEmailerror("");
   setPwdError("");
-};
+    setTimeout(()=>{ navigate('/admin/dashboard')},200)
+  } else {
+    showToast(false,fullfilled.message );
+  }
+}
+ 
+ catch(error){}
+ finally{
 
+ }
+}
 
 
 return (

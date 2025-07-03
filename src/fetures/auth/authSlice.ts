@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as api from './authApi';
 import axios from 'axios';
 import { origin } from '../../apiRequest/config'; 
+import { baseURL, endpoints } from "../../Utils/Config";
 
 
 interface ApiResponse {
@@ -46,10 +47,10 @@ const initialState: IAuth = {
 // );
 export const loginUser= createAsyncThunk(
   "auth/signin",
-  async (payload: { data:{email:string,password:string} }, { fulfillWithValue, rejectWithValue }) => {
+  async (payload: { data:{email:string ,password:string } }, { fulfillWithValue, rejectWithValue }) => {
     try {
       const {data}=payload
-      const response = await fetch(`http://localhost:8080/api/auth/signin`, {
+      const response = await fetch(`${baseURL}/${endpoints.SIGNIN}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,13 +61,14 @@ export const loginUser= createAsyncThunk(
       const result = await response.json();
      
       if (response.ok) {
-        localStorage.setItem("token", result.token);
+      
+        localStorage.setItem("token", result.accesstoken);
         return fulfillWithValue(result);
       } else {
         return rejectWithValue(result);
       }
-    } catch (error: any) {
-      return rejectWithValue(error.message || "Something went wrong");
+    } catch (error) {
+      return rejectWithValue(error|| "Something went wrong");
     }
   }
 );
