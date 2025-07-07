@@ -7,7 +7,7 @@ const Nakshatralu = () => {
   const navigate=useNavigate();
     return (
   <Box width="100%" p={2}>
-    <Typography color='#3DB80C' fontWeight="700">Telugu Nakshatralu</Typography>
+    <Typography color='#3DB80C' fontWeight="700" fontSize={17}>Telugu Nakshatralu</Typography>
      <Box display="flex" justifyContent="center">
          <Box component="img"  mt={2} src={nakshatralu} width="80%"
      />

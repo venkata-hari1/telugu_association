@@ -7,7 +7,7 @@ const Vemanapadyalu = () => {
   const navigate=useNavigate(); 
   return (
      <Box width="100%" p={2}>
-       <Typography color='#3DB80C' fontWeight="700">Vemana Padyalu</Typography>
+       <Typography color='#3DB80C' fontWeight="700" fontSize={17}>Vemana Padyalu</Typography>
         <Box display="flex" justifyContent="center">
             <Box component="img"  mt={2} src={vemanapadyalu} width="95%"
         />

@@ -7,7 +7,7 @@ const Tithulu = () => {
 
   return (
      <Box width="100%" p={2}>
-       <Typography color='#3DB80C' fontWeight="700">Telugu Tidhulu</Typography>
+       <Typography color='#3DB80C' fontWeight="700" fontSize={17}>Telugu Tidhulu</Typography>
         <Box display="flex" justifyContent="center">
             <Box component="img"  mt={2} src={tithulu} width="100%"
         />

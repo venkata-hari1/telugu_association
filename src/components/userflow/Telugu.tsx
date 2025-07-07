@@ -33,13 +33,14 @@ const navigate=useNavigate()
 
   return (
    <Box sx={{width:'100%',p:2}}>
-    <Typography color='#3DB80C' fontWeight="700">Telugu Vyakaranam</Typography>
+    <Typography color='#3DB80C' fontWeight="700" fontSize={18}>Telugu Vyakaranam</Typography>
      <Grid container spacing={4} display="flex" justifyContent='flex-start' mt={4}>
     { 
       telugudata.map(telugu=>(
        
        <Grid size={{xs:12,md:4}} >
-       <Button variant="outlined" fullWidth sx={{background:'white',color:"#3DB80C",borderColor:'#3DB80C',fontWeight:700}}
+       <Button variant="outlined" sx={{background:'white',color:"#3DB80C",borderColor:'#3DB80C',fontWeight:700
+       ,width:{md:'200px',xs:'100%'},whiteSpace:'nowrap'}}
        onClick={()=>vyakaramHandle(telugu.id)}
        >{telugu.title}</Button>
       </Grid>

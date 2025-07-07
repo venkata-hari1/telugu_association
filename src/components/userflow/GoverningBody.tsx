@@ -28,6 +28,7 @@ import { Fragment, useEffect, useState } from "react";
 function GoverningBodyPresidents() {
   const location = useLocation();
   const pathname = location.pathname;
+ 
  const[date,setData]=useState<number[]>([])
   const boardmembers = [
     { id: 1, name: "Ramachandra Peteti", image: Ramachandra, position: "2021 President" },
@@ -46,6 +47,7 @@ function GoverningBodyPresidents() {
     { id: 14, name: "Ram Tallapaka", image: Ramtallapaka, position: "2008 President" },
     { id: 15, name: "Venkata Akurati", image: Venkat, position: "2007 President" },
   ];
+
   useEffect(() => {
     const years = [];
     for (let i = 2023; i >= 2013; i--) {
@@ -53,24 +55,25 @@ function GoverningBodyPresidents() {
     }
     setData(years);
   }, []);
+  
   return (
-    <Box width="100%" p={2}>
+  <Box width="100%" p={2}>
       <Typography variant="h6" color="#3DB80C" mb={1} fontWeight={700} >
         {pathname==="/governing_body/previous_board_members"?"Previous Board members":pathname==="/governing_body/board_of_directors"?"Board of Directors":"TEAM Honors and Recognizes our Past Presidents!"}
       </Typography>
-{pathname==="/governing_body/previous_board_members"&&<Fragment>
-  <Box
-  gap={1}
-  sx={{
-    display: 'flex',
-    justifyContent:'space-between',
-    overflowX: 'auto',
-    whiteSpace: 'nowrap',
-    paddingBottom: '8px',
-    '&::-webkit-scrollbar': {
-      display: 'none', 
-    },
-  }}
+    {pathname==="/governing_body/previous_board_members"&&<Fragment>
+   <Box
+    gap={1}
+    sx={{
+      display: 'flex',
+      justifyContent:'space-between',
+      overflowX: 'auto',
+      whiteSpace: 'nowrap',
+      paddingBottom: '8px',
+      '&::-webkit-scrollbar': {
+        display: 'none', 
+      },
+    }}
 >
   {date.map((x:number)=>
     <Button key={x} variant="contained" sx={{ background: '#3DB80C',fontSize:{lg:'14px',xs:'11px',md:'11px'}}} >{x}</Button>
@@ -90,6 +93,7 @@ function GoverningBodyPresidents() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                gap:"60px"
               }}
             >
               <CardMedia
@@ -97,8 +101,8 @@ function GoverningBodyPresidents() {
                 image={member.image}
                 alt={member.name}
                 sx={{
-                  width: {lg:'100%',xs:'85%',md:'85%'},
-                 height:{lg:200,xs:130,md:130},
+                  width: {lg:'70%',xs:'85%',md:'80%'},
+                 height:{lg:230,xs:130,md:130},
                   objectFit: "cover",
                   borderRadius: 2,
                 
@@ -107,7 +111,8 @@ function GoverningBodyPresidents() {
               <CardContent>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: "black", textAlign: "center", fontWeight: 700 }}
+                  sx={{ color: "black", textAlign: "center", 
+                    fontSize:"15px",fontWeight: 700 }}
                 >
                   {member.name}
                 </Typography>

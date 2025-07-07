@@ -21,7 +21,7 @@ function Sponsors() {
   const display=useMediaQuery((theme:Theme)=>theme.breakpoints.down('lg'))
   return (
     <Box width="100%" p={2}>
-     <Typography color="#3DB80C" fontWeight={600}>Our Sponsers</Typography>
+     <Typography color="#3DB80C" fontWeight={600} fontSize={18}>Our sponsors</Typography>
      <Box p={3}>
       <Grid container spacing={4}>
       {
@@ -39,7 +39,7 @@ function Sponsors() {
          objectFit: 'contain',
          justifyContent:'center'}}/>
          <CardContent>
-          <Typography textAlign="center" fontWeight={600}>{sponser.name}</Typography>
+          <Typography textAlign="center" fontWeight={600} fontSize={17}>{sponser.name}</Typography>
          </CardContent>
         </Card>
        </Grid>
@@ -50,15 +50,15 @@ function Sponsors() {
     
     <Box mt={3} display="flex" justifyContent="center" flexDirection="column" alignItems="center"> 
       <Typography>
-      <Typography component="span">
-        For more information Click here for</Typography>
-       <Typography component="span" color='#3DB80C'>Marketing brochure</Typography>
+      <Typography component="span" fontSize={16} fontWeight="700">
+        For more information Click here for </Typography>
+       <Typography component="span" color='#3DB80C' fontSize={16} fontWeight="700" sx={{textDecoration:'underline'}}>Marketing brochure</Typography>
       </Typography>
-        <Typography>TEAM Marketing Executive(s):</Typography>
-    <Typography>Surendra Kanneganti @ +1 (612) 212-9251</Typography>
+        <Typography fontSize={17} fontWeight="700">TEAM Marketing Executive(s):</Typography>
+    <Typography fontSize={16} fontWeight="700">Surendra Kanneganti @ +1 (612) 212-9251</Typography>
     <Typography display="flex">
-    <Typography component="span">Email:</Typography>
-    <Typography component="span" color='#3DB80C'>marketing@telugumn.org</Typography>
+    <Typography component="span" fontSize={16} fontWeight="700">Email:</Typography>
+    <Typography component="span" color='#3DB80C' fontSize={16} fontWeight="700">marketing@telugumn.org</Typography>
     </Typography>
 </Box>
     

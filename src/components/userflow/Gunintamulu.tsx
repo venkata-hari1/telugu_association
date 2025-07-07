@@ -8,7 +8,7 @@ const Gunintamulu = () => {
     
   return (
       <Box width="100%" p={2}>
-       <Typography color='#3DB80C' fontWeight="700">Telugu Gunintamulu</Typography>
+       <Typography color='#3DB80C' fontWeight="700" fontSize={17}>Telugu Gunintamulu</Typography>
         <Box display="flex" justifyContent="center">
             <Box component="img"  mt={2} src={gunintamulu} width="95%"
         />

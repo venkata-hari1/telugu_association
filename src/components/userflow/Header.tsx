@@ -52,8 +52,8 @@ const tabData: TabData[] = [
   { id: 5, label: 'Telugu', link: '/telugu' },
   { id: 6, label: 'Gallery', link: '/gallery',
     dropdown: [
-      { id: 40, label: 'Photos', link: '/gallery/photos' },
-      { id: 41, label: 'Videos', link: '/gallery/videos' },
+      { id: 40, label: 'Photo Gallery', link: '/gallery/photos' },
+      { id: 41, label: 'Video Gallery', link: '/gallery/videos' },
     ],
 
    },
@@ -131,7 +131,7 @@ export default function Header() {
                       content: '""',
                       display: 'block',
                       position: 'absolute',
-                      bottom: -11,
+                      bottom: -12,
                       left: 0,
                       right: 0,
                       height: '3px',

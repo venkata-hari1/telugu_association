@@ -63,7 +63,10 @@ const Events = () => {
     },
     
   ];
+
   const Event=pathname==="/events/upcoming"?upcomingevents:pastevents
+  
+
   return (
     <Box width="100%">
       <Box sx={{ p: 2 }}>
@@ -73,12 +76,12 @@ const Events = () => {
           {pathname==="/events/upcoming"?"Upcoming Events":"Past Events"}
         </Typography>
 
-        {Event.map((event) => (
-          <Box>
+        {Event.map((event,index) => (
+          <Box >
             <Box sx={{ display: "flex", mt: 2 }}>
               <Card
-                variant="outlined"
-                sx={{ display: "flex", gap: 3, background: "transparent",width:{lg:'60%',xs:'100%'} }}
+                sx={{ display: "flex", gap: 6, background: "transparent",width:{lg:'60%',xs:'100%'},
+              boxShadow:'none' }}
               >
                 <CardMedia
                   component="image"
@@ -120,8 +123,12 @@ const Events = () => {
                 </Box>
               </Card>
             </Box>
-
-            <Divider sx={{ border: "1px solid #3DB80C", mt: 3 }} />
+           {
+            index!==Event.length-1 &&(
+               <Divider sx={{ border: "1px solid #3DB80C",mt: 3 }} />
+            )
+           }
+           
           </Box>
         ))}
       </Box>

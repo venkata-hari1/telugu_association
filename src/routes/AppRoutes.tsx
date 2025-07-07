@@ -32,7 +32,6 @@ import Profileotp from '../components/AdminFlow/Profileotp'
 
 
 
-
 const AdminRoutes = () => {
   return (
     <Routes>
