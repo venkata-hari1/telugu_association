@@ -12,7 +12,7 @@ export default function Sidebar() {
  const {classes}:IProps=useStyles()
   return (
     <Box className={classes.sidebarstyle} sx={{display:{xs:'none',md:'none',lg:'grid'}}}>
-      <DonateBecomeMember/>
+    <DonateBecomeMember/>
       <Box>
         <Typography className={classes.commontext} sx={{mt:2,textTransform:'uppercase'}}>Panchangam</Typography>
         <Calender/>

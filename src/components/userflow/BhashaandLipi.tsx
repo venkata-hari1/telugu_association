@@ -8,7 +8,7 @@ const BhashaandLipi = () => {
     const navigate=useNavigate(); 
   return (
      <Box width="100%" p={2}>
-              <Typography color='#3DB80C' fontWeight="700">Telugu Bhasa, Lipi Charitra</Typography>
+              <Typography color='#3DB80C' fontWeight="700" fontSize={17}>Telugu Bhasa, Lipi Charitra</Typography>
                <Box display="flex" justifyContent="center">
                    <Box component="img"  mt={2} src={lipi} width="95%"
                />

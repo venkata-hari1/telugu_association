@@ -9,6 +9,7 @@ import tv5 from '../../assets/TV5.jpg'
 import MyCalendar from "./Calender"
 import UpcomingEvents from "./UpcomingEvents"
 
+
 function Home() {
 const display=useMediaQuery((theme)=>theme.breakpoints.down('lg'))
 
@@ -95,14 +96,16 @@ const sponserdata=[
            {gallerydata.map((data) => (
             <Grid size={{xs:12 ,sm:6 ,md:6}} key={data.id}>
              <Card sx={{ width: '100%',background:'transparent' }} variant="outlined" component={Paper}>
+             <Box sx={{width:'100%',height:180,overflow:'hidden'}}>
              <CardMedia
               component="img"
               image={data.img}
               alt={data.text}
-              sx={{ height: 150,width:'100%', objectFit: 'contain',display:'block' }}
+              sx={{ height:"100%",width:'100%', objectFit: 'cover',display:'block',p:'0px 12px', }}
             />
+            </Box>
             <CardContent>
-              <Typography variant="body2" sx={{ color: 'text.secondary',fontSize:'13px' }}>
+              <Typography variant="body2" sx={{ color: 'text.secondary',fontSize:'14px',fontWeight:600 }}>
                 {data.text}
               </Typography>
             </CardContent>
@@ -113,7 +116,9 @@ const sponserdata=[
     </Box>}
    
    {!display&&<Box sx={{ mb: 1 }}>
-  <Typography variant="h6" color="#3DB80C" mb={1} sx={{marginLeft:"30px",fontWeight:'bold',fontSize:'15px'}}> OUR SPONSERS</Typography>
+  <Typography variant="h6" color="#3DB80C" mb={1} sx={{marginLeft:"30px",fontWeight:'bold',fontSize:'16px'}}>
+    OUR SPONSORS
+  </Typography>
   <Grid container>
   <Box component={Paper} 
   sx={{display:'flex',

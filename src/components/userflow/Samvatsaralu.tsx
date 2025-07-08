@@ -7,7 +7,7 @@ const Samvatsaralu = () => {
   return (
 
      <Box width="100%" p={2}>
-    <Typography color='#3DB80C' fontWeight="700">Telugu Samvatsaralu</Typography>
+    <Typography color='#3DB80C' fontWeight="700" fontSize={17}>Telugu Samvatsaralu</Typography>
      <Box display="flex" justifyContent="center">
          <Box component="img"  mt={2} src={samvastaralu} width="80%"
      />

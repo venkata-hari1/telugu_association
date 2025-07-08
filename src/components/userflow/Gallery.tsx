@@ -58,7 +58,7 @@ function Gallery() {
   return (
     <Box width="100%" p={2}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography color="#3DB80C" fontWeight="700">
+        <Typography color="#3DB80C" fontWeight="700" fontSize={18}>
           {pathname==="/gallery/photos"?"Photo Gallery":"Video Gallery"}
         </Typography>
         <FormControl size="small">
@@ -107,7 +107,59 @@ function Gallery() {
           </Select>
         </FormControl>
       </Box>
+     {/* Events dropdown */}
+       <Box>
+          <FormControl size="small">
+          <Select
+            value="Event"
+            variant="outlined"
+            displayEmpty
+            IconComponent={() => (
+              <ArrowDropDownIcon sx={{ color: "green", cursor: "pointer" }} />
+            )}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  backgroundColor: "#FDF7E1",
+                  marginTop: "4px",
+                  "& .MuiMenuItem-root": {
+                    backgroundColor: "#FDF7E1",
+                    color: "#3DB80C",
+                    "&:hover": {
+                      backgroundColor: "#3DB80C",
+                      color: "white",
+                    },
+                  },
+                },
+              },
+            }}
+            sx={{
+              fontSize:"16px",
+              fontWeight:700,
+              color: "#3DB80C",
+              backgroundColor: "white",
+              /* border: "1px solid #3DB80C", */
+              borderRadius: "2px",
+              width: "120px",
+              padding: "1px 1px",
+              "& .MuiSelect-outlined": {
+                padding: "8px 10px",
+               background: "transparent",
+              },
+              "& fieldset": {
+                border: "none",
+              },
+            }}
+          >
+            <MenuItem value="Event">Event</MenuItem>
+            <MenuItem value="TAM Deepavali">TAM Deepavali</MenuItem>
+            <MenuItem value="TAM Sankranthi">TAM Sankranthi</MenuItem>
+          </Select>
+        </FormControl>
 
+       </Box>
+
+     
       {Gallery.map((gdata) => (
         <Box key={gdata.id}>
           <Paper
@@ -118,7 +170,7 @@ function Gallery() {
               p: 1,
               margin: "auto",
               marginTop: "10px",
-              width: "95%",
+              width: "100%",
             }}
           >
             <Typography
