@@ -86,11 +86,17 @@ function Home() {
               mb: 1,
               cursor: "pointer",
             }}
-            onClick={() => setOpenPanchangam(true)}
           >
             Panchangam
           </Typography>
-          <MyCalendar value={calendarDate} setValue={handleCalendarChange} />
+          <MyCalendar
+            value={calendarDate}
+            setValue={setCalendarDate}
+            onDateClick={(date) => {
+              setCalendarDate(date);
+              setOpenPanchangam(true);
+            }}
+          />
           <PanchangamModal
             open={openPanchangam}
             onClose={() => setOpenPanchangam(false)}

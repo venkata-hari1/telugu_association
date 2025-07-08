@@ -20,7 +20,6 @@ export function PanchangamModal({
   open,
   onClose,
   date,
-  setDate,
   headerColor = "#3DB80C",
 }: PanchangamModalProps) {
   const formatDate = (date: Date) =>
@@ -156,14 +155,6 @@ export default function Sidebar() {
   const [calendarDate, setCalendarDate] = useState<Date>(new Date());
   const [openPanchangam, setOpenPanchangam] = useState(false);
 
-  // Format date for modal header (e.g., 02 Dec 2024)
-  const formatDate = (date: Date) =>
-    date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-
   return (
     <Box
       className={classes.sidebarstyle}
@@ -174,13 +165,16 @@ export default function Sidebar() {
         <Typography
           className={classes.commontext}
           sx={{ mt: 2, textTransform: "uppercase", cursor: "pointer" }}
-          onClick={() => setOpenPanchangam(true)}
         >
           Panchangam
         </Typography>
         <Calender
           value={calendarDate}
-          setValue={(d) => setCalendarDate(d ?? new Date())}
+          setValue={setCalendarDate}
+          onDateClick={(date) => {
+            setCalendarDate(date);
+            setOpenPanchangam(true);
+          }}
         />
       </Box>
       <ProudSponers />
