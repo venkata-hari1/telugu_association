@@ -35,6 +35,9 @@ import MembershipregPopup from "./MembershipregPopup";
 import Donate from "./Donate";
 import Volunteer from "./Volunteer";
 
+import backgroundImg from "../../assets/BackgroundImage.png";
+import { useEffect, useRef } from "react";
+
 type Classes = {
   root: string;
 };
@@ -42,8 +45,52 @@ type Classes = {
 export default function Welcomepage() {
   const { classes }: { classes: Classes } = useStyles();
   const display = useMediaQuery((theme) => theme.breakpoints.down("lg"));
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (bgRef.current) {
+        const bgHeight = bgRef.current.offsetHeight;
+        const scrollY = window.scrollY;
+        if (scrollY >= bgHeight - window.innerHeight) {
+          bgRef.current.style.position = "fixed";
+          bgRef.current.style.top = `${-(bgHeight - window.innerHeight)}px`;
+        } else {
+          bgRef.current.style.position = "absolute";
+          bgRef.current.style.top = "0";
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <Box className={classes.root} id="top">
+    <Box className={classes.root} id="top" sx={{ position: "relative", minHeight: "100vh" }} >
+      <Box
+        ref={bgRef}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "fit-content",
+          zIndex: -1,
+          overflow: "hidden",
+        }}
+      >
+        <img
+          src={backgroundImg}
+          alt="Background"
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "block",
+          }}
+        />
+      </Box>
+
       <Header />
       <Grid
         container

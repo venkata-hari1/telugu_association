@@ -1,5 +1,4 @@
 import { makeStyles } from "tss-react/mui";
-import backgroundImg from "../../../assets/BackgroundImage.png";
 import { Theme } from "@mui/material";
 export const Lato = {
   fontFamily: '"Lato", sans-serif',
@@ -14,10 +13,6 @@ const flex = {
 
 export const useStyles = makeStyles()((theme: Theme) => ({
   root: {
-    backgroundImage: `url(${backgroundImg})`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
     minHeight: "100vh",
     width: "100%",
     height: "fit-content",
