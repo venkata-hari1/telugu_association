@@ -15,7 +15,6 @@ const initialState: IProps = {
     popup:false,
     message:''
 };
-
 const userFlowSlice = createSlice({
     name: 'userFlow',
     initialState,
