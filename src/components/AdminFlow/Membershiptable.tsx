@@ -1,4 +1,4 @@
-import { Box, Button, Grid, IconButton, Stack, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Box, Button, Grid, IconButton, Stack, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import UploadIcon from "@mui/icons-material/Upload";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -6,15 +6,23 @@ import EditIcon from "@mui/icons-material/Edit";
 import CircleIcon from "@mui/icons-material/Circle";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import * as XLSX from 'xlsx'; // Import SheetJS
+import { useState, useRef } from "react";
+import { useDispatch } from 'react-redux';
+import * as XLSX from 'xlsx';
+
 import Filterdropdown from "./Filterdropdown";
 import Paginationcomponent from "./Pagination";
 
 const Membershiptable = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [state, setState] = useState(false);
-  const [openPreview, setOpenPreview] = useState(false); // State for preview dialog
+  const [openExportPreview, setOpenExportPreview] = useState(false); 
+
+  const [uploadLoading, setUploadLoading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const tabledata = [
     {
@@ -77,19 +85,15 @@ const Membershiptable = () => {
     setState((prev) => !prev);
   };
 
-  // Open preview dialog
-  const handleOpenPreview = () => {
-    setOpenPreview(true);
+  const handleOpenExportPreview = () => {
+    setOpenExportPreview(true);
   };
 
-  // Close preview dialog
-  const handleClosePreview = () => {
-    setOpenPreview(false);
+  const handleCloseExportPreview = () => {
+    setOpenExportPreview(false);
   };
 
-  // Export to Excel function
   const exportToExcel = () => {
-    // Prepare data for export (excluding the 'action' column)
     const exportData = tabledata.map(({ sno, name, email, phone, membertype, date, status }) => ({
       SNo: sno,
       Name: name,
@@ -100,25 +104,95 @@ const Membershiptable = () => {
       Status: status,
     }));
 
-    // Create a worksheet
     const worksheet = XLSX.utils.json_to_sheet(exportData);
-    // Create a workbook
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Memberships");
-    // Export the workbook to a file
     XLSX.writeFile(workbook, "Membership_Management.xlsx");
-    handleClosePreview(); // Close dialog after download
+    handleCloseExportPreview();
+  };
+
+  const handleBulkUploadButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) {
+      setUploadError('No file selected.');
+      return;
+    }
+
+    setUploadLoading(true);
+    setUploadError('');
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      try {
+        const data = new Uint8Array(e.target?.result as ArrayBuffer);
+        const workbook = XLSX.read(data, { type: 'array' });
+
+        const firstSheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheetName];
+
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+        if (jsonData.length > 0) {
+          const headers = jsonData[0] as string[];
+          const rows = jsonData.slice(1);
+
+          const formattedData = rows.map(row => {
+            let obj: { [key: string]: any } = {};
+            headers.forEach((header, index) => {
+              obj[header] = (row as any[])[index];
+            });
+            return obj;
+          });
+
+          // Console log the formatted data (the parsed array of objects)
+          console.log('Parsed and formatted data ready for dispatch:', formattedData);
+
+          dispatch({
+            type: 'BULK_UPLOAD_MEMBERSHIPS_TEXT',
+            payload: JSON.stringify(formattedData),
+          });
+
+        } else {
+          setUploadError('The uploaded file appears to be empty or contains no data after headers.');
+        }
+      } catch (err: any) {
+        setUploadError(`Error processing file: ${err.message}`);
+        console.error('Error processing Excel/CSV file:', err);
+      } finally {
+        setUploadLoading(false);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+      }
+    };
+
+    reader.onerror = () => {
+      setUploadLoading(false);
+      setUploadError('Failed to read file.');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    };
+
+    reader.readAsArrayBuffer(file);
   };
 
   return (
-    <Box gap={2}>
+    <Box sx={{ p: 2 }}>
+      {/* Grid container to manage overall layout */}
       <Grid container spacing={2} alignItems="center">
-        <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
+        {/* Child Grid items no longer need the 'item' prop. Responsive props (xs, sm, md, lg) are now within 'sx'. */}
+        <Grid sx={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
           <Typography variant="h5" color="#3DB80C">
             Membership Management
           </Typography>
         </Grid>
-        <Grid size={{ lg: 6, md: 6, sm: 12, xs: 12 }}>
+        <Grid sx={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
           <Box display="flex" justifyContent={{ xs: 'flex-start', md: 'flex-end' }} gap={2} flexWrap="wrap">
             <Button
               sx={{ background: '#3DB80C', color: 'white', borderColor: '#3DB80C', fontWeight: 400 }}
@@ -137,7 +211,7 @@ const Membershiptable = () => {
           </Box>
         </Grid>
 
-        <Grid size={{ lg: 12, md: 12, sm: 12, xs: 12 }}>
+        <Grid sx={{ xs: 12, sm: 12, md: 12, lg: 12 }}>
           <Box sx={{ display: 'flex', justifyContent: { lg: 'flex-end' }, flexDirection: 'row', flexWrap: 'wrap', gap: 2 }}>
             <Button
               variant="contained"
@@ -147,14 +221,27 @@ const Membershiptable = () => {
             >
               Add Member
             </Button>
-            <Button variant="contained" startIcon={<UploadIcon />} sx={{ background: '#3DB80C', fontWeight: 400 }}>
-              Bulk Upload
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileUpload}
+              accept=".xlsx, .xls, .csv"
+              style={{ display: 'none' }}
+            />
+            <Button
+              variant="contained"
+              startIcon={<UploadIcon />}
+              sx={{ background: '#3DB80C', fontWeight: 400 }}
+              onClick={handleBulkUploadButtonClick}
+              disabled={uploadLoading}
+            >
+              {uploadLoading ? <CircularProgress size={24} color="inherit" /> : 'Bulk Upload'}
             </Button>
             <Button
               variant="contained"
               startIcon={<UploadIcon />}
               sx={{ background: '#3DB80C', fontWeight: 400 }}
-              onClick={handleOpenPreview} // Open preview dialog
+              onClick={handleOpenExportPreview}
             >
               Export
             </Button>
@@ -171,6 +258,14 @@ const Membershiptable = () => {
             </Box>
           </Box>
         </Grid>
+
+        {uploadError && (
+          <Grid sx={{ xs: 12 }}>
+            <Box sx={{ color: 'red', textAlign: 'center', my: 2 }}>
+              <Typography variant="body1">{uploadError}</Typography>
+            </Box>
+          </Grid>
+        )}
 
         <TableContainer component={Paper} sx={{ marginTop: "10px", background: "white", fontWeight: 400 }}>
           <Table sx={{ minWidth: 650 }} size="small">
@@ -227,9 +322,9 @@ const Membershiptable = () => {
         </TableContainer>
       </Grid>
 
-      {/* Preview Dialog */}
-      <Dialog open={openPreview} onClose={handleClosePreview} maxWidth="lg" fullWidth>
-        <DialogTitle>Excel Preview</DialogTitle>
+      {/* Export Preview Dialog */}
+      <Dialog open={openExportPreview} onClose={handleCloseExportPreview} maxWidth="lg" fullWidth>
+        <DialogTitle>Excel Export Preview</DialogTitle>
         <DialogContent>
           <Typography variant="body2" sx={{ mb: 2 }}>
             Below is a preview of the data that will be exported to Excel.
@@ -270,7 +365,7 @@ const Membershiptable = () => {
           </TableContainer>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClosePreview} color="secondary">
+          <Button onClick={handleCloseExportPreview} color="secondary">
             Cancel
           </Button>
           <Button onClick={exportToExcel} sx={{ background: "#3DB80C", color: 'white' }} variant="contained">
