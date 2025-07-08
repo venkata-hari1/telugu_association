@@ -1,5 +1,4 @@
 import { Box, Theme, useMediaQuery } from "@mui/material";
-import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { makeStyles } from "tss-react/mui";
@@ -88,26 +87,6 @@ const MyCalendar = ({ value, setValue, onDateClick }: CalenderProps) => {
     );
   };
 
-
-const [open,setOpen] = useState(false);
-
-const[selectedDate,setSelectedDate]=useState("");
-const handleClickOpen = (currentdate:Date) => {
-  setOpen(true);
-  setValue(currentdate)
-  const day=currentdate.getDate().toString().padStart(2,'0');
-  const month=currentdate.toLocaleString('en-US',{month:'short'});
-  const year=currentdate.getFullYear()
-  const formattedDate=`${day} ${month} ${year}`
-  console.log(formattedDate)
-  setSelectedDate(formattedDate)
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-
   return (
     <Box className={classes.centergrid}>
       <Calendar
@@ -116,11 +95,16 @@ const handleClickOpen = (currentdate:Date) => {
           const date = Array.isArray(val) ? val[0] : val;
           if (date instanceof Date) {
             setValue(date);
-            if (onDateClick) onDateClick(date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const selected = new Date(date);
+            selected.setHours(0, 0, 0, 0);
+            if (onDateClick && selected <= today) {
+              onDateClick(date);
+            }
           }
         }}
         value={value}
-        maxDate={new Date()} // disable future dates
         tileClassName={({ date, view }) => {
           if (view === "month" && date instanceof Date) {
             return highlightedDates.find(
