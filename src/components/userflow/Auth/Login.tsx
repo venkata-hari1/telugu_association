@@ -281,37 +281,37 @@ export default function Login({ value }: IProps) {
 };
 
 
-  const showGoogleOneTapFallback = () => {
-    // Alternative: trigger the Google popup directly
-    if (window.google && window.google.accounts && window.google.accounts.oauth2) {
-      const client = window.google.accounts.oauth2.initTokenClient({
-        client_id: GOOGLE_CLIENT_ID,
-        scope: 'profile email',
-        callback: (response: any) => {
-          if (response.access_token) {
-            // Use the access token to get user info
-            fetch(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${response.access_token}`)
-              .then(res => res.json())
-              .then(userInfo => {
-                console.log('Google login successful (OAuth2):', userInfo);
-                localStorage.setItem('isAuthenticated', 'true');
-                showToast(true, `Logged in with Google as ${userInfo.name}!`);
-                dispatch(setLogin(false));
-                navigate('/');
-                if (value === "member") {
-                  localStorage.setItem("member", "member");
-                }
-              })
-              .catch(error => {
-                console.error('Error fetching user info:', error);
-                showToast(false, 'Google login failed. Please try again.');
-              });
-          }
-        },
-      });
-      client.requestAccessToken();
-    }
-  };
+  // const showGoogleOneTapFallback = () => {
+  //   // Alternative: trigger the Google popup directly
+  //   if (window.google && window.google.accounts && window.google.accounts.oauth2) {
+  //     const client = window.google.accounts.oauth2.initTokenClient({
+  //       client_id: GOOGLE_CLIENT_ID,
+  //       scope: 'profile email',
+  //       callback: (response: any) => {
+  //         if (response.access_token) {
+  //           // Use the access token to get user info
+  //           fetch(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${response.access_token}`)
+  //             .then(res => res.json())
+  //             .then(userInfo => {
+  //               console.log('Google login successful (OAuth2):', userInfo);
+  //               localStorage.setItem('isAuthenticated', 'true');
+  //               showToast(true, `Logged in with Google as ${userInfo.name}!`);
+  //               dispatch(setLogin(false));
+  //               navigate('/');
+  //               if (value === "member") {
+  //                 localStorage.setItem("member", "member");
+  //               }
+  //             })
+  //             .catch(error => {
+  //               console.error('Error fetching user info:', error);
+  //               showToast(false, 'Google login failed. Please try again.');
+  //             });
+  //         }
+  //       },
+  //     });
+  //     client.requestAccessToken();
+  //   }
+  // };
 
   const handleClose = () => {
     dispatch(setLogin(false));
