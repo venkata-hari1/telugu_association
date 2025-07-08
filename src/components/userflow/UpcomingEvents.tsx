@@ -4,7 +4,6 @@ import bathukamma from "../../assets/bathukamma.jpg";
 import { useStyles } from "./Styles/makeStyles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 type IProps = any;
@@ -33,10 +32,6 @@ export default function UpcomingEvents() {
     return () => clearInterval(interval);
   }, [itemsPerRow, totalItems]);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + totalItems) % totalItems);
-  };
-
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % (totalItems - itemsPerRow + 1));
   };
@@ -55,7 +50,7 @@ export default function UpcomingEvents() {
         </Typography>
       </Box>
       <Box sx={{ position: "relative", overflow: "hidden" }}>
-        <IconButton
+        {/* <IconButton
           onClick={handlePrev}
           sx={{
             position: "absolute",
@@ -71,7 +66,7 @@ export default function UpcomingEvents() {
           }}
         >
           <ArrowBackIosIcon />
-        </IconButton>
+        </IconButton> */}
         <Box
           sx={{
             display: "flex",
@@ -95,7 +90,7 @@ export default function UpcomingEvents() {
                 component="img"
                 src={event.img}
                 alt=""
-                sx={{ width: "80%", borderRadius: "8px" }}
+                sx={{ width: "70%", borderRadius: "8px" }}
               />
             </Box>
           ))}
@@ -104,7 +99,7 @@ export default function UpcomingEvents() {
           onClick={handleNext}
           sx={{
             position: "absolute",
-            right: 3,
+            right: 10,
             top: "50%",
             transform: "translateY(-50%)",
             color: "#3DB80C",

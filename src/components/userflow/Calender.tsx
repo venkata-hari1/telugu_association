@@ -63,10 +63,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 interface CalenderProps {
   value: Date;
-  setValue: (date: Date | null) => void;
+  setValue: (date: Date) => void;
+  onDateClick?: (date: Date) => void;
 }
 
-const MyCalendar = ({ value, setValue }: CalenderProps) => {
+const MyCalendar = ({ value, setValue, onDateClick }: CalenderProps) => {
   const { classes }: any = useStyles();
   const display = useMediaQuery((theme) => theme.breakpoints.down("lg"));
   const highlightedDates = [
@@ -77,22 +78,33 @@ const MyCalendar = ({ value, setValue }: CalenderProps) => {
     new Date(2025, 5, 13),
   ];
 
-  const isSameDay = (date1: Date, date2: Date) =>
-    date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate();
+  const isSameDay = (date1: Date | null, date2: Date | null) => {
+    if (!date1 || !date2) return false;
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
+  };
 
   return (
     <Box className={classes.centergrid}>
       <Calendar
         className={display ? classes.mobilecalnderRoot : classes.calendarRoot}
-        onChange={(val) =>
-          setValue(Array.isArray(val) ? val[0] : val ?? new Date())
-        }
+        onChange={(val) => {
+          const date = Array.isArray(val) ? val[0] : val;
+          if (date instanceof Date) {
+            setValue(date);
+            if (onDateClick) onDateClick(date);
+          }
+        }}
         value={value}
+        maxDate={new Date()} // disable future dates
         tileClassName={({ date, view }) => {
-          if (view === "month") {
-            return highlightedDates.find((d) => isSameDay(d, date))
+          if (view === "month" && date instanceof Date) {
+            return highlightedDates.find(
+              (d) => d instanceof Date && isSameDay(d, date)
+            )
               ? classes.highlight
               : undefined;
           }
