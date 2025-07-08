@@ -10,13 +10,13 @@ import {
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useLocation } from "react-router-dom";
-import Photo1 from '../../assets/photo1.png'
-import Photo2 from '../../assets/photo2.png'
-import Photo3 from '../../assets/photo3.png'
-import Photo4 from '../../assets/photo4.png'
+import Photo1 from "../../assets/photo1.png";
+import Photo2 from "../../assets/photo2.png";
+import Photo3 from "../../assets/photo3.png";
+import Photo4 from "../../assets/photo4.png";
 function Gallery() {
-  const location=useLocation()
-  const pathname=location.pathname
+  const location = useLocation();
+  const pathname = location.pathname;
   const Video1 = () => (
     <iframe
       width="600"
@@ -30,36 +30,45 @@ function Gallery() {
     />
   );
   const photogalldata = [
-    {id:1,txt:'TAM Deepavali',imgs:[
-      { id: 1, img: Photo1 },
-      { id: 2, img: Photo2},
-      { id: 3, img: Photo2 },
-    ]},
-    {id:2,txt:'TAM Sankranti',imgs:[
-      { id: 1, img: Photo3 },
-      { id: 2, img:Photo4 },
-      { id: 3, img: Photo4 },
-    ]}
+    {
+      id: 1,
+      txt: "TAM Deepavali",
+      imgs: [
+        { id: 1, img: Photo1 },
+        { id: 2, img: Photo2 },
+        { id: 3, img: Photo2 },
+      ],
+    },
+    {
+      id: 2,
+      txt: "TAM Sankranti",
+      imgs: [
+        { id: 1, img: Photo3 },
+        { id: 2, img: Photo4 },
+        { id: 3, img: Photo4 },
+      ],
+    },
   ];
 
   const videogalldata = [
     {
       id: 1,
-      txt: 'TAM Deepavali',
+      txt: "TAM Deepavali",
       imgs: [{ id: 1, img: <Video1 /> }],
     },
     {
       id: 2,
-      txt: 'TAM Sankranti',
+      txt: "TAM Sankranti",
       imgs: [{ id: 1, img: <Video1 /> }],
-    }
+    },
   ];
- const Gallery=pathname==="/gallery/photos"?photogalldata:videogalldata
+  const Gallery =
+    pathname === "/gallery/photos" ? photogalldata : videogalldata;
   return (
     <Box width="100%" p={2}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography color="#3DB80C" fontWeight="700" fontSize={18}>
-          {pathname==="/gallery/photos"?"Photo Gallery":"Video Gallery"}
+        <Typography color="#3DB80C" fontWeight="700">
+          {pathname === "/gallery/photos" ? "Photo Gallery" : "Video Gallery"}
         </Typography>
         <FormControl size="small">
           <Select
@@ -170,7 +179,8 @@ function Gallery() {
               p: 1,
               margin: "auto",
               marginTop: "10px",
-              width: "100%",
+              width: "95%",
+              mx: 0,
             }}
           >
             <Typography
@@ -187,38 +197,35 @@ function Gallery() {
             flexDirection={{ lg: "row", md: "row", sm: "column", xs: "column" }}
             gap={3}
           >
-            {gdata.imgs.map((gallery:any) => (
+            {gdata.imgs.map((gallery: any) => (
               <Card
                 key={gallery.id}
                 sx={{
                   background: "transparent",
                   width: { sm: "100%", xs: "100%", lg: "100%" },
-               
                 }}
               >
-               {pathname==="/gallery/photos" ? (
-  <CardMedia
-    component="img"
-    src={gallery.img}
-    sx={{ width: "100%", height: "150px" }}
-  />
-) : (
-  <Box
-  sx={{
-    position: "relative",
-    display:'flex',
-    padding:'10px',
-    justifyContent:'center',
-    alignItems:'center',
-    alignContent:'center',
-    width: "100%",
-  }}
->
-  
-    {gallery.img}
-
-</Box>
-)}
+                {pathname === "/gallery/photos" ? (
+                  <CardMedia
+                    component="img"
+                    src={gallery.img}
+                    sx={{ width: "100%", height: "150px" }}
+                  />
+                ) : (
+                  <Box
+                    sx={{
+                      position: "relative",
+                      display: "flex",
+                      padding: "10px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      alignContent: "center",
+                      width: "100%",
+                    }}
+                  >
+                    {gallery.img}
+                  </Box>
+                )}
               </Card>
             ))}
           </Box>

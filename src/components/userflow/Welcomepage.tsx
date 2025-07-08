@@ -1,40 +1,39 @@
-import { Box, Grid, useMediaQuery } from '@mui/material'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import { useStyles } from './Styles/makeStyles'
-import Footer from './Footer';
-import { Route, Routes } from 'react-router-dom';
-import Home from './Home';
-import AboutUs from './AboutUs';
-import Events from './Events';
-import Sponsors from './Sponsors';
-import Telugu from './Telugu';
-import Gallery from './Gallery';
-import ContactUs from './ContactUs';
-import Mebershipbenfits from './Mebershipbenfits';
-import Registration from './Auth/Registration';
-import AdminLogin from '../AdminFlow/AdminLogin'
-import Mission from './Mission';
-import Organization from './Organization';
-import Upcommingevents from './EventDetails';
-import Nakshatralu from './Nakshatralu';
-import Samvatsaralu from './Samvatsaralu';
-import Tithulu from './Tithulu';
-import Gunintamulu from './Gunintamulu';
-import Vemanapadyalu from './Vemanapadyalu';
-import Aksaramala from './Aksaramala';
-import BhashaandLipi from './BhashaandLipi';
-import TAMbylaws from './TAMbylaws';
-import GoverningBodyPresidents from './GoverningBody';
-import Forgotpassword from './Auth/Forgotpassword';
-import Resetpassword from './Auth/Resetpassword';
-import Otpinput from './Auth/Otpinput';
-import Usermemebership from './Usermemebership';
-import MobileHeader from './Reusable/MobileHeader';
-import MembershipregPopup from './MembershipregPopup';
-import Donate from './Donate';
-import Volunteer from './Volunteer';
-
+import { Box, Grid, useMediaQuery } from "@mui/material";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import { useStyles } from "./Styles/makeStyles";
+import Footer from "./Footer";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import AboutUs from "./AboutUs";
+import Events from "./Events";
+import Sponsors from "./Sponsors";
+import Telugu from "./Telugu";
+import Gallery from "./Gallery";
+import ContactUs from "./ContactUs";
+import Mebershipbenfits from "./Mebershipbenfits";
+import Registration from "./Auth/Registration";
+import AdminLogin from "../AdminFlow/AdminLogin";
+import Mission from "./Mission";
+import Organization from "./Organization";
+import Upcommingevents from "./EventDetails";
+import Nakshatralu from "./Nakshatralu";
+import Samvatsaralu from "./Samvatsaralu";
+import Tithulu from "./Tithulu";
+import Gunintamulu from "./Gunintamulu";
+import Vemanapadyalu from "./Vemanapadyalu";
+import Aksaramala from "./Aksaramala";
+import BhashaandLipi from "./BhashaandLipi";
+import TAMbylaws from "./TAMbylaws";
+import GoverningBodyPresidents from "./GoverningBody";
+import Forgotpassword from "./Auth/Forgotpassword";
+import Resetpassword from "./Auth/Resetpassword";
+import Otpinput from "./Auth/Otpinput";
+import Usermemebership from "./Usermemebership";
+import MobileHeader from "./Reusable/MobileHeader";
+import MembershipregPopup from "./MembershipregPopup";
+import Donate from "./Donate";
+import Volunteer from "./Volunteer";
 
 type Classes = {
   root: string;
@@ -42,27 +41,45 @@ type Classes = {
 
 export default function Welcomepage() {
   const { classes }: { classes: Classes } = useStyles();
-  const display = useMediaQuery((theme) => theme.breakpoints.down('lg'))
+  const display = useMediaQuery((theme) => theme.breakpoints.down("lg"));
   return (
-    <Box className={classes.root} id='top'>
+    <Box className={classes.root} id="top">
       <Header />
-      <Grid container sx={{ width: { lg: '76%', xs: '100%', md: '100%' }, background: '#FDF7E1' }}>
-        <Grid size={{ lg: 2.7, xs: 12, md: 12 }} sx={{ borderRight: '1px solid #3DB80C', overflow: 'hidden' }}>
+      <Grid
+        container
+        sx={{
+          width: { lg: "76%", xs: "100%", md: "100%" },
+          background: "#FDF7E1",
+          flex: 1,
+        }}
+      >
+        <Grid
+          size={{ lg: 2.7, xs: 12, md: 12 }}
+          sx={{ borderRight: "1px solid #3DB80C", overflow: "hidden" }}
+        >
           {!display ? <Sidebar /> : <MobileHeader />}
         </Grid>
         <Grid size={{ lg: 9.3, xs: 12, md: 12 }}>
           <Routes>
             <Route path="" element={<Home />} />
-            <Route path='forgot' element={<Forgotpassword />} />
-            <Route path='reset' element={<Resetpassword />} />
-            <Route path='/otp' element={<Otpinput />} />
+            <Route path="forgot" element={<Forgotpassword />} />
+            <Route path="reset" element={<Resetpassword />} />
+            <Route path="/otp" element={<Otpinput />} />
             <Route path="login" element={<AdminLogin />} />
 
-
             <Route path="about_us" element={<AboutUs />} />
-            <Route path="governing_body/presidents" element={<GoverningBodyPresidents />} />
-            <Route path="governing_body/board_of_directors" element={<GoverningBodyPresidents />} />
-            <Route path="governing_body/previous_board_members" element={<GoverningBodyPresidents />} />
+            <Route
+              path="governing_body/presidents"
+              element={<GoverningBodyPresidents />}
+            />
+            <Route
+              path="governing_body/board_of_directors"
+              element={<GoverningBodyPresidents />}
+            />
+            <Route
+              path="governing_body/previous_board_members"
+              element={<GoverningBodyPresidents />}
+            />
             <Route path="events/past" element={<Events />} />
             <Route path="events/upcoming" element={<Events />} />
 
@@ -84,18 +101,16 @@ export default function Welcomepage() {
             <Route path="padyalu" element={<Vemanapadyalu />} />
             <Route path="aksharamala" element={<Aksaramala />} />
             <Route path="lipi" element={<BhashaandLipi />} />
-            <Route path='usermembership' element={<Usermemebership />} />
-
+            <Route path="usermembership" element={<Usermemebership />} />
 
             <Route path="volunteer" element={<Volunteer />} />
             <Route path="member" element={<Registration />} />
             <Route path="donate" element={<Donate />} />
             <Route path="memberpopup" element={<MembershipregPopup />} />
-
           </Routes>
         </Grid>
       </Grid>
       <Footer />
     </Box>
-  )
+  );
 }
