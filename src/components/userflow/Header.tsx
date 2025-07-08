@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { AppBar, Box, Button, Toolbar, Menu, MenuItem } from '@mui/material';
-import logo from '../../assets/logo.png';
-import { useStyles } from './Styles/makeStyles';
-import { useLocation, useNavigate } from 'react-router-dom';
+import * as React from "react";
+import { AppBar, Box, Button, Toolbar, Menu, MenuItem } from "@mui/material";
+import logo from "../../assets/logo.png";
+import { useStyles } from "./Styles/makeStyles";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export interface TabData {
   id: number;
@@ -18,47 +18,56 @@ type IProps = {
 };
 
 const tabData: TabData[] = [
-  { id: 0, label: 'Home', link: '/' },
+  { id: 0, label: "Home", link: "/" },
   {
     id: 1,
-    label: 'About Us',
-    link: '/about_us',
+    label: "About Us",
+    link: "/about_us",
     dropdown: [
-      { id: 10, label: 'Organization', link: '/about_us/organization' },
-      { id: 11, label: 'Our Mission', link: '/about_us/mission' },
-      { id: 12, label: 'TAM By Laws', link: '/about_us/tam_by_laws' },
+      { id: 10, label: "Organization", link: "/about_us/organization" },
+      { id: 11, label: "Our Mission", link: "/about_us/mission" },
+      { id: 12, label: "TAM By Laws", link: "/about_us/tam_by_laws" },
     ],
   },
   {
     id: 2,
-    label: 'Governing Body',
-    link: '/governing_body',
+    label: "Governing Body",
+    link: "/governing_body",
     dropdown: [
-      { id: 20, label: 'Board of Directors', link: '/governing_body/board_of_directors' },
-      { id: 21, label: 'Previous Board Members', link: '/governing_body/previous_board_members' },
-      { id: 22, label: 'Presidents', link: '/governing_body/presidents' },
+      {
+        id: 20,
+        label: "Board of Directors",
+        link: "/governing_body/board_of_directors",
+      },
+      {
+        id: 21,
+        label: "Previous Board Members",
+        link: "/governing_body/previous_board_members",
+      },
+      { id: 22, label: "Presidents", link: "/governing_body/presidents" },
     ],
   },
   {
     id: 3,
-    label: 'Events',
-    link: '/events',
+    label: "Events",
+    link: "/events",
     dropdown: [
-      { id: 30, label: 'Upcoming Events', link: '/events/upcoming' },
-      { id: 31, label: 'Past Events', link: '/events/past' },
+      { id: 30, label: "Upcoming Events", link: "/events/upcoming" },
+      { id: 31, label: "Past Events", link: "/events/past" },
     ],
   },
-  { id: 4, label: 'Sponsors', link: '/sponsors' },
-  { id: 5, label: 'Telugu', link: '/telugu' },
-  { id: 6, label: 'Gallery', link: '/gallery',
+  { id: 4, label: "Sponsors", link: "/sponsors" },
+  { id: 5, label: "Telugu", link: "/telugu" },
+  {
+    id: 6,
+    label: "Gallery",
+    link: "/gallery",
     dropdown: [
-      { id: 40, label: 'Photos', link: '/gallery/photos' },
-      { id: 41, label: 'Videos', link: '/gallery/videos' },
+      { id: 40, label: "Photos", link: "/gallery/photos" },
+      { id: 41, label: "Videos", link: "/gallery/videos" },
     ],
-
-   },
-  { id: 7, label: 'Contact Us', link: '/contactus' },
-
+  },
+  { id: 7, label: "Contact Us", link: "/contactus" },
 ];
 
 export default function Header() {
@@ -67,18 +76,25 @@ export default function Header() {
   const [selectedTab, setSelectedTab] = React.useState<number | null>(null);
   const { classes }: IProps = useStyles();
   const navigate = useNavigate();
- const location=useLocation()
+  const location = useLocation();
   const handleClick = (tab: TabData, dropdownItemId?: number) => {
     // If dropdownItemId is provided, set activeTab to the parent tab's id
     const newActiveTab = dropdownItemId !== undefined ? tab.id : tab.id;
     setActiveTab(newActiveTab);
-    navigate(dropdownItemId !== undefined ? tab.dropdown!.find(item => item.id === dropdownItemId)!.link : tab.link);
+    navigate(
+      dropdownItemId !== undefined
+        ? tab.dropdown!.find((item) => item.id === dropdownItemId)!.link
+        : tab.link
+    );
     if (dropdownItemId !== undefined) {
       handleMenuClose();
     }
   };
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, tabId: number) => {
+  const handleMenuOpen = (
+    event: React.MouseEvent<HTMLElement>,
+    tabId: number
+  ) => {
     setAnchorEl(event.currentTarget);
     setSelectedTab(tabId);
   };
@@ -90,54 +106,74 @@ export default function Header() {
   const isActiveTab = (tab: TabData): boolean => {
     if (location.pathname === tab.link) return true;
     if (tab.dropdown) {
-      return tab.dropdown.some((item) => location.pathname.startsWith(item.link));
+      return tab.dropdown.some((item) =>
+        location.pathname.startsWith(item.link)
+      );
     }
     return false;
   };
   return (
-    <Box sx={{ width: '76%', display: { xs: 'none', md: 'none', lg: 'grid' } }}>
+    <Box sx={{ width: "76%", display: { xs: "none", md: "none", lg: "grid" } }}>
       <AppBar
         position="static"
         sx={{
-          background: 'linear-gradient(180deg, #5BE823 0%, #3DB80C 100%)',
+          background: "linear-gradient(180deg, #5BE823 0%, #3DB80C 100%)",
         }}
       >
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Box className={classes.logo} >
-            <Box src={logo} component={'img'} alt="logo" className={classes.logo_image} sx={{marginTop:'15px'}} />
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box className={classes.logo}>
+            <Box
+              src={logo}
+              component={"img"}
+              alt="logo"
+              className={classes.logo_image}
+              sx={{ marginTop: "15px" }}
+            />
           </Box>
-          <Box sx={{ display: 'flex', width: '80%', justifyContent: 'space-between' }}>
+          <Box
+            sx={{
+              display: "flex",
+              width: "80%",
+              height: "100%",
+              justifyContent: "space-between",
+            }}
+          >
             {tabData.map((tab) => (
-              <Box key={tab.id} sx={{ position: 'relative' }}>
+              <Box key={tab.id} sx={{ position: "relative", height: "100%" }}>
                 <Button
                   onClick={() => handleClick(tab)}
-                  onMouseEnter={(e) => tab.dropdown && handleMenuOpen(e, tab.id)}
+                  onMouseEnter={(e) =>
+                    tab.dropdown && handleMenuOpen(e, tab.id)
+                  }
                   sx={{
-                    height: '5vh',
-                    color: 'white',
-                    textTransform: 'none',
-                    fontSize: '14px !important',
-                    padding: '10px',
-                    whiteSpace: 'nowrap',
-                    position: 'relative',
+                    height: "100%",
+                    color: "white",
+                    textTransform: "none",
+                    fontSize: "14px !important",
+                    padding: "10px",
+                    whiteSpace: "nowrap",
+                    position: "relative",
                     fontFamily: '"Lato", sans-serif !important',
-                    fontWeight: 'bold',
+                    fontWeight: "bold",
                     mx: 1,
-                    '& span': {
-                      fontSize: '14px',
+                    "& span": {
+                      fontSize: "14px",
                       fontFamily: '"Lato", sans-serif',
                     },
-                    '&::after': {
+                    "&::after": {
                       content: '""',
-                      display: 'block',
-                      position: 'absolute',
-                      bottom: -11,
+                      display: "block",
+                      position: "absolute",
+                      bottom: 0,
                       left: 0,
                       right: 0,
-                      height: '3px',
-                      backgroundColor:isActiveTab(tab) ? 'white' : 'transparent',
-                      borderRadius: '2px',
-                      transition: 'left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      height: "3px",
+                      backgroundColor: isActiveTab(tab)
+                        ? "white"
+                        : "transparent",
+                      borderRadius: "2px",
+                      transition:
+                        "left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     },
                   }}
                 >
@@ -153,7 +189,8 @@ export default function Header() {
                     }}
                     PaperProps={{
                       sx: {
-                        background: 'linear-gradient(180deg, #5BE823 0%, #3DB80C 100%)',
+                        background:
+                          "linear-gradient(180deg, #5BE823 0%, #3DB80C 100%)",
                       },
                     }}
                   >
@@ -162,11 +199,14 @@ export default function Header() {
                         key={item.id}
                         onClick={() => handleClick(tab, item.id)}
                         sx={{
-                          color: 'white',
+                          color: "white",
                           fontFamily: '"Lato", sans-serif',
-                          fontSize: '14px',
-                          fontWeight: 'bold',
-                          backgroundColor: activeTab === item.id ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+                          fontSize: "14px",
+                          fontWeight: "900",
+                          backgroundColor:
+                            activeTab === item.id
+                              ? "rgba(255, 255, 255, 0.2)"
+                              : "transparent",
                         }}
                       >
                         {item.label}

@@ -4,7 +4,11 @@ import heritage from "../../assets/heritage.png";
 export default function AboutUs() {
   return (
     <Box width="100%" p={2}>
-      <Typography variant="h6" color="#3DB80C">
+      <Typography
+        variant="h6"
+        sx={{ fontWeight: "800", mt: 1.5, mb: 0.5 }}
+        color="#3DB80C"
+      >
         Our Mission
       </Typography>
       <Typography component="div" color="#3DB80C">

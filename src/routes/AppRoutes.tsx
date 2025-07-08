@@ -31,7 +31,6 @@ import Videogallery from "../components/AdminFlow/Videogallery";
 import Profileotp from "../components/AdminFlow/Profileotp";
 
 const AdminRoutes = () => {
-  console.log("Test Push");
   return (
     <Routes>
       <Route path="/" element={<Welcomepage />} />
