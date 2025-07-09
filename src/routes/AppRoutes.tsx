@@ -29,7 +29,7 @@ import AdminOtp from '../components/AdminFlow/AdminOtp'
 import Media from '../components/AdminFlow/Media'
 import Videogallery from '../components/AdminFlow/Videogallery'
 import Profileotp from '../components/AdminFlow/Profileotp'
-
+import AddhomepageHighlights from '../components/AdminFlow/AddhomepageHighlights'
 
 
 
@@ -45,6 +45,8 @@ const AdminRoutes = () => {
       <Route path="/adminotp" element={<AdminOtp/>} />
       <Route element={<Privateroutes />}>
         <Route path="/admin" element={<Mainlayout />}>
+           <Route path="/admin/homepage-highlights" element={<AddhomepageHighlights />} />
+
             {/* <Route path="/admin" element={<Dashboard />} /> */}
             <Route path="dashboard" element={<Dashboard />} /> 
            {/* <Route path="dashboard" element={<Dashboard />} />  */}
@@ -70,6 +72,7 @@ const AdminRoutes = () => {
          
             <Route path="profile/change-password" element={<Changepassword />}/>
              <Route path="profile/profile-otp" element={<Profileotp />}/>
+             
         </Route>
        
      </Route>

@@ -10,15 +10,13 @@ interface ApiResponse {
   message: string;
 }
 
-
-
-
 interface IAuth {
   signInUser: any;
   loading: boolean;
   error: any;
-  forgotMsg: string | null;
-  otpVerifyMsg: string | null;
+  forgotMsg: any;
+  otpVerifyMsg: any;
+ passwordResetMsg: string | null;
    
 }
 
@@ -29,22 +27,10 @@ const initialState: IAuth = {
   error: null,
   forgotMsg: null,
   otpVerifyMsg: null,
+  passwordResetMsg: null,
 
 };
 
-
-// export const loginUser = createAsyncThunk(
-//   'auth/loginUser',
-//   async (payload:{data:{email:string,password:string}}, thunkAPI) => {
-//     try {
-//       const {data}=payload
-//       const res = await axios.post(`http://localhost:6000/api/auth/signin`, {data});
-//       return res.data;
-//     } catch (err: any) {
-//       return thunkAPI.rejectWithValue(err.response?.data?.message || 'Login failed');
-//     }
-//   }
-// );
 export const loginUser= createAsyncThunk(
   "auth/signin",
   async (payload: { data:{email:string ,password:string } }, { fulfillWithValue, rejectWithValue }) => {
@@ -62,7 +48,7 @@ export const loginUser= createAsyncThunk(
      
       if (response.ok) {
       
-        localStorage.setItem("token", result.accesstoken);
+       localStorage.setItem("token", result.accesstoken);
         return fulfillWithValue(result);
       } else {
         return rejectWithValue(result);
@@ -73,41 +59,87 @@ export const loginUser= createAsyncThunk(
   }
 );
 
-export const forgetPassword = createAsyncThunk<
-  ApiResponse,                            
-  { email: string },                      
-  { rejectValue: string }                 
->(
-  'auth/forgetPassword',
-  async (data, { rejectWithValue }) => {
+export const forgotPassword= createAsyncThunk(
+  "forgotPassword",
+  async (payload: { data:{email:string  } }, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const response = await axios.patch<ApiResponse>(`${origin}/auth/forgetpassword`, data);
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error?.response?.data?.message || 'Something went wrong');
+      const {data}=payload
+      const response = await fetch(`${baseURL}/${endpoints.FORGETPASSWORD}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+     
+      if (response.ok) {
+        return fulfillWithValue(result);
+      } else {
+        return rejectWithValue(result);
+      }
+    } catch (error) {
+      return rejectWithValue(error|| "Something went wrong");
     }
   }
 );
 
-
-export const verifyOtp = createAsyncThunk<
-  ApiResponse,
-  { email: string; otp: string }, 
-  { rejectValue: string }
->(
-  'auth/verifyOtp',
-  async (data, { rejectWithValue }) => {
+export const verifyOtp= createAsyncThunk(
+  "verifyOtp",
+  async (payload: { data:{email:string, otp:string } }, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const response = await axios.patch<ApiResponse>(`${origin}/auth/verifyotp`, data);
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error?.response?.data?.message || 'Invalid OTP');
+      const {data}=payload
+      const response = await fetch(`${baseURL}/${endpoints.VERIFYOTP}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+     
+      if (response.ok) {
+        return fulfillWithValue(result);
+      } else {
+        return rejectWithValue(result);
+      }
+    } catch (error) {
+      return rejectWithValue(error|| "Something went wrong");
     }
   }
 );
 
+export const changePassword = createAsyncThunk(
+  "changePassword",
+  async (
+    payload: { data: { email: string; Password: string } },
+    { fulfillWithValue, rejectWithValue }
+  ) => {
+    try {
+      const { data } = payload;
 
+      const response = await fetch(`${baseURL}/${endpoints.CHANGEPASSWORD}`, {
+        method: "PATCH", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
+      const result = await response.json();
+
+      if (response.ok) {
+        return fulfillWithValue(result); 
+      } else {
+        return rejectWithValue(result); 
+      }
+    } catch (error) {
+      return rejectWithValue(error || "Something went wrong"); 
+    }
+  }
+);
 
 
 const authSlice = createSlice({
@@ -135,18 +167,15 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Something went wrong';
-      }) .addCase(forgetPassword.pending, (state) => {
+      }) .addCase(forgotPassword.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(forgetPassword.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
+      .addCase(forgotPassword.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
   state.loading = false;
-  state.forgotMsg = action.payload.message;
+  state.forgotMsg = action.payload;
 })
-
-
-
-      .addCase(forgetPassword.rejected, (state, action) => {
+      .addCase(forgotPassword.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
@@ -163,13 +192,20 @@ const authSlice = createSlice({
       .addCase(verifyOtp.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+      .addCase(changePassword.pending, (state) => {
+  state.loading = true;
+  state.error = null;
+})
+.addCase(changePassword.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
+  state.loading = false;
+  state.passwordResetMsg = action.payload.message;
+})
+.addCase(changePassword.rejected, (state, action) => {
+  state.loading = false;
+  state.error = action.payload || "Password reset failed";
+});
   },
-
-
-      
-
- 
 });
 
 export const { resetauthAdminState } = authSlice.actions;

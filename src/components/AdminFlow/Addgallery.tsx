@@ -7,6 +7,9 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CloseIcon from '@mui/icons-material/Close';
 import { Submit, VisuallyHiddenInput } from '../../adminstyles/MembershiptableStyles';
 import {showToast} from '../../Utils/ShowToast';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../Redux/Store'; 
+import { uploadGalleryImage } from '../../Redux/gallarySlice';
 
 interface FormData {
   year: string;
@@ -27,8 +30,10 @@ interface Preview {
 }
 
 const Addgallery: React.FC = () => {
+const dispatch = useDispatch<AppDispatch>();
+const { loading, error, message } = useSelector((state: RootState) => state.gallery);
 
-  const [formData, setFormData] = useState<FormData>({
+const [formData, setFormData] = useState<FormData>({
     year: '2025',
     title: '',
     mediaType: 'photos',
@@ -40,19 +45,24 @@ const Addgallery: React.FC = () => {
     files: '',
   });
   const [selectedYear, setSelectedYear] = useState<Date | null>(new Date());
+  useEffect(() => {
+  if (selectedYear) {
+    const year = selectedYear.getFullYear().toString();
+    setFormData((prev) => ({ ...prev, year }));
+  }
+}, [selectedYear]);
+
   const [previews, setPreviews] = useState<Preview[]>([]);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [touched, setTouched] = useState<{ title: boolean; files: boolean }>({
     title: false,
     files: false,
   });
- 
-
   const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB in bytes
   const MAX_VIDEO_SIZE = 3 * 1024 * 1024; // 3MB in bytes
   const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
   const VIDEO_TYPES = ['video/mp4', 'video/mpeg', 'video/webm'];
-
+  
   const validateForm = (): boolean => {
     let isValid = true;
     const newErrors: Errors = { title: '', files: '' };
@@ -163,33 +173,87 @@ const Addgallery: React.FC = () => {
     setTouched((prev) => ({ ...prev, files: true }));
   };
 
-  const handleSubmit = () => {
-    setTouched({ title: true, files: true });
-    const isValid = validateForm();
-    if (!isValid) {
-      const errorMessages = [];
-      if (errors.title) errorMessages.push(errors.title);
-      if (errors.files) errorMessages.push(errors.files);
-      showToast(false,errorMessages.join(' and '))
-      return;
-    }
+  // const handleSubmit = () => {
+  //   setTouched({ title: true, files: true });
+  //   const isValid = validateForm();
+  //   if (!isValid) {
+  //     const errorMessages = [];
+  //     if (errors.title) errorMessages.push(errors.title);
+  //     if (errors.files) errorMessages.push(errors.files);
+  //     showToast(false,errorMessages.join(' and '))
+  //     return;
+  //   }
 
 
-    setFormData({
-      year: formData.year,
-      title: '',
-      mediaType: formData.mediaType,
-      youtubeLink: '',
-      files: [],
-    });
-    setErrors({ title: '', files: '' });
-    setPreviews([]);
-    setTouched({ title: false, files: false });
-    showToast(true,'The gallery has been added successfully.')
-    // Add your submit logic here (e.g., API call)
-  };
-
+  //   setFormData({
+  //     year: formData.year,
+  //     title: '',
+  //     mediaType: formData.mediaType,
+  //     youtubeLink: '',
+  //     files: [],
+  //   });
+  //   setErrors({ title: '', files: '' });
+  //   setPreviews([]);
+  //   setTouched({ title: false, files: false });
+  //   showToast(true,'The gallery has been added successfully.')
+  //   // Add your submit logic here (e.g., API call)
+  // };
+const handleSubmit = async () => {
+  setTouched({ title: true, files: true });
+  const isValid = validateForm();
   
+  if (!isValid) {
+    const errorMessages = [];
+    if (errors.title) errorMessages.push(errors.title);
+    if (errors.files) errorMessages.push(errors.files);
+    showToast(false, errorMessages.join(' and '));
+    return;
+  }
+
+  const form = new FormData();
+  form.append("title", formData.title);
+  form.append("year", formData.year);
+  form.append("mediaType", formData.mediaType);
+  form.append("youtubelink", formData.youtubeLink);
+
+  if (formData.files.length > 0) {
+   form.append("file", formData.files[0]);
+
+  }
+
+  const token = localStorage.getItem("token") || "";
+
+  try {
+    const actionResult = await dispatch(
+      uploadGalleryImage({ formData: form, token })
+    );
+
+    const res = actionResult.payload as any;
+
+    if (res?.status) {
+      showToast(true, res.message || 'Gallery uploaded successfully');
+      console.log("Upload Response:", res);
+
+      setFormData({
+        year:  selectedYear?.getFullYear().toString() || '',
+        title: '',
+        mediaType: formData.mediaType,
+        youtubeLink: '',
+        files: [],
+      });
+      setErrors({ title: '', files: '' });
+      setPreviews([]);
+      setTouched({ title: false, files: false });
+    } else {
+      showToast(false, res?.message || 'Upload failed');
+      console.log(" Upload Failed Response:", res);
+    }
+  } catch (err) {
+    showToast(false, "Something went wrong");
+    console.error(" Upload Error:", err);
+  }
+};
+
 
   return (
     <Box sx={{ overflowX: { sm: 'hidden' } }}>
@@ -205,10 +269,10 @@ const Addgallery: React.FC = () => {
               size: 'small',
               sx: {
                 width: '140px',
-                backgroundColor: '#FFFFFF', // White background
+                backgroundColor: '#FFFFFF', 
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
-                    border: '2px solid #3DB80C', // 2px green border
+                    border: '2px solid #3DB80C', 
                   },
                   '&:hover fieldset': {
                     border: '2px solid #3DB80C',
@@ -448,14 +512,24 @@ const Addgallery: React.FC = () => {
 
         <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Submit
+            {/* <Submit
               variant="contained"
               size="large"
               onClick={handleSubmit}
               disabled={!isFormValid}
             >
               Submit
-            </Submit>
+            </Submit> */}
+
+            <Submit
+  variant="contained"
+  size="large"
+  onClick={handleSubmit}
+  disabled={!isFormValid || loading}
+>
+  {loading ? 'Uploading...' : 'Submit'}
+</Submit>
+
           </Box>
         </Grid>
       </Grid>

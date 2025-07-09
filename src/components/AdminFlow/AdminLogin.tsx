@@ -87,6 +87,7 @@ function handlerPassword(event: any) {
   }
 const response = await dispatch(loginUser({data:data}));
 const fullfilled=response.payload
+console.log(fullfilled)
   if (fullfilled.status) {
     showToast(true, fullfilled.message);
     setEmail("");

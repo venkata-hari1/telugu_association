@@ -1,3 +1,4 @@
+
 import { Box, Button, Card, CardContent, CardMedia, Grid, Paper, Typography } from "@mui/material"
 import { Custombutton } from "../../adminstyles/MembershiptableStyles"
 import AddIcon from '@mui/icons-material/Add';
@@ -5,7 +6,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import sankranthi from '../../assets/sankranthi.jpg'
-
+import AddhomepageHighlights from "../AdminFlow/AddhomepageHighlights";
 const AdminGallery = () => {
  
   const location= useLocation()
@@ -17,11 +18,13 @@ const AdminGallery = () => {
     {id:2,img:sankranthi,text:' Had a great time at recent event with #Associations'},
     
    ] 
- const navigate=useNavigate()      
+ const navigate = useNavigate();
+
 
 const[highlights,setHighlights]=useState(false)
- function homeHighlights(){
-   setHighlights(prev=>!prev)
+ function 
+AddhomepageHighlights() {
+  setHighlights(prev => !prev)
 }
 
  return (
@@ -58,8 +61,18 @@ const[highlights,setHighlights]=useState(false)
        </Grid>
        <Grid size={{md:6,xs:12}}>
          <Box sx={{display:'flex',justifyContent:{md:'flex-end',sm:'flex-start',gap:10}}} >
-         <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
-         onClick={homeHighlights}>Add Highlights</Button>
+         {/* <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
+         onClick={HomepageHighlights}
+>
+  Add Highlights</Button> */}
+  <Button
+  variant="outlined"
+  startIcon={<BorderColorIcon />}
+  sx={{ background: '#3DB80C', border: 'none', color: 'white' }}
+  onClick={() => navigate('Addhomepage-highlights')}>
+  Add Highlights
+</Button>
+
          </Box>
         </Grid> 
       
@@ -70,8 +83,16 @@ const[highlights,setHighlights]=useState(false)
        </Grid>
         <Grid size={{md:6,xs:12}}>
          <Box sx={{display:'flex',justifyContent:{md:'flex-end',sm:'flex-start',gap:10}}} >
-         <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
-        onClick={homeHighlights} >Add Highlights</Button>
+         {/* <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
+        onClick={HomepageHighlights} >Add Highlights</Button> */}
+        <Button
+  variant="outlined"
+  startIcon={<BorderColorIcon />}
+  sx={{ background: '#3DB80C', border: 'none', color: 'white' }}
+  onClick={() => navigate('Addhomepage-highlights')}>
+  Add Highlights
+</Button>
+
         <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
             >Edit</Button>
          </Box>
