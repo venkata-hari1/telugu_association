@@ -1,16 +1,13 @@
 import {
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogActions,
   Typography,
   Button,
   Grid,
-  Divider,
   Box,
 } from '@mui/material';
 
-import { showToast } from './ShowToast';
 import { useState } from 'react';
 import Regsuccess from './Regsuccess';
 
