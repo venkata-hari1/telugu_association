@@ -6,7 +6,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import sankranthi from '../../assets/sankranthi.jpg'
-import AddhomepageHighlights from "../AdminFlow/AddhomepageHighlights";
+
 const AdminGallery = () => {
  
   const location= useLocation()
@@ -22,11 +22,6 @@ const AdminGallery = () => {
 
 
 const[highlights,setHighlights]=useState(false)
- function 
-AddhomepageHighlights() {
-  setHighlights(prev => !prev)
-}
-
  return (
   <Box>
    <Grid container>
@@ -68,7 +63,7 @@ AddhomepageHighlights() {
   <Button
   variant="outlined"
   startIcon={<BorderColorIcon />}
-  sx={{ background: '#3DB80C', border: 'none', color: 'white' }}
+  sx={{ background: '#3DB80C', border: 'none', color: 'white',whiteSpace:'nowrap' }}
   onClick={() => navigate('Addhomepage-highlights')}>
   Add Highlights
 </Button>

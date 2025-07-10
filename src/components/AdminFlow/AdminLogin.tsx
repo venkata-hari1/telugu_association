@@ -224,7 +224,7 @@ return (
     type="submit"
     variant="contained"
     disabled={!isEmail || pwd.length < 8 || loading}
-    sx={{ mt: 3, backgroundColor: '#3DB80C', width: "100px" }}
+    sx={{ mt: 3, backgroundColor: '#3DB80C', width: "100px" ,whiteSpace:'nowrap'}}
   >
     {loading ? 'Logging in...' : 'Login'}
   </Button>

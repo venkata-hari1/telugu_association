@@ -61,7 +61,7 @@ const AdminRoutes = () => {
           <Route path="sponsorship/subscriptionplans" element={<Subscriptionplans />} />
           <Route path="sponsorship/subscriptionplans/editsubscription" element={<Editsubscription />} />
           <Route path="admingallery" element={<Gallery />}/>
-          <Route path="admingallery/addgallery" element={<Addgallery />}/>
+          <Route path="admingallery/addgallery" element={<Addgallery/>}/>
           <Route path="admingallery/photogallery" element={<Media />}/>
            <Route path="admingallery/video" element={<Videogallery />}/>
           <Route path="events" element={<EventsandCalender />}/>

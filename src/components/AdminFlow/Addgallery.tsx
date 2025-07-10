@@ -9,7 +9,9 @@ import { Submit, VisuallyHiddenInput } from '../../adminstyles/MembershiptableSt
 import {showToast} from '../../Utils/ShowToast';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../Redux/Store'; 
-import { uploadGalleryImage } from '../../Redux/gallarySlice';
+import { deleteSingleGallery, SingleGallery, UpdateGallery, uploadGalleryImage } from '../../Redux/gallarySlice';
+import Loading from '../../Utils/CircularLoader';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface FormData {
   year: string;
@@ -31,10 +33,11 @@ interface Preview {
 
 const Addgallery: React.FC = () => {
 const dispatch = useDispatch<AppDispatch>();
-const { loading, error, message } = useSelector((state: RootState) => state.gallery);
-
+const location=useLocation()
+const navigate=useNavigate()
+const { loading,single_gallery}:any = useSelector((state: RootState) => state.gallery);
 const [formData, setFormData] = useState<FormData>({
-    year: '2025',
+    year: '',
     title: '',
     mediaType: 'photos',
     youtubeLink: '',
@@ -45,13 +48,6 @@ const [formData, setFormData] = useState<FormData>({
     files: '',
   });
   const [selectedYear, setSelectedYear] = useState<Date | null>(new Date());
-  useEffect(() => {
-  if (selectedYear) {
-    const year = selectedYear.getFullYear().toString();
-    setFormData((prev) => ({ ...prev, year }));
-  }
-}, [selectedYear]);
-
   const [previews, setPreviews] = useState<Preview[]>([]);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [touched, setTouched] = useState<{ title: boolean; files: boolean }>({
@@ -62,6 +58,33 @@ const [formData, setFormData] = useState<FormData>({
   const MAX_VIDEO_SIZE = 3 * 1024 * 1024; // 3MB in bytes
   const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
   const VIDEO_TYPES = ['video/mp4', 'video/mpeg', 'video/webm'];
+  useEffect(() => {
+    if (location?.state?.value) {
+      dispatch(SingleGallery());
+    }
+  }, [dispatch, location?.state?.value]);
+  
+ 
+  useEffect(() => {
+    if (location?.state?.value) {
+      setSelectedYear(new Date(single_gallery?.data?.year));
+      setFormData((prev) => ({
+        ...prev,
+        title: single_gallery?.data?.title || '',
+        mediaType: single_gallery?.data?.mediaType || 'photos',
+        youtubeLink: single_gallery?.data?.youtubelink || '',
+        year: new Date(single_gallery?.data?.createdAt).getFullYear().toString(),
+        files: [],
+      }));
+      if (single_gallery?.data?.CloudFile?.length > 0) {
+        const mappedPreviews = single_gallery?.data?.CloudFile?.map((file:{_id:string,image:string}) => ({
+          id: file._id,
+          url: file.image, 
+        }));
+        setPreviews(mappedPreviews);
+      }
+    }
+  }, [single_gallery]);
   
   const validateForm = (): boolean => {
     let isValid = true;
@@ -72,10 +95,16 @@ const [formData, setFormData] = useState<FormData>({
       isValid = false;
     }
 
-    if (formData.files.length === 0) {
-      newErrors.files = formData.mediaType === 'photos' ? 'At least one image is required' : 'At least one video is required';
-      isValid = false;
-    }
+    const hasNewFiles = formData.files.length > 0;
+  const hasPreviewImages = previews.length > 0;
+
+  if (!hasNewFiles && !hasPreviewImages) {
+    newErrors.files =
+      formData.mediaType === 'photos'
+        ? 'At least one image is required'
+        : 'At least one video is required';
+    isValid = false;
+  }
 
     if (touched.title || touched.files) {
       setErrors(newErrors);
@@ -164,40 +193,31 @@ const [formData, setFormData] = useState<FormData>({
   };
   
 
-  const handleRemovePreview = (id: string) => {
+  const handleRemovePreview = async(id: string) => {
+    const isCloudImage = single_gallery?.data?.CloudFile?.some((file:{_id:string}) => file._id === id);
+
+    if (isCloudImage) {
+      try {
+        const data = { cloudid: id };
+        const response = await dispatch(deleteSingleGallery({ data }));
+        const fulfilled = response.payload;
+  
+        if (fulfilled.status) {
+          showToast(true, fulfilled.message);
+        } else {
+          showToast(false, fulfilled.message);
+        }
+      } catch (error) {
+        showToast(false, 'Something went wrong while deleting image');
+      }
+    }
     const updatedPreviews = previews.filter((preview) => preview.id !== id);
     const updatedFiles = formData.files.filter((_, index) => previews[index]?.id !== id);
-
+   
     setPreviews(updatedPreviews);
     setFormData((prev) => ({ ...prev, files: updatedFiles }));
     setTouched((prev) => ({ ...prev, files: true }));
   };
-
-  // const handleSubmit = () => {
-  //   setTouched({ title: true, files: true });
-  //   const isValid = validateForm();
-  //   if (!isValid) {
-  //     const errorMessages = [];
-  //     if (errors.title) errorMessages.push(errors.title);
-  //     if (errors.files) errorMessages.push(errors.files);
-  //     showToast(false,errorMessages.join(' and '))
-  //     return;
-  //   }
-
-
-  //   setFormData({
-  //     year: formData.year,
-  //     title: '',
-  //     mediaType: formData.mediaType,
-  //     youtubeLink: '',
-  //     files: [],
-  //   });
-  //   setErrors({ title: '', files: '' });
-  //   setPreviews([]);
-  //   setTouched({ title: false, files: false });
-  //   showToast(true,'The gallery has been added successfully.')
-  //   // Add your submit logic here (e.g., API call)
-  // };
 const handleSubmit = async () => {
   setTouched({ title: true, files: true });
   const isValid = validateForm();
@@ -212,45 +232,48 @@ const handleSubmit = async () => {
 
   const form = new FormData();
   form.append("title", formData.title);
-  form.append("year", formData.year);
+  if(selectedYear){
+  form.append("year", selectedYear.getFullYear().toString());
+  }
   form.append("mediaType", formData.mediaType);
   form.append("youtubelink", formData.youtubeLink);
 
   if (formData.files.length > 0) {
-   form.append("file", formData.files[0]);
-
+    formData.files.forEach((file) => {
+      form.append("file", file);
+    });
   }
 
-  const token = localStorage.getItem("token") || "";
+
 
   try {
-    const actionResult = await dispatch(
-      uploadGalleryImage({ formData: form, token })
-    );
-
-    const res = actionResult.payload as any;
-
-    if (res?.status) {
-      showToast(true, res.message || 'Gallery uploaded successfully');
-      console.log("Upload Response:", res);
-
-      setFormData({
-        year:  selectedYear?.getFullYear().toString() || '',
-        title: '',
-        mediaType: formData.mediaType,
-        youtubeLink: '',
-        files: [],
-      });
-      setErrors({ title: '', files: '' });
-      setPreviews([]);
-      setTouched({ title: false, files: false });
-    } else {
-      showToast(false, res?.message || 'Upload failed');
-      console.log(" Upload Failed Response:", res);
+    if(location?.state?.value){
+      const response=await dispatch(UpdateGallery({ formData: form })); 
+      const fullfilled=response.payload
+      if(fullfilled.status){
+        if(formData.mediaType==='photos'){
+        navigate('/admin/admingallery/photogallery')
+        }
+        else{
+          navigate('/admin/admingallery/video')
+        }
+      }
+    }
+    else{
+    const response=await dispatch(uploadGalleryImage({ formData: form })); 
+    const fullfilled=response.payload
+    if(fullfilled.status){
+      if(formData.mediaType==='photos'){
+      navigate('/admin/admingallery/photogallery')
+      }
+      else{
+        navigate('/admin/admingallery/video')
+      }
+    }
     }
   } catch (err) {
     showToast(false, "Something went wrong");
-    console.error(" Upload Error:", err);
+    
   }
 };
 
@@ -258,6 +281,7 @@ const handleSubmit = async () => {
   return (
     <Box sx={{ overflowX: { sm: 'hidden' } }}>
       <Box mt={2} mb={2}>
+      {loading&&<Loading/>}
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           views={['year']}
@@ -289,55 +313,7 @@ const handleSubmit = async () => {
           }}
         />
       </LocalizationProvider>
-        {/* <FormControl size="small">
-          <Select
-            name="year"
-            value={formData.year}
-            onChange={handleInputChange}
-            variant="outlined"
-            displayEmpty
-            IconComponent={() => (
-              <ArrowDropDownIcon sx={{ color: '#3DB80C', cursor: 'pointer' }} />
-            )}
-            MenuProps={{
-              PaperProps: {
-                sx: {
-                  backgroundColor: '#FDF7E1',
-                  marginTop: '4px',
-                  '& .MuiMenuItem-root': {
-                    backgroundColor: '#FDF7E1',
-                    color: '#3DB80C',
-                    '&:hover': {
-                      backgroundColor: '#3DB80C',
-                      color: 'white',
-                    },
-                  },
-                },
-              },
-            }}
-            sx={{
-              color: '#3DB80C',
-              backgroundColor: 'white',
-              border: '1px solid #3DB80C',
-              borderRadius: '2px',
-              width: '120px',
-              padding: '1px 1px',
-              '& .MuiSelect-outlined': {
-                padding: '8px 10px',
-                color: '#3DB80C',
-                background: 'transparent',
-              },
-              '& fieldset': {
-                border: 'none',
-              },
-              marginTop: '5px',
-            }}
-          >
-            <MenuItem value="2025">2025</MenuItem>
-            <MenuItem value="2024">2024</MenuItem>
-            <MenuItem value="2023">2023</MenuItem>
-          </Select>
-        </FormControl> */}
+       
       </Box>
       <Grid container spacing={2} mt={1}>
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
@@ -525,9 +501,9 @@ const handleSubmit = async () => {
   variant="contained"
   size="large"
   onClick={handleSubmit}
-  disabled={!isFormValid || loading}
+  disabled={location?.state?.value?false:!isFormValid || loading}
 >
-  {loading ? 'Uploading...' : 'Submit'}
+  {loading ? 'Uploading...' : location?.state?.value?'Update':'Submit'}
 </Submit>
 
           </Box>

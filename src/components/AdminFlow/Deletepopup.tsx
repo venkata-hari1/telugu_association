@@ -4,15 +4,22 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 
+
 const Deletepopup = ({
   open,
   handleClose,
   onConfirm,
+  name,
+  loading
 }: {
   open: boolean;
   handleClose: () => void;
   onConfirm: () => void;
+  name:string;
+  loading:boolean
 }) => {
+ 
+  
   return (
     <Box>
       <Dialog
@@ -29,7 +36,7 @@ const Deletepopup = ({
       >
         <DialogContent>
           <Typography variant="h6" sx={{ color: '#f44336', fontWeight: 500 }}>
-            Are you sure you want to delete the Selected <br /> 1 Homepage Highlight?
+          {name==='singledelete'?'Are you sure you want to delete this gallery?': '⚠️ Warning: Are you sure you want to delete all galleries?'}
           </Typography>
 
           <DialogActions
@@ -55,6 +62,7 @@ const Deletepopup = ({
             </Button>
             <Button
               onClick={onConfirm}
+              disabled={loading}
               sx={{
                 backgroundColor: '#f44336',
                 color: '#fff',
@@ -69,7 +77,7 @@ const Deletepopup = ({
                 },
               }}
             >
-              Delete
+              {loading?'Delete...':'Delete'}
             </Button>
           </DialogActions>
         </DialogContent>

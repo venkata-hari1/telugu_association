@@ -12,5 +12,8 @@ export const endpoints:any={
     GETGALLARY:'gallery/all_galleries',
     DELETEGALLARY:'gallery/delete_gallery',
     DELETEALLGALLARY:'gallery/delete_galleries',
+    SINGLEGALLARY:'gallery/single_gallery',
+    UPDATEGALLARY:'gallery/update_gallery',
+    DELECTSINGLEGALLARY:'gallery/delete_single_gallery'
 
 }

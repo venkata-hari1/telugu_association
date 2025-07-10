@@ -15,6 +15,7 @@ export interface GalleryItem {
 
 interface GalleryState {
   gallery: GalleryItem[];
+  single_gallery: {},
   loading: boolean;
   error: any;
   message: string | null;
@@ -29,28 +30,22 @@ interface GalleryState {
 // Initial state
 const initialState: GalleryState = {
   gallery: [],
+  single_gallery: {},
   loading: false,
   error: null,
   message: null,
-   currentPage: 1,
+  currentPage: 1,
   totalPages: 1,
 };
 
 export const uploadGalleryImage = createAsyncThunk(
   'gallery/create_gallery',
-  async ({ formData, token }: { formData: FormData; token: string }, { rejectWithValue, fulfillWithValue }) => {
+  async ({ formData }: { formData: FormData }, { rejectWithValue, fulfillWithValue }) => {
     try {
-      
-      console.log("Token:", token);
-
-      for (let pair of formData.entries()) {
-        console.log(" FormData:", pair[0], pair[1]);
-      }
-
       const res = await fetch(`${baseURL}/${endpoints.CREATEGALLARY}`, {
         method: 'POST',
         headers: {
-       token: token,
+          token: localStorage.getItem('token') || '',
         },
         body: formData,
       });
@@ -72,46 +67,98 @@ export const uploadGalleryImage = createAsyncThunk(
 
 export const fetchGallery = createAsyncThunk(
   "gallery/all_galleries",
-  async ( { page, limit, year }: { page: number; limit: number; year?: string }, { fulfillWithValue, rejectWithValue }) => {
-    
+  async ({ year, page }: { year?: number | string; page: number }, { fulfillWithValue, rejectWithValue }) => {
+
     try {
-      const response = await fetch(`${baseURL}/${endpoints.GETGALLARY}?page=${page}&limit=${limit}`);
+      const response = await fetch(`${baseURL}/${endpoints.GETGALLARY}?page=${page}&year=${year}`);
       const result = await response.json();
 
       if (response.ok) {
-        
-        return fulfillWithValue({
-  gallery: result.gallery,
-  currentPage: result.currentPage,
-  totalPages: result.totalPages,
-});
+
+        return fulfillWithValue(result)
 
       } else {
-        return rejectWithValue(result.message || "Failed to fetch gallery");
+        return rejectWithValue(result)
       }
     } catch (error) {
       return rejectWithValue(error || "Network error");
     }
   }
 );
-
-// Delete Single Gallery Item
-export const deleteGalleryById = createAsyncThunk(
-  'gallery/delete_gallery',
-  async ({ id }: { id: string; }, { rejectWithValue }) => {
+//UPDATE GALLARY
+export const UpdateGallery = createAsyncThunk(
+  'UpdateGallery',
+  async ({ formData }: { formData: FormData }, { fulfillWithValue, rejectWithValue, dispatch }) => {
     try {
-      const res = await fetch(`${baseURL}/${endpoints.DELETEGALLERY}/${id}`, {
-        method: 'DELETE',
-       
+      const id = localStorage.getItem('galleryid')
+      const res = await fetch(`${baseURL}/${endpoints.UPDATEGALLARY}/${id}`, {
+        method: 'PATCH',
+        headers: {
+          token: localStorage.getItem('token') || ''
+        },
+        body: formData
       });
 
       const data = await res.json();
-
+      const year = localStorage.getItem('year') || ''
+      const page = parseInt(localStorage.getItem('page') || '');
       if (res.ok) {
-        return { id, message: data.message };
+        dispatch(fetchGallery({
+          year, page,
+        }))
+        return fulfillWithValue(data)
       } else {
         return rejectWithValue(data.message || 'Delete failed');
       }
+    } catch (error) {
+      return rejectWithValue('Network error');
+    }
+  }
+);
+// Delete Single Gallery Item
+export const deleteGalleryById = createAsyncThunk(
+  'deleteGalleryById',
+  async (__, { fulfillWithValue, rejectWithValue, dispatch }) => {
+    try {
+      const id = localStorage.getItem('galleryid')
+      const res = await fetch(`${baseURL}/${endpoints.DELETEGALLARY}/${id}`, {
+        method: 'DELETE',
+        headers: {
+          token: localStorage.getItem('token') || ''
+        }
+      });
+
+      const data = await res.json();
+      const year = localStorage.getItem('year') || ''
+      const page = parseInt(localStorage.getItem('page') || '');
+      dispatch(fetchGallery({
+        year, page,
+      }))
+      return fulfillWithValue(data)
+    } catch (error) {
+      return rejectWithValue('Network error');
+    }
+  }
+);
+
+//deletesingleGallery Item
+export const deleteSingleGallery = createAsyncThunk(
+  'deleteSingleGallery',
+  async (payload:{data:{cloudid:string}}, { fulfillWithValue, rejectWithValue, dispatch }) => {
+    try {
+      const {cloudid}=payload.data
+      const id = localStorage.getItem('galleryid')
+      const res = await fetch(`${baseURL}/${endpoints.DELECTSINGLEGALLARY}/${id}/${cloudid}`, {
+        method: 'DELETE',
+        headers: {
+          token: localStorage.getItem('token') || ''
+        }
+      });
+
+      const data = await res.json();
+     
+     
+      return fulfillWithValue(data)
     } catch (error) {
       return rejectWithValue('Network error');
     }
@@ -121,22 +168,26 @@ export const deleteGalleryById = createAsyncThunk(
 // Delete All Galleries
 export const deleteAllGalleryItems = createAsyncThunk(
   'gallery/delete_galleries',
-  async ({ token }: { token: string }, { rejectWithValue }) => {
+  async (__, { fulfillWithValue, rejectWithValue, dispatch }) => {
     try {
       const res = await fetch(`${baseURL}/${endpoints.DELETEALLGALLARY}`,
-         {
-        method: 'DELETE',
-        headers: {
-          token: token,
-        },
-      });
+        {
+          method: 'DELETE',
+          headers: {
+            token: localStorage.getItem('token') || '',
+          },
+        });
 
       const data = await res.json();
-
+      const year = localStorage.getItem('year') || ''
+      const page = parseInt(localStorage.getItem('page') || '');
       if (res.ok) {
-        return data.message;
+        dispatch(fetchGallery({
+          year, page,
+        }))
+        return fulfillWithValue(data)
       } else {
-        return rejectWithValue(data.message || 'Delete all failed');
+        return rejectWithValue(data || 'Delete all failed');
       }
     } catch (error) {
       return rejectWithValue('Network error');
@@ -144,6 +195,32 @@ export const deleteAllGalleryItems = createAsyncThunk(
   }
 );
 
+// Single Gallery
+export const SingleGallery = createAsyncThunk(
+  'SingleGallery',
+  async (__, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const id = localStorage.getItem('galleryid')
+      const res = await fetch(`${baseURL}/${endpoints.SINGLEGALLARY}/${id}`,
+        {
+          method: 'GET',
+          headers: {
+            token: localStorage.getItem('token') || '',
+          },
+        });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        return fulfillWithValue(data);
+      } else {
+        return rejectWithValue(data);
+      }
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 const gallerySlice = createSlice({
   name: "gallery",
@@ -167,7 +244,7 @@ const gallerySlice = createSlice({
       })
       .addCase(uploadGalleryImage.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string; 
+        state.error = action.payload as string;
       })
 
       // Fetch All
@@ -176,32 +253,69 @@ const gallerySlice = createSlice({
         state.error = null;
       })
       .addCase(fetchGallery.fulfilled, (state, action: PayloadAction<any>) => {
-  state.loading = false;
-  state.gallery = action.payload.gallery || [];
-  state.currentPage = action.payload.currentPage || 1;
-  state.totalPages = action.payload.totalPages || 1;
-})
+        state.loading = false;
+        state.gallery = action.payload
+      })
       .addCase(fetchGallery.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Fetch failed";
       })
-      
 
-.addCase(deleteGalleryById.fulfilled, (state, action: PayloadAction<any>) => {
-  state.gallery = state.gallery.filter((item) => item._id !== action.payload.id);
-  state.message = action.payload.message;
-})
-.addCase(deleteGalleryById.rejected, (state, action) => {
-  state.error = action.payload;
-})
+      .addCase(deleteGalleryById.pending, (state) => {
+        state.loading = true
 
-.addCase(deleteAllGalleryItems.fulfilled, (state, action: PayloadAction<string>) => {
-  state.gallery = [];
-  state.message = action.payload;
-})
-.addCase(deleteAllGalleryItems.rejected, (state, action) => {
-  state.error = action.payload;
-});
+      })
+      .addCase(deleteGalleryById.fulfilled, (state) => {
+        state.loading = false
+
+      })
+      .addCase(deleteGalleryById.rejected, (state) => {
+        state.loading = false
+      })
+      .addCase(deleteAllGalleryItems.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(deleteAllGalleryItems.fulfilled, (state) => {
+        state.loading = false
+      })
+      .addCase(deleteAllGalleryItems.rejected, (state) => {
+        state.loading = false
+      })
+      //singlegallery
+      .addCase(SingleGallery.pending, (state) => {
+        state.loading = true
+      })
+
+      .addCase(SingleGallery.fulfilled, (state, action) => {
+        state.single_gallery = action.payload;
+        state.loading = false
+      })
+      .addCase(SingleGallery.rejected, (state) => {
+        state.loading = false
+      })
+
+      //updategallery
+      //singlegallery
+      .addCase(UpdateGallery.pending, (state) => {
+        state.loading = true
+      })
+
+      .addCase(UpdateGallery.fulfilled, (state) => {
+        state.loading = false
+      })
+      .addCase(UpdateGallery.rejected, (state) => {
+        state.loading = false
+      })
+      .addCase(deleteSingleGallery.pending, (state) => {
+        state.loading = true
+      })
+
+      .addCase(deleteSingleGallery.fulfilled, (state) => {
+        state.loading = false
+      })
+      .addCase(deleteSingleGallery.rejected, (state) => {
+        state.loading = false
+      })
   },
 });
 
