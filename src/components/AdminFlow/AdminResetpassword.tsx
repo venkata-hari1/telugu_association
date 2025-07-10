@@ -17,6 +17,10 @@ import Logo from "../../assets/logo.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import {showToast} from "../../Utils/ShowToast";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../Redux/Store";
+import { changePassword } from "../../fetures/auth/authSlice"; 
+
 
 
 const AdminResetpassword = () => {
@@ -26,11 +30,19 @@ const AdminResetpassword = () => {
   const [currenttype, setCurrentType] = useState("password");
   const [confirmshow, setConfirmshow] = useState(false);
   const [confirmtype, setConfirmtype] = useState("password");
-
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmError, setConfirmError] = useState("");
+
+  const dispatch = useDispatch<AppDispatch>();
+  const email = localStorage.getItem("email");
+  console.log("Email from localStorage:", email); 
+
+  
+
   function showcurrentPassword() {
     setCurrentShow(true);
     setCurrentType("text");
@@ -68,15 +80,64 @@ const AdminResetpassword = () => {
     }
   }
 
-  function submitResetHanlder() {
+  // function submitResetHanlder() {
 
-   showToast(true,'Password Changed Successfully')
-   setTimeout(()=>{
-    navigate('/login')
-   },900)
+  //  showToast(true,'Password Changed Successfully')
+  //  setTimeout(()=>{
+  //   navigate('/login')
+  //  },900)
 
    
+  // }
+const submitResetHandler = async () => {
+  const email = localStorage.getItem("email");
+
+  if (!email) {
+    showToast(false, "Email not found. Please go through Forgot Password again.");
+    navigate("/forgotpassword");
+    return;
   }
+
+  if (!password || !confirmpassword) {
+    showToast(false, "Both password fields are required.");
+    return;
+  }
+
+  if (password !== confirmpassword) {
+    showToast(false, "Passwords do not match.");
+    return;
+  }
+
+  try {
+    const response = await dispatch(
+      changePassword({
+        data: {
+          email,
+          newPassword: password,        // ✅ Match backend field name
+          confirmPassword: confirmpassword,
+        },
+      })
+    );
+
+    const result = response.payload;
+
+     if (response.meta.requestStatus === "fulfilled")
+ {
+      showToast(true, result.message || "Password changed successfully");
+      localStorage.removeItem("email");
+      setTimeout(() => navigate("/login"), 1000);
+    } else {
+      showToast(false, result?.message || "Failed to reset password");
+    }
+  } catch (err) {
+    console.error("Reset failed", err);
+    showToast(false, "Something went wrong");
+  }
+};
+
+
+
+
   const isDisabled =
   password.length < 8 || confirmpassword !== password || !!passwordError || !!confirmError;
   return (
@@ -162,7 +223,7 @@ const AdminResetpassword = () => {
             )}
           </FormControl>
 
-          {/* Confirm Password Field */}
+          
           <FormControl fullWidth margin="normal" size="small" variant="outlined">
             <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 700 }}>
               Confirm Password
@@ -208,7 +269,7 @@ const AdminResetpassword = () => {
             <Button
               variant="contained"
               sx={{ mt: 2, backgroundColor: "#3DB80C", width: "180px" }}
-              onClick={submitResetHanlder}
+              onClick={submitResetHandler}
               disabled={isDisabled}
             >
               Reset Password

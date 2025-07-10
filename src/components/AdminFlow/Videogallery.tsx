@@ -39,9 +39,27 @@ const navigate=useNavigate()
             Gallery & Media
           </Typography>
         </Grid>
-        <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
-          <Box display="flex" sx={{ gap: "20px", justifyContent: "flex-end" }}>
+        <Grid size={{ md: 6, xs: 4 }}>
+          <Box display="flex" justifyContent="flex-end" gap={2}>
+            <Button
+              variant="outlined"
+              startIcon={<AddIcon />}
+              sx={{
+                background: "#3DB80C",
+                color: "white",
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: "white",
+                  color: "#3DB80C",
+                  borderColor: "#3DB80C",
+                },
+              }}
+              onClick={() => console.log("Add Highlight clicked")}
+            >
+              Add Highlight
+            </Button>
             <Custombutton
+              variant="outlined"
               startIcon={<AddIcon />}
               onClick={() => navigate("/admin/admingallery/addgallery")}
             >

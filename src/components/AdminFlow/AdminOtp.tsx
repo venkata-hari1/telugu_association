@@ -13,21 +13,88 @@ import OTPInput from 'react-otp-input';
 import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {showToast} from '../../Utils/ShowToast';
-;
+import { verifyOtp } from '../../fetures/auth/authSlice';
+import {  useLocation } from 'react-router-dom';
+import { useEffect } from 'react'; 
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../../Redux/Store'; 
+import { forgotPassword } from '../../fetures/auth/authSlice';
+
+
 
 
 const AdminOtp = () => {
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
-  const navigate = useNavigate()
-  const handleOtp=()=>{
-   showToast(true,'OTP Verified Successfully')
-   setOtp('')
-   setTimeout(()=>{
-    navigate('/adminreset')
-   },900)
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+
   
+const location = useLocation();
+const email = location.state?.email || localStorage.getItem("email");
+
+useEffect(() => {
+  if (!email) {
+    showToast(false, "Email not found. Please try again.");
+    navigate("/forgotpassword");
   }
+}, [email]);
+
+  
+const handleOtp = async () => {
+  const trimmedOtp = otp.trim();
+  const isValidOtp = /^\d{4}$/.test(trimmedOtp); 
+
+  if (!isValidOtp || !email) {
+    setOtpError("Please enter a valid 4-digit OTP");
+    return;
+  }
+
+  try {
+    const response = await dispatch(verifyOtp({ data: { email, otp: trimmedOtp } }));
+    const fulfilled = response.payload;
+
+    if (response.meta.requestStatus === "fulfilled" && fulfilled?.status) {
+      showToast(true, fulfilled.message || "OTP Verified Successfully");
+      localStorage.setItem("email", email);
+
+      setOtp("");
+      setOtpError("");
+      setTimeout(() => {
+        navigate("/adminreset", { state: { email } });
+      }, 200);
+    } else {
+      showToast(false, fulfilled?.message || "Invalid OTP");
+    }
+  } catch (error) {
+    console.error("OTP verification failed", error);
+    showToast(false, "Something went wrong");
+  }
+};
+
+const handleResendOtp = async () => {
+  if (!email) {
+    showToast(false, "Email not found. Cannot resend OTP.");
+    return;
+  }
+
+  try {
+    const response = await dispatch(forgotPassword({ data: { email } }));
+    const result = response.payload;
+
+    if (response.meta.requestStatus === "fulfilled" && result?.status) {
+      showToast(true, result.message || "OTP resent successfully");
+    } else {
+      showToast(false, result?.message || "Failed to resend OTP");
+    }
+  } catch (err) {
+    console.error("Error resending OTP:", err);
+    showToast(false, "Something went wrong");
+  }
+};
+
+
   return (
     <Fragment>
     <Box
@@ -78,7 +145,7 @@ const AdminOtp = () => {
             variant="outlined"
             sx={{ mt: 3, justifyContent: 'center', alignItems: 'center', display: 'flex' }}
           >
-            <OTPInput
+            { <OTPInput
               value={otp}
               onChange={(value) => {
                 setOtp(value);
@@ -100,7 +167,9 @@ const AdminOtp = () => {
                 textAlign: 'center',
                 background: '#fff',
               }}
-            />
+            /> 
+}
+           
             {otpError && (
               <Typography color="error" mt={1} fontSize="14px">
                 {otpError}
@@ -112,7 +181,9 @@ const AdminOtp = () => {
           <Box display="flex" justifyContent="center">
             <Button
               variant="contained"
-              disabled={otp.length !== 4}
+              // disabled={otp.length !== 4}
+              disabled={!/^\d{4}$/.test(otp)}
+
               onClick={handleOtp}
               sx={{ mt: 3, backgroundColor: '#3DB80C', width: "150px" }}
             >
@@ -121,7 +192,7 @@ const AdminOtp = () => {
           </Box>
           <Typography display="flex" justifyContent="center" mt={2}>
             Dont Receive the Email? &nbsp;
-            <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer' }}>Resend</Typography>
+            <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={handleResendOtp}>Resend</Typography>
           </Typography>
 
           <Typography sx={{

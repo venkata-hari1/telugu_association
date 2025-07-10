@@ -1,3 +1,4 @@
+
 import { Box, Button, Card, CardContent, FormControl, IconButton, InputAdornment, OutlinedInput, Typography } from '@mui/material'
 import backgroundImg from '../../assets/BackgroundImage.png'
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -6,11 +7,23 @@ import {  Fragment, useEffect, useState } from 'react';
 import Logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom';
 import { showToast } from '../../Utils/ShowToast';
+import { useDispatch, useSelector } from 'react-redux';
+  import { loginUser } from '../../fetures/auth/authSlice';
+import { AppDispatch } from '../../Redux/Store';
+
+
+
 
 
 const AdminLogin = () => {
 
   const navigate=useNavigate()
+  const dispatch = useDispatch<AppDispatch>();
+  const { signInUser, loading, error, } = useSelector((state: any) => state.login)
+  const [email,setEmail]=useState<string>('')
+  const[pwd,setPwd]=useState<string>('')
+
+const [pwdError, setPwdError] = useState('');
  const[currentshow,setCurrentShow]=useState(false)
  
  const [currenttype,setCurrentType]=useState("password")
@@ -24,7 +37,6 @@ function hidecurrentPassword(){
   setCurrentType("password")
 }
 
-const [email,setEmail]=useState('')
 
 function handleEmail(event:any){
   setEmail(event.target.value)
@@ -52,9 +64,7 @@ function emailHandlingError(isEmail:any){
   }
 }
 
-const[pwd,setPwd]=useState('')
 
-const [pwdError, setPwdError] = useState('');
 
 function handlerPassword(event: any) {
   const newPassword = event.target.value;
@@ -68,18 +78,33 @@ function handlerPassword(event: any) {
   }
 }
 
-const handleLogin = () => {
- showToast(true,'Login successfully')
-  
-  setTimeout(()=>{
-    navigate('/admin/dashboard')
-  },900)
-  localStorage.setItem("admin", "admin");
-  setEmail("");
+
+ const handleLogin = async() => {
+  try{
+  const data={
+    email:email,
+    password:pwd
+  }
+const response = await dispatch(loginUser({data:data}));
+const fullfilled=response.payload
+console.log(fullfilled)
+  if (fullfilled.status) {
+    showToast(true, fullfilled.message);
+    setEmail("");
   setPwd("");
   setEmailerror("");
   setPwdError("");
-};
+    setTimeout(()=>{ navigate('/admin/dashboard')},200)
+  } else {
+    showToast(false,fullfilled.message );
+  }
+}
+ 
+ catch(error){}
+ finally{
+
+ }
+}
 
 
 return (
@@ -181,14 +206,31 @@ return (
     </Box>
      <Box display="flex" justifyContent="center">
       
-      <Button
-            variant="contained"
-            disabled={!isEmail || pwd.length<8}
-            onClick={handleLogin}
-            sx={{ mt: 3, backgroundColor: '#3DB80C',width:"100px" }}
-          >
-            Login
-      </Button>
+
+      {/* <Button
+  variant="contained"
+  disabled={!isEmail || pwd.length < 8 || loading}
+
+  sx={{ mt: 3, backgroundColor: '#3DB80C', width: "100px" }}
+>
+  {loading ? 'Logging in...' : 'Login'}
+</Button> */}
+
+<form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
+  {/* Email input */}
+  {/* Password input */}
+  
+  <Button
+    type="submit"
+    variant="contained"
+    disabled={!isEmail || pwd.length < 8 || loading}
+    sx={{ mt: 3, backgroundColor: '#3DB80C', width: "100px" ,whiteSpace:'nowrap'}}
+  >
+    {loading ? 'Logging in...' : 'Login'}
+  </Button>
+</form>
+
+
       
       </Box> 
     </CardContent>  

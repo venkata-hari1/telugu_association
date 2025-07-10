@@ -3,35 +3,87 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 
-const Deletepopup = ({open,handleClose}:{ open: boolean; handleClose: () => void }) => {
 
-return (
-  <Box>
-       <Dialog
+const Deletepopup = ({
+  open,
+  handleClose,
+  onConfirm,
+  name,
+  loading
+}: {
+  open: boolean;
+  handleClose: () => void;
+  onConfirm: () => void;
+  name:string;
+  loading:boolean
+}) => {
+ 
+  
+  return (
+    <Box>
+      <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        
+        PaperProps={{
+          sx: {
+            padding: '20px',
+            borderRadius: '10px',
+            minWidth: '400px',
+            textAlign: 'center',
+          },
+        }}
       >
-        <DialogTitle id="alert-dialog-title">
-          <Typography variant='h6' color='#3DB80C'>Are You sure you want to delete this event?</Typography>
-        </DialogTitle>
-        <DialogContent >
-          
-           <DialogActions sx={{display:"flex", justifyContent:"space-between",paddingTop:'40px'}}>
-          <Button variant="outlined" size="large" sx={{borderColor:"#3DB80C",color:"#3DB80C"}} onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" size="large" sx={{background:"#3DB80C",color:"#fff"}} onClick={handleClose} autoFocus>
-            Delete
-          </Button>
-        </DialogActions>
-        </DialogContent>
-       
-      </Dialog>  
-  </Box>    
-)
-}
+        <DialogContent>
+          <Typography variant="h6" sx={{ color: '#f44336', fontWeight: 500 }}>
+          {name==='singledelete'?'Are you sure you want to delete this gallery?': '⚠️ Warning: Are you sure you want to delete all galleries?'}
+          </Typography>
 
-export default Deletepopup
+          <DialogActions
+            sx={{ justifyContent: 'center', marginTop: '40px' }}
+          >
+            <Button
+              onClick={handleClose}
+              sx={{
+                border: '1px solid #f44336',
+                color: '#f44336',
+                textTransform: 'none',
+                px: 4,
+                py: 1.5,
+                borderRadius: '6px',
+                fontWeight: 500,
+                backgroundColor: 'transparent',
+                '&:hover': {
+                  backgroundColor: '#ffe6e6',
+                },
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={onConfirm}
+              disabled={loading}
+              sx={{
+                backgroundColor: '#f44336',
+                color: '#fff',
+                textTransform: 'none',
+                px: 4,
+                py: 1.5,
+                borderRadius: '6px',
+                fontWeight: 500,
+                marginLeft: '20px',
+                '&:hover': {
+                  backgroundColor: '#d32f2f',
+                },
+              }}
+            >
+              {loading?'Delete...':'Delete'}
+            </Button>
+          </DialogActions>
+        </DialogContent>
+      </Dialog>
+    </Box>
+  );
+};
+
+export default Deletepopup;
