@@ -40,7 +40,7 @@ const years = useMemo(() => {
 
   useEffect(() => {
     if (pathname === "/gallery/photos") {
-      dispatch(fetchGallery({ page: 1, limit: 10 }));
+      dispatch(fetchGallery({ Page: 1, type: '',SearchTitle:'' }));
     }
   }, [dispatch, pathname]);
 

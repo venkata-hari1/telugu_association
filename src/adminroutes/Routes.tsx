@@ -25,9 +25,6 @@ import Media from '../components/AdminFlow/Media'
 import Videogallery from '../components/AdminFlow/Videogallery'
 import AdminGallery from '../components/AdminFlow/AdminGallery'
 
-import AdminRoute from '../fetures/auth/AdminRoute';
-import AdminLogin from '../components/AdminFlow/AdminLogin'
-import AddhomepageHighlights from '../components/AdminFlow/AddhomepageHighlights'
 
 const AppRoutes = () => {
   return (
@@ -54,7 +51,6 @@ const AppRoutes = () => {
            <Route path="gallery/video" element={<Videogallery />}/>
           <Route path="media/addgallery" element={<Addgallery />}/>
           <Route path="admingallery/addgallery" element={<Addgallery />}/>
-          <Route path="Addhomepage-highlights" element={<AddhomepageHighlights />} />
           <Route path="events" element={<EventsandCalender />}/>
            <Route path="events/addevent" element={<Addevent />}/>  
            <Route path="board" element={<BoardandLeadership />}/>  
@@ -62,14 +58,6 @@ const AppRoutes = () => {
             <Route path="profile" element={<Profile />}/>  
             <Route path="profile/change-email" element={<Changeemail />}/> 
             <Route path="profile/change-password" element={<Changepassword />}/>
-
-            <Route path="/login" element={<AdminLogin />} />
-            <Route path="/admin/dashboard"element={<AdminRoute><Dashboard /></AdminRoute>} />
-            <Route path="/change-password" element={<Changepassword />} />
-            
-
-          
-            
         </Route>
      </Route>
     </Routes>

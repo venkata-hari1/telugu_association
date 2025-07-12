@@ -19,11 +19,15 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logout from './Logout';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../Redux/Store';
+import { pagination } from '../../Redux/gallarySlice';
 
 
 
 const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSidebar:() => void}) => {
   const navigate = useNavigate();
+  const dispatch=useDispatch<AppDispatch>()
   const location = useLocation();
   const sidemenu = [
     { id: 1, title: 'Dashboard', icon: <GridViewIcon />, link: 'admin/dashboard' },
@@ -62,6 +66,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
             onClick={() => {
               navigate(`/${item.link}`);
               onCloseSidebar();
+              dispatch(pagination(1))
             }}
             sx={{
               '&.Mui-selected': {

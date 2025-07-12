@@ -13,17 +13,19 @@ import OTPInput from 'react-otp-input';
 import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {showToast} from '../../Utils/ShowToast';
-import { verifyOtp } from '../../fetures/auth/authSlice';
+import { verifyOtp } from '../../Redux/authSlice';
 import {  useLocation } from 'react-router-dom';
 import { useEffect } from 'react'; 
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../Redux/Store'; 
-import { forgotPassword } from '../../fetures/auth/authSlice';
+import { forgotPassword } from '../../Redux/authSlice';
+import Loading from '../../Utils/CircularLoader';
 
 
 
 
 const AdminOtp = () => {
+  const {loading}=useSelector((state:RootState)=>state.login)
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
   const navigate = useNavigate();
@@ -35,10 +37,7 @@ const location = useLocation();
 const email = location.state?.email || localStorage.getItem("email");
 
 useEffect(() => {
-  if (!email) {
-    showToast(false, "Email not found. Please try again.");
-    navigate("/forgotpassword");
-  }
+ 
 }, [email]);
 
   
@@ -97,6 +96,7 @@ const handleResendOtp = async () => {
 
   return (
     <Fragment>
+      {loading&&<Loading/>}
     <Box
        sx={{
         backgroundImage: `url(${backgroundImg})`,
@@ -182,12 +182,12 @@ const handleResendOtp = async () => {
             <Button
               variant="contained"
               // disabled={otp.length !== 4}
-              disabled={!/^\d{4}$/.test(otp)}
+              disabled={loading || !/^\d{4}$/.test(otp)}
 
               onClick={handleOtp}
               sx={{ mt: 3, backgroundColor: '#3DB80C', width: "150px" }}
             >
-              Continue
+              {loading?'Continue...':'Continue'}
             </Button>
           </Box>
           <Typography display="flex" justifyContent="center" mt={2}>

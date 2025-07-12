@@ -1,9 +1,7 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import * as api from './authApi';
-import axios from 'axios';
-import { origin } from '../../apiRequest/config'; 
-import { baseURL, endpoints } from "../../Utils/Config";
+
+import { baseURL, endpoints } from "../Utils/Config";
 
 
 interface ApiResponse {
@@ -16,8 +14,8 @@ interface IAuth {
   error: any;
   forgotMsg: any;
   otpVerifyMsg: any;
- passwordResetMsg: string | null;
-   
+  passwordResetMsg: string | null;
+
 }
 
 
@@ -31,11 +29,11 @@ const initialState: IAuth = {
 
 };
 
-export const loginUser= createAsyncThunk(
+export const loginUser = createAsyncThunk(
   "auth/signin",
-  async (payload: { data:{email:string ,password:string } }, { fulfillWithValue, rejectWithValue }) => {
+  async (payload: { data: { email: string, password: string } }, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const {data}=payload
+      const { data } = payload
       const response = await fetch(`${baseURL}/${endpoints.SIGNIN}`, {
         method: "POST",
         headers: {
@@ -45,25 +43,25 @@ export const loginUser= createAsyncThunk(
       });
 
       const result = await response.json();
-     
+
       if (response.ok) {
-      
-       localStorage.setItem("token", result.accesstoken);
+
+        localStorage.setItem("token", result.accesstoken);
         return fulfillWithValue(result);
       } else {
         return rejectWithValue(result);
       }
     } catch (error) {
-      return rejectWithValue(error|| "Something went wrong");
+      return rejectWithValue(error || "Something went wrong");
     }
   }
 );
 
-export const forgotPassword= createAsyncThunk(
+export const forgotPassword = createAsyncThunk(
   "forgotPassword",
-  async (payload: { data:{email:string  } }, { fulfillWithValue, rejectWithValue }) => {
+  async (payload: { data: { email: string } }, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const {data}=payload
+      const { data } = payload
       const response = await fetch(`${baseURL}/${endpoints.FORGETPASSWORD}`, {
         method: "PATCH",
         headers: {
@@ -73,23 +71,23 @@ export const forgotPassword= createAsyncThunk(
       });
 
       const result = await response.json();
-     
+
       if (response.ok) {
         return fulfillWithValue(result);
       } else {
         return rejectWithValue(result);
       }
     } catch (error) {
-      return rejectWithValue(error|| "Something went wrong");
+      return rejectWithValue(error || "Something went wrong");
     }
   }
 );
 
-export const verifyOtp= createAsyncThunk(
+export const verifyOtp = createAsyncThunk(
   "verifyOtp",
-  async (payload: { data:{email:string, otp:string } }, { fulfillWithValue, rejectWithValue }) => {
+  async (payload: { data: { email: string, otp: string } }, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const {data}=payload
+      const { data } = payload
       const response = await fetch(`${baseURL}/${endpoints.VERIFYOTP}`, {
         method: "PATCH",
         headers: {
@@ -99,14 +97,14 @@ export const verifyOtp= createAsyncThunk(
       });
 
       const result = await response.json();
-     
+
       if (response.ok) {
         return fulfillWithValue(result);
       } else {
         return rejectWithValue(result);
       }
     } catch (error) {
-      return rejectWithValue(error|| "Something went wrong");
+      return rejectWithValue(error || "Something went wrong");
     }
   }
 );
@@ -121,7 +119,7 @@ export const changePassword = createAsyncThunk(
       const { data } = payload;
 
       const response = await fetch(`${baseURL}/${endpoints.CHANGEPASSWORD}`, {
-        method: "PATCH", 
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
@@ -131,12 +129,12 @@ export const changePassword = createAsyncThunk(
       const result = await response.json();
 
       if (response.ok) {
-        return fulfillWithValue(result); 
+        return fulfillWithValue(result);
       } else {
-        return rejectWithValue(result); 
+        return rejectWithValue(result);
       }
     } catch (error) {
-      return rejectWithValue(error || "Something went wrong"); 
+      return rejectWithValue(error || "Something went wrong");
     }
   }
 );
@@ -150,10 +148,10 @@ const authSlice = createSlice({
       state.signInUser = null;
       state.error = null;
       state.forgotMsg = null;
-      state. otpVerifyMsg = null;
- 
+      state.otpVerifyMsg = null;
+
     },
-},
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
@@ -167,44 +165,36 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Something went wrong';
-      }) .addCase(forgotPassword.pending, (state) => {
+      }).addCase(forgotPassword.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
-      .addCase(forgotPassword.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
-  state.loading = false;
-  state.forgotMsg = action.payload;
-})
-      .addCase(forgotPassword.rejected, (state, action) => {
+      .addCase(forgotPassword.fulfilled, (state) => {
         state.loading = false;
-        state.error = action.payload;
+      })
+      .addCase(forgotPassword.rejected, (state) => {
+        state.loading = false;
       })
 
       .addCase(verifyOtp.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
-      .addCase(verifyOtp.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
-  state.loading = false;
-  state. otpVerifyMsg = action.payload.message;
-})
-
-      .addCase(verifyOtp.rejected, (state, action) => {
+      .addCase(verifyOtp.fulfilled, (state) => {
         state.loading = false;
-        state.error = action.payload;
+      })
+
+      .addCase(verifyOtp.rejected, (state) => {
+        state.loading = false;
       })
       .addCase(changePassword.pending, (state) => {
-  state.loading = true;
-  state.error = null;
-})
-.addCase(changePassword.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
-  state.loading = false;
-  state.passwordResetMsg = action.payload.message;
-})
-.addCase(changePassword.rejected, (state, action) => {
-  state.loading = false;
-  state.error = action.payload || "Password reset failed";
-});
+        state.loading = true;
+      })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(changePassword.rejected, (state) => {
+        state.loading = false;
+
+      });
   },
 });
 

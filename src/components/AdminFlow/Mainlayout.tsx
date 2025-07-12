@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Mainlayout = () => {
   
-  const [mobileOpen, setMobileOpen] = useState(false); // mobile sidebar toggle
+  const [mobileOpen, setMobileOpen] = useState(false); 
 
   const handleToggleSidebar = () => {
     setMobileOpen(!mobileOpen);

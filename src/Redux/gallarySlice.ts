@@ -21,6 +21,8 @@ interface GalleryState {
   message: string | null;
   currentPage: number;
   totalPages: number;
+  Page:number;
+  SearchTitle:string;
 }
 
 
@@ -36,6 +38,8 @@ const initialState: GalleryState = {
   message: null,
   currentPage: 1,
   totalPages: 1,
+  Page:1,
+  SearchTitle:''
 };
 
 export const uploadGalleryImage = createAsyncThunk(
@@ -67,10 +71,11 @@ export const uploadGalleryImage = createAsyncThunk(
 
 export const fetchGallery = createAsyncThunk(
   "gallery/all_galleries",
-  async ({ year, page }: { year?: number | string; page: number }, { fulfillWithValue, rejectWithValue }) => {
+  async ({ year, Page,type,SearchTitle }: { year?: number | string; Page: number | null,type:string,SearchTitle:string }, { fulfillWithValue, rejectWithValue }) => {
 
     try {
-      const response = await fetch(`${baseURL}/${endpoints.GETGALLARY}?page=${page}&year=${year}`);
+      const type1=type || localStorage.getItem('type')
+      const response = await fetch(`${baseURL}/${endpoints.GETGALLARY}?page=${Page}&mediatype=${type1}&year=${year}&title=${SearchTitle}`);
       const result = await response.json();
 
       if (response.ok) {
@@ -100,12 +105,8 @@ export const UpdateGallery = createAsyncThunk(
       });
 
       const data = await res.json();
-      const year = localStorage.getItem('year') || ''
-      const page = parseInt(localStorage.getItem('page') || '');
+     
       if (res.ok) {
-        dispatch(fetchGallery({
-          year, page,
-        }))
         return fulfillWithValue(data)
       } else {
         return rejectWithValue(data.message || 'Delete failed');
@@ -130,9 +131,11 @@ export const deleteGalleryById = createAsyncThunk(
 
       const data = await res.json();
       const year = localStorage.getItem('year') || ''
-      const page = parseInt(localStorage.getItem('page') || '');
+      const Page = parseInt(localStorage.getItem('page') || '');
+      const type = localStorage.getItem('type') || ''
+     const SearchTitle=  localStorage.getItem('SearchTitle') || ''
       dispatch(fetchGallery({
-        year, page,
+        year, Page,type,SearchTitle
       }))
       return fulfillWithValue(data)
     } catch (error) {
@@ -180,11 +183,14 @@ export const deleteAllGalleryItems = createAsyncThunk(
 
       const data = await res.json();
       const year = localStorage.getItem('year') || ''
-      const page = parseInt(localStorage.getItem('page') || '');
+      const Page = parseInt(localStorage.getItem('page') || '');
+      const type = localStorage.getItem('type') || ''
+      const SearchTitle = localStorage.getItem('SearchTitle') || ''
       if (res.ok) {
         dispatch(fetchGallery({
-          year, page,
+          year, Page, type, SearchTitle
         }))
+       
         return fulfillWithValue(data)
       } else {
         return rejectWithValue(data || 'Delete all failed');
@@ -230,6 +236,12 @@ const gallerySlice = createSlice({
       state.message = null;
       state.error = null;
     },
+    pagination:(state,action)=>{
+      state.Page=action.payload
+    },
+    SearchTitle:(state,action)=>{
+      state.SearchTitle=action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -319,5 +331,5 @@ const gallerySlice = createSlice({
   },
 });
 
-export const { resetGalleryState } = gallerySlice.actions;
+export const { resetGalleryState,pagination,SearchTitle } = gallerySlice.actions;
 export default gallerySlice.reducer;

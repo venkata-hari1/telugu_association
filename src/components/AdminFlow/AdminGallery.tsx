@@ -19,8 +19,10 @@ const AdminGallery = () => {
     
    ] 
  const navigate = useNavigate();
-
-
+const handleNavigate=(type:string)=>{
+  localStorage.setItem('type',type)
+  setTimeout(()=>{navigate('photogallery')},100)
+}
 const[highlights,setHighlights]=useState(false)
  return (
   <Box>
@@ -40,10 +42,10 @@ const[highlights,setHighlights]=useState(false)
 
     <Grid>
     <Box display="flex" sx={{gap:"30px",justifyContent:"flex-start",mt:'5px'}}>
-       <Custombutton onClick={()=>navigate('photogallery')}>
+       <Custombutton onClick={()=>handleNavigate('photos')}>
          Photo Gallery
        </Custombutton>
-       <Custombutton onClick={()=>navigate('video')}>
+       <Custombutton onClick={()=>handleNavigate('videos')}>
          Video Gallery
        </Custombutton>
       </Box>
@@ -64,7 +66,7 @@ const[highlights,setHighlights]=useState(false)
   variant="outlined"
   startIcon={<BorderColorIcon />}
   sx={{ background: '#3DB80C', border: 'none', color: 'white',whiteSpace:'nowrap' }}
-  onClick={() => navigate('Addhomepage-highlights')}>
+  onClick={() => navigate('/admin/Addhomepage-highlights')}>
   Add Highlights
 </Button>
 
@@ -84,7 +86,7 @@ const[highlights,setHighlights]=useState(false)
   variant="outlined"
   startIcon={<BorderColorIcon />}
   sx={{ background: '#3DB80C', border: 'none', color: 'white' }}
-  onClick={() => navigate('Addhomepage-highlights')}>
+  >
   Add Highlights
 </Button>
 

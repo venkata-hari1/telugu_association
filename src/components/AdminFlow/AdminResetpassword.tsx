@@ -17,21 +17,21 @@ import Logo from "../../assets/logo.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import {showToast} from "../../Utils/ShowToast";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../Redux/Store";
-import { changePassword } from "../../fetures/auth/authSlice"; 
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../Redux/Store";
+import { changePassword } from "../../Redux/authSlice"; 
+import Loading from "../../Utils/CircularLoader";
 
 
 
 const AdminResetpassword = () => {
   const navigate = useNavigate();
-
+  const {loading}=useSelector((state:RootState)=>state.login)
   const [currentshow, setCurrentShow] = useState(false);
   const [currenttype, setCurrentType] = useState("password");
   const [confirmshow, setConfirmshow] = useState(false);
   const [confirmtype, setConfirmtype] = useState("password");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -94,7 +94,7 @@ const submitResetHandler = async () => {
 
   if (!email) {
     showToast(false, "Email not found. Please go through Forgot Password again.");
-    navigate("/forgotpassword");
+  
     return;
   }
 
@@ -116,7 +116,7 @@ const submitResetHandler = async () => {
           newPassword: password,        // ✅ Match backend field name
           confirmPassword: confirmpassword,
         },
-      })
+      } as any)
     );
 
     const result = response.payload;
@@ -142,6 +142,7 @@ const submitResetHandler = async () => {
   password.length < 8 || confirmpassword !== password || !!passwordError || !!confirmError;
   return (
     <Fragment>
+      {loading&&<Loading/>}
     <Box
     sx={{
       backgroundImage: `url(${backgroundImg})`,
@@ -270,9 +271,9 @@ const submitResetHandler = async () => {
               variant="contained"
               sx={{ mt: 2, backgroundColor: "#3DB80C", width: "180px" }}
               onClick={submitResetHandler}
-              disabled={isDisabled}
+              disabled={loading || isDisabled}
             >
-              Reset Password
+              {loading?'Reset Password...':'Reset Password'}
             </Button>
           </Box>
         </CardContent>

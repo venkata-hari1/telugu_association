@@ -8,7 +8,7 @@ import Ugadhi from '../../assets/ugadhi.png'
 import TeluguCalender from '../../assets/telugucalender.png'
 import WomensDay from '../../assets/womensday.png'
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import { useNavigate } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userFlowReducer from './UserFlow'; 
-import authreducer from '../fetures/auth/authSlice';
+import authreducer from './authSlice';
 import galleryReducer from '../Redux/gallarySlice';
 
 

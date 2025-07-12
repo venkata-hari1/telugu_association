@@ -8,7 +8,7 @@ import Logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom';
 import { showToast } from '../../Utils/ShowToast';
 import { useDispatch, useSelector } from 'react-redux';
-  import { loginUser } from '../../fetures/auth/authSlice';
+  import { loginUser } from '../../Redux/authSlice';
 import { AppDispatch } from '../../Redux/Store';
 
 

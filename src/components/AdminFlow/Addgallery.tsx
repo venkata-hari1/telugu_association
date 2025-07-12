@@ -6,9 +6,9 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CloseIcon from '@mui/icons-material/Close';
 import { Submit, VisuallyHiddenInput } from '../../adminstyles/MembershiptableStyles';
-import {showToast} from '../../Utils/ShowToast';
+import { showToast } from '../../Utils/ShowToast';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../Redux/Store'; 
+import { AppDispatch, RootState } from '../../Redux/Store';
 import { deleteSingleGallery, SingleGallery, UpdateGallery, uploadGalleryImage } from '../../Redux/gallarySlice';
 import Loading from '../../Utils/CircularLoader';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -16,7 +16,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 interface FormData {
   year: string;
   title: string;
-  mediaType: 'photos' | 'videos';
+  mediaType: string;
   youtubeLink: string;
   files: File[];
 }
@@ -24,6 +24,7 @@ interface FormData {
 interface Errors {
   title: string;
   files: string;
+  youtubeLink:string;
 }
 
 interface Preview {
@@ -32,20 +33,21 @@ interface Preview {
 }
 
 const Addgallery: React.FC = () => {
-const dispatch = useDispatch<AppDispatch>();
-const location=useLocation()
-const navigate=useNavigate()
-const { loading,single_gallery}:any = useSelector((state: RootState) => state.gallery);
-const [formData, setFormData] = useState<FormData>({
+  const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { loading, single_gallery }: any = useSelector((state: RootState) => state.gallery);
+  const [formData, setFormData] = useState<FormData>({
     year: '',
     title: '',
-    mediaType: 'photos',
+    mediaType: '',
     youtubeLink: '',
     files: [],
   });
   const [errors, setErrors] = useState<Errors>({
     title: '',
     files: '',
+    youtubeLink:''
   });
   const [selectedYear, setSelectedYear] = useState<Date | null>(new Date());
   const [previews, setPreviews] = useState<Preview[]>([]);
@@ -59,12 +61,20 @@ const [formData, setFormData] = useState<FormData>({
   const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
   const VIDEO_TYPES = ['video/mp4', 'video/mpeg', 'video/webm'];
   useEffect(() => {
+    const type = localStorage.getItem('type') || ''
+    if (!type) {
+      setFormData((prev)=>({...prev, mediaType:'photos'}))
+      localStorage.setItem('type', 'photos');
+    }
+    else{
+      setFormData((prev)=>({...prev, mediaType:type}))
+    }
     if (location?.state?.value) {
       dispatch(SingleGallery());
     }
   }, [dispatch, location?.state?.value]);
-  
- 
+
+
   useEffect(() => {
     if (location?.state?.value) {
       setSelectedYear(new Date(single_gallery?.data?.year));
@@ -77,37 +87,42 @@ const [formData, setFormData] = useState<FormData>({
         files: [],
       }));
       if (single_gallery?.data?.CloudFile?.length > 0) {
-        const mappedPreviews = single_gallery?.data?.CloudFile?.map((file:{_id:string,image:string}) => ({
+        const mappedPreviews = single_gallery?.data?.CloudFile?.map((file: { _id: string, image: string }) => ({
           id: file._id,
-          url: file.image, 
+          url: file.image,
         }));
         setPreviews(mappedPreviews);
       }
     }
   }, [single_gallery]);
-  
+
   const validateForm = (): boolean => {
     let isValid = true;
-    const newErrors: Errors = { title: '', files: '' };
-
+    const newErrors: Errors = { title: '', files: '',youtubeLink:'' };
     if (!formData.title.trim()) {
       newErrors.title = 'Title is required';
       isValid = false;
     }
-
     const hasNewFiles = formData.files.length > 0;
-  const hasPreviewImages = previews.length > 0;
-
-  if (!hasNewFiles && !hasPreviewImages) {
-    newErrors.files =
-      formData.mediaType === 'photos'
-        ? 'At least one image is required'
-        : 'At least one video is required';
-    isValid = false;
-  }
-
+    const hasPreviewImages = previews.length > 0;
+    if (formData.mediaType !== 'videos' && !hasNewFiles && !hasPreviewImages) {
+      newErrors.files = 'At least one image is required'
+      isValid = false;
+    }
     if (touched.title || touched.files) {
       setErrors(newErrors);
+    }
+    if (formData.mediaType === 'videos') {
+      if (!formData.youtubeLink.trim()) {
+        newErrors.youtubeLink = 'YouTube link is required';
+        isValid = false;
+      } else {
+        const youtubeRegex = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
+        if (!youtubeRegex.test(formData.youtubeLink)) {
+          newErrors.youtubeLink = 'Invalid YouTube link';
+          isValid = false;
+        }
+      }
     }
     return isValid;
   };
@@ -123,6 +138,7 @@ const [formData, setFormData] = useState<FormData>({
       setErrors((prev) => ({ ...prev, files: '' }));
       setTouched((prev) => ({ ...prev, files: false }));
     }
+
   }, [formData.mediaType]);
 
   const handleInputChange = (
@@ -133,28 +149,29 @@ const [formData, setFormData] = useState<FormData>({
       setFormData((prev) => ({ ...prev, [name]: value }));
       setTouched((prev) => ({ ...prev, [name]: true }));
     }
+   
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || []);
     const existingFiles = formData.files;
-  
+
     const newFiles: File[] = [];
     const duplicateNames: string[] = [];
-  
+
     selectedFiles.forEach((file) => {
       const isDuplicate =
         existingFiles.some(f => f.name === file.name && f.size === file.size) ||
         newFiles.some(f => f.name === file.name && f.size === file.size); // also check against newFiles
-  
+
       if (isDuplicate) {
         duplicateNames.push(file.name);
         return;
       }
-  
+
       const isImage = formData.mediaType === 'photos';
       const isVideo = formData.mediaType === 'videos';
-  
+
       if (isImage && !IMAGE_TYPES.includes(file.type)) {
         showToast(false, 'Only image files (JPEG, PNG, GIF) are allowed');
         return;
@@ -171,37 +188,37 @@ const [formData, setFormData] = useState<FormData>({
         showToast(false, 'Video files must be under 3MB');
         return;
       }
-  
+
       newFiles.push(file);
     });
-  
+
     if (duplicateNames.length > 0) {
       showToast(false, `Duplicate files are not allowed: ${duplicateNames.join(', ')}`);
     }
-  
+
     if (newFiles.length === 0) return;
-  
+
     const newPreviews: Preview[] = newFiles.map((file) => ({
       id: Math.random().toString(36).substr(2, 9),
       url: URL.createObjectURL(file),
     }));
-  
+
     setFormData((prev) => ({ ...prev, files: [...prev.files, ...newFiles] }));
     setPreviews((prev) => [...prev, ...newPreviews]);
     setErrors((prev) => ({ ...prev, files: '' }));
     setTouched((prev) => ({ ...prev, files: true }));
   };
-  
 
-  const handleRemovePreview = async(id: string) => {
-    const isCloudImage = single_gallery?.data?.CloudFile?.some((file:{_id:string}) => file._id === id);
+
+  const handleRemovePreview = async (id: string) => {
+    const isCloudImage = single_gallery?.data?.CloudFile?.some((file: { _id: string }) => file._id === id);
 
     if (isCloudImage) {
       try {
         const data = { cloudid: id };
         const response = await dispatch(deleteSingleGallery({ data }));
         const fulfilled = response.payload;
-  
+
         if (fulfilled.status) {
           showToast(true, fulfilled.message);
         } else {
@@ -213,107 +230,109 @@ const [formData, setFormData] = useState<FormData>({
     }
     const updatedPreviews = previews.filter((preview) => preview.id !== id);
     const updatedFiles = formData.files.filter((_, index) => previews[index]?.id !== id);
-   
+
     setPreviews(updatedPreviews);
     setFormData((prev) => ({ ...prev, files: updatedFiles }));
     setTouched((prev) => ({ ...prev, files: true }));
   };
-const handleSubmit = async () => {
-  setTouched({ title: true, files: true });
-  const isValid = validateForm();
-  
-  if (!isValid) {
-    const errorMessages = [];
-    if (errors.title) errorMessages.push(errors.title);
-    if (errors.files) errorMessages.push(errors.files);
-    showToast(false, errorMessages.join(' and '));
-    return;
-  }
+  const handleSubmit = async () => {
+    setTouched({ title: true, files: true });
+    const isValid = validateForm();
 
-  const form = new FormData();
-  form.append("title", formData.title);
-  if(selectedYear){
-  form.append("year", selectedYear.getFullYear().toString());
-  }
-  form.append("mediaType", formData.mediaType);
-  form.append("youtubelink", formData.youtubeLink);
+    if (!isValid) {
+      const errorMessages = [];
+      if (errors.title) errorMessages.push(errors.title);
+      if (errors.files) errorMessages.push(errors.files);
+      showToast(false, errorMessages.join(' and '));
+      return;
+    }
 
-  if (formData.files.length > 0) {
-    formData.files.forEach((file) => {
-      form.append("file", file);
-    });
-  }
+    const form = new FormData();
+    form.append("title", formData.title);
+    if (selectedYear) {
+      form.append("year", selectedYear.getFullYear().toString());
+    }
+    form.append("mediaType", formData.mediaType);
+    form.append("youtubelink", formData.youtubeLink);
+
+    if (formData.files.length > 0) {
+      formData.files.forEach((file) => {
+        form.append("file", file);
+      });
+    }
 
 
 
-  try {
-    if(location?.state?.value){
-      const response=await dispatch(UpdateGallery({ formData: form })); 
-      const fullfilled=response.payload
-      if(fullfilled.status){
-        if(formData.mediaType==='photos'){
-        navigate('/admin/admingallery/photogallery')
+    try {
+      if (location?.state?.value) {
+        const response = await dispatch(UpdateGallery({ formData: form }));
+        const fullfilled = response.payload
+        if (fullfilled.status) {
+          if (formData.mediaType === 'photos') {
+            localStorage.setItem('type','photos')
+          }
+          else {
+            localStorage.setItem('type','videos')
+          }
+          setTimeout(()=>{ navigate('/admin/admingallery/photogallery')},100)
         }
-        else{
-          navigate('/admin/admingallery/video')
+      }
+      else {
+        const response = await dispatch(uploadGalleryImage({ formData: form }));
+        const fullfilled = response.payload
+        if (fullfilled.status) {
+          if (formData.mediaType === 'photos') {
+            localStorage.setItem('type','photos')
+          }
+          else {
+            localStorage.setItem('type','videos')
+          }
         }
+        setTimeout(()=>{ navigate('/admin/admingallery/photogallery')},100)
       }
+    } catch (err) {
+      showToast(false, "Something went wrong");
+
     }
-    else{
-    const response=await dispatch(uploadGalleryImage({ formData: form })); 
-    const fullfilled=response.payload
-    if(fullfilled.status){
-      if(formData.mediaType==='photos'){
-      navigate('/admin/admingallery/photogallery')
-      }
-      else{
-        navigate('/admin/admingallery/video')
-      }
-    }
-    }
-  } catch (err) {
-    showToast(false, "Something went wrong");
-    
-  }
-};
+  };
 
 
   return (
     <Box sx={{ overflowX: { sm: 'hidden' } }}>
       <Box mt={2} mb={2}>
-      {loading&&<Loading/>}
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          views={['year']}
-          value={selectedYear}
-          onChange={(newValue) => setSelectedYear(newValue)}
-          slotProps={{
-            textField: {
-              placeholder: '',
-              size: 'small',
-              sx: {
-                width: '140px',
-                backgroundColor: '#FFFFFF', 
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    border: '2px solid #3DB80C', 
+        {loading && <Loading />}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            views={['year']}
+            value={selectedYear}
+            onChange={(newValue) => setSelectedYear(newValue)}
+            slotProps={{
+              textField: {
+                placeholder: '',
+                size: 'small',
+                sx: {
+                  width: '140px',
+                  backgroundColor: '#FFFFFF',
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      border: '2px solid #3DB80C',
+                    },
+                    '&:hover fieldset': {
+                      border: '2px solid #3DB80C',
+                    },
+                    '&.Mui-focused fieldset': {
+                      border: '2px solid #3DB80C',
+                    },
                   },
-                  '&:hover fieldset': {
-                    border: '2px solid #3DB80C',
+                  '& .MuiSvgIcon-root': {
+                    color: '#3DB80C', // Green icon
                   },
-                  '&.Mui-focused fieldset': {
-                    border: '2px solid #3DB80C',
-                  },
-                },
-                '& .MuiSvgIcon-root': {
-                  color: '#3DB80C', // Green icon
                 },
               },
-            },
-          }}
-        />
-      </LocalizationProvider>
-       
+            }}
+          />
+        </LocalizationProvider>
+
       </Box>
       <Grid container spacing={2} mt={1}>
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
@@ -389,10 +408,10 @@ const handleSubmit = async () => {
           </FormControl>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
+        {formData.mediaType !== 'videos' && <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
           <Typography>{formData.mediaType === 'photos' ? 'Images' : 'Videos'}</Typography>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
+        </Grid>}
+        {formData.mediaType !== 'videos' && <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
           <Button
             component="label"
             variant="outlined"
@@ -413,19 +432,21 @@ const handleSubmit = async () => {
               {errors.files}
             </Typography>
           )}
-        </Grid>
+        </Grid>}
 
-        <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
+        {formData.mediaType === 'videos' && <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
           <Typography>YouTube Link</Typography>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
+        </Grid>}
+        {formData.mediaType === 'videos' && <Grid size={{ xs: 12, sm: 12, md: 10, lg: 10 }}>
           <TextField
             fullWidth
             size="small"
+            error={!!errors.youtubeLink}
+            helperText={errors.youtubeLink}
             name="youtubeLink"
             value={formData.youtubeLink}
             onChange={handleInputChange}
-            disabled={formData.mediaType === 'photos'}
+
             sx={{
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
@@ -442,12 +463,12 @@ const handleSubmit = async () => {
               },
             }}
           />
-        </Grid>
+        </Grid>}
 
-        <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
+        {formData.mediaType !== 'videos' && <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>
           <Typography>Preview</Typography>
-        </Grid>
-        <Grid
+        </Grid>}
+        {formData.mediaType !== 'videos' && <Grid
           size={{ xs: 12, sm: 12, md: 6, lg: 6 }}
           sx={{
             display: 'flex',
@@ -484,33 +505,26 @@ const handleSubmit = async () => {
           ) : (
             <Typography>No previews available</Typography>
           )}
-        </Grid>
+        </Grid>}
 
         <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            {/* <Submit
+
+
+            <Submit
               variant="contained"
               size="large"
               onClick={handleSubmit}
-              disabled={!isFormValid}
+              disabled={location?.state?.value ? false : !isFormValid || loading}
             >
-              Submit
-            </Submit> */}
-
-            <Submit
-  variant="contained"
-  size="large"
-  onClick={handleSubmit}
-  disabled={location?.state?.value?false:!isFormValid || loading}
->
-  {loading ? 'Uploading...' : location?.state?.value?'Update':'Submit'}
-</Submit>
+              {loading ? 'Uploading...' : location?.state?.value ? 'Update' : 'Submit'}
+            </Submit>
 
           </Box>
         </Grid>
       </Grid>
 
-   
+
     </Box>
   );
 };

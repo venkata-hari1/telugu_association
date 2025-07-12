@@ -32,7 +32,9 @@ const carddata=[
 ]
  return (
     <Box>
-     {open && <Deletepopup open={open} handleClose={handleClose} />}
+     {open && <Deletepopup open={open} handleClose={handleClose} onConfirm={function (): void {
+       throw new Error("Function not implemented.");
+     } } name={""} loading={false} />}
 
      <Grid container>
       <Grid size={{md:6,sm:7,xs:7}}>
