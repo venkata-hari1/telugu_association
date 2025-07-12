@@ -50,7 +50,9 @@ const mememberbutton=[
 
   return (
      <Box>
-      {openpop&&<Deletepopup open={openpop} handleClose={handleClose}/>}
+      {openpop&&<Deletepopup open={openpop} handleClose={handleClose} onConfirm={function (): void {
+        throw new Error("Function not implemented.");
+      } } name={""} loading={false}/>}
       <Grid container>
         <Grid size={{lg:6,md:6,sm:12,xs:12}} >
           <Typography variant="h5" color="#3DB80C">
