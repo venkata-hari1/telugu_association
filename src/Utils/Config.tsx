@@ -1,4 +1,4 @@
-export const baseURL='http://localhost:8080/api'
+export const baseURL='https://8257c02b0c13.ngrok-free.app/api'
 export const endpoints:any={
 
     //Adminlogin
