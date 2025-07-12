@@ -1,12 +1,12 @@
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
+import App from './App';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './Redux/Store.tsx'
+import store from './Redux/Store'
 import { ToastContainer } from 'react-toastify';
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
