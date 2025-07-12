@@ -163,7 +163,7 @@ return (
         borderRadius: '12px',
         border: '1px solid #3DB80C',
         p: 2,
-        overflow: 'hidden',
+        overflow: 'hidden', 
         
       }}
     >

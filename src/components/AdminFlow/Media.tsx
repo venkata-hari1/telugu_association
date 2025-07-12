@@ -232,7 +232,7 @@ const Media = () => {
             >
 
               <Box display="flex" gap={2} flexWrap="wrap">
-                <Button onClick={() => {
+                {gallery.years.length>0&&<Button onClick={() => {
                   setSelectedYear('');
                   dispatch(pagination(1));
                 }
@@ -242,9 +242,8 @@ const Media = () => {
                     color: selectedYear === '' ?"#3DB80C": "white" ,
                     borderColor: "#3DB80C",
                   }}
-                >All</Button>
-                {gallery?.years?.length > 0 ? (
-                  gallery.years.map((year: Year) => (
+                >All</Button>}
+                {gallery?.years?.map((year: Year) => (
                     <Button
                       key={year.year}
                       onClick={() => handleYearClick(year.year)}
@@ -271,9 +270,7 @@ const Media = () => {
                       {year.year}
                     </Button>
                   ))
-                ) : (
-                  <Typography color="gray">No years available</Typography>
-                )}
+                }
               </Box>
 
 
