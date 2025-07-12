@@ -232,7 +232,7 @@ const Media = () => {
             >
 
               <Box display="flex" gap={2} flexWrap="wrap">
-                {gallery.years.length>0&&<Button onClick={() => {
+                {gallery?.years?.length>0&&<Button onClick={() => {
                   setSelectedYear('');
                   dispatch(pagination(1));
                 }
