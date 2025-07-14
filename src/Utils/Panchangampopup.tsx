@@ -2,11 +2,102 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { getFullPanchangam, getDistanceFromLatLonInKm } from './getPanchangamDetails';
+
+const LOCATION_KEY = 'panchangam_location_data';
+const DISTANCE_THRESHOLD_KM = 10;
 
 const Panchangampopup = ({open,handleclose,selecteddate}:{open:boolean,handleclose:()=>void,selecteddate:any}) => {
 
+   const [data, setData] = useState<Record<string, string> | null>(null);
+   const getInitialLocationName = (): string | null => {
+     try {
+       const stored = localStorage.getItem(LOCATION_KEY);
+       if (stored) {
+         const parsed = JSON.parse(stored);
+         return parsed.name || null;
+       }
+     } catch {
+       return null;
+     }
+     return null;
+   };
+   const [locationName, setLocationName] = useState<string | null>(getInitialLocationName());
+   const [locationLoaded, setLocationLoaded] = useState(!!getInitialLocationName());
+
+   useEffect(() => {
+      if(selecteddate){
+        const stored = localStorage.getItem(LOCATION_KEY);
+        let storedData: { name: string, lat: number, lon: number } | null = null;
+        if (stored) {
+          try {
+            storedData = JSON.parse(stored);
+          } catch {}
+        }
+
+        const fallbackData = getFullPanchangam(selecteddate);
+        setData(fallbackData);
+
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const lat = position.coords.latitude;
+              const lon = position.coords.longitude;
+
+              let shouldFetch = true;
+              if (storedData && storedData.lat && storedData.lon && storedData.name !== "") {
+                const dist = getDistanceFromLatLonInKm(lat, lon, storedData.lat, storedData.lon);
+                if (dist < DISTANCE_THRESHOLD_KM) {
+                  setLocationName(storedData.name);
+                  setLocationLoaded(true);
+                  shouldFetch = false;
+                }
+              }
+
+              if (shouldFetch) {
+                try {
+                  const response = await fetch(
+                    `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&addressdetails=1&accept-language=te`)}`,
+                    {
+                      headers: {
+                        'User-Agent': 'PanchangamApp/1.0 (teluguassociation@gmail.com)', 
+                      },
+                    }
+                  );
+                  const json = await response.json();
+                  console.log(json)
+                  const address = json.address || {};
+                  const city = address.state || address.city || address.town || address.village || address.county || '';
+                  const country = address.country || '';
+                  let loc = city && country ? `${city}, ${country}` : city || country || '';
+                  setLocationName(loc);
+                  setLocationLoaded(true);
+                  localStorage.setItem(LOCATION_KEY, JSON.stringify({ name: loc, lat, lon }));
+
+                  const panchangamData = getFullPanchangam(selecteddate, lat, lon);
+                  setData(panchangamData);
+                } catch (e) {
+                  setLocationLoaded(true);
+                  setLocationName(`${lat}, ${lon}`);
+                  localStorage.setItem(LOCATION_KEY, JSON.stringify({ name: ``, lat, lon }));
+                }
+              }
+            },
+            () => {
+              setLocationLoaded(true);
+              if (storedData) setLocationName(storedData.name);
+            }
+          );
+        } else {
+          setLocationLoaded(true);
+          if (storedData) setLocationName(storedData.name);
+        }
+      }
+   },[selecteddate])
+
   return (
-     
      <Dialog
         open={open}
         onClose={handleclose}
@@ -30,38 +121,36 @@ const Panchangampopup = ({open,handleclose,selecteddate}:{open:boolean,handleclo
            '& .MuiTypography-root': { fontSize: '10px',fontWeight:800,} }}>
           
           <Typography>తెలుగు పంచాంగం</Typography>
-          <Typography>తేది: 02 డిసెంబర్ 2024 (సోమవారం)</Typography>
-          <Typography>స్థలం: హైదరాబాద్, ఇండియా </Typography>
-          <Typography>శక సంవత్సరం: నందన</Typography>
-          <Typography>దిన సూచిక: సోమవారం</Typography>
-          <Typography>తిథి: ద్వాదశి (మధ్యాహ్నం 01:20 వరకు), తదుపరి త్రయోదశి</Typography>
-          <Typography>నక్షత్రం: అనూరాధ (మధ్యాహ్నం 02:45 వరకు), తదుపరి జ్యేష్ఠ</Typography>
-          <Typography>యోగం: వర్ష (రాత్రి 11:10 వరకు), తదుపరి వృద్ది</Typography>
-          <Typography>కరణం: బావ (మధ్యాహ్నం 01:20 వరకు), తదుపరి బాలవ</Typography>
-          <Typography>పక్షం: కృష్ణపక్షం</Typography>
-           <Typography>రోజువారీ సమయాలు</Typography>
-            <Typography>సూర్యోదయం: ఉదయం 06:33</Typography>
-             <Typography>సూర్యాస్తమయం: సాయంత్రం 05:43</Typography>
-              <Typography>చంద్రోదయం: రాత్రి 08:15</Typography>
-              <Typography>చంద్రాస్తమయం: ఉదయం 07:10</Typography>
-              <Typography>శుభ సమయాలు</Typography>
-              <Typography>అభిజిత్ ముహూర్తం: మధ్యాహ్నం 12:10 నుండి 12:50 వరకు</Typography>
-              <Typography>అమృత కాలం: ఉదయం 07:20 నుండి 08:50 వరకు</Typography>
-              <Typography>బ్రహ్మ ముహూర్తం: ఉదయం 04:50 నుండి 05:30 వరకు </Typography>
-              <Typography>అశుభ సమయాలు</Typography>
-              <Typography>రాహుకాలం: ఉదయం 07:30 నుండి 09:00 వరకు</Typography>
-              <Typography>యమగండం: మధ్యాహ్నం 10:30 నుండి 12:00 వరకు</Typography>
-              <Typography>గులిక కాలం: మధ్యాహ్నం 01:30 నుండి 03:00 వరకు</Typography>
-              <Typography>దిన విశేషాలు</Typography>
-              <Typography>వ్రతాలు/పూజలు: క్షీరాబ్ది ద్వాదశి</Typography>
-              <Typography>దేవతారాధన: శ్రీ మహా విష్ణువు </Typography>
-              <Typography>చంద్ర రాశి: వృశ్చికం</Typography>
-              <Typography>వార నామం: సోమవారం - చంద్ర దేవుని ఉపాసనకు అనుకూలం </Typography>
-              <Typography>రాశి ఫలితాలు</Typography>
-              <Typography>మేషం: ప్రయాణాలలో జాగ్రత్త అవసరం</Typography>
-              <Typography>వృషభం: ఆర్థిక లావాదేవీల్లో లాభం</Typography>
-              <Typography>మిథునం: కుటుంబంలో శుభవార్త</Typography>
-            </DialogContent>
+          <Typography>తేది: {data?.['తేది']}</Typography>
+          {locationLoaded && locationName && (
+            <Typography>స్థలం: {locationName}</Typography>
+          )}
+          <Typography>శక సంవత్సరం: {data?.['శక_సంవత్సరం']}</Typography>
+          <Typography>దిన సూచిక: {data?.['దిన_సూచిక']}</Typography>
+          <Typography>తిథి: {data?.['తిథి']}</Typography>
+          <Typography>నక్షత్రం: {data?.['నక్షత్రం']}</Typography>
+          <Typography>యోగం: {data?.['యోగం']}</Typography>
+          <Typography>కరణం: {data?.['కరణం']}</Typography>
+          <Typography>పక్షం: {data?.['పక్షం']}</Typography>
+          <Typography>రోజువారీ సమయాలు</Typography>
+          <Typography>సూర్యోదయం: {data?.['సూర్యోదయం']}</Typography>
+          <Typography>సూర్యాస్తమయం: {data?.['సూర్యాస్తమయం']}</Typography>
+          <Typography>చంద్రోదయం: {data?.['చంద్రోదయం']}</Typography>
+          <Typography>చంద్రాస్తమయం: {data?.['చంద్రాస్తమయం']}</Typography>
+          <Typography>శుభ సమయాలు</Typography>
+          <Typography>అభిజిత్ ముహూర్తం: {data?.['అభిజిత్_ముహూర్తం']}</Typography>
+          <Typography>అమృత కాలం: {data?.['అమృత_కాలం']}</Typography>
+          <Typography>బ్రహ్మ ముహూర్తం: {data?.['బ్రహ్మ_ముహూర్తం']}</Typography>
+          <Typography>అశుభ సమయాలు</Typography>
+          <Typography>రాహుకాలం: {data?.['రాహుకాలం']}</Typography>
+          <Typography>యమగండం: {data?.['యమగండం']}</Typography>
+          <Typography>గులిక కాలం: {data?.['గులిక_కాలం']}</Typography>
+          <Typography>దిన విశేషాలు</Typography>
+          <Typography>• వ్రతాలు/పూజలు: {data?.['వ్రతాలు_పూజలు']}</Typography>
+          <Typography>• దేవతారాధన: {data?.['దేవతారాధన']}</Typography>
+          <Typography>• చంద్ర రాశి: {data?.['చంద్ర_రాశి']}</Typography>
+          <Typography>• వార నామం: {data?.['వార_నామం']}</Typography>
+        </DialogContent>
              </Dialog>
 
   )
