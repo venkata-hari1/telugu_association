@@ -12,10 +12,13 @@ import {
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CancelIcon from '@mui/icons-material/Cancel';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 import { GreenTextField, Submit, VisuallyHiddenInput } from "../../adminstyles/MembershiptableStyles";
 import {showToast} from "../../Utils/ShowToast";
 
 const Addsponsor = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<{
     companyName: string;
     sponsorName: string;
@@ -199,6 +202,12 @@ const Addsponsor = () => {
 
   return (
     <Box sx={{ overflowX: { sm: 'hidden' } }}>
+      <Box display="flex" alignItems="center" mb={2}>
+        <ArrowBackIcon onClick={() => navigate(-1)} sx={{ cursor: 'pointer', color: '#3DB80C', mr: 1 }} />
+        <Typography variant="h5" color="#3DB80C">
+          Sponsorship Management / <Typography component="span" fontSize={22} fontWeight={300}>Add Sponsor</Typography>
+        </Typography>
+      </Box>
       <Grid container spacing={2}>
         {/* Company Name */}
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>

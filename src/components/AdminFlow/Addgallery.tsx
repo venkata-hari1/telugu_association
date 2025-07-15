@@ -5,8 +5,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CloseIcon from '@mui/icons-material/Close';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Submit, VisuallyHiddenInput } from '../../adminstyles/MembershiptableStyles';
 import {showToast} from '../../Utils/ShowToast';
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
   year: string;
@@ -46,6 +48,7 @@ const Addgallery: React.FC = () => {
     title: false,
     files: false,
   });
+  const navigate = useNavigate();
  
 
   const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB in bytes
@@ -194,6 +197,14 @@ const Addgallery: React.FC = () => {
   return (
     <Box sx={{ overflowX: { sm: 'hidden' } }}>
       <Box mt={2} mb={2}>
+        <Grid sx={{mb: 3}} size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
+          <Box display="flex" alignItems="center" mb={2}>
+            <ArrowBackIcon onClick={() => navigate(-1)} sx={{ cursor: 'pointer', color: '#3DB80C', mr: 1 }} />
+            <Typography variant="h5" color="#3DB80C" fontWeight="500">
+              Gallery and Media / {formData.mediaType === 'photos' ? 'Add Gallery' : 'Add Video'}
+            </Typography>
+          </Box>
+        </Grid>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           views={['year']}

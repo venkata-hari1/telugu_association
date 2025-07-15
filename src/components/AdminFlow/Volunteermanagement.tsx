@@ -6,6 +6,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import EditIcon from "@mui/icons-material/Edit";
 import CircleIcon from "@mui/icons-material/Circle";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import * as XLSX from 'xlsx'; // Import SheetJS
@@ -108,9 +109,12 @@ const Volunteermanagement = () => {
     <Box>
       <Grid container>
         <Grid size={{ md: 6, xs: 12 }}>
-          <Typography variant="h5" color="#3DB80C">
-            Volunteer Management
-          </Typography>
+          <Box display="flex" alignItems="center">
+            <ArrowBackIcon onClick={() => navigate(-1)} sx={{ cursor: 'pointer', color: '#3DB80C', mr: 1 }} />
+            <Typography variant="h5" color="#3DB80C">
+              Volunteer Management
+            </Typography>
+          </Box>
         </Grid>
         <Grid size={{ md: 6, xs: 12 }}>
           <Box sx={{ display: "flex", gap: 1, justifyContent: { md: 'flex-end', sm: 'flex-start' }, flexWrap: 'wrap' }}>

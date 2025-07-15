@@ -24,6 +24,7 @@ import Addnews from '../components/AdminFlow/Addnews'
 import Media from '../components/AdminFlow/Media'
 import Videogallery from '../components/AdminFlow/Videogallery'
 import AdminGallery from '../components/AdminFlow/AdminGallery'
+import Addhighlight from '../components/AdminFlow/Addhighlight'
 
 
 const AppRoutes = () => {
@@ -35,8 +36,8 @@ const AppRoutes = () => {
         <Route path="/admin" element={<Mainlayout />}>
           <Route path="/admin" element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} /> 
-           <Route path="dashboard" element={<Dashboard />} /> 
-           <Route path='dashboard/addnews' element={<Addnews />}/>
+          <Route path="dashboard" element={<Dashboard />} /> 
+          <Route path='dashboard/addnews' element={<Addnews />}/>
           <Route path="membership" element={<Membershiptable />} />
           <Route path="membership/member" element={<AddMember />} />
           <Route path="membership/volunteermgmt" element={<Volunteermanagement />} />
@@ -47,17 +48,18 @@ const AppRoutes = () => {
           <Route path="sponsorship/subscriptionplans" element={<Subscriptionplans />} />
           <Route path="sponsorship/subscriptionplans/editsubscription" element={<Editsubscription />} />
           <Route path="admingallery" element={<AdminGallery />}/>
-           <Route path="admingallery/photogallery" element={<Media />}/>
-           <Route path="gallery/video" element={<Videogallery />}/>
+          <Route path="admingallery/photogallery" element={<Media />}/>
+          <Route path="gallery/video" element={<Videogallery />}/>
           <Route path="media/addgallery" element={<Addgallery />}/>
           <Route path="admingallery/addgallery" element={<Addgallery />}/>
+          <Route path="admingallery/addhighlight" element={<Addhighlight />}/>
           <Route path="events" element={<EventsandCalender />}/>
-           <Route path="events/addevent" element={<Addevent />}/>  
-           <Route path="board" element={<BoardandLeadership />}/>  
-           <Route path="board/addboard" element={<Addboard />}/>  
-            <Route path="profile" element={<Profile />}/>  
-            <Route path="profile/change-email" element={<Changeemail />}/> 
-            <Route path="profile/change-password" element={<Changepassword />}/>
+          <Route path="events/addevent" element={<Addevent />}/>  
+          <Route path="board" element={<BoardandLeadership />}/>  
+          <Route path="board/addboard" element={<Addboard />}/>  
+          <Route path="profile" element={<Profile />}/>  
+          <Route path="profile/change-email" element={<Changeemail />}/> 
+          <Route path="profile/change-password" element={<Changepassword />}/>
         </Route>
      </Route>
     </Routes>

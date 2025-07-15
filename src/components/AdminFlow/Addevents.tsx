@@ -3,8 +3,10 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { GreenTextField, Submit, VisuallyHiddenInput } from "../../adminstyles/MembershiptableStyles";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CancelIcon from '@mui/icons-material/Cancel';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import {showToast} from "../../Utils/ShowToast";
+import { useNavigate } from "react-router-dom";
 
 const Addevent = () => {
   // State for form values and errors
@@ -42,6 +44,7 @@ const Addevent = () => {
 
   // State for image preview URL
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const navigate = useNavigate();
 
 
   const validateField = (name: string, value: string | File | null): string => {
@@ -158,6 +161,14 @@ const Addevent = () => {
   return (
     <Box sx={{overflowX:{sm:'hidden'}}}>
 
+      <Grid>
+        <Box display="flex" alignItems="center" mb={2}>
+          <ArrowBackIcon onClick={() => navigate(-1)} sx={{ cursor: 'pointer', color: '#3DB80C', mr: 1 }} />
+          <Typography variant="h5" color="#3DB80C" fontWeight="500">
+              Events and Calendar / Add Event
+          </Typography>
+        </Box>
+      </Grid>
       <Grid container spacing={4} mt={4}>
         {/* Event Title */}
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>

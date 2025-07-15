@@ -6,6 +6,7 @@ import {
   TextField,
   Typography,
   MenuItem,
+  Grid,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
@@ -13,6 +14,8 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { useState } from "react";
 import { Submit, VisuallyHiddenInput } from "../../adminstyles/MembershiptableStyles";
 import { showToast } from "../../Utils/ShowToast";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB
@@ -27,7 +30,7 @@ const Addboard = () => {
   });
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [errors, setErrors] = useState({ image: "" });
-
+  const navigate = useNavigate();
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -80,6 +83,15 @@ const Addboard = () => {
   return (
     <Box sx={{ overflowX: { sm: "hidden" }, width: {lg:"60%",md:'100%',xs:'100%'}, }}>
       {/* Year Select */}
+      <Grid sx={{mb:3}} >
+        <Box display="flex" alignItems="center" mb={2}>
+          <ArrowBackIcon onClick={() => navigate(-1)} sx={{ cursor: 'pointer', color: '#3DB80C', mr: 1 }} />
+          <Typography variant="h5" color="#3DB80C" fontWeight="500">
+              Events and Calendar / Add Event
+          </Typography>
+        </Box>
+      </Grid>
+
       <Box mb={2}>
         <FormControl size="small">
           <Select

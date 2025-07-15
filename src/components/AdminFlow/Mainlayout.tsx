@@ -17,32 +17,38 @@ const Mainlayout = () => {
 
 return (
     <Grid container spacing={1}>
-      <Grid size={{lg:2}}>
-    
       <Sidebar
         mobileOpen={mobileOpen}
         onCloseSidebar={() => setMobileOpen(false)}
       />
-      </Grid>
-    <Grid size={{lg:10,xs:12,md:12}} >
-      <Box sx={{display:'flex',justifyContent:'center',alignItems:'center',alignContent:'center',flexDirection:'column',width:'100%'}}>
-      <Box
-       sx={{width:'100%'}}
-      >
-        <Commonheader onToggleSidebar={handleToggleSidebar} />
-        </Box>
-        <Box
+      <Box 
         sx={{
-          width:'96%',
-         
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center',
+          alignContent:'center',
+          flexDirection:'column',
+          width:'100%',
+          ml: { md: '220px', lg: '250px' },
+          transition: 'margin-left 0.3s',
         }}
       >
-        <Box sx={{ flexGrow: 1, overflowY: 'auto', p: 2 }}>
-          <Outlet />
+        <Box
+         sx={{width:'100%'}}
+        >
+          <Commonheader onToggleSidebar={handleToggleSidebar} />
+          </Box>
+          <Box
+          sx={{
+            width:'96%',
+           
+          }}
+        >
+          <Box sx={{ flexGrow: 1, overflowY: 'auto', p: 2 }}>
+            <Outlet />
+          </Box>
         </Box>
-      </Box>
-      </Box>
-      </Grid>
+        </Box>
     </Grid>
   );
 };

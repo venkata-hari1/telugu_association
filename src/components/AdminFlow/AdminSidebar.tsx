@@ -58,7 +58,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
           {sidemenu.map(item => (
             <ListItemButton
             key={item.id}
-            selected={location.pathname === `/${item.link}`}
+            selected={location.pathname.startsWith(`/${item.link}`)}
             onClick={() => {
               navigate(`/${item.link}`);
               onCloseSidebar();
@@ -76,7 +76,7 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
           >
             <ListItemIcon
               sx={{
-                color: location.pathname === `/${item.link}` ? 'green' : 'white',
+                color: location.pathname.startsWith(`/${item.link}`) ? 'green' : 'white',
                 minWidth: 'unset',
                 marginRight: '15px',
                 display: 'flex',
@@ -119,34 +119,30 @@ const Sidebar = ({ mobileOpen, onCloseSidebar }:{mobileOpen:boolean,onCloseSideb
 
   return (
     <>
-      {/* Permanent Sidebar for lg/md */}
-      <Box
-        sx={{
-          display: { xs: 'none', md: 'block' },
-          height: "100vh",
-          width: { lg: '250px', md: '220px' },
-          minWidth: '200px',
-          background: "linear-gradient(to bottom, #5BE823, #3DB80C)",
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          overflowY: 'auto',
-          zIndex: 1000,
-        }}
-      >
-        
-        {drawerContent}
-      </Box>
-        
-      {/* Drawer for mobile */}
+      {/* Permanent Drawer for lg/md, Temporary for xs */}
       <Drawer
-        open={mobileOpen}
+        variant={ (typeof window !== 'undefined' && window.innerWidth >= 900) ? 'permanent' : 'temporary' }
+        open={mobileOpen || (typeof window !== 'undefined' && window.innerWidth >= 900)}
         onClose={onCloseSidebar}
-        sx={{ display: { xs: 'block', md: 'none' } }}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          display: { xs: 'block', md: 'block' },
+          '& .MuiDrawer-paper': {
+            height: '100vh',
+            width: { lg: '250px', md: '220px', xs: '220px' },
+            minWidth: '200px',
+            background: 'linear-gradient(to bottom, #5BE823, #3DB80C)',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            overflowY: 'auto',
+            zIndex: 1000,
+          },
+        }}
       >
         {drawerContent}
       </Drawer>
-       <Logout open={state} handleClose={() => setState(false)} />        
+      <Logout open={state} handleClose={() => setState(false)} />        
     </>
   );
 };

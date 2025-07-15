@@ -10,6 +10,7 @@ import {
 import { Custombutton } from "../../adminstyles/MembershiptableStyles";
 import AddIcon from "@mui/icons-material/Add";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import tgallery1 from "../../assets/tgallery1.jpg";
 
@@ -35,9 +36,12 @@ const navigate=useNavigate()
     <Box>
       <Grid container>
         <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
-          <Typography variant="h5" color="#3DB80C" fontWeight="500">
-            Gallery & Media
-          </Typography>
+        <Box display="flex" alignItems="center" mb={2}>
+        <ArrowBackIcon onClick={() => navigate(-1)} sx={{ cursor: 'pointer', color: '#3DB80C', mr: 1 }} />
+            <Typography variant="h5" color="#3DB80C" fontWeight="500">
+              Gallery & Media
+            </Typography>
+          </Box>
         </Grid>
         <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
           <Box display="flex" sx={{ gap: "20px", justifyContent: "flex-end" }}>

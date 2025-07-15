@@ -12,10 +12,13 @@ import {
   MenuItem
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
 import { GreenTextField, Submit } from "../../adminstyles/MembershiptableStyles";
 import { showToast } from "../../Utils/ShowToast";
 
 const AddMember = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<{
     firstName: string;
     lastName: string;
@@ -142,6 +145,12 @@ const AddMember = () => {
 
   return (
     <Box sx={{ overflowX: { sm: "hidden" } }}>
+      <Box display="flex" alignItems="center" mb={2}>
+        <ArrowBackIcon onClick={() => navigate(-1)} sx={{ cursor: 'pointer', color: '#3DB80C', mr: 1 }} />
+        <Typography variant="h5" color="#3DB80C">
+          Membership Management / <Typography component="span" fontSize={22} fontWeight={300}>Add Member</Typography>
+        </Typography>
+      </Box>
       <Grid container spacing={2}>
         {/* First Name */}
         <Grid size={{ xs: 12, sm: 12, md: 2, lg: 2 }}>

@@ -3,7 +3,6 @@ import { Custombutton } from "../../adminstyles/MembershiptableStyles"
 import AddIcon from '@mui/icons-material/Add';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import sankranthi from '../../assets/sankranthi.jpg'
 
 const AdminGallery = () => {
@@ -17,12 +16,7 @@ const AdminGallery = () => {
     {id:2,img:sankranthi,text:' Had a great time at recent event with #Associations'},
     
    ] 
- const navigate=useNavigate()      
-
-const[highlights,setHighlights]=useState(false)
- function homeHighlights(){
-   setHighlights(prev=>!prev)
-}
+ const navigate=useNavigate()
 
  return (
   <Box>
@@ -51,7 +45,7 @@ const[highlights,setHighlights]=useState(false)
       </Box>
     
      <Box component={Paper} sx={{width:"100%",p:3,mt:2}} >
-      {highlights?(
+      
           <Grid container spacing={5} width={{xs:'100%',md:"900px"}}>
         <Grid size={{md:6, xs:12}} >
         <Typography variant="h6" color="#3DB80C">Homepage Highlights</Typography>
@@ -59,48 +53,34 @@ const[highlights,setHighlights]=useState(false)
        <Grid size={{md:6,xs:12}}>
          <Box sx={{display:'flex',justifyContent:{md:'flex-end',sm:'flex-start',gap:10}}} >
          <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
-         onClick={homeHighlights}>Add Highlights</Button>
+         onClick={()=>navigate('addhighlight')}>Add Highlights</Button>
          </Box>
         </Grid> 
       
         </Grid>
-      ):(<Grid container>
-        <Grid size={{md:6, xs:12}}>
-        <Typography variant="h6" color="#3DB80C">Homepage Highlights</Typography>
-       </Grid>
-        <Grid size={{md:6,xs:12}}>
-         <Box sx={{display:'flex',justifyContent:{md:'flex-end',sm:'flex-start',gap:10}}} >
-         <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
-        onClick={homeHighlights} >Add Highlights</Button>
-        <Button variant="outlined" startIcon={<BorderColorIcon />} sx={{background:' #3DB80C',border:'none',color:'white'}}
-            >Edit</Button>
-         </Box>
-        </Grid>
-      
-        </Grid> )}
        
        
 
-{!highlights&&
- <Grid container spacing={4} sx={{ mt: 2 }}>
-       {gallerydata.map((data) => (
-        <Grid size={{xs:12 ,sm:6 ,md:6}} key={data.id}>
-         <Card sx={{ maxWidth: '100%' }} component={Paper}>
-         <CardMedia
-          component="img"
-           image={data.img}
-          alt={data.text}
-          sx={{ height: 200, objectFit: 'cover' }}
-        />
-        <CardContent>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {data.text}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Grid>
-  ))}
-  </Grid> }
+
+        <Grid container spacing={4} sx={{ mt: 2 }}>
+              {gallerydata.map((data) => (
+                <Grid size={{xs:12 ,sm:6 ,md:6}} key={data.id}>
+                <Card sx={{ maxWidth: '100%' }} component={Paper}>
+                <CardMedia
+                  component="img"
+                  image={data.img}
+                  alt={data.text}
+                  sx={{ height: 200, objectFit: 'cover' }}
+                />
+                <CardContent>
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    {data.text}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+          </Grid> 
    
    
 

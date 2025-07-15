@@ -21,6 +21,8 @@ import UploadIcon from "@mui/icons-material/Upload";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 import CircleIcon from "@mui/icons-material/Circle";
 import Paginationcomponent from "./Pagination";
 import * as XLSX from "xlsx";
@@ -28,6 +30,7 @@ import * as XLSX from "xlsx";
 const Donations = () => {
   const [openPreview, setOpenPreview] = useState(false); // State for preview dialog
   const [error, setError] = useState(""); // State for error message
+  const navigate = useNavigate();
 
   const tabledata = [
     {
@@ -142,9 +145,12 @@ const Donations = () => {
     <Box>
       <Grid container>
         <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
-          <Typography variant="h5" color="#3DB80C">
-            Donations
-          </Typography>
+        <Box display="flex" alignItems="center" mb={2}>
+          <ArrowBackIcon onClick={() => navigate(-1)} sx={{ cursor: 'pointer', color: '#3DB80C', mr: 1 }} />
+            <Typography variant="h5" color="#3DB80C">
+              Donations
+            </Typography>
+        </Box>
         </Grid>
         <Grid size={{ lg: 6, md: 6, sm: 6, xs: 6 }}>
           <Box display="flex" sx={{ gap: "20px", justifyContent: "flex-end" }}>
